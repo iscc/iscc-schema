@@ -1,0 +1,62 @@
+openapi: 3.1.0
+info:
+  title: ISCC Generator
+  version: '1.0'
+  contact:
+    name: Titusz Pan
+    email: tp@iscc.io
+  description: Service for generating ISCC codes for media files.
+servers:
+  - url: 'http://localhost:3000'
+  - url: 'https://iscc.io/api/v1/generator'
+    description: ''
+tags:
+  - name: generate
+  - description: Generate ISCC Codes
+paths:
+  /iscc:
+    post:
+      summary: ''
+      operationId: generate-iscc
+      description: Generate an ISCC for a file.
+      requestBody:
+        $ref: '#/components/requestBodies/GenerateRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/GenerateResponse'
+      tags:
+        - generate
+components:
+  schemas: {}
+  requestBodies:
+    GenerateRequest:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              file:
+                type: string
+                format: binary
+                description: The media asset for which to create an ISCC
+              name:
+                type: string
+                description: The name or title of the digital content.
+              description:
+                type: string
+                description: 'Description of the digital content identified by the ISCC (may include markdown). '
+            required:
+              - file
+      description: Generate an ISCC for a media file.
+  responses:
+    GenerateResponse:
+      description: Result of ISCC generator process
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              task_id:
+                type: string
+              result:
+                $ref: ../models/iscc.yaml

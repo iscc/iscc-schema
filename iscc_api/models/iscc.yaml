@@ -1,0 +1,146 @@
+title: ISCC Metadata Schema
+type: object
+description: Schema for ISCC Metadata.
+properties:
+  '@context':
+    type: string
+    format: uri
+    default: 'https://purl.org/iscc/context/0.2.0.json'
+    description: JSON-LD Context URI for ISCC metadata.
+  type:
+    type: string
+    format: uri
+    default: 'https://purl.org/iscc/schema/0.2.0.json'
+  iscc:
+    type: string
+    format: uri
+    example: 'ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY'
+  name:
+    type: string
+    description: >
+      The name or title of the intangible creation manifested by the idendified digital 
+      content.
+    maxLength: 128
+    example: Harry Potter and the Philosopher's Stone
+  description:
+    type: string
+    description: >
+      Description of the digital asset identified by the ISCC (used as input for 
+      Meta-Code generation). Any user presentable text string (including Markdown text) 
+      indicative of the identity  of the referent may be used.
+    maxLength: 1024
+  metadata:
+    type: object
+    description: >
+      JSON or JSON-LD metadata for the digital content. This is the source for 
+      determinstic calculation of the metahash.
+  image:
+    type: string
+    description: >
+      URL for a user-presentable image that serves as a preview of identified digital 
+      content. The URI may be a Data-URL 
+      [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If this metadata should 
+      serve as NFT metadata according to  
+      [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or 
+      [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) 
+      the URI must reference the actual digital content represented by the NFT.
+    format: uri
+    example: 'https://picsum.photos/200/300.jpg'
+  keywords:
+    type: array
+    description: List of keywords relevant to the identified digital content.
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string
+      example: hashing
+  identifier:
+    description: >
+      Other identifier(s) referencing the work, product or other abstraction of which 
+      the referenced **digital content** is a full or partial manifestation.
+    context: 'https://purl.org/iscc/context/0.2.0/#identifier'
+    type:
+      - string
+      - array
+    items:
+      type: string
+      format: uri
+  filename:
+    type: string
+    description: |
+      Filename of the referenced **digital content** (automatically used as fallback if 
+      the `name` field was not specified for ISCC processing)
+    context: 'https://dbpedia.org/ontology/filename'
+  filesize:
+    type: integer
+    description: File size of media asset in number of bytes.
+    context: 'https://dbpedia.org/ontology/fileSize'
+    readOnly: true
+  mediatype:
+    type: string
+    description: IANA Media Type (MIME type)
+    context: encodingFormat
+  tophash:
+    type: string
+    description: Multihash of the concatenation (binding) of metahash and datahash"
+    context: 'https://purl.org/iscc/context/0.2.0/#tophash'
+  metahash:
+    type: string
+    description: Multihash of the metadata associated with the *digital content*.
+    context: 'https://purl.org/iscc/context/0.2.0/#metahash'
+  datahash:
+    type: string
+    description: Multihash hash of media file.
+    context: 'https://purl.org/iscc/context/0.2.0/#datahash'
+  duration:
+    type: integer
+    description: Duration of audio-visual media in secondes.
+  fps:
+    type: number
+    description: Frames per second of video assets.
+    format: float
+    example: 24
+    context: 'http://id.loc.gov/ontologies/bibframe/ProjectionSpeed'
+    minimum: 1
+  width:
+    type: integer
+    description: Width of visual media in number of pixels.
+    format: int32
+    example: 640
+  height:
+    type: integer
+    description: Height of visual media in number of pixels.
+    format: int32
+    example: 480
+    minimum: 1
+  characters:
+    type: integer
+    description: Number of text characters (code points after Unicode normalization)
+  language:
+    description: Language(s) of content (BCP-47).
+    type:
+      - string
+      - array
+    items:
+      type: string
+  parts:
+    type: array
+    description: Included Content-Codes.
+    items:
+      type: string
+  license:
+    type: string
+    description: URI of license for the identified digital content.
+    format: uri
+  redirect:
+    type: string
+    description: >
+      URL to which a resolver should redirect an ISCC-ID that has been minted from a 
+      declartion that includes the IPFS-hash of this metadata instance.
+    format: uri
+required:
+  - '@context'
+  - type
+  - iscc
+x-tags:
+  - metadata

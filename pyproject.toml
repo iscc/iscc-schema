@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "iscc-api"
+version = "0.1.0"
+description = "ISCC - OpenAPI Specifications"
+authors = ["Titusz <tp@py7.de>"]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/iscc/iscc-api"
+repository = "https://github.com/iscc/iscc-api"
+keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "similarity"]
+
+[tool.poetry.dependencies]
+python = ">=3.6.2,<4.0"
+pydantic = "^1.9.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+datamodel-code-generator = "^0.11.15"
+poethepoet = "^0.11.0"
+black = "21.12b0"
+
+[tool.datamodel-codegen]
+strip-default-none = true
+target-python-version = "3.6"
+field-constraints = true
+input = "iscc_api/models/iscc.yaml"
+output = "iscc_api/schema.py"
+class-name = "Schema"
+field-include-all-keys = true
+use-default = true
+use-schema-description = true
+wrap-string-literal = true
+validation = true
+
+
+[tool.poe.tasks]
+build = { cmd = "datamodel-codegen", help = "Build schema module"}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
