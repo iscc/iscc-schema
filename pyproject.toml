@@ -27,6 +27,7 @@ field-extra-keys = ["context"]
 use-default = true
 use-schema-description = true
 wrap-string-literal = true
+class-name = "ISCC"
 
 
 [tool.poe.tasks]
