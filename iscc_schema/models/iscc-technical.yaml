@@ -1,0 +1,50 @@
+title: iscc-technical
+type: object
+description: Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor
+properties:
+  filename:
+    type: string
+    description: |
+      Filename of the referenced **digital content** (automatically used as fallback if
+      the `name` field was not specified for ISCC processing)
+    context: 'https://dbpedia.org/ontology/filename'
+  filesize:
+    type: integer
+    description: File size of media asset in number of bytes.
+    context: 'https://dbpedia.org/ontology/fileSize'
+    readOnly: true
+  mediatype:
+    type: string
+    description: IANA Media Type (MIME type)
+    context: encodingFormat
+  duration:
+    type: integer
+    description: Duration of audio-visual media in secondes.
+  fps:
+    type: number
+    description: Frames per second of video assets.
+    format: float
+    example: 24
+    context: 'http://id.loc.gov/ontologies/bibframe/ProjectionSpeed'
+    minimum: 1
+  width:
+    type: integer
+    description: Width of visual media in number of pixels.
+    format: int32
+    example: 640
+  height:
+    type: integer
+    description: Height of visual media in number of pixels.
+    format: int32
+    example: 480
+    minimum: 1
+  characters:
+    type: integer
+    description: Number of text characters (code points after Unicode normalization)
+  language:
+    description: Language(s) of content (BCP-47).
+    type:
+      - string
+      - array
+    items:
+      type: string
