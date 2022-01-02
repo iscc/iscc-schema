@@ -4,14 +4,16 @@
     {
       "§schema": "@type",
       "iscc": "@id",
-      "identifier": "https://purl.org/iscc/context/0.2.0/#identifier",
+      "datahash": "https://purl.org/iscc/context/#datahash",
+      "metahash": "https://purl.org/iscc/context/#metahash",
+      "tophash": "https://purl.org/iscc/context/#tophash",
       "filename": "https://dbpedia.org/ontology/filename",
       "filesize": "https://dbpedia.org/ontology/fileSize",
       "mediatype": "encodingFormat",
-      "tophash": "https://purl.org/iscc/context/0.2.0/#tophash",
-      "metahash": "https://purl.org/iscc/context/0.2.0/#metahash",
-      "datahash": "https://purl.org/iscc/context/0.2.0/#datahash",
-      "fps": "http://id.loc.gov/ontologies/bibframe/ProjectionSpeed"
+      "fps": "https://id.loc.gov/ontologies/bibframe/ProjectionSpeed",
+      "content": "contentUrl",
+      "identifier": "https://purl.org/iscc/context/#identifier",
+      "creator": "https://purl.org/dc/elements/1.1/creator"
     }
   ]
 }

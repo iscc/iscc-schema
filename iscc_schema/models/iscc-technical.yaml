@@ -12,10 +12,10 @@ properties:
     type: integer
     description: File size of media asset in number of bytes.
     context: 'https://dbpedia.org/ontology/fileSize'
-    readOnly: true
   mediatype:
     type: string
-    description: IANA Media Type (MIME type)
+    description: '[IANA Media Type] https://www.iana.org/assignments/media-types/media-types.xhtml (MIME type)'
+    example: "image/png"
     context: encodingFormat
   duration:
     type: integer
@@ -25,7 +25,7 @@ properties:
     description: Frames per second of video assets.
     format: float
     example: 24
-    context: 'http://id.loc.gov/ontologies/bibframe/ProjectionSpeed'
+    context: 'https://id.loc.gov/ontologies/bibframe/ProjectionSpeed'
     minimum: 1
   width:
     type: integer
@@ -41,10 +41,34 @@ properties:
   characters:
     type: integer
     description: Number of text characters (code points after Unicode normalization)
+    example: 55689
+  pages:
+    type: integer
+    description: Number of pages (for paged documents only)
+    example: 77
   language:
-    description: Language(s) of content (BCP-47).
+    description: Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).
+    example: en-US
     type:
       - string
       - array
     items:
       type: string
+  keywords:
+    type: array
+    description: List of keywords relevant to the identified digital content.
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string
+      example: ["hashing", "identification"]
+  parts:
+    type: array
+    description: Included Content-Codes.
+    items:
+      type: string
+  features:
+    type: array
+    description: Granular features of the *digital content*.
+    items:
+      type: object

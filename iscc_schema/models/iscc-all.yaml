@@ -1,0 +1,10 @@
+title: iscc-all
+description: ISCC Metadata Schema
+allOf:
+  - $ref: ./iscc-jsonld.yaml
+  - $ref: ./iscc-minimal.yaml
+  - $ref: ./iscc-basic.yaml
+  - $ref: ./iscc-extended.yaml
+  - $ref: ./iscc-properties.yaml
+  - $ref: ./iscc-technical.yaml
+  - $ref: ./iscc-crypto.yaml

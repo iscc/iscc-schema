@@ -1,12 +1,39 @@
 title: iscc-extended
-description: >
-  Arbitrary properties. Values may be strings, numbers, object or arrays.
-  Should be used for industry specific structured metadata.
 type: object
+description: Extended ISCC Metadata
 properties:
-  properties:
-    type: object
-    minProperties: 1
+  content:
     description: >
-      JSON or JSON-LD formated values about the identified *digital content*.
-      Compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
+      URI of the *digital content* that was used to create this ISCC.
+    type: string
+    format: uri
+    context: contentUrl
+  identifier:
+    description: >
+      Other identifier(s) referencing the work, product or other abstraction of which
+      the referenced **digital content** is a full or partial manifestation.
+    context: 'https://purl.org/iscc/context/#identifier'
+    type:
+      - string
+      - array
+    items:
+      type: string
+      format: uri
+  creator:
+    description: An entity primarily responsible for making the resource.
+    context: 'https://purl.org/dc/elements/1.1/creator'
+    type:
+      - string
+      - array
+    items:
+      type: string
+  license:
+    type: string
+    description: URI of license for the identified *digital content*.
+    format: uri
+  redirect:
+    type: string
+    description: >
+      URL to which a resolver should redirect an ISCC-ID that has been minted from a
+      declartion that includes the IPFS-hash of this metadata instance.
+    format: uri

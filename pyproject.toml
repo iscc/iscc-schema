@@ -22,7 +22,7 @@ mkdocs-material = "^8.1.4"
 [tool.datamodel-codegen]
 field-constraints = true
 aliases = "iscc_schema/aliases.json"
-input = "iscc_schema/models/iscc.yaml"
+input = "iscc_schema/models/iscc-all.yaml"
 output = "iscc_schema/schema.py"
 field-extra-keys = ["context"]
 use-default = true
