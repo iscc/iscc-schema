@@ -1,0 +1,69 @@
+site_name: "ISCC - Schema Definitions"
+site_description: 'International Standard Content Code - Schema Definitions.'
+site_author: 'Titusz Pan'
+site_url: 'https://schema.iscc.io'
+
+# Repository
+repo_name: 'iscc/iscc-schema'
+repo_url: 'https://github.com/iscc/iscc-schema'
+edit_uri: 'edit/main/docs/'
+
+# Copyright
+copyright: 'Copyright © 2016-2022 The Authors
+| <a href="https://iscc.foundation/privacy">Privacy Policy</a>
+| <a href="https://iscc.foundation/cookies">Cookie Policy</a>
+| <a href="https://iscc.foundation/imprint">Imprint</a>
+| <a href="https://iscc.foundation/disclaimer">Disclaimer</a>'
+
+extra_css:
+  - stylesheets/extra.css
+
+theme:
+  name: material
+  logo: images/iscc-logo-icon-white.svg
+  favicon: images/iscc-logo-icon-black.svg
+  language: en
+  font:
+    text: Quicksand
+    code: Inconsolata
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  features:
+    - toc.integrate
+    - navigation.indexes
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.expand
+
+
+plugins:
+  - search
+
+
+markdown_extensions:
+  - meta
+  - admonition
+  - pymdownx.details
+  - abbr
+  - attr_list
+  - md_in_html
+  - footnotes
+  - toc:
+      permalink: "#"
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+nav:
+  - Overview: index.md
+
