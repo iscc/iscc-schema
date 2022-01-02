@@ -1,12 +1,11 @@
 [tool.poetry]
-name = "iscc-api"
+name = "iscc-schema"
 version = "0.1.0"
-description = "ISCC - OpenAPI Specifications"
+description = "ISCC - Schema Definitions"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
 readme = "README.md"
-homepage = "https://github.com/iscc/iscc-api"
-repository = "https://github.com/iscc/iscc-api"
+repository = "https://github.com/iscc/iscc-schema"
 keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "similarity"]
 
 [tool.poetry.dependencies]
@@ -20,17 +19,14 @@ poethepoet = "^0.11.0"
 black = "21.12b0"
 
 [tool.datamodel-codegen]
-strip-default-none = true
-target-python-version = "3.6"
 field-constraints = true
-input = "iscc_api/models/iscc.yaml"
-output = "iscc_api/schema.py"
-class-name = "Schema"
-field-include-all-keys = true
+aliases = "iscc_schema/aliases.json"
+input = "iscc_schema/models/iscc.yaml"
+output = "iscc_schema/schema.py"
+field-extra-keys = ["context"]
 use-default = true
 use-schema-description = true
 wrap-string-literal = true
-validation = true
 
 
 [tool.poe.tasks]

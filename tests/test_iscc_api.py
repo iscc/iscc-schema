@@ -1,4 +1,4 @@
-from iscc_api import __version__
+from iscc_schema import __version__
 
 
 def test_version():

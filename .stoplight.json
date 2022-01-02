@@ -2,13 +2,13 @@
   "exclude": [],
   "formats": {
     "openapi": {
-      "rootDir": "iscc_api/reference",
+      "rootDir": "iscc_schema/reference",
       "include": [
         "**"
       ]
     },
     "json_schema": {
-      "rootDir": "iscc_api/models",
+      "rootDir": "iscc_schema/models",
       "include": [
         "**"
       ]

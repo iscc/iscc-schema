@@ -1,49 +1,43 @@
 title: ISCC Metadata Schema
 type: object
 description: Schema for ISCC Metadata.
+x-tags:
+  - metadata
 properties:
   '@context':
     type: string
     format: uri
     default: 'https://purl.org/iscc/context/0.2.0.json'
     description: JSON-LD Context URI for ISCC metadata.
-  type:
+  $schema:
     type: string
     format: uri
     default: 'https://purl.org/iscc/schema/0.2.0.json'
+    description: JSON Schema URI for ISCC metadata.
   iscc:
     type: string
-    format: uri
     example: 'ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY'
+    maxLength: 60
+    minLength: 15
   name:
     type: string
-    description: >
-      The name or title of the intangible creation manifested by the idendified digital 
-      content.
+    description: |
+      The name or title of the intangible creation manifested by the idendified digital content.
     maxLength: 128
     example: Harry Potter and the Philosopher's Stone
   description:
     type: string
-    description: >
-      Description of the digital asset identified by the ISCC (used as input for 
-      Meta-Code generation). Any user presentable text string (including Markdown text) 
-      indicative of the identity  of the referent may be used.
+    description: |
+      Description of the digital asset identified by the ISCC (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.
     maxLength: 1024
   metadata:
     type: object
-    description: >
-      JSON or JSON-LD metadata for the digital content. This is the source for 
-      determinstic calculation of the metahash.
+    description: |
+      JSON or JSON-LD metadata for the digital content. This is the source for determinstic calculation of the metahash.
   image:
     type: string
-    description: >
-      URL for a user-presentable image that serves as a preview of identified digital 
-      content. The URI may be a Data-URL 
-      [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If this metadata should 
-      serve as NFT metadata according to  
-      [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or 
-      [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) 
-      the URI must reference the actual digital content represented by the NFT.
+    description: |
+      URL for a user-presentable image that serves as a preview of identified digital content. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If this metadata should serve as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI must reference the actual digital content represented by the NFT.
     format: uri
     example: 'https://picsum.photos/200/300.jpg'
   keywords:
@@ -55,9 +49,8 @@ properties:
       type: string
       example: hashing
   identifier:
-    description: >
-      Other identifier(s) referencing the work, product or other abstraction of which 
-      the referenced **digital content** is a full or partial manifestation.
+    description: |
+      Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
     context: 'https://purl.org/iscc/context/0.2.0/#identifier'
     type:
       - string
@@ -68,7 +61,7 @@ properties:
   filename:
     type: string
     description: |
-      Filename of the referenced **digital content** (automatically used as fallback if 
+      Filename of the referenced **digital content** (automatically used as fallback if
       the `name` field was not specified for ISCC processing)
     context: 'https://dbpedia.org/ontology/filename'
   filesize:
@@ -134,13 +127,10 @@ properties:
     format: uri
   redirect:
     type: string
-    description: >
-      URL to which a resolver should redirect an ISCC-ID that has been minted from a 
-      declartion that includes the IPFS-hash of this metadata instance.
+    description: |
+      URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.
     format: uri
 required:
   - '@context'
-  - type
+  - $schema
   - iscc
-x-tags:
-  - metadata
