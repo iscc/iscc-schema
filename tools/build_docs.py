@@ -28,7 +28,7 @@ def build_json_schema_docs():
     """Build markdown from JSON Schema"""
     header = "# JSON Schema for ISCC Metadata\n\n"
     schemata = [
-        "iscc-jsonld.yaml",
+        # "iscc-jsonld.yaml",
         "iscc-minimal.yaml",
         "iscc-basic.yaml",
         "iscc-extended.yaml",

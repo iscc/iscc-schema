@@ -1,21 +1,15 @@
 # JSON Schema for ISCC Metadata
 
-## iscc-jsonld
-[JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-schema.org/) reference
-### **@context**
-
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| @context | `string-uri` | [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.                     |
-
-### **$schema**
-
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| $schema | `string-uri` | [JSON Schema](https://json-schema.org/) URI for ISCC metadata.                     |
-
 ## iscc-minimal
 Minimal ISCC Metadata
+
+!!! example
+
+    ```json
+    {
+      "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
+    }
+    ```
 ### **iscc**
 
 | Name | Type | Definition                               |
