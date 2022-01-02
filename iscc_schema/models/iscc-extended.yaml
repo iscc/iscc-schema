@@ -8,9 +8,8 @@ properties:
     format: uri
     context: contentUrl
   identifier:
-    description: >
-      Other identifier(s) referencing the work, product or other abstraction of which
-      the referenced **digital content** is a full or partial manifestation.
+    description: |
+      Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
     context: 'https://purl.org/iscc/context/#identifier'
     type:
       - string
@@ -32,7 +31,12 @@ properties:
     format: uri
   redirect:
     type: string
-    description: >
-      URL to which a resolver should redirect an ISCC-ID that has been minted from a
-      declartion that includes the IPFS-hash of this metadata instance.
+    description: |
+      URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.
     format: uri
+examples:
+  - content: 'http://example.com/the-asset.epub'
+    identifier: 'urn:isbn:3-8273-7019-1'
+    creator: Frank Fancy
+    license: 'http://example.com/license.txt'
+    redirect: 'http://example.com/about-the-asset'

@@ -1,6 +1,15 @@
 title: iscc-technical
 type: object
 description: Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor
+examples:
+  - filename: the-file.png
+    filesize: 46356
+    mediatype: image/png
+    width: 640
+    height: 480
+    keywords:
+      - hashing
+      - identification
 properties:
   filename:
     type: string
@@ -13,7 +22,7 @@ properties:
   mediatype:
     type: string
     description: '[IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)'
-    example: "image/png"
+    example: image/png
     context: encodingFormat
   duration:
     type: integer
@@ -45,7 +54,7 @@ properties:
     description: Number of pages (for paged documents only)
     example: 77
   language:
-    description: Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).
+    description: 'Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).'
     example: en-US
     type:
       - string
@@ -59,7 +68,6 @@ properties:
     uniqueItems: true
     items:
       type: string
-      example: ["hashing", "identification"]
   parts:
     type: array
     description: Included Content-Codes.

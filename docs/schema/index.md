@@ -3,7 +3,7 @@
 ## iscc-minimal
 Minimal ISCC Metadata
 
-!!! example
+??? example
 
     ```json
     {
@@ -19,7 +19,7 @@ Minimal ISCC Metadata
 ## iscc-basic
 Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ethereum.org/EIPS/eip-721)
 
-!!! example
+??? example
 
     ```json
     {
@@ -48,6 +48,18 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
 
 ## iscc-extended
 Extended ISCC Metadata
+
+??? example
+
+    ```json
+    {
+      "content": "http://example.com/the-asset.epub",
+      "identifier": "urn:isbn:3-8273-7019-1",
+      "creator": "Frank Fancy",
+      "license": "http://example.com/license.txt",
+      "redirect": "http://example.com/about-the-asset"
+    }
+    ```
 ### **content**
 <contentUrl>
 
@@ -85,6 +97,37 @@ Extended ISCC Metadata
 
 ## iscc-properties
 Arbitrary properties. Values may be strings, numbers, object or arrays. Should be used for industry specific structured metadata.
+
+??? example
+
+    ```json
+    {
+      "properties": {
+        "simple_property": "example value",
+        "rich_property": {
+          "name": "Name",
+          "value": "123",
+          "display_value": "123 Example Value",
+          "class": "emphasis",
+          "css": {
+            "color": "#ffffff",
+            "font-weight": "bold",
+            "text-decoration": "underline"
+          }
+        },
+        "array_property": {
+          "name": "Name",
+          "value": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "class": "emphasis"
+        }
+      }
+    }
+    ```
 ### **properties**
 
 | Name | Type | Definition                               |
@@ -93,6 +136,22 @@ Arbitrary properties. Values may be strings, numbers, object or arrays. Should b
 
 ## iscc-technical
 Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor
+
+??? example
+
+    ```json
+    {
+      "filename": "the-file.png",
+      "filesize": 46356,
+      "mediatype": "image/png",
+      "width": 640,
+      "height": 480,
+      "keywords": [
+        "hashing",
+        "identification"
+      ]
+    }
+    ```
 ### **filename**
 <https://dbpedia.org/ontology/filename>
 
