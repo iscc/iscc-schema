@@ -36,19 +36,19 @@ theme:
         icon: material/toggle-switch
         name: Switch to light mode
   features:
-    - toc.integrate
+    #- toc.integrate
     - navigation.indexes
-    - navigation.tracking
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.expand
-
+#    - navigation.tracking
+#    - navigation.tabs
+#    - navigation.tabs.sticky
+#    - navigation.expand
 
 plugins:
   - search
 
 
 markdown_extensions:
+  - tables
   - meta
   - admonition
   - pymdownx.details
@@ -63,7 +63,13 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
 
 nav:
   - Overview: index.md
+  - JSON Schema: schema/index.md
 

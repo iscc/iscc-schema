@@ -3,27 +3,111 @@
   "description": "ISCC Metadata Schema",
   "type": "object",
   "properties": {
-    "datahash": {
-      "title": "Datahash",
-      "description": "[Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).",
-      "context": "https://purl.org/iscc/context/#datahash",
+    "@context": {
+      "title": "@Context",
+      "description": "[JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
+      "default": "https://purl.org/iscc/context/iscc.json",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
       "type": "string"
     },
-    "metahash": {
-      "title": "Metahash",
-      "description": "[Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.",
-      "context": "https://purl.org/iscc/context/#metahash",
+    "$schema": {
+      "title": "$Schema",
+      "description": "[JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
+      "default": "https://purl.org/iscc/schema/iscc.json",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
       "type": "string"
     },
-    "tophash": {
-      "title": "Tophash",
-      "description": "[Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).",
-      "context": "https://purl.org/iscc/context/#tophash",
+    "iscc": {
+      "title": "Iscc",
+      "description": "**ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.",
+      "maxLength": 60,
+      "minLength": 15,
+      "example": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "description": "The name or title of the intangible creation manifested by the idendified *digital content*.",
+      "maxLength": 128,
+      "minLength": 1,
+      "example": "The Never Ending Story",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "description": "Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.",
+      "maxLength": 1024,
+      "minLength": 1,
+      "example": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
+      "type": "string"
+    },
+    "image": {
+      "title": "Image",
+      "description": "URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.",
+      "example": "https://picsum.photos/200/300.jpg",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "content": {
+      "title": "Content",
+      "description": "URI of the *digital content* that was used to create this ISCC.",
+      "context": "contentUrl",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "identifier": {
+      "title": "Identifier",
+      "description": "Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.\n",
+      "context": "https://purl.org/iscc/context/#identifier",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 65536,
+        "format": "uri"
+      }
+    },
+    "creator": {
+      "title": "Creator",
+      "description": "An entity primarily responsible for making the resource.",
+      "context": "https://purl.org/dc/elements/1.1/creator",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "license": {
+      "title": "License",
+      "description": "URI of license for the identified *digital content*.",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "redirect": {
+      "title": "Redirect",
+      "description": "URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.\n",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "properties": {
+      "title": "Properties",
+      "description": "JSON or JSON-LD formated values about the identified *digital content*. Compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).",
+      "type": "object"
     },
     "filename": {
       "title": "Filename",
-      "description": "Filename of the referenced **digital content** (automatically used as fallback if\nthe `name` field was not specified for ISCC processing)\n",
+      "description": "Filename of the referenced **digital content** (automatically used as fallback if the `name` field was not specified for ISCC processing)",
       "context": "https://dbpedia.org/ontology/filename",
       "type": "string"
     },
@@ -35,7 +119,7 @@
     },
     "mediatype": {
       "title": "Mediatype",
-      "description": "[IANA Media Type] https://www.iana.org/assignments/media-types/media-types.xhtml (MIME type)",
+      "description": "[IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)",
       "context": "encodingFormat",
       "example": "image/png",
       "type": "string"
@@ -112,106 +196,22 @@
         "type": "object"
       }
     },
-    "properties": {
-      "title": "Properties",
-      "description": "JSON or JSON-LD formated values about the identified *digital content*. Compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).\n",
-      "type": "object"
-    },
-    "content": {
-      "title": "Content",
-      "description": "URI of the *digital content* that was used to create this ISCC.\n",
-      "context": "contentUrl",
-      "minLength": 1,
-      "maxLength": 65536,
-      "format": "uri",
+    "datahash": {
+      "title": "Datahash",
+      "description": "[Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).",
+      "context": "https://purl.org/iscc/context/#datahash",
       "type": "string"
     },
-    "identifier": {
-      "title": "Identifier",
-      "description": "Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.\n",
-      "context": "https://purl.org/iscc/context/#identifier",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 65536,
-        "format": "uri"
-      }
-    },
-    "creator": {
-      "title": "Creator",
-      "description": "An entity primarily responsible for making the resource.",
-      "context": "https://purl.org/dc/elements/1.1/creator",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "license": {
-      "title": "License",
-      "description": "URI of license for the identified *digital content*.",
-      "minLength": 1,
-      "maxLength": 65536,
-      "format": "uri",
+    "metahash": {
+      "title": "Metahash",
+      "description": "[Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.",
+      "context": "https://purl.org/iscc/context/#metahash",
       "type": "string"
     },
-    "redirect": {
-      "title": "Redirect",
-      "description": "URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.\n",
-      "minLength": 1,
-      "maxLength": 65536,
-      "format": "uri",
-      "type": "string"
-    },
-    "name": {
-      "title": "Name",
-      "description": "The name or title of the intangible creation manifested by the idendified *digital content*.",
-      "maxLength": 128,
-      "minLength": 1,
-      "example": "The Never Ending Story",
-      "type": "string"
-    },
-    "description": {
-      "title": "Description",
-      "description": "Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.",
-      "maxLength": 1024,
-      "minLength": 1,
-      "example": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
-      "type": "string"
-    },
-    "image": {
-      "title": "Image",
-      "description": "URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.",
-      "example": "https://picsum.photos/200/300.jpg",
-      "minLength": 1,
-      "maxLength": 65536,
-      "format": "uri",
-      "type": "string"
-    },
-    "iscc": {
-      "title": "Iscc",
-      "description": "**ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.",
-      "maxLength": 60,
-      "minLength": 15,
-      "example": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
-      "type": "string"
-    },
-    "@context": {
-      "title": "@Context",
-      "description": "[JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
-      "default": "https://purl.org/iscc/context/iscc.json",
-      "minLength": 1,
-      "maxLength": 65536,
-      "format": "uri",
-      "type": "string"
-    },
-    "$schema": {
-      "title": "$Schema",
-      "description": "[JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
-      "default": "https://purl.org/iscc/schema/iscc.json",
-      "minLength": 1,
-      "maxLength": 65536,
-      "format": "uri",
+    "tophash": {
+      "title": "Tophash",
+      "description": "[Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).",
+      "context": "https://purl.org/iscc/context/#tophash",
       "type": "string"
     }
   },

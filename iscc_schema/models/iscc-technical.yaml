@@ -4,9 +4,7 @@ description: Technical ISCC Metadata automaticaly inferred from the *digital con
 properties:
   filename:
     type: string
-    description: |
-      Filename of the referenced **digital content** (automatically used as fallback if
-      the `name` field was not specified for ISCC processing)
+    description: Filename of the referenced **digital content** (automatically used as fallback if the `name` field was not specified for ISCC processing)
     context: 'https://dbpedia.org/ontology/filename'
   filesize:
     type: integer
@@ -14,7 +12,7 @@ properties:
     context: 'https://dbpedia.org/ontology/fileSize'
   mediatype:
     type: string
-    description: '[IANA Media Type] https://www.iana.org/assignments/media-types/media-types.xhtml (MIME type)'
+    description: '[IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)'
     example: "image/png"
     context: encodingFormat
   duration:

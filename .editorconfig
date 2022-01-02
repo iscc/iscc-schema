@@ -13,7 +13,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 
 # YAML files
-[*.yaml]
+[*.{yml,yaml}]
 indent_size = 2
 
 

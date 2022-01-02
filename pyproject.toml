@@ -19,6 +19,7 @@ poethepoet = "^0.11.0"
 black = "21.12b0"
 mkdocs-material = "^8.1.4"
 
+
 [tool.datamodel-codegen]
 field-constraints = true
 aliases = "iscc_schema/aliases.json"

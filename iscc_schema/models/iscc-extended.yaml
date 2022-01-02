@@ -3,8 +3,7 @@ type: object
 description: Extended ISCC Metadata
 properties:
   content:
-    description: >
-      URI of the *digital content* that was used to create this ISCC.
+    description: URI of the *digital content* that was used to create this ISCC.
     type: string
     format: uri
     context: contentUrl

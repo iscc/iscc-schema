@@ -1,12 +1,8 @@
 title: iscc-properties
-description: >
-  Arbitrary properties. Values may be strings, numbers, object or arrays.
-  Should be used for industry specific structured metadata.
+description: Arbitrary properties. Values may be strings, numbers, object or arrays. Should be used for industry specific structured metadata.
 type: object
 properties:
   properties:
     type: object
     minProperties: 1
-    description: >
-      JSON or JSON-LD formated values about the identified *digital content*.
-      Compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
+    description: JSON or JSON-LD formated values about the identified *digital content*. Compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
