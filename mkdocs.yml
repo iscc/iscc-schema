@@ -1,7 +1,7 @@
-site_name: "ISCC - Schema Definitions"
+site_name: "ISCC - Schema"
 site_description: 'International Standard Content Code - Schema Definitions.'
 site_author: 'Titusz Pan'
-site_url: 'https://schema.iscc.io'
+site_url: 'https://schema.iscc.codes'
 
 # Repository
 repo_name: 'iscc/iscc-schema'
