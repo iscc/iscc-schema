@@ -1,6 +1,5 @@
 """Copy README.md to documentation index.md"""
 from os.path import abspath, dirname, join
-import shutil
 from textwrap import indent
 
 import yaml
@@ -59,7 +58,7 @@ def build_json_schema_docs():
         if data.get("examples"):
             pretty = json.dumps(data.get("examples")[0], indent=2)
             content += f"""
-??? example
+!!! example
 
     ```json
 {indent(pretty, prefix="    ")}
