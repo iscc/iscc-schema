@@ -48,11 +48,12 @@ plugins:
 
 
 markdown_extensions:
+  - abbr
+  - pymdownx.snippets
   - tables
   - meta
   - admonition
   - pymdownx.details
-  - abbr
   - attr_list
   - md_in_html
   - footnotes
@@ -61,7 +62,6 @@ markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
   - pymdownx.superfences
   - pymdownx.critic
   - pymdownx.caret

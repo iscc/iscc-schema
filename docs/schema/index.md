@@ -285,3 +285,6 @@ Cryptography related ISCC Metadata
 | ---- | ---- | -----------------------------------------|
 | tophash | `string` | A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).                     |
 
+
+
+--8<-- "includes/abbreviations.md"

@@ -36,4 +36,4 @@ All ISCC extensions start with `x-iscc-`:
 ### 0.1.0 - Unreleased
 - Initial release
 
-*[ISCC]: International Standard Content Code
+--8<-- "includes/abbreviations.md"
