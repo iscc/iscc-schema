@@ -11,6 +11,7 @@ Minimal ISCC Metadata
     }
     ```
 ### **iscc**
+<http://purl.org/iscc/terms/#iscc>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
@@ -29,18 +30,21 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
     }
     ```
 ### **name**
+<http://schema.org/name>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | name | `string` | The name or title of the intangible creation manifested by the idendified *digital content*.                     |
 
 ### **description**
+<http://schema.org/disambiguatingDescription>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | description | `string` | Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.                     |
 
 ### **image**
+<http://schema.org/image>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
@@ -60,15 +64,22 @@ Extended ISCC Metadata
       "redirect": "http://example.com/about-the-asset"
     }
     ```
+### **version**
+<http://schema.org/version>
+
+| Name | Type | Definition                               |
+| ---- | ---- | -----------------------------------------|
+| version | `['integer', 'string']` | The version of the CreativeWork embodied by a specified resource.                     |
+
 ### **content**
-<contentUrl>
+<http://schema.org/contentUrl>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | content | `string-uri` | URI of the *digital content* that was used to create this ISCC.                     |
 
 ### **identifier**
-<https://purl.org/iscc/context/#identifier>
+<http://schema.org/identifier>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
@@ -76,19 +87,21 @@ Extended ISCC Metadata
                      |
 
 ### **creator**
-<https://purl.org/dc/elements/1.1/creator>
+<http://schema.org/creator>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | creator | `['string', 'array']` | An entity primarily responsible for making the resource.                     |
 
 ### **license**
+<http://schema.org/license>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | license | `string-uri` | URI of license for the identified *digital content*.                     |
 
 ### **redirect**
+<http://purl.org/iscc/terms/#redirect>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
@@ -129,6 +142,7 @@ Arbitrary properties. Values may be strings, numbers, object or arrays. Should b
     }
     ```
 ### **properties**
+<http://purl.org/iscc/terms/#properties>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
@@ -153,82 +167,98 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
     }
     ```
 ### **filename**
-<https://dbpedia.org/ontology/filename>
+<http://purl.org/iscc/terms/#filename>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | filename | `string` | Filename of the referenced **digital content** (automatically used as fallback if the `name` field was not specified for ISCC processing)                     |
 
 ### **filesize**
-<https://dbpedia.org/ontology/fileSize>
+<http://schema.org/fileSize>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | filesize | `integer` | File size of media asset in number of bytes.                     |
 
 ### **mediatype**
-<encodingFormat>
+<http://schema.org/encodingFormat>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | mediatype | `string` | [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)                     |
 
 ### **duration**
+<http://schema.org/duration>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | duration | `integer` | Duration of audio-visual media in secondes.                     |
 
 ### **fps**
-<https://id.loc.gov/ontologies/bibframe/ProjectionSpeed>
+<http://purl.org/iscc/terms/#fps>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | fps | `number-float` | Frames per second of video assets.                     |
 
 ### **width**
+<http://purl.org/iscc/terms/#width>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | width | `integer-int32` | Width of visual media in number of pixels.                     |
 
 ### **height**
+<http://purl.org/iscc/terms/#height>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | height | `integer-int32` | Height of visual media in number of pixels.                     |
 
 ### **characters**
+<http://purl.org/iscc/terms/#characters>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | characters | `integer` | Number of text characters (code points after Unicode normalization)                     |
 
 ### **pages**
+<http://schema.org/numberOfPages>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | pages | `integer` | Number of pages (for paged documents only)                     |
 
 ### **language**
+<http://schema.org/inLanguage>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | language | `['string', 'array']` | Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).                     |
 
 ### **keywords**
+<http://schema.org/keywords>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| keywords | `array` | List of keywords relevant to the identified digital content.                     |
+| keywords | `string` | Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.                     |
 
 ### **parts**
+<http://purl.org/iscc/terms/#parts>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| parts | `array` | Included Content-Codes.                     |
+| parts | `array` | Indicates items that are part of this item via Content-Codes (inverse-property: belongs).                     |
+
+### **part_of**
+<http://purl.org/iscc/terms/#part_of>
+
+| Name | Type | Definition                               |
+| ---- | ---- | -----------------------------------------|
+| part_of | `array` | Indicates that this item is part of other items via their Content-Code.                     |
 
 ### **features**
+<http://purl.org/iscc/terms/#features>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
@@ -237,21 +267,21 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 ## iscc-crypto
 Cryptography related ISCC Metadata
 ### **datahash**
-<https://purl.org/iscc/context/#datahash>
+<https://purl.org/iscc/terms/#datahash>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | datahash | `string` | [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).                     |
 
 ### **metahash**
-<https://purl.org/iscc/context/#metahash>
+<https://purl.org/iscc/terms/#metahash>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | metahash | `string` | [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.                     |
 
 ### **tophash**
-<https://purl.org/iscc/context/#tophash>
+<https://purl.org/iscc/terms/#tophash>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|

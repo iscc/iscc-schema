@@ -9,7 +9,8 @@ import json
 
 ROOT = pathlib.Path(__file__).parent.parent
 SCHEMAS = ROOT / "iscc_schema/models"
-MARKDOWN = ROOT / "docs/schema/index.md"
+MARKDOWN_SCHEMA = ROOT / "docs/schema/index.md"
+MARKDOWN_CONTEXT = ROOT / "docs/context/index.md"
 
 HERE = dirname(abspath(__file__))
 SRC = join(HERE, "../README.md")
@@ -66,13 +67,44 @@ def build_json_schema_docs():
             content += f"| ---- | ---- | -----------------------------------------|\n"
             content += f"| {prop} | `{type_}` | {description}                     |\n\n"
 
-    with open(MARKDOWN, "wt", encoding="utf-8") as outf:
+    with open(MARKDOWN_SCHEMA, "wt", encoding="utf-8") as outf:
         outf.write(content)
+
+
+def build_json_ld_context_docs():
+
+    doc = f"# **ISCC** - Metadata Vocabulary\n\n"
+
+    schemata = [
+        # "iscc-jsonld.yaml",
+        "iscc-minimal.yaml",
+        "iscc-basic.yaml",
+        "iscc-extended.yaml",
+        "iscc-properties.yaml",
+        "iscc-technical.yaml",
+        "iscc-crypto.yaml",
+    ]
+
+    for schema in schemata:
+        path = SCHEMAS / schema
+        with open(path) as infile:
+            data = yaml.safe_load(infile)
+
+        for prop, fields in data["properties"].items():
+            if fields.get("context"):
+                doc += f"## {prop}\n\n"
+                doc += f"<small><{fields.get('context')}></small>\n"
+                doc += '!!! term ""\n'
+                doc += f"    {fields['description']}\n\n"
+
+    with open(MARKDOWN_CONTEXT, "wt", encoding="UTF-8") as outf:
+        outf.write(doc)
 
 
 def build():
     copy_readme()
     build_json_schema_docs()
+    build_json_ld_context_docs()
 
 
 if __name__ == "__main__":

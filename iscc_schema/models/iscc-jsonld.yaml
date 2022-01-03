@@ -5,10 +5,10 @@ properties:
   '@context':
     type: string
     format: uri
-    default: 'https://purl.org/iscc/context/iscc.json'
+    default: 'https://purl.org/iscc/terms/'
     description: '[JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.'
   $schema:
     type: string
     format: uri
-    default: 'https://purl.org/iscc/schema/iscc.json'
+    default: 'https://purl.org/iscc/schema/'
     description: '[JSON Schema](https://json-schema.org/) URI for ISCC metadata.'

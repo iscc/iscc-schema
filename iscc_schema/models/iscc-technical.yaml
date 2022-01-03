@@ -14,45 +14,50 @@ properties:
   filename:
     type: string
     description: Filename of the referenced **digital content** (automatically used as fallback if the `name` field was not specified for ISCC processing)
-    context: 'https://dbpedia.org/ontology/filename'
+    context: 'http://purl.org/iscc/terms/#filename'
   filesize:
     type: integer
     description: File size of media asset in number of bytes.
-    context: 'https://dbpedia.org/ontology/fileSize'
+    context: 'http://schema.org/fileSize'
   mediatype:
     type: string
     description: '[IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)'
     example: image/png
-    context: encodingFormat
+    context: 'http://schema.org/encodingFormat'
   duration:
     type: integer
     description: Duration of audio-visual media in secondes.
+    context: 'http://schema.org/duration'
   fps:
     type: number
     description: Frames per second of video assets.
     format: float
     example: 24
-    context: 'https://id.loc.gov/ontologies/bibframe/ProjectionSpeed'
+    context: 'http://purl.org/iscc/terms/#fps'
     minimum: 1
   width:
     type: integer
     description: Width of visual media in number of pixels.
     format: int32
     example: 640
+    context: 'http://purl.org/iscc/terms/#width'
   height:
     type: integer
     description: Height of visual media in number of pixels.
     format: int32
     example: 480
     minimum: 1
+    context: 'http://purl.org/iscc/terms/#height'
   characters:
     type: integer
     description: Number of text characters (code points after Unicode normalization)
     example: 55689
+    context: 'http://purl.org/iscc/terms/#characters'
   pages:
     type: integer
     description: Number of pages (for paged documents only)
     example: 77
+    context: 'http://schema.org/numberOfPages'
   language:
     description: 'Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).'
     example: en-US
@@ -61,20 +66,26 @@ properties:
       - array
     items:
       type: string
+    context: 'http://schema.org/inLanguage'
   keywords:
-    type: array
-    description: List of keywords relevant to the identified digital content.
-    minItems: 1
-    uniqueItems: true
-    items:
-      type: string
+    type: string
+    description: Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
+    context: 'http://schema.org/keywords'
   parts:
     type: array
-    description: Included Content-Codes.
+    description: 'Indicates items that are part of this item via Content-Codes (inverse-property: belongs).'
     items:
       type: string
+    context: 'http://purl.org/iscc/terms/#parts'
+  part_of:
+    type: array
+    description: Indicates that this item is part of other items via their Content-Code.
+    items:
+      type: string
+    context: 'http://purl.org/iscc/terms/#part_of'
   features:
     type: array
     description: Granular features of the *digital content*.
     items:
       type: object
+    context: 'http://purl.org/iscc/terms/#features'

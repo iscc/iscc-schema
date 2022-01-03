@@ -72,4 +72,5 @@ markdown_extensions:
 nav:
   - Overview: index.md
   - JSON Schema: schema/index.md
+  - JSON-LD Context: context/index.md
 

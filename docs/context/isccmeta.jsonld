@@ -1,0 +1,41 @@
+{
+    "@context": {
+
+        "type": "@type",
+        "iscc": "@id",
+        "schema": "http://schema.org",
+        "isccmeta": "http://purl.org/iscc/terms/",
+
+        "name": { "@id": "schema:name"},
+        "description": { "@id": "schema:description"},
+        "image": { "@id": "schema:image"},
+
+        "version": { "@id": "schema.version"},
+        "content": { "@id": "schema:contentUrl"},
+        "identifier": { "@id": "schema:identifier", "@type": "@id"},
+        "creator": { "@id": "schema:creator"},
+        "license": { "@id": "schema:license", "@type": "@id"},
+        "redirect": { "@id": "isccmeta:redirect", "type": "@id"},
+
+        "filename": { "@id": "isccmeta:filename"},
+        "filesize": { "@id": "schema:fileSize"},
+        "mediatype": { "@id": "schema:encodingFormat"},
+        "duration": { "@id": "schema:duration"},
+        "fps": { "@id": "isccmeta:fps"},
+        "width": { "@id": "isccmeta:width"},
+        "height": { "@id": "isccmeta:height"},
+        "characters": { "@id": "isccmeta:characters"},
+        "pages": { "@id": "schema:numberOfPages"},
+        "language": {"@id": "schema:inLanguage"},
+        "keywords": { "@id": "schema:keywords"},
+        "parts": { "@id": "isccmeta:parts"},
+        "part_of": { "@id": "isccmeta:part_of"},
+        "features": { "@id": "isccmeta:features"},
+
+        "metahash": { "@id": "isccmeta:metahash"},
+        "datahash": { "@id": "isccmeta:datahash"},
+        "tophash": { "@id": "isccmeta:tophash"},
+
+        "properties": { "@id": "isccmeta:properties"}
+    }
+}
