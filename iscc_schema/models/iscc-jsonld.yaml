@@ -1,14 +1,14 @@
 title: iscc-jsonld
 type: object
-description: '[JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-schema.org/) reference'
+description: 'The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-schema.org/) reference'
 properties:
   '@context':
     type: string
     format: uri
     default: 'https://purl.org/iscc/terms/'
-    description: '[JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.'
+    description: 'The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.'
   $schema:
     type: string
     format: uri
     default: 'https://purl.org/iscc/schema/'
-    description: '[JSON Schema](https://json-schema.org/) URI for ISCC metadata.'
+    description: 'The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.'

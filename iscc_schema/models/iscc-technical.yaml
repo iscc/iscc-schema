@@ -21,7 +21,7 @@ properties:
     context: 'http://schema.org/fileSize'
   mediatype:
     type: string
-    description: '[IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)'
+    description: 'An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)'
     example: image/png
     context: 'http://schema.org/encodingFormat'
   duration:
@@ -73,7 +73,7 @@ properties:
     context: 'http://schema.org/keywords'
   parts:
     type: array
-    description: 'Indicates items that are part of this item via Content-Codes (inverse-property: belongs).'
+    description: 'Indicates items that are part of this item via Content-Codes (inverse-property belongs).'
     items:
       type: string
     context: 'http://purl.org/iscc/terms/#parts'

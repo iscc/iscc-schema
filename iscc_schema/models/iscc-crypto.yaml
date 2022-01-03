@@ -4,13 +4,13 @@ description: Cryptography related ISCC Metadata
 properties:
   datahash:
     type: string
-    description: '[Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).'
-    context: 'https://purl.org/iscc/terms/#datahash'
+    description: 'A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).'
+    context: 'http://purl.org/iscc/terms/#datahash'
   metahash:
     type: string
-    description: '[Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.'
-    context: 'https://purl.org/iscc/terms/#metahash'
+    description: 'A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.'
+    context: 'http://purl.org/iscc/terms/#metahash'
   tophash:
     type: string
-    description: '[Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).'
-    context: 'https://purl.org/iscc/terms/#tophash'
+    description: 'A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).'
+    context: 'http://purl.org/iscc/terms/#tophash'
