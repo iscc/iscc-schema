@@ -58,19 +58,6 @@
       "format": "uri",
       "type": "string"
     },
-    "version": {
-      "title": "Version",
-      "description": "The version of the CreativeWork embodied by a specified resource.",
-      "x_iscc_context": "http://schema.org/version",
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "string"
-        }
-      ]
-    },
     "content": {
       "title": "Content",
       "description": "URI of the *digital content* that was used to create this ISCC.",
@@ -78,6 +65,21 @@
       "minLength": 1,
       "maxLength": 65536,
       "format": "uri",
+      "type": "string"
+    },
+    "creator": {
+      "title": "Creator",
+      "description": "An entity primarily responsible for making the resource.",
+      "x_iscc_context": "http://schema.org/creator",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "keywords": {
+      "title": "Keywords",
+      "description": "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.",
+      "x_iscc_context": "http://schema.org/keywords",
       "type": "string"
     },
     "identifier": {
@@ -90,15 +92,6 @@
         "minLength": 1,
         "maxLength": 65536,
         "format": "uri"
-      }
-    },
-    "creator": {
-      "title": "Creator",
-      "description": "An entity primarily responsible for making the resource.",
-      "x_iscc_context": "http://schema.org/creator",
-      "type": "array",
-      "items": {
-        "type": "string"
       }
     },
     "license": {
@@ -119,11 +112,37 @@
       "format": "uri",
       "type": "string"
     },
+    "previous": {
+      "title": "Previous",
+      "description": "ISCC of the preceding version of this item.",
+      "x_iscc_context": "http://schema.org/previous",
+      "type": "string"
+    },
+    "version": {
+      "title": "Version",
+      "description": "The version of the CreativeWork embodied by a specified resource.",
+      "x_iscc_context": "http://schema.org/version",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "properties": {
       "title": "Properties",
       "description": "JSON or JSON-LD formated values about the identified *digital content*. Compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).",
       "x_iscc_context": "http://purl.org/iscc/terms/#properties",
       "type": "object"
+    },
+    "created": {
+      "title": "Created",
+      "description": "Datetime the ISCC was created for the item.",
+      "x_iscc_context": "http://schema.org/dateCreated",
+      "type": "string",
+      "format": "date-time"
     },
     "filename": {
       "title": "Filename",
@@ -196,12 +215,6 @@
       "items": {
         "type": "string"
       }
-    },
-    "keywords": {
-      "title": "Keywords",
-      "description": "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.",
-      "x_iscc_context": "http://schema.org/keywords",
-      "type": "string"
     },
     "parts": {
       "title": "Parts",

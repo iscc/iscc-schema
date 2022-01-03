@@ -3,7 +3,7 @@
 ## iscc-minimal
 Minimal ISCC Metadata
 
-??? example
+!!! example
 
     ```json
     {
@@ -20,7 +20,7 @@ Minimal ISCC Metadata
 ## iscc-basic
 Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ethereum.org/EIPS/eip-721)
 
-??? example
+!!! example
 
     ```json
     {
@@ -53,7 +53,7 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
 ## iscc-extended
 Extended ISCC Metadata
 
-??? example
+!!! example
 
     ```json
     {
@@ -64,13 +64,6 @@ Extended ISCC Metadata
       "redirect": "https://example.com/about-the-asset"
     }
     ```
-### **version**
-<http://schema.org/version>
-
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| version | `['integer', 'string']` | The version of the CreativeWork embodied by a specified resource.                     |
-
 ### **content**
 <http://schema.org/contentUrl>
 
@@ -78,19 +71,26 @@ Extended ISCC Metadata
 | ---- | ---- | -----------------------------------------|
 | content | `string-uri` | URI of the *digital content* that was used to create this ISCC.                     |
 
-### **identifier**
-<http://schema.org/identifier>
-
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| identifier | `['string', 'array']` | Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.                     |
-
 ### **creator**
 <http://schema.org/creator>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | creator | `['string', 'array']` | An entity primarily responsible for making the resource.                     |
+
+### **keywords**
+<http://schema.org/keywords>
+
+| Name | Type | Definition                               |
+| ---- | ---- | -----------------------------------------|
+| keywords | `string` | Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.                     |
+
+### **identifier**
+<http://schema.org/identifier>
+
+| Name | Type | Definition                               |
+| ---- | ---- | -----------------------------------------|
+| identifier | `['string', 'array']` | Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.                     |
 
 ### **license**
 <http://schema.org/license>
@@ -106,10 +106,24 @@ Extended ISCC Metadata
 | ---- | ---- | -----------------------------------------|
 | redirect | `string-uri` | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.                     |
 
+### **previous**
+<http://schema.org/previous>
+
+| Name | Type | Definition                               |
+| ---- | ---- | -----------------------------------------|
+| previous | `string` | ISCC of the preceding version of this item.                     |
+
+### **version**
+<http://schema.org/version>
+
+| Name | Type | Definition                               |
+| ---- | ---- | -----------------------------------------|
+| version | `['integer', 'string']` | The version of the CreativeWork embodied by a specified resource.                     |
+
 ## iscc-properties
 Arbitrary properties. Values may be strings, numbers, object or arrays. Should be used for industry specific structured metadata.
 
-??? example
+!!! example
 
     ```json
     {
@@ -149,7 +163,7 @@ Arbitrary properties. Values may be strings, numbers, object or arrays. Should b
 ## iscc-technical
 Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor
 
-??? example
+!!! example
 
     ```json
     {
@@ -164,6 +178,13 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
       ]
     }
     ```
+### **created**
+<http://schema.org/dateCreated>
+
+| Name | Type | Definition                               |
+| ---- | ---- | -----------------------------------------|
+| created | `string-date-time` | Datetime the ISCC was created for the item.                     |
+
 ### **filename**
 <http://purl.org/iscc/terms/#filename>
 
@@ -233,13 +254,6 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
 | language | `['string', 'array']` | Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).                     |
-
-### **keywords**
-<http://schema.org/keywords>
-
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| keywords | `string` | Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.                     |
 
 ### **parts**
 <http://purl.org/iscc/terms/#parts>

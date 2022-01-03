@@ -2,13 +2,6 @@ title: iscc-extended
 type: object
 description: Extended ISCC Metadata
 properties:
-  version:
-    description: The version of the CreativeWork embodied by a specified resource.
-    type:
-    - integer
-    - string
-    x-iscc-context: http://schema.org/version
-    x-iscc-schema-doc: The version of the CreativeWork embodied by a specified resource.
   content:
     description: URI of the *digital content* that was used to create this ISCC.
     type: string
@@ -16,6 +9,23 @@ properties:
     x-iscc-context: http://schema.org/contentUrl
     x-iscc-schema-doc: Actual bytes of the media object, for example the image file or video
       file.
+  creator:
+    description: An entity primarily responsible for making the resource.
+    type:
+    - string
+    - array
+    items:
+      type: string
+    x-iscc-context: http://schema.org/creator
+    x-iscc-schema-doc: The creator/author of this CreativeWork. This is the same as the Author
+      property for CreativeWork.
+  keywords:
+    type: string
+    description: Keywords or tags used to describe this content. Multiple entries in a keywords
+      list are typically delimited by commas.
+    x-iscc-context: http://schema.org/keywords
+    x-iscc-schema-doc: Keywords or tags used to describe this content. Multiple entries in
+      a keywords list are typically delimited by commas.
   identifier:
     description: Other identifier(s) referencing the work, product or other abstraction of
       which the referenced **digital content** is a full or partial manifestation.
@@ -30,16 +40,6 @@ properties:
       of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
       for representing many of these, either as textual strings or as URL (URI) links. See
       background notes for more details.
-  creator:
-    description: An entity primarily responsible for making the resource.
-    type:
-    - string
-    - array
-    items:
-      type: string
-    x-iscc-context: http://schema.org/creator
-    x-iscc-schema-doc: The creator/author of this CreativeWork. This is the same as the Author
-      property for CreativeWork.
   license:
     type: string
     description: URI of license for the identified *digital content*.
@@ -53,6 +53,17 @@ properties:
       a declartion that includes the IPFS-hash of this metadata instance.
     format: uri
     x-iscc-context: http://purl.org/iscc/terms/#redirect
+  previous:
+    description: ISCC of the preceding version of this item.
+    type: string
+    x-iscc-context: http://schema.org/previous
+  version:
+    description: The version of the CreativeWork embodied by a specified resource.
+    type:
+    - integer
+    - string
+    x-iscc-context: http://schema.org/version
+    x-iscc-schema-doc: The version of the CreativeWork embodied by a specified resource.
 examples:
 - content: https://example.com/the-asset.epub
   identifier: urn:isbn:3-8273-7019-1

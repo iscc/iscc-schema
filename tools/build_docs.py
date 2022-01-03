@@ -18,13 +18,12 @@ DST = join(HERE, "../docs/index.md")
 
 # TODO group terms by schame/isccmeta
 # TODO publish to terms
-# TODO check iso metadata spec
-# TODO move keywords
 # TODO add notes to original terms
 # TODO update purl.org forwardings
 # TODO test json-ld normalization
 # TODO add more examples
 # TODO add logging to tool actions
+# TODO maybe don`t redefine json-ld type to §schema
 
 
 def copy_readme():

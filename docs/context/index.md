@@ -24,29 +24,29 @@
 !!! term ""
     URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.
 
-## version
-
-<small><http://schema.org/version></small>
-!!! term ""
-    The version of the CreativeWork embodied by a specified resource.
-
 ## content
 
 <small><http://schema.org/contentUrl></small>
 !!! term ""
     URI of the *digital content* that was used to create this ISCC.
 
-## identifier
-
-<small><http://schema.org/identifier></small>
-!!! term ""
-    Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
-
 ## creator
 
 <small><http://schema.org/creator></small>
 !!! term ""
     An entity primarily responsible for making the resource.
+
+## keywords
+
+<small><http://schema.org/keywords></small>
+!!! term ""
+    Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
+
+## identifier
+
+<small><http://schema.org/identifier></small>
+!!! term ""
+    Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
 
 ## license
 
@@ -60,11 +60,29 @@
 !!! term ""
     URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.
 
+## previous
+
+<small><http://schema.org/previous></small>
+!!! term ""
+    ISCC of the preceding version of this item.
+
+## version
+
+<small><http://schema.org/version></small>
+!!! term ""
+    The version of the CreativeWork embodied by a specified resource.
+
 ## properties
 
 <small><http://purl.org/iscc/terms/#properties></small>
 !!! term ""
     JSON or JSON-LD formated values about the identified *digital content*. Compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
+
+## created
+
+<small><http://schema.org/dateCreated></small>
+!!! term ""
+    Datetime the ISCC was created for the item.
 
 ## filename
 
@@ -125,12 +143,6 @@
 <small><http://schema.org/inLanguage></small>
 !!! term ""
     Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).
-
-## keywords
-
-<small><http://schema.org/keywords></small>
-!!! term ""
-    Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
 
 ## parts
 

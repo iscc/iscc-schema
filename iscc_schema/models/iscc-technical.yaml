@@ -12,6 +12,13 @@ examples:
   - hashing
   - identification
 properties:
+  created:
+    type: string
+    description: Datetime the ISCC was created for the item.
+    x-iscc-context: http://schema.org/dateCreated
+    x-iscc-schema-doc: The date on which the CreativeWork was created or the item was added
+      to a DataFeed.
+    format: date-time
   filename:
     type: string
     description: Filename of the referenced **digital content** (automatically used as fallback
@@ -78,35 +85,28 @@ properties:
     type:
     - string
     - array
-    items:
-      type: string
     x-iscc-context: http://schema.org/inLanguage
     x-iscc-schema-doc: The language of the content or performance or used in an action. Please
       use one of the language codes from the [IETF BCP 47 standard](https://www.rfc-editor.org/info/bcp47).
       See also [availableLanguage](https://schema.org/availableLanguage).
-  keywords:
-    type: string
-    description: Keywords or tags used to describe this content. Multiple entries in a keywords
-      list are typically delimited by commas.
-    x-iscc-context: http://schema.org/keywords
-    x-iscc-schema-doc: Keywords or tags used to describe this content. Multiple entries in
-      a keywords list are typically delimited by commas.
+    items:
+      type: string
   parts:
     type: array
     description: Indicates items that are part of this item via Content-Codes (inverse-property
       belongs).
+    x-iscc-context: http://purl.org/iscc/terms/#parts
     items:
       type: string
-    x-iscc-context: http://purl.org/iscc/terms/#parts
   part_of:
     type: array
     description: Indicates that this item is part of other items via their Content-Code.
+    x-iscc-context: http://purl.org/iscc/terms/#part_of
     items:
       type: string
-    x-iscc-context: http://purl.org/iscc/terms/#part_of
   features:
     type: array
     description: Granular features of the *digital content*.
+    x-iscc-context: http://purl.org/iscc/terms/#features
     items:
       type: object
-    x-iscc-context: http://purl.org/iscc/terms/#features
