@@ -17,6 +17,17 @@ SRC = join(HERE, "../README.md")
 DST = join(HERE, "../docs/index.md")
 
 
+# TODO use x-extensions in openapi definitions
+# TODO document the use of x-extensions
+# TODO publish to terms
+# TODO group terms by schame/isccmeta
+# TODO use original terms definitions from schema org
+# TODO add notes to original terms
+# TODO update purl.org forwardings
+# TODO test json-ld normalization
+# TODO add includable abbreviations
+
+
 def copy_readme():
     """Copy README.md to documentation index.md"""
     shutil.copyfile(
