@@ -281,6 +281,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#openapi-extensions" class="md-nav__link">
+    OpenAPI Extensions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#changelog" class="md-nav__link">
     Changelog
   </a>
@@ -379,6 +386,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#openapi-extensions" class="md-nav__link">
+    OpenAPI Extensions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#changelog" class="md-nav__link">
     Changelog
   </a>
@@ -431,6 +445,14 @@ The outputs produced when running <code>poe build</code> are:</p>
 <li><code>docs/schema/iscc.json</code> - JSON Schema for <abbr title="International Standard Content Code">ISCC</abbr> Metadata</li>
 <li><code>docs/context/iscc.json</code> - JSON-LD context for <abbr title="International Standard Content Code">ISCC</abbr> Metadata</li>
 <li><code>iscc_schema/schema.py</code> - Pydantic model for <abbr title="International Standard Content Code">ISCC</abbr> Metadata</li>
+</ul>
+<h2 id="openapi-extensions">OpenAPI Extensions<a class="headerlink" href="#openapi-extensions" title="Permanent link">#</a></h2>
+<p>The OpenAPI Specification allows for
+<a href="https://spec.openapis.org/oas/latest.html#specification-extensions">extending</a> the
+specification with custom fields. Extensions must start with <code>x-</code>.
+All <abbr title="International Standard Content Code">ISCC</abbr> extensions start with <code>x-iscc-</code>:</p>
+<ul>
+<li><code>x-iscc-context</code> - for documenting JSON-LD contexts.</li>
 </ul>
 <h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">#</a></h2>
 <h3 id="010-unreleased">0.1.0 - Unreleased<a class="headerlink" href="#010-unreleased" title="Permanent link">#</a></h3>

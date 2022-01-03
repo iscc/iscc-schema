@@ -1,7 +1,7 @@
 {
     "@context": {
 
-        "type": "@type",
+        "§schema": "@type",
         "iscc": "@id",
         "schema": "http://schema.org",
         "isccmeta": "http://purl.org/iscc/terms/",
