@@ -19,6 +19,10 @@ poethepoet = "^0.11.0"
 black = "21.12b0"
 mkdocs-material = "^8.1.4"
 
+[tool.black]
+skip-string-normalization = false
+line-length = 100
+target-version = ['py37']
 
 [tool.datamodel-codegen]
 field-constraints = true
@@ -34,12 +38,13 @@ class-name = "ISCC"
 
 [tool.poe.tasks]
 update = { cmd = "poetry update", help = "Update project dependencies"}
+fromatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
 buildpydantic = { cmd = "datamodel-codegen", help = "Build pydantic model"}
 formatcode = { cmd = "black .", help = "Code style formating with black" }
 buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON Schema" }
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
-build = ["update", "buildpydantic", "formatcode", "buildschema", "buildcontext", "builddocs"]
+build = ["update", "fromatyaml", "buildpydantic", "formatcode", "buildschema", "buildcontext", "builddocs"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

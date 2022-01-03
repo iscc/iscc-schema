@@ -1,0 +1,33 @@
+# -*- coding: utf-8 -*-
+import pathlib
+import sys
+import yaml
+
+ROOT = pathlib.Path(sys.path[1]).absolute()
+HERE = pathlib.Path(__file__).parent.absolute()
+
+
+def yaml_files():
+    return ROOT.glob("**\*.yaml")
+
+
+def reformat():
+    for f in yaml_files():
+        with open(f) as infile:
+            data = yaml.safe_load(infile)
+        with open(f, "wt", encoding="utf-8") as outf:
+            yaml.safe_dump(
+                data,
+                outf,
+                indent=2,
+                width=88,
+                encoding="utf-8",
+                sort_keys=False,
+                default_flow_style=False,
+                default_style=None,
+                allow_unicode=True,
+            )
+
+
+if __name__ == "__main__":
+    reformat()
