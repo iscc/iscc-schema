@@ -12,12 +12,22 @@ definitions, [JSON-LD](https://json-ld.org/) contexts, and other schema related
 artifacts.
 
 ## Generated files:
+
 The source of code generation is `iscc_schema/models/iscc.yaml`.
 The outputs produced when running `poe build` are:
 
 - `docs/schema/iscc.json` - JSON Schema for ISCC Metadata
 - `docs/context/iscc.json` - JSON-LD context for ISCC Metadata
 - `iscc_schema/schema.py` - Pydantic model for ISCC Metadata
+
+## OpenAPI Extensions
+
+The OpenAPI Specification allows for
+[extending](https://spec.openapis.org/oas/latest.html#specification-extensions) the
+specification with custom fields. Extensions must start with `x-`.
+All ISCC extensions start with `x-iscc-`:
+
+- `x-iscc-context` - for documenting JSON-LD contexts.
 
 
 ## Changelog

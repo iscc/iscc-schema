@@ -17,7 +17,6 @@ SRC = join(HERE, "../README.md")
 DST = join(HERE, "../docs/index.md")
 
 
-# TODO document the use of x-extensions
 # TODO publish to terms
 # TODO group terms by schame/isccmeta
 # TODO use original terms definitions from schema org
