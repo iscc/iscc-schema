@@ -11,6 +11,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://schema.iscc.io/includes/abbreviations/</loc>
+         <lastmod>2022-01-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://schema.iscc.io/schema/</loc>
          <lastmod>2022-01-03</lastmod>
          <changefreq>daily</changefreq>
