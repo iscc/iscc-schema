@@ -13,7 +13,7 @@
       "identifier": "http://schema.org/identifier",
       "license": "http://schema.org/license",
       "redirect": "http://purl.org/iscc/terms/#redirect",
-      "previous": "http://schema.org/previous",
+      "previous": "http://purl.org/iscc/terms/#previous",
       "version": "http://schema.org/version",
       "properties": "http://purl.org/iscc/terms/#properties",
       "created": "http://schema.org/dateCreated",

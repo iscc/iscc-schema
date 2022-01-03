@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://schema.iscc.io/</loc>
+         <loc>https://schema.iscc.codes/</loc>
          <lastmod>2022-01-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://schema.iscc.io/context/</loc>
+         <loc>https://schema.iscc.codes/context/</loc>
          <lastmod>2022-01-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://schema.iscc.io/includes/abbreviations/</loc>
+         <loc>https://schema.iscc.codes/includes/abbreviations/</loc>
          <lastmod>2022-01-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://schema.iscc.io/schema/</loc>
+         <loc>https://schema.iscc.codes/includes/terms-iscc/</loc>
+         <lastmod>2022-01-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://schema.iscc.codes/includes/terms-schema/</loc>
+         <lastmod>2022-01-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://schema.iscc.codes/schema/</loc>
+         <lastmod>2022-01-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://schema.iscc.codes/terms/</loc>
          <lastmod>2022-01-03</lastmod>
          <changefreq>daily</changefreq>
     </url>

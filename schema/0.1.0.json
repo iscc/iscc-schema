@@ -115,7 +115,7 @@
     "previous": {
       "title": "Previous",
       "description": "ISCC of the preceding version of this item.",
-      "x_iscc_context": "http://schema.org/previous",
+      "x_iscc_context": "http://purl.org/iscc/terms/#previous",
       "type": "string"
     },
     "version": {
