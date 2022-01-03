@@ -15,7 +15,7 @@ Minimal ISCC Metadata
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| iscc | `string` | **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.                     |
+| iscc | `string` | An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.                     |
 
 ## iscc-basic
 Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ethereum.org/EIPS/eip-721)
@@ -57,11 +57,11 @@ Extended ISCC Metadata
 
     ```json
     {
-      "content": "http://example.com/the-asset.epub",
+      "content": "https://example.com/the-asset.epub",
       "identifier": "urn:isbn:3-8273-7019-1",
       "creator": "Frank Fancy",
-      "license": "http://example.com/license.txt",
-      "redirect": "http://example.com/about-the-asset"
+      "license": "https://example.com/license.txt",
+      "redirect": "https://example.com/about-the-asset"
     }
     ```
 ### **version**
@@ -185,7 +185,7 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| mediatype | `string` | [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)                     |
+| mediatype | `string` | An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)                     |
 
 ### **duration**
 <http://schema.org/duration>
@@ -248,7 +248,7 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| parts | `array` | Indicates items that are part of this item via Content-Codes (inverse-property: belongs).                     |
+| parts | `array` | Indicates items that are part of this item via Content-Codes (inverse-property belongs).                     |
 
 ### **part_of**
 <http://purl.org/iscc/terms/#part_of>
@@ -267,23 +267,23 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 ## iscc-crypto
 Cryptography related ISCC Metadata
 ### **datahash**
-<https://purl.org/iscc/terms/#datahash>
+<http://purl.org/iscc/terms/#datahash>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| datahash | `string` | [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).                     |
+| datahash | `string` | A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).                     |
 
 ### **metahash**
-<https://purl.org/iscc/terms/#metahash>
+<http://purl.org/iscc/terms/#metahash>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| metahash | `string` | [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.                     |
+| metahash | `string` | A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.                     |
 
 ### **tophash**
-<https://purl.org/iscc/terms/#tophash>
+<http://purl.org/iscc/terms/#tophash>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| tophash | `string` | [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).                     |
+| tophash | `string` | A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).                     |
 

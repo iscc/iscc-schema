@@ -5,46 +5,50 @@ properties:
   version:
     description: The version of the CreativeWork embodied by a specified resource.
     type:
-      - integer
-      - string
-    context: 'http://schema.org/version'
+    - integer
+    - string
+    context: http://schema.org/version
   content:
     description: URI of the *digital content* that was used to create this ISCC.
     type: string
     format: uri
-    context: 'http://schema.org/contentUrl'
+    context: http://schema.org/contentUrl
   identifier:
-    description: |
-      Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
+    description: 'Other identifier(s) referencing the work, product or other abstraction of
+      which the referenced **digital content** is a full or partial manifestation.
+
+      '
     type:
-      - string
-      - array
+    - string
+    - array
     items:
       type: string
       format: uri
-    context: 'http://schema.org/identifier'
+    context: http://schema.org/identifier
   creator:
     description: An entity primarily responsible for making the resource.
     type:
-      - string
-      - array
+    - string
+    - array
     items:
       type: string
-    context: 'http://schema.org/creator'
+    context: http://schema.org/creator
   license:
     type: string
     description: URI of license for the identified *digital content*.
     format: uri
-    context: 'http://schema.org/license'
+    context: http://schema.org/license
   redirect:
     type: string
-    description: |
-      URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.
+    description: 'URL to which a resolver should redirect an ISCC-ID that has been minted
+      from a declartion that includes the IPFS-hash of this metadata instance.
+
+      '
     format: uri
-    context: 'http://purl.org/iscc/terms/#redirect'
+    context: http://purl.org/iscc/terms/#redirect
 examples:
-  - content: 'http://example.com/the-asset.epub'
-    identifier: 'urn:isbn:3-8273-7019-1'
-    creator: Frank Fancy
-    license: 'http://example.com/license.txt'
-    redirect: 'http://example.com/about-the-asset'
+- content: https://example.com/the-asset.epub
+  identifier: urn:isbn:3-8273-7019-1
+  creator: Frank Fancy
+  license: https://example.com/license.txt
+  redirect: https://example.com/about-the-asset

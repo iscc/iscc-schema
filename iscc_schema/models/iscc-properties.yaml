@@ -1,29 +1,31 @@
 title: iscc-properties
-description: 'Arbitrary properties. Values may be strings, numbers, object or arrays. Should be used for industry specific structured metadata.'
+description: Arbitrary properties. Values may be strings, numbers, object or arrays. Should
+  be used for industry specific structured metadata.
 type: object
 properties:
   properties:
     type: object
     minProperties: 1
-    description: 'JSON or JSON-LD formated values about the identified *digital content*. Compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).'
-    context: 'http://purl.org/iscc/terms/#properties'
+    description: JSON or JSON-LD formated values about the identified *digital content*. Compatible
+      with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
+    context: http://purl.org/iscc/terms/#properties
 examples:
-  - properties:
-      simple_property: example value
-      rich_property:
-        name: Name
-        value: '123'
-        display_value: 123 Example Value
-        class: emphasis
-        css:
-          color: '#ffffff'
-          font-weight: bold
-          text-decoration: underline
-      array_property:
-        name: Name
-        value:
-          - 1
-          - 2
-          - 3
-          - 4
-        class: emphasis
+- properties:
+    simple_property: example value
+    rich_property:
+      name: Name
+      value: '123'
+      display_value: 123 Example Value
+      class: emphasis
+      css:
+        color: '#ffffff'
+        font-weight: bold
+        text-decoration: underline
+    array_property:
+      name: Name
+      value:
+      - 1
+      - 2
+      - 3
+      - 4
+      class: emphasis

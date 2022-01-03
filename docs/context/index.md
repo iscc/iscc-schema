@@ -4,7 +4,7 @@
 
 <small><http://purl.org/iscc/terms/#iscc></small>
 !!! term ""
-    **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.
+    An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.
 
 ## name
 
@@ -84,7 +84,7 @@
 
 <small><http://schema.org/encodingFormat></small>
 !!! term ""
-    [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)
+    An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)
 
 ## duration
 
@@ -138,7 +138,7 @@
 
 <small><http://purl.org/iscc/terms/#parts></small>
 !!! term ""
-    Indicates items that are part of this item via Content-Codes (inverse-property: belongs).
+    Indicates items that are part of this item via Content-Codes (inverse-property belongs).
 
 ## part_of
 
@@ -154,19 +154,19 @@
 
 ## datahash
 
-<small><https://purl.org/iscc/terms/#datahash></small>
+<small><http://purl.org/iscc/terms/#datahash></small>
 !!! term ""
-    [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
+    A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
 
 ## metahash
 
-<small><https://purl.org/iscc/terms/#metahash></small>
+<small><http://purl.org/iscc/terms/#metahash></small>
 !!! term ""
-    [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.
+    A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.
 
 ## tophash
 
-<small><https://purl.org/iscc/terms/#tophash></small>
+<small><http://purl.org/iscc/terms/#tophash></small>
 !!! term ""
-    [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).
+    A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).
 

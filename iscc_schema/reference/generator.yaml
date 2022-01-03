@@ -7,12 +7,12 @@ info:
     email: tp@iscc.io
   description: Service for generating ISCC codes for media files.
 servers:
-  - url: 'http://localhost:3000'
-  - url: 'https://iscc.io/api/v1/generator'
-    description: ''
+- url: http://localhost:3000
+- url: https://iscc.io/api/v1/generator
+  description: ''
 tags:
-  - name: generate
-  - description: Generate ISCC Codes
+- name: generate
+- description: Generate ISCC Codes
 paths:
   /iscc:
     post:
@@ -25,7 +25,7 @@ paths:
         '200':
           $ref: '#/components/responses/GenerateResponse'
       tags:
-        - generate
+      - generate
 components:
   schemas: {}
   requestBodies:
@@ -44,9 +44,10 @@ components:
                 description: The name or title of the digital content.
               description:
                 type: string
-                description: 'Description of the digital content identified by the ISCC (may include markdown). '
+                description: Description of the digital content identified by the ISCC (may
+                  include markdown).
             required:
-              - file
+            - file
       description: Generate an ISCC for a media file.
   responses:
     GenerateResponse:

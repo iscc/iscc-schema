@@ -28,9 +28,9 @@
       "parts": "http://purl.org/iscc/terms/#parts",
       "part_of": "http://purl.org/iscc/terms/#part_of",
       "features": "http://purl.org/iscc/terms/#features",
-      "datahash": "https://purl.org/iscc/terms/#datahash",
-      "metahash": "https://purl.org/iscc/terms/#metahash",
-      "tophash": "https://purl.org/iscc/terms/#tophash"
+      "datahash": "http://purl.org/iscc/terms/#datahash",
+      "metahash": "http://purl.org/iscc/terms/#metahash",
+      "tophash": "http://purl.org/iscc/terms/#tophash"
     }
   ]
 }
