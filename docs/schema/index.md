@@ -107,7 +107,7 @@ Extended ISCC Metadata
 | redirect | `string-uri` | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.                     |
 
 ### **previous**
-<http://schema.org/previous>
+<http://purl.org/iscc/terms/#previous>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|

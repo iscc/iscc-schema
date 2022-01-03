@@ -1,4 +1,4 @@
-# **ISCC** - Schema Definitions
+# **ISCC** - Schema
 
 [![Build](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml)
 [![Version](https://img.shields.io/pypi/v/iscc-schema.svg)](https://pypi.python.org/pypi/iscc-schema/)

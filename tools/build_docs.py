@@ -16,9 +16,6 @@ SRC = join(HERE, "../README.md")
 DST = join(HERE, "../docs/index.md")
 
 
-# TODO group terms by schame/isccmeta
-# TODO publish to terms
-# TODO add notes to original terms
 # TODO update purl.org forwardings
 # TODO test json-ld normalization
 # TODO add more examples

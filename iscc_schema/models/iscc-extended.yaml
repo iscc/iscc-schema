@@ -56,14 +56,14 @@ properties:
   previous:
     description: ISCC of the preceding version of this item.
     type: string
-    x-iscc-context: http://schema.org/previous
+    x-iscc-context: http://purl.org/iscc/terms/#previous
   version:
     description: The version of the CreativeWork embodied by a specified resource.
     type:
     - integer
     - string
     x-iscc-context: http://schema.org/version
-    x-iscc-schema-doc: The version of the CreativeWork embodied by a specified resource.
+    x-iscc-schema-doc: The version of the *digital content* identified by the ISCC.
 examples:
 - content: https://example.com/the-asset.epub
   identifier: urn:isbn:3-8273-7019-1

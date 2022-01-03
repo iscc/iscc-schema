@@ -62,7 +62,7 @@
 
 ## previous
 
-<small><http://schema.org/previous></small>
+<small><http://purl.org/iscc/terms/#previous></small>
 !!! term ""
     ISCC of the preceding version of this item.
 

@@ -41,10 +41,11 @@ update = { cmd = "poetry update", help = "Update project dependencies"}
 fromatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
 buildpydantic = { cmd = "datamodel-codegen", help = "Build pydantic model"}
 formatcode = { cmd = "black .", help = "Code style formating with black" }
+buildterms = { script = "tools.build_terms:build", help = "Build markdown for terms" }
 buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON Schema" }
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
-build = ["update", "fromatyaml", "buildpydantic", "formatcode", "buildschema", "buildcontext", "builddocs"]
+build = ["update", "fromatyaml", "buildpydantic", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
