@@ -429,30 +429,30 @@
 </a>
 
 
-<h1 id="iscc-schema-definitions"><strong>ISCC</strong> - Schema Definitions<a class="headerlink" href="#iscc-schema-definitions" title="Permanent link">#</a></h1>
+<h1 id="iscc-schema-definitions"><strong><abbr title="International Standard Content Code">ISCC</abbr></strong> - Schema Definitions<a class="headerlink" href="#iscc-schema-definitions" title="Permanent link">#</a></h1>
 <p><a href="https://github.com/iscc/iscc-schema/actions/workflows/tests.yml"><img alt="Build" src="https://github.com/iscc/iscc-schema/actions/workflows/tests.yml/badge.svg" /></a>
 <a href="https://pypi.python.org/pypi/iscc-schema/"><img alt="Version" src="https://img.shields.io/pypi/v/iscc-schema.svg" /></a></p>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">#</a></h2>
-<p>This repository hosts all schema definitions of the ISCC. Schemas are defined in
+<p>This repository hosts all schema definitions of the <abbr title="International Standard Content Code">ISCC</abbr>. Schemas are defined in
 <a href="https://spec.openapis.org/oas/v3.1.0.html">OpenAPI v3.1.0</a> format and serve as a
-single source of truth for auto-generated <a href="https://json-schema.org/">JSON Schema</a>
-definitions, <a href="https://json-ld.org/">JSON-LD</a> contexts, and other schema related
+single source of truth for auto-generated <a href="https://json-schema.org/"><abbr title="JavaScript Object Notation">JSON</abbr> Schema</a>
+definitions, <a href="https://json-ld.org/"><abbr title="JavaScript Object Notation">JSON</abbr>-LD</a> contexts, and other schema related
 artifacts.</p>
 <h2 id="generated-files">Generated files:<a class="headerlink" href="#generated-files" title="Permanent link">#</a></h2>
 <p>The source of code generation is <code>iscc_schema/models/iscc.yaml</code>.
 The outputs produced when running <code>poe build</code> are:</p>
 <ul>
-<li><code>docs/schema/iscc.json</code> - JSON Schema for ISCC Metadata</li>
-<li><code>docs/context/iscc.json</code> - JSON-LD context for ISCC Metadata</li>
-<li><code>iscc_schema/schema.py</code> - Pydantic model for ISCC Metadata</li>
+<li><code>docs/schema/iscc.json</code> - <abbr title="JavaScript Object Notation">JSON</abbr> Schema for <abbr title="International Standard Content Code">ISCC</abbr> Metadata</li>
+<li><code>docs/context/iscc.json</code> - <abbr title="JavaScript Object Notation">JSON</abbr>-LD context for <abbr title="International Standard Content Code">ISCC</abbr> Metadata</li>
+<li><code>iscc_schema/schema.py</code> - Pydantic model for <abbr title="International Standard Content Code">ISCC</abbr> Metadata</li>
 </ul>
 <h2 id="openapi-extensions">OpenAPI Extensions<a class="headerlink" href="#openapi-extensions" title="Permanent link">#</a></h2>
 <p>The OpenAPI Specification allows for
 <a href="https://spec.openapis.org/oas/latest.html#specification-extensions">extending</a> the
 specification with custom fields. Extensions must start with <code>x-</code>.
-All ISCC extensions start with <code>x-iscc-</code>:</p>
+All <abbr title="International Standard Content Code">ISCC</abbr> extensions start with <code>x-iscc-</code>:</p>
 <ul>
-<li><code>x-iscc-context</code> - for documenting JSON-LD contexts.</li>
+<li><code>x-iscc-context</code> - for documenting <abbr title="JavaScript Object Notation">JSON</abbr>-LD contexts.</li>
 <li><code>x-iscc-schema-doc</code> - for original descriptions from <a href="https://schema.org">schema.org</a></li>
 </ul>
 <h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">#</a></h2>
