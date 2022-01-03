@@ -35,5 +35,3 @@ All ISCC extensions start with `x-iscc-`:
 
 ### 0.1.0 - Unreleased
 - Initial release
-
---8<-- "includes/abbreviations.md"

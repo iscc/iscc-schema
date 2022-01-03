@@ -33,8 +33,6 @@ def copy_readme():
     with open(SRC, "rt", encoding="utf-8") as infile:
         text = infile.read()
 
-    text += '\n--8<-- "includes/abbreviations.md"\n'
-
     with open(DST, "wt", encoding="utf-8") as outf:
         outf.write(text)
 
@@ -81,7 +79,6 @@ def build_json_schema_docs():
             content += f"| ---- | ---- | -----------------------------------------|\n"
             content += f"| {prop} | `{type_}` | {description}                     |\n\n"
 
-    content += '\n\n--8<-- "includes/abbreviations.md"\n'
     with open(MARKDOWN_SCHEMA, "wt", encoding="utf-8") as outf:
         outf.write(content)
 
@@ -112,7 +109,6 @@ def build_json_ld_context_docs():
                 doc += '!!! term ""\n'
                 doc += f"    {fields['description']}\n\n"
 
-    doc += '\n\n--8<-- "includes/abbreviations.md"\n'
     with open(MARKDOWN_CONTEXT, "wt", encoding="UTF-8") as outf:
         outf.write(doc)
 

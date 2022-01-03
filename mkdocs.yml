@@ -49,7 +49,9 @@ plugins:
 
 markdown_extensions:
   - abbr
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: ["docs/includes"]
+      auto_append: ["abbreviations.md"]
   - tables
   - meta
   - admonition
