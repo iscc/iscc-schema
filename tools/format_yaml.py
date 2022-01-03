@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
 import pathlib
-import sys
 import yaml
 
-ROOT = pathlib.Path(sys.path[1]).absolute()
+
 HERE = pathlib.Path(__file__).parent.absolute()
 
 
-def yaml_files():
-    return ROOT.glob("**\*.yaml")
-
-
 def reformat():
-    for f in yaml_files():
+    for f in HERE.parent.glob("**\*.yaml"):
         with open(f) as infile:
             data = yaml.safe_load(infile)
         with open(f, "wt", encoding="utf-8") as outf:

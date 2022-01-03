@@ -82,7 +82,7 @@
     },
     "identifier": {
       "title": "Identifier",
-      "description": "Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.\n",
+      "description": "Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.",
       "x_iscc_context": "http://schema.org/identifier",
       "type": "array",
       "items": {
@@ -112,7 +112,7 @@
     },
     "redirect": {
       "title": "Redirect",
-      "description": "URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.\n",
+      "description": "URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.",
       "x_iscc_context": "http://purl.org/iscc/terms/#redirect",
       "minLength": 1,
       "maxLength": 65536,

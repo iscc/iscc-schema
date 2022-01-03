@@ -14,6 +14,7 @@ properties:
     description: The name or title of the intangible creation manifested by the idendified
       *digital content*.
     x-iscc-context: http://schema.org/name
+    x-iscc-schema-doc: The name of the item.
   description:
     type: string
     example: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
@@ -23,6 +24,9 @@ properties:
       input for Meta-Code generation). Any user presentable text string (including Markdown
       text) indicative of the identity  of the referent may be used.
     x-iscc-context: http://schema.org/disambiguatingDescription
+    x-iscc-schema-doc: A sub property of description. A short description of the item used
+      to disambiguate from other, similar items. Information from other properties (in particular,
+      name) may be necessary for the description to be useful for disambiguation.
   image:
     type: string
     format: uri
@@ -33,3 +37,4 @@ properties:
       URI should reference the actual digital content represented by the NFT.
     example: https://picsum.photos/200/300.jpg
     x-iscc-context: http://schema.org/image
+    x-iscc-schema-doc: An image of the item. This can be a URL or a fully described ImageObject.

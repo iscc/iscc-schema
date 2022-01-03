@@ -83,8 +83,7 @@ Extended ISCC Metadata
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| identifier | `['string', 'array']` | Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
-                     |
+| identifier | `['string', 'array']` | Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.                     |
 
 ### **creator**
 <http://schema.org/creator>
@@ -105,8 +104,7 @@ Extended ISCC Metadata
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| redirect | `string-uri` | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.
-                     |
+| redirect | `string-uri` | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.                     |
 
 ## iscc-properties
 Arbitrary properties. Values may be strings, numbers, object or arrays. Should be used for industry specific structured metadata.

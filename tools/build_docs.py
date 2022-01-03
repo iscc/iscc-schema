@@ -17,13 +17,16 @@ SRC = join(HERE, "../README.md")
 DST = join(HERE, "../docs/index.md")
 
 
-# TODO publish to terms
-# TODO group terms by schame/isccmeta
 # TODO use original terms definitions from schema org
+# TODO publish to terms
+# TODO check iso metadata spec
+# TODO move keywords
+# TODO group terms by schame/isccmeta
 # TODO add notes to original terms
 # TODO update purl.org forwardings
 # TODO test json-ld normalization
 # TODO add includable abbreviations
+# TODO add more examples
 
 
 def copy_readme():

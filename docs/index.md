@@ -28,6 +28,7 @@ specification with custom fields. Extensions must start with `x-`.
 All ISCC extensions start with `x-iscc-`:
 
 - `x-iscc-context` - for documenting JSON-LD contexts.
+- `x-iscc-schema-doc` - for original descriptions from [schema.org](https://schema.org)
 
 
 ## Changelog
