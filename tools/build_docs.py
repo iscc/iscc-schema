@@ -1,7 +1,7 @@
 """Copy README.md to documentation index.md"""
 from os.path import abspath, dirname, join
 import shutil
-from textwrap import dedent, indent
+from textwrap import indent
 
 import yaml
 import pathlib
