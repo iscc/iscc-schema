@@ -7,12 +7,12 @@ properties:
     type:
     - integer
     - string
-    context: http://schema.org/version
+    x-iscc-context: http://schema.org/version
   content:
     description: URI of the *digital content* that was used to create this ISCC.
     type: string
     format: uri
-    context: http://schema.org/contentUrl
+    x-iscc-context: http://schema.org/contentUrl
   identifier:
     description: 'Other identifier(s) referencing the work, product or other abstraction of
       which the referenced **digital content** is a full or partial manifestation.
@@ -24,7 +24,7 @@ properties:
     items:
       type: string
       format: uri
-    context: http://schema.org/identifier
+    x-iscc-context: http://schema.org/identifier
   creator:
     description: An entity primarily responsible for making the resource.
     type:
@@ -32,12 +32,12 @@ properties:
     - array
     items:
       type: string
-    context: http://schema.org/creator
+    x-iscc-context: http://schema.org/creator
   license:
     type: string
     description: URI of license for the identified *digital content*.
     format: uri
-    context: http://schema.org/license
+    x-iscc-context: http://schema.org/license
   redirect:
     type: string
     description: 'URL to which a resolver should redirect an ISCC-ID that has been minted
@@ -45,7 +45,7 @@ properties:
 
       '
     format: uri
-    context: http://purl.org/iscc/terms/#redirect
+    x-iscc-context: http://purl.org/iscc/terms/#redirect
 examples:
 - content: https://example.com/the-asset.epub
   identifier: urn:isbn:3-8273-7019-1

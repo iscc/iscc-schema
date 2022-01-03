@@ -29,8 +29,8 @@ def build_context():
     }
     ctx = context["@context"][1]
     for prop, fields in iscc_schema.ISCC.schema()["properties"].items():
-        if "context" in fields:
-            ctx[prop] = fields["context"]
+        if "x_iscc_context" in fields:
+            ctx[prop] = fields["x_iscc_context"]
     return context
 
 

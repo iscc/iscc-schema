@@ -17,7 +17,6 @@ SRC = join(HERE, "../README.md")
 DST = join(HERE, "../docs/index.md")
 
 
-# TODO use x-extensions in openapi definitions
 # TODO document the use of x-extensions
 # TODO publish to terms
 # TODO group terms by schame/isccmeta
@@ -70,8 +69,8 @@ def build_json_schema_docs():
             if attrs.get("format"):
                 type_ += "-" + attrs.get("format")
             title = f"**{prop}**\n"
-            if attrs.get("context"):
-                title += f"<{attrs.get('context')}>\n"
+            if attrs.get("x-iscc-context"):
+                title += f"<{attrs.get('x-iscc-context')}>\n"
             description = attrs.get("description")
             content += f"### {title}\n"
             content += f"| Name | Type | Definition                               |\n"
@@ -102,9 +101,9 @@ def build_json_ld_context_docs():
             data = yaml.safe_load(infile)
 
         for prop, fields in data["properties"].items():
-            if fields.get("context"):
+            if fields.get("x-iscc-context"):
                 doc += f"## {prop}\n\n"
-                doc += f"<small><{fields.get('context')}></small>\n"
+                doc += f"<small><{fields.get('x-iscc-context')}></small>\n"
                 doc += '!!! term ""\n'
                 doc += f"    {fields['description']}\n\n"
 

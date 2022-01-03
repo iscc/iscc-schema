@@ -8,7 +8,7 @@ properties:
     minProperties: 1
     description: JSON or JSON-LD formated values about the identified *digital content*. Compatible
       with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
-    context: http://purl.org/iscc/terms/#properties
+    x-iscc-context: http://purl.org/iscc/terms/#properties
 examples:
 - properties:
     simple_property: example value
