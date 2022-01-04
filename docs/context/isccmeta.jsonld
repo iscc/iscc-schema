@@ -6,7 +6,7 @@
         "schema": "http://schema.org",
         "isccmeta": "http://purl.org/iscc/terms/",
 
-        "CreativeWork": {"@id": "schema:TextDigitalDocument"},
+        "CreativeWork": {"@id": "schema:CreativeWork"},
         "TextDigitalDocument": {"@id": "schema:TextDigitalDocument"},
         "ImageObject": {"@id": "schema:ImageObject"},
         "AudioObject": {"@id": "schema:AudioObject"},
