@@ -6,6 +6,14 @@
         "schema": "http://schema.org",
         "isccmeta": "http://purl.org/iscc/terms/",
 
+        "CreativeWork": {"@id": "schema:TextDigitalDocument"},
+        "TextDigitalDocument": {"@id": "schema:TextDigitalDocument"},
+        "ImageObject": {"@id": "schema:ImageObject"},
+        "AudioObject": {"@id": "schema:AudioObject"},
+        "VideoObject": {"@id": "schema:VideoObject"},
+        "Organization": {"@id": "schema:Organization"},
+        "Person": {"@id": "schema:Person"},
+
         "name": { "@id": "schema:name"},
         "description": { "@id": "schema:description"},
         "image": { "@id": "schema:image"},
