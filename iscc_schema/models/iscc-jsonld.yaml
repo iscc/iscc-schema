@@ -8,6 +8,10 @@ properties:
     format: uri
     default: https://purl.org/iscc/terms/
     description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
+  '@type':
+    type: string
+    description: The type of digital content according to schema.org classes (TextDigitalDocument,
+      ImageObject, AudioObject, VideoObject).
   $schema:
     type: string
     format: uri
