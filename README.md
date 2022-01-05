@@ -46,5 +46,5 @@ All ISCC extensions start with `x-iscc-`:
 
 ## Changelog
 
-### 0.1.0 - Unreleased
+### 0.1.0 - 2022-01-05
 - Initial release
