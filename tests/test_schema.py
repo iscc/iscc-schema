@@ -7,9 +7,9 @@ from pyld import jsonld
 def test_schema():
     so = iscc_schema.ISCC(iscc="ISCC:EIAGUJFCEY")
     assert so.dict(exclude_none=True, by_alias=True) == {
-        "@context": "http://purl.org/iscc/context/",
+        "@context": "http://purl.org/iscc/context",
         "@type": "CreativeWork",
-        "$schema": "http://purl.org/iscc/schema/",
+        "$schema": "http://purl.org/iscc/schema",
         "iscc": "ISCC:EIAGUJFCEY",
     }
 
@@ -33,9 +33,9 @@ def test_json_ld_normalize():
     so = iscc_schema.ISCC(iscc="ISCC:EIAGUJFCEY")
     data = so.dict(exclude_none=True, by_alias=True)
     assert data == {
-        "@context": "http://purl.org/iscc/context/",
+        "@context": "http://purl.org/iscc/context",
         "@type": "CreativeWork",
-        "$schema": "http://purl.org/iscc/schema/",
+        "$schema": "http://purl.org/iscc/schema",
         "iscc": "ISCC:EIAGUJFCEY",
     }
 

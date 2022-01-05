@@ -6,7 +6,7 @@
     "@context": {
       "title": "@Context",
       "description": "The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
-      "default": "http://purl.org/iscc/context/",
+      "default": "http://purl.org/iscc/context",
       "minLength": 1,
       "maxLength": 65536,
       "format": "uri",
@@ -24,7 +24,7 @@
     "$schema": {
       "title": "$Schema",
       "description": "The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
-      "default": "http://purl.org/iscc/schema/",
+      "default": "http://purl.org/iscc/schema",
       "minLength": 1,
       "maxLength": 65536,
       "format": "uri",
