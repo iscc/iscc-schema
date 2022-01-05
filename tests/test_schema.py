@@ -13,9 +13,19 @@ def test_schema():
     }
 
 
-def test_iscc_regex_validation():
+def test_pydantic_model_full_iscc():
+    obj = iscc_schema.ISCC(iscc="ISCC:KID6X6GUH5F5GAXO2AUKQLUQFCUC4LNBCROR3QEP26N2PEOYVTDO2OY")
+    assert obj.iscc == "ISCC:KID6X6GUH5F5GAXO2AUKQLUQFCUC4LNBCROR3QEP26N2PEOYVTDO2OY"
+
+
+def test_pydantic_model_iscc_to_short_raises():
     with pytest.raises(ValueError):
         iscc_schema.ISCC(iscc="ISCC:EIAGUJFCE")
+
+
+def test_pydantic_model_iscc_to_long_raises():
+    with pytest.raises(ValueError):
+        iscc_schema.ISCC(iscc="ISCC:KID6X6GUH5F5GAXO2AUKQLUQFCUC4LNBCROR3QEP26N2PEOYVTDO2OYK")
 
 
 def test_json_ld_normalize():
