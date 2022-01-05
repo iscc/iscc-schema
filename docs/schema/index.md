@@ -33,7 +33,7 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| name | `string` | The name or title of the intangible creation manifested by the idendified *digital content*.                     |
+| name | `string` | The title or name of the intangible creation manifested by the identified *digital content* (used as input for **ISCC Meta-Code** generation).                     |
 
 ### **description**
 <http://schema.org/disambiguatingDescription>
@@ -157,7 +157,7 @@ Arbitrary properties. Values may be strings, numbers, object or arrays. Should b
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| properties | `object` | JSON or JSON-LD formated values about the identified *digital content*. Compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).                     |
+| properties | `object` | Descriptive, industry-sector or use-case specific metadata in JSON or JSON-LD format. If properties are provided they are the sole inpute for `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).                     |
 
 ## iscc-technical
 Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor

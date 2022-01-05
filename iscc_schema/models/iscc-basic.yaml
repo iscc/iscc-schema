@@ -11,8 +11,8 @@ properties:
     minLength: 1
     maxLength: 128
     example: The Never Ending Story
-    description: The name or title of the intangible creation manifested by the idendified
-      *digital content*.
+    description: The title or name of the intangible creation manifested by the identified
+      *digital content* (used as input for **ISCC Meta-Code** generation).
     x-iscc-context: http://schema.org/name
     x-iscc-schema-doc: The name of the item.
   description:

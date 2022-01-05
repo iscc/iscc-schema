@@ -4,7 +4,7 @@
 
     The name of the item.
 
-    **Comment**:  The name or title of the intangible creation manifested by the idendified *digital content*.
+    **Comment**:  The title or name of the intangible creation manifested by the identified *digital content* (used as input for **ISCC Meta-Code** generation).
 
 ### **description**
 

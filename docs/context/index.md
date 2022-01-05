@@ -4,7 +4,7 @@
 
 <small><http://schema.org/name></small>
 !!! term ""
-    The name or title of the intangible creation manifested by the idendified *digital content*.
+    The title or name of the intangible creation manifested by the identified *digital content* (used as input for **ISCC Meta-Code** generation).
 
 ## description
 
@@ -70,7 +70,7 @@
 
 <small><http://purl.org/iscc/terms/#properties></small>
 !!! term ""
-    JSON or JSON-LD formated values about the identified *digital content*. Compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
+    Descriptive, industry-sector or use-case specific metadata in JSON or JSON-LD format. If properties are provided they are the sole inpute for `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
 
 ## created
 
