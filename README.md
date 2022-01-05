@@ -13,12 +13,22 @@ artifacts.
 
 ## Generated files:
 
-The source of code generation is `iscc_schema/models/iscc.yaml`.
+The source of code generation are the files at `iscc_schema/models/*`.
 The outputs produced when running `poe build` are:
 
 - `docs/schema/iscc.json` - JSON Schema for ISCC Metadata
-- `docs/context/iscc.json` - JSON-LD context for ISCC Metadata
-- `iscc_schema/schema.py` - Pydantic model for ISCC Metadata
+- `docs/schema/index.md` - JSON Schema Markdown documentation
+- `docs/context/iscc.jsonld` - JSON-LD context for ISCC Metadata
+- `docs/terms/index.md` - ISCC Metadata Vocabulary documentation
+- `iscc_schema/schema.py` - Pydantic models for ISCC Metadata
+
+## Published files:
+
+The generated files are published under the following canonical URLs:
+
+- `http://purl.org/iscc/schema/` - JSON Schema latest version
+- `http://purl.org/iscc/context/` - JSON-LD Context latest version
+- `http://purl.org/iscc/terms/` - ISCC Metadata Vocabulary latest version
 
 ## OpenAPI Extensions
 
