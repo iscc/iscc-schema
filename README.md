@@ -1,5 +1,7 @@
 # **ISCC** - Schema
 
+*OpenAPI representation of the ISCC data model*
+
 [![Build](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml)
 [![Version](https://img.shields.io/pypi/v/iscc-schema.svg)](https://pypi.python.org/pypi/iscc-schema/)
 
@@ -29,6 +31,7 @@ The generated files are published under the following canonical URLs:
 - [`http://purl.org/iscc/schema`](http://purl.org/iscc/schema) - JSON Schema latest version
 - [`http://purl.org/iscc/context`](http://purl.org/iscc/context) - JSON-LD Context latest version
 - [`http://purl.org/iscc/terms`](http://purl.org/iscc/terms) - ISCC Metadata Vocabulary latest version
+- [`http://pypi.org/project/iscc-schema`](http://pypi.org/project/iscc-schema) - Python package with pydantic models
 
 ## OpenAPI Extensions
 
