@@ -17,9 +17,9 @@ def test_json_ld_normalize():
     so.context_ = "http://schema.iscc.codes/context/isccmeta.jsonld"
     data = so.dict(exclude_none=True, by_alias=True)
     assert data == {
-        '@context': 'http://schema.iscc.codes/context/isccmeta.jsonld',
-        '$schema': 'https://purl.org/iscc/schema/',
-        'iscc': 'ISCC:EIAGUJFCEY'
+        "@context": "http://schema.iscc.codes/context/isccmeta.jsonld",
+        "$schema": "https://purl.org/iscc/schema/",
+        "iscc": "ISCC:EIAGUJFCEY",
     }
 
     # jsonld.set_document_loader(jsonld.requests_document_loader(timeout=10))
