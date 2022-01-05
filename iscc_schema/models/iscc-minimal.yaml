@@ -12,6 +12,5 @@ properties:
     minLength: 15
     maxLength: 60
     pattern: ^ISCC:[A-Z2-7]{10,60}$
-    x-iscc-context: http://purl.org/iscc/terms/#iscc
 required:
 - iscc
