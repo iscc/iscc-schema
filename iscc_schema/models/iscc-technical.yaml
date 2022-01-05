@@ -82,15 +82,15 @@ properties:
   language:
     description: Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).
     example: en-US
-    type:
-    - string
-    - array
+    oneOf:
+    - type: string
+    - type: array
+      items:
+      - type: string
     x-iscc-context: http://schema.org/inLanguage
     x-iscc-schema-doc: The language of the content or performance or used in an action. Please
       use one of the language codes from the [IETF BCP 47 standard](https://www.rfc-editor.org/info/bcp47).
       See also [availableLanguage](https://schema.org/availableLanguage).
-    items:
-      type: string
   parts:
     type: array
     description: Indicates items that are part of this item via Content-Codes (inverse-property
