@@ -26,9 +26,9 @@ The outputs produced when running `poe build` are:
 
 The generated files are published under the following canonical URLs:
 
-- `http://purl.org/iscc/schema` - JSON Schema latest version
-- `http://purl.org/iscc/context` - JSON-LD Context latest version
-- `http://purl.org/iscc/terms` - ISCC Metadata Vocabulary latest version
+- [`http://purl.org/iscc/schema`](http://purl.org/iscc/schema) - JSON Schema latest version
+- [`http://purl.org/iscc/context`](http://purl.org/iscc/context) - JSON-LD Context latest version
+- [`http://purl.org/iscc/terms`](http://purl.org/iscc/terms) - ISCC Metadata Vocabulary latest version
 
 ## OpenAPI Extensions
 
