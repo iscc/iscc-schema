@@ -39,5 +39,7 @@ def test_json_ld_normalize():
         "iscc": "ISCC:EIAGUJFCEY",
     }
 
-    # norm = jsonld.normalize(data, {"algorithm": "URDNA2015", "format": "application/n-quads"})
-    # assert norm == ""
+    norm = jsonld.normalize(data, {"algorithm": "URDNA2015", "format": "application/n-quads"})
+    assert norm == (
+        "<ISCC:EIAGUJFCEY> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork> .\n"
+    )
