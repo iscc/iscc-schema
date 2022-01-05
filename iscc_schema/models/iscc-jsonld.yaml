@@ -10,6 +10,13 @@ properties:
     description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
   '@type':
     type: string
+    default: CreativeWork
+    enum:
+    - CreativeWork
+    - TextDigitalDocument
+    - ImageObject
+    - AudioObject
+    - VideoObject
     description: The type of digital content according to schema.org classes (TextDigitalDocument,
       ImageObject, AudioObject, VideoObject).
   $schema:
