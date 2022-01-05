@@ -923,9 +923,9 @@
 </a>
 
 
-<h1 id="json-schema-for-iscc-metadata"><abbr title="JavaScript Object Notation">JSON</abbr> Schema for <abbr title="International Standard Content Code">ISCC</abbr> Metadata<a class="headerlink" href="#json-schema-for-iscc-metadata" title="Permanent link">#</a></h1>
+<h1 id="json-schema-for-iscc-metadata">JSON Schema for ISCC Metadata<a class="headerlink" href="#json-schema-for-iscc-metadata" title="Permanent link">#</a></h1>
 <h2 id="iscc-minimal">iscc-minimal<a class="headerlink" href="#iscc-minimal" title="Permanent link">#</a></h2>
-<p>Minimal <abbr title="International Standard Content Code">ISCC</abbr> Metadata</p>
+<p>Minimal ISCC Metadata</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="__codelineno-0-1"></a><span class="p">{</span><span class="w"></span>
@@ -934,7 +934,6 @@
 </code></pre></div>
 </div>
 <h3 id="iscc"><strong>iscc</strong><a class="headerlink" href="#iscc" title="Permanent link">#</a></h3>
-<p><a href="http://purl.org/iscc/terms/#iscc">http://purl.org/iscc/terms/#iscc</a></p>
 <table>
 <thead>
 <tr>
@@ -947,12 +946,12 @@
 <tr>
 <td>iscc</td>
 <td><code>string</code></td>
-<td>An <strong><abbr title="International Standard Content Code">ISCC</abbr>-CODE</strong> in canonical representation. This is the minimal required field for a valid <abbr title="International Standard Content Code">ISCC</abbr> Metadata object.</td>
+<td>An <strong><abbr title="An multi-component ISCC built from several ISCC-UNITS with a common header">ISCC-CODE</abbr></strong> in canonical representation. This is the minimal required field for a valid ISCC Metadata object.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="iscc-basic">iscc-basic<a class="headerlink" href="#iscc-basic" title="Permanent link">#</a></h2>
-<p>Basic user presentable <abbr title="International Standard Content Code">ISCC</abbr> Metadata conformant with <a href="https://eips.ethereum.org/EIPS/eip-721">ERC721</a></p>
+<p>Basic user presentable ISCC Metadata conformant with <a href="https://eips.ethereum.org/EIPS/eip-721">ERC721</a></p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="__codelineno-1-1"></a><span class="p">{</span><span class="w"></span>
@@ -994,7 +993,7 @@
 <tr>
 <td>description</td>
 <td><code>string</code></td>
-<td>Description of the <em>digital content</em> identified by the <strong><abbr title="International Standard Content Code">ISCC</abbr></strong> (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.</td>
+<td>Description of the <em>digital content</em> identified by the <strong>ISCC</strong> (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.</td>
 </tr>
 </tbody>
 </table>
@@ -1012,12 +1011,12 @@
 <tr>
 <td>image</td>
 <td><code>string-uri</code></td>
-<td><abbr title="Uniform Resource Identifier">URI</abbr> for a user-presentable image that serves as a preview of the <em>digital content</em>. The <abbr title="Uniform Resource Identifier">URI</abbr> may be a Data-URL <a href="https://datatracker.ietf.org/doc/html/rfc2397">RFC2397</a>. If <strong><abbr title="International Standard Content Code">ISCC</abbr></strong> metadata is used as NFT metadata according to <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-721/">ERC-721</a> or <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/">ERC-1155</a> the <abbr title="Uniform Resource Identifier">URI</abbr> should reference the actual digital content represented by the NFT.</td>
+<td>URI for a user-presentable image that serves as a preview of the <em>digital content</em>. The URI may be a Data-URL <a href="https://datatracker.ietf.org/doc/html/rfc2397">RFC2397</a>. If <strong>ISCC</strong> metadata is used as NFT metadata according to <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-721/">ERC-721</a> or <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/">ERC-1155</a> the URI should reference the actual digital content represented by the NFT.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="iscc-extended">iscc-extended<a class="headerlink" href="#iscc-extended" title="Permanent link">#</a></h2>
-<p>Extended <abbr title="International Standard Content Code">ISCC</abbr> Metadata</p>
+<p>Extended ISCC Metadata</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="__codelineno-2-1"></a><span class="p">{</span><span class="w"></span>
@@ -1043,7 +1042,7 @@
 <tr>
 <td>content</td>
 <td><code>string-uri</code></td>
-<td><abbr title="Uniform Resource Identifier">URI</abbr> of the <em>digital content</em> that was used to create this <abbr title="International Standard Content Code">ISCC</abbr>.</td>
+<td>URI of the <em>digital content</em> that was used to create this ISCC.</td>
 </tr>
 </tbody>
 </table>
@@ -1115,7 +1114,7 @@
 <tr>
 <td>license</td>
 <td><code>string-uri</code></td>
-<td><abbr title="Uniform Resource Identifier">URI</abbr> of license for the identified <em>digital content</em>.</td>
+<td>URI of license for the identified <em>digital content</em>.</td>
 </tr>
 </tbody>
 </table>
@@ -1133,7 +1132,7 @@
 <tr>
 <td>redirect</td>
 <td><code>string-uri</code></td>
-<td>URL to which a resolver should redirect an <abbr title="International Standard Content Code">ISCC</abbr>-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.</td>
+<td>URL to which a resolver should redirect an <abbr title="A short, unique and owned identifier for *digital content*">ISCC-ID</abbr> that has been minted from a declartion that includes the IPFS-hash of this metadata instance.</td>
 </tr>
 </tbody>
 </table>
@@ -1151,7 +1150,7 @@
 <tr>
 <td>previous</td>
 <td><code>string</code></td>
-<td><abbr title="International Standard Content Code">ISCC</abbr> of the preceding version of this item.</td>
+<td>ISCC of the preceding version of this item.</td>
 </tr>
 </tbody>
 </table>
@@ -1219,12 +1218,12 @@
 <tr>
 <td>properties</td>
 <td><code>object</code></td>
-<td><abbr title="JavaScript Object Notation">JSON</abbr> or <abbr title="JavaScript Object Notation">JSON</abbr>-LD formated values about the identified <em>digital content</em>. Compatible with <a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a>.</td>
+<td>JSON or <abbr title="A JSON-based Serialization for Linked Data">JSON-LD</abbr> formated values about the identified <em>digital content</em>. Compatible with <a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a>.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="iscc-technical">iscc-technical<a class="headerlink" href="#iscc-technical" title="Permanent link">#</a></h2>
-<p>Technical <abbr title="International Standard Content Code">ISCC</abbr> Metadata automaticaly inferred from the <em>digital content</em> by an <abbr title="International Standard Content Code">ISCC</abbr> Processor</p>
+<p>Technical ISCC Metadata automaticaly inferred from the <em>digital content</em> by an ISCC Processor</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="__codelineno-4-1"></a><span class="p">{</span><span class="w"></span>
@@ -1254,7 +1253,7 @@
 <tr>
 <td>created</td>
 <td><code>string-date-time</code></td>
-<td>Datetime the <abbr title="International Standard Content Code">ISCC</abbr> was created for the item.</td>
+<td>Datetime the ISCC was created for the item.</td>
 </tr>
 </tbody>
 </table>
@@ -1272,7 +1271,7 @@
 <tr>
 <td>filename</td>
 <td><code>string</code></td>
-<td>Filename of the referenced <strong>digital content</strong> (automatically used as fallback if the <code>name</code> field was not specified for <abbr title="International Standard Content Code">ISCC</abbr> processing)</td>
+<td>Filename of the referenced <strong>digital content</strong> (automatically used as fallback if the <code>name</code> field was not specified for ISCC processing)</td>
 </tr>
 </tbody>
 </table>
@@ -1433,7 +1432,7 @@
 <tbody>
 <tr>
 <td>language</td>
-<td><code>['string', 'array']</code></td>
+<td><code>None</code></td>
 <td>Language(s) of content <a href="https://tools.ietf.org/search/bcp47">BCP 47</a>.</td>
 </tr>
 </tbody>
@@ -1493,7 +1492,7 @@
 </tbody>
 </table>
 <h2 id="iscc-crypto">iscc-crypto<a class="headerlink" href="#iscc-crypto" title="Permanent link">#</a></h2>
-<p>Cryptography related <abbr title="International Standard Content Code">ISCC</abbr> Metadata</p>
+<p>Cryptography related ISCC Metadata</p>
 <h3 id="datahash"><strong>datahash</strong><a class="headerlink" href="#datahash" title="Permanent link">#</a></h3>
 <p><a href="http://purl.org/iscc/terms/#datahash">http://purl.org/iscc/terms/#datahash</a></p>
 <table>

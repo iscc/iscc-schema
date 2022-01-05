@@ -6,16 +6,25 @@
     "@context": {
       "title": "@Context",
       "description": "The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
-      "default": "https://purl.org/iscc/terms/",
+      "default": "http://purl.org/iscc/context/",
       "minLength": 1,
       "maxLength": 65536,
       "format": "uri",
       "type": "string"
     },
+    "@type": {
+      "description": "The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).",
+      "default": "CreativeWork",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
+      ]
+    },
     "$schema": {
       "title": "$Schema",
       "description": "The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
-      "default": "https://purl.org/iscc/schema/",
+      "default": "http://purl.org/iscc/schema/",
       "minLength": 1,
       "maxLength": 65536,
       "format": "uri",
@@ -26,8 +35,8 @@
       "description": "An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.",
       "maxLength": 60,
       "minLength": 15,
+      "pattern": "^ISCC:[A-Z2-7]{10,60}$",
       "example": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
-      "x_iscc_context": "http://purl.org/iscc/terms/#iscc",
       "type": "string"
     },
     "name": {
@@ -211,10 +220,17 @@
       "description": "Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).",
       "example": "en-US",
       "x_iscc_context": "http://schema.org/inLanguage",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
     },
     "parts": {
       "title": "Parts",
@@ -246,23 +262,39 @@
     "datahash": {
       "title": "Datahash",
       "description": "A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).",
+      "minLength": 40,
       "x_iscc_context": "http://purl.org/iscc/terms/#datahash",
       "type": "string"
     },
     "metahash": {
       "title": "Metahash",
       "description": "A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.",
+      "minLength": 40,
       "x_iscc_context": "http://purl.org/iscc/terms/#metahash",
       "type": "string"
     },
     "tophash": {
       "title": "Tophash",
       "description": "A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).",
+      "minLength": 40,
       "x_iscc_context": "http://purl.org/iscc/terms/#tophash",
       "type": "string"
     }
   },
   "required": [
     "iscc"
-  ]
+  ],
+  "definitions": {
+    "Type": {
+      "title": "Type",
+      "description": "The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).",
+      "enum": [
+        "CreativeWork",
+        "TextDigitalDocument",
+        "ImageObject",
+        "AudioObject",
+        "VideoObject"
+      ]
+    }
+  }
 }
