@@ -6,7 +6,7 @@ properties:
   '@context':
     type: string
     format: uri
-    default: https://purl.org/iscc/terms/
+    default: https://purl.org/iscc/context/
     description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
   '@type':
     type: string
