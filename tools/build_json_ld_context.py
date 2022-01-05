@@ -6,8 +6,8 @@ from os.path import dirname, abspath, join
 import json
 
 HERE = dirname(abspath(__file__))
-PATH_LATEST = join(HERE, f"../docs/context/iscc.json")
-PATH_VERSION = join(HERE, f"../docs/context/{iscc_schema.__version__}.json")
+PATH_LATEST = join(HERE, f"../docs/context/iscc.jsonld")
+PATH_VERSION = join(HERE, f"../docs/context/{iscc_schema.__version__}.jsonld")
 
 
 def build_context():
@@ -15,19 +15,23 @@ def build_context():
     """
     Build JSON-LD context from ISCC pydantic model for publishing
 
+    TODO: build directly from OpenAPI definitions instead of pydantic schema.
+
     :return: Serialized JSON-LD context for publishing.
     :rtype: Dict
     """
     context = {
-        "@context": [
-            "https://schema.org/docs/jsonldcontext.jsonld",
-            {
-                "§schema": "@type",
-                "iscc": "@id",
-            },
-        ]
+        "@context": {
+            "iscc": "@id",
+            "CreativeWork": "http://schema.org/CreativeWork",
+            "TextDigitalDocument": "http://schema.org/TextDigitalDocument",
+            "ImageObject": "http://schema.org/ImageObject",
+            "AudioObject": "http://schema.org/AudioObject",
+            "VideoObject": "http://schema.org/VideoObject",
+
+        }
     }
-    ctx = context["@context"][1]
+    ctx = context["@context"]
     for prop, fields in iscc_schema.ISCC.schema()["properties"].items():
         if "x_iscc_context" in fields:
             ctx[prop] = fields["x_iscc_context"]
