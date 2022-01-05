@@ -28,7 +28,6 @@ def build_context():
             "ImageObject": "http://schema.org/ImageObject",
             "AudioObject": "http://schema.org/AudioObject",
             "VideoObject": "http://schema.org/VideoObject",
-
         }
     }
     ctx = context["@context"]

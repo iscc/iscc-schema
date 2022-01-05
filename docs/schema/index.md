@@ -11,7 +11,6 @@ Minimal ISCC Metadata
     }
     ```
 ### **iscc**
-<http://purl.org/iscc/terms/#iscc>
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
@@ -253,7 +252,7 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 
 | Name | Type | Definition                               |
 | ---- | ---- | -----------------------------------------|
-| language | `['string', 'array']` | Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).                     |
+| language | `None` | Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).                     |
 
 ### **parts**
 <http://purl.org/iscc/terms/#parts>

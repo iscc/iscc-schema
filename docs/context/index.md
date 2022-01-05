@@ -1,11 +1,5 @@
 # **ISCC** - Metadata Vocabulary
 
-## iscc
-
-<small><http://purl.org/iscc/terms/#iscc></small>
-!!! term ""
-    An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.
-
 ## name
 
 <small><http://schema.org/name></small>
