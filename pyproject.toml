@@ -46,7 +46,8 @@ buildterms = { script = "tools.build_terms:build", help = "Build markdown for te
 buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON Schema" }
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
-build = ["update", "fromatyaml", "buildpydantic", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs"]
+test = { cmd = "pytest", help = "Run tests"}
+build = ["update", "fromatyaml", "buildpydantic", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

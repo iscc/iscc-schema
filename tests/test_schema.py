@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 import iscc_schema
 from pyld import jsonld
 
@@ -10,6 +11,11 @@ def test_schema():
         "$schema": "https://purl.org/iscc/schema/",
         "iscc": "ISCC:EIAGUJFCEY",
     }
+
+
+def test_iscc_regex_validation():
+    with pytest.raises(ValueError):
+        iscc_schema.ISCC(iscc="ISCC:EIAGUJFCE")
 
 
 def test_json_ld_normalize():

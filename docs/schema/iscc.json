@@ -26,6 +26,7 @@
       "description": "An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.",
       "maxLength": 60,
       "minLength": 15,
+      "pattern": "^ISCC:[A-Z2-7]{10,60}$",
       "example": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "x_iscc_context": "http://purl.org/iscc/terms/#iscc",
       "type": "string"
