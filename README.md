@@ -18,11 +18,11 @@ artifacts.
 The source of code generation are the files at `iscc_schema/models/*`.
 The outputs produced when running `poe build` are:
 
-- `docs/schema/iscc.json` - JSON Schema for ISCC Metadata
-- `docs/schema/index.md` - JSON Schema Markdown documentation
-- `docs/context/iscc.jsonld` - JSON-LD context for ISCC Metadata
-- `docs/terms/index.md` - ISCC Metadata Vocabulary documentation
-- `iscc_schema/schema.py` - Pydantic models for ISCC Metadata
+- [`docs/schema/iscc.json`](https://github.com/iscc/iscc-schema/blob/main/docs/schema/iscc.json) - JSON Schema for ISCC Metadata
+- [`docs/schema/index.md`](https://github.com/iscc/iscc-schema/blob/main/docs/schema/index.md) - JSON Schema Markdown documentation
+- [`docs/context/iscc.jsonld`](https://github.com/iscc/iscc-schema/blob/main/docs/context/iscc.jsonld) - JSON-LD context for ISCC Metadata
+- [`docs/terms/index.md`](https://github.com/iscc/iscc-schema/blob/main/docs/context/index.md) - ISCC Metadata Vocabulary documentation
+- [`iscc_schema/schema.py`](https://github.com/iscc/iscc-schema/blob/main/iscc_schema/schema.py) - Pydantic models for ISCC Metadata
 
 ## Published files:
 
@@ -45,6 +45,8 @@ All ISCC extensions start with `x-iscc-`:
 
 
 ## Changelog
+
+### 0.2.0 - Unreleased
 
 ### 0.1.0 - 2022-01-05
 - Initial release
