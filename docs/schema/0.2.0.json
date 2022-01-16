@@ -33,9 +33,9 @@
     "iscc": {
       "title": "Iscc",
       "description": "An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.",
-      "maxLength": 60,
+      "maxLength": 73,
       "minLength": 15,
-      "pattern": "^ISCC:[A-Z2-7]{10,60}$",
+      "pattern": "^ISCC:[A-Z2-7]{10,73}$",
       "example": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "type": "string"
     },

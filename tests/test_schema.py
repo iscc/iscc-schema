@@ -26,7 +26,9 @@ def test_pydantic_model_iscc_to_short_raises():
 
 def test_pydantic_model_iscc_to_long_raises():
     with pytest.raises(ValueError):
-        iscc_schema.ISCC(iscc="ISCC:KID6X6GUH5F5GAXO2AUKQLUQFCUC4LNBCROR3QEP26N2PEOYVTDO2OYK")
+        iscc_schema.ISCC(
+            iscc="ISCC:KAD7LOFDIKZG5M426IITP2XOZ2S6YR3C4YNQ25URPKITNUL2NXLHU3SKFW336BFNK6WQ6"
+        )
 
 
 def test_json_ld_normalize():
