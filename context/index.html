@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://schema.iscc.codes/context/">
       
       <link rel="icon" href="../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.4">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.7">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.bb3983ee.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.cd566b2a.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -35,8 +35,8 @@
       
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,400i,700%7CInconsolata&display=fallback">
-        <style>:root{--md-text-font:"Quicksand";--md-code-font:"Inconsolata"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Readex+Pro:300,400,400i,700%7CJetBrains+Mono&display=fallback">
+        <style>:root{--md-text-font:"Readex Pro";--md-code-font:"JetBrains Mono"}</style>
       
     
     
@@ -45,6 +45,10 @@
     <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
+  
+
+
+  <script defer data-domain="schema.iscc.codes" src="https://stats.iscc.codes/js/plausible.js"></script>
 
     
     
@@ -58,11 +62,11 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
   
     
     
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -82,7 +86,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="ISCC - Schema" class="md-header__button md-logo" aria-label="ISCC - Schema" data-md-component="logo">
       
@@ -113,19 +119,19 @@
         
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
           
-            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
             </label>
           
         
           
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
           
-            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
             </label>
           
         
@@ -181,13 +187,58 @@
     
   </nav>
   
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      Overview
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../terms/" class="md-tabs__link">
+      Terms
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../schema/" class="md-tabs__link">
+      Schema
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
-        
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -200,8 +251,12 @@
                   <div class="md-sidebar__inner">
                     
 
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="ISCC - Schema" class="md-nav__button md-logo" aria-label="ISCC - Schema" data-md-component="logo">
       
@@ -277,235 +332,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#name" class="md-nav__link">
-    name
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    description
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#image" class="md-nav__link">
-    image
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#content" class="md-nav__link">
-    content
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#creator" class="md-nav__link">
-    creator
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#keywords" class="md-nav__link">
-    keywords
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#identifier" class="md-nav__link">
-    identifier
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    license
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#redirect" class="md-nav__link">
-    redirect
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#previous" class="md-nav__link">
-    previous
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#version" class="md-nav__link">
-    version
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    properties
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#created" class="md-nav__link">
-    created
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#filename" class="md-nav__link">
-    filename
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#filesize" class="md-nav__link">
-    filesize
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mediatype" class="md-nav__link">
-    mediatype
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#duration" class="md-nav__link">
-    duration
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fps" class="md-nav__link">
-    fps
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#width" class="md-nav__link">
-    width
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#height" class="md-nav__link">
-    height
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#characters" class="md-nav__link">
-    characters
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pages" class="md-nav__link">
-    pages
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#language" class="md-nav__link">
-    language
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parts" class="md-nav__link">
-    parts
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#part_of" class="md-nav__link">
-    part_of
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
-    features
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datahash" class="md-nav__link">
-    datahash
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#metahash" class="md-nav__link">
-    metahash
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tophash" class="md-nav__link">
-    tophash
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -575,7 +401,7 @@
 <h2 id="properties">properties<a class="headerlink" href="#properties" title="Permanent link">#</a></h2>
 <p><small><a href="http://purl.org/iscc/terms/#properties">http://purl.org/iscc/terms/#properties</a></small></p>
 <div class="admonition term">
-<p>Descriptive, industry-sector or use-case specific metadata in JSON or <abbr title="A JSON-based Serialization for Linked Data">JSON-LD</abbr> format. If properties are provided they are the sole inpute for <code>metahash</code> calculation. Also compatible with <a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a>.</p>
+<p>Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for <code>metahash</code> calculation. Also compatible with <a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a>. If properties is set to a string it is assumed that it is base64 encoded binary file metadata.</p>
 </div>
 <h2 id="created">created<a class="headerlink" href="#created" title="Permanent link">#</a></h2>
 <p><small><a href="http://schema.org/dateCreated">http://schema.org/dateCreated</a></small></p>
@@ -647,6 +473,11 @@
 <div class="admonition term">
 <p>Granular features of the <em>digital content</em>.</p>
 </div>
+<h2 id="generator">generator<a class="headerlink" href="#generator" title="Permanent link">#</a></h2>
+<p><small><a href="http://purl.org/iscc/terms/#generator">http://purl.org/iscc/terms/#generator</a></small></p>
+<div class="admonition term">
+<p>Name and version of the software that generated the ISCC</p>
+</div>
 <h2 id="datahash">datahash<a class="headerlink" href="#datahash" title="Permanent link">#</a></h2>
 <p><small><a href="http://purl.org/iscc/terms/#datahash">http://purl.org/iscc/terms/#datahash</a></small></p>
 <div class="admonition term">
@@ -696,10 +527,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.indexes"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.361d90f1.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.22074ed6.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.289a2a4b.min.js"></script>
+      <script src="../assets/javascripts/bundle.01de222e.min.js"></script>
       
     
   </body>
