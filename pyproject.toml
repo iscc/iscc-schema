@@ -10,15 +10,17 @@ keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "simil
 
 [tool.poetry.dependencies]
 python = ">=3.6.2,<4.0"
-pydantic = "^1.9.0"
+pydantic = "^1.9"
+jwcrypto = "^1.0"
+jcs = "^0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
-datamodel-code-generator = "^0.11.15"
-poethepoet = "^0.11.0"
-black = "21.12b0"
-mkdocs-material = "^8.1.4"
-PyLD = "^2.0.3"
+datamodel-code-generator = "*"
+poethepoet = "*"
+black = { version = "*", allow-prereleases = true }
+mkdocs-material = "*"
+PyLD = "*"
 
 [tool.black]
 skip-string-normalization = false
