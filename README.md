@@ -13,7 +13,7 @@ single source of truth for auto-generated [JSON Schema](https://json-schema.org/
 definitions, [JSON-LD](https://json-ld.org/) contexts, and other schema related
 artifacts.
 
-## Generated files:
+## Generated files
 
 The source of code generation are the files at `iscc_schema/models/*`.
 The outputs produced when running `poe build` are:
@@ -24,7 +24,7 @@ The outputs produced when running `poe build` are:
 - [`docs/terms/index.md`](https://github.com/iscc/iscc-schema/blob/main/docs/context/index.md) - ISCC Metadata Vocabulary documentation
 - [`iscc_schema/schema.py`](https://github.com/iscc/iscc-schema/blob/main/iscc_schema/schema.py) - Pydantic models for ISCC Metadata
 
-## Published files:
+## Published files
 
 The generated files are published under the following canonical URLs:
 
