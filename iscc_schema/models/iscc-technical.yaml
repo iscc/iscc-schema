@@ -110,3 +110,7 @@ properties:
     x-iscc-context: http://purl.org/iscc/terms/#features
     items:
       type: object
+  generator:
+    type: string
+    description: Name and version of the software that generated the ISCC
+    x-iscc-context: http://purl.org/iscc/terms/#generator

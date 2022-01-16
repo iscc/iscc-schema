@@ -156,6 +156,12 @@
 !!! term ""
     Granular features of the *digital content*.
 
+## generator
+
+<small><http://purl.org/iscc/terms/#generator></small>
+!!! term ""
+    Name and version of the software that generated the ISCC
+
 ## datahash
 
 <small><http://purl.org/iscc/terms/#datahash></small>

@@ -64,6 +64,12 @@
 
     Granular features of the *digital content*.
 
+### **generator**
+
+!!! term "<small><http://purl.org/iscc/terms/#generator></small>"
+
+    Name and version of the software that generated the ISCC
+
 ### **datahash**
 
 !!! term "<small><http://purl.org/iscc/terms/#datahash></small>"

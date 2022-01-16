@@ -275,6 +275,13 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 | ---- | ---- | -----------------------------------------|
 | features | `array` | Granular features of the *digital content*.                     |
 
+### **generator**
+<http://purl.org/iscc/terms/#generator>
+
+| Name | Type | Definition                               |
+| ---- | ---- | -----------------------------------------|
+| generator | `string` | Name and version of the software that generated the ISCC                     |
+
 ## iscc-crypto
 Cryptography related ISCC Metadata
 ### **datahash**
