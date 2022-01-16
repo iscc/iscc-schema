@@ -70,7 +70,7 @@
 
 <small><http://purl.org/iscc/terms/#properties></small>
 !!! term ""
-    Descriptive, industry-sector or use-case specific metadata in JSON or JSON-LD format. If properties are provided they are the sole inpute for `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
+    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.
 
 ## created
 

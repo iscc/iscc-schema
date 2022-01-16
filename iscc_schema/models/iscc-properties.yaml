@@ -2,14 +2,6 @@ title: iscc-properties
 description: Arbitrary properties. Values may be strings, numbers, object or arrays. Should
   be used for industry specific structured metadata.
 type: object
-properties:
-  properties:
-    type: object
-    minProperties: 1
-    description: Descriptive, industry-sector or use-case specific metadata in JSON or JSON-LD
-      format. If properties are provided they are the sole inpute for `metahash` calculation.
-      Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
-    x-iscc-context: http://purl.org/iscc/terms/#properties
 examples:
 - properties:
     simple_property: example value
@@ -30,3 +22,20 @@ examples:
       - 3
       - 4
       class: emphasis
+properties:
+  properties:
+    oneOf:
+    - type: string
+      format: byte
+      pattern: ^(?:[A-Za-z\d+/]{4})*(?:[A-Za-z\d+/]{3}=|[A-Za-z\d+/]{2}==)?$
+      description: Base64 encoded file header metadata
+    - type: object
+      minProperties: 1
+      description: Any object that is JSON/JCS serializable
+    minProperties: 1
+    description: Descriptive, industry-sector or use-case specific metadata. Can be any object
+      that is JSON/JCS serializable. If properties are provided they are the sole input for
+      `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
+      If properties is set to a string it is assumed that it is base64 encoded binary file
+      metadata.
+    x-iscc-context: http://purl.org/iscc/terms/#properties
