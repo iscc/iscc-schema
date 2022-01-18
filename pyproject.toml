@@ -36,7 +36,12 @@ field-extra-keys = ["x-iscc-context"]
 use-default = true
 use-schema-description = true
 wrap-string-literal = true
+use-annotated = false
 class-name = "ISCC"
+disable-timestamp = true
+target-python-version = "3.6"
+validation = true
+endocing = "utf-8"
 
 
 [tool.poe.tasks]
@@ -49,7 +54,7 @@ buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON 
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
 test = { cmd = "pytest", help = "Run tests"}
-build = ["fromatyaml", "buildpydantic", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
+build = ["update", "fromatyaml", "buildpydantic", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
