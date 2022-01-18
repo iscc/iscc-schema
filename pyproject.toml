@@ -25,7 +25,7 @@ PyLD = "*"
 [tool.black]
 skip-string-normalization = false
 line-length = 100
-target-version = ['py37']
+target-version = ['py36']
 
 [tool.datamodel-codegen]
 field-constraints = true
