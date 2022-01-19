@@ -20,6 +20,7 @@ poethepoet = "*"
 black = { version = "*", allow-prereleases = true }
 mkdocs-material = "*"
 PyLD = "*"
+requests = "^2.27.1"
 
 [tool.black]
 skip-string-normalization = false
