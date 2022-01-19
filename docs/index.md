@@ -46,6 +46,10 @@ All ISCC extensions start with `x-iscc-`:
 
 ## Changelog
 
+### 0.2.1 - 2022-01-19
+- Tweak code generator
+- Cleanup dependencies
+
 ### 0.2.0 - 2022-01-17
 - Added generator field
 - Changed properties field to support base64
