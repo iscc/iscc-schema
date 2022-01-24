@@ -9,7 +9,7 @@ repository = "https://github.com/iscc/iscc-schema"
 keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "similarity"]
 
 [tool.poetry.dependencies]
-python = ">=3.6.1,<4.0.0"
+python = ">=3.7,<4.0.0"
 pydantic = "^1.9"
 jcs = "^0.2"
 
@@ -25,7 +25,7 @@ requests = "^2.27.1"
 [tool.black]
 skip-string-normalization = false
 line-length = 100
-target-version = ['py36']
+target-version = ['py37']
 
 [tool.datamodel-codegen]
 field-constraints = true
@@ -39,7 +39,7 @@ wrap-string-literal = true
 use-annotated = false
 class-name = "ISCC"
 disable-timestamp = true
-target-python-version = "3.6"
+target-python-version = "3.7"
 validation = true
 endocing = "utf-8"
 
