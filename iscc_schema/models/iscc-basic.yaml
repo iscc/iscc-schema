@@ -27,6 +27,21 @@ properties:
     x-iscc-schema-doc: A sub property of description. A short description of the item used
       to disambiguate from other, similar items. Information from other properties (in particular,
       name) may be necessary for the description to be useful for disambiguation.
+  metadata:
+    oneOf:
+    - type: object
+      minProperties: 1
+      description: Any object that is JSON/JCS serializable
+    - type: string
+      format: byte
+      pattern: ^(?:[A-Za-z\d+/]{4})*(?:[A-Za-z\d+/]{3}=|[A-Za-z\d+/]{2}==)?$
+      description: Base64 encoded file header metadata
+    minProperties: 1
+    description: Descriptive, industry-sector or use-case specific metadata. Can be any object
+      that is JSON/JCS serializable. If `metadata` is provided it is the sole input for the
+      cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed
+      that it is base64 encoded binary file metadata.
+    x-iscc-context: http://purl.org/iscc/terms/#properties
   image:
     type: string
     format: uri
