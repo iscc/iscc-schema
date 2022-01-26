@@ -12,11 +12,23 @@
 !!! term ""
     Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.
 
+## metadata
+
+<small><http://purl.org/iscc/terms/#properties></small>
+!!! term ""
+    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
+
 ## image
 
 <small><http://schema.org/image></small>
 !!! term ""
     URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.
+
+## identifier
+
+<small><http://schema.org/identifier></small>
+!!! term ""
+    Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
 
 ## content
 
@@ -35,12 +47,6 @@
 <small><http://schema.org/keywords></small>
 !!! term ""
     Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
-
-## identifier
-
-<small><http://schema.org/identifier></small>
-!!! term ""
-    Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
 
 ## license
 
@@ -65,12 +71,6 @@
 <small><http://schema.org/version></small>
 !!! term ""
     The version of the CreativeWork embodied by a specified resource.
-
-## properties
-
-<small><http://purl.org/iscc/terms/#properties></small>
-!!! term ""
-    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.
 
 ## created
 
@@ -162,21 +162,39 @@
 !!! term ""
     Name and version of the software that generated the ISCC
 
-## datahash
+## external_url
 
-<small><http://purl.org/iscc/terms/#datahash></small>
+<small><http://purl.org/iscc/terms/#external_url></small>
 !!! term ""
-    A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
+    This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site.
 
-## metahash
+## animation_url
 
-<small><http://purl.org/iscc/terms/#metahash></small>
+<small><http://purl.org/iscc/terms/#animation_url></small>
 !!! term ""
-    A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.
+    A URL to a multi-media attachment for the item.
+
+## properties
+
+<small><http://purl.org/iscc/terms/#properties></small>
+!!! term ""
+    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for the cryptographic `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.
 
 ## tophash
 
 <small><http://purl.org/iscc/terms/#tophash></small>
 !!! term ""
     A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).
+
+## metahash
+
+<small><http://purl.org/iscc/terms/#metahash></small>
+!!! term ""
+    A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). The hash is created from `name` and `description` fields or `properties` if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied to `properties` before hashing if it is a JSON object.
+
+## datahash
+
+<small><http://purl.org/iscc/terms/#datahash></small>
+!!! term ""
+    A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
 

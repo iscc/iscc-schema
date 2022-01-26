@@ -22,6 +22,14 @@
 
     **Comment**:  URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.
 
+### **identifier**
+
+!!! term "<small><http://schema.org/identifier></small>"
+
+    The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details.
+
+    **Comment**:  Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
+
 ### **content**
 
 !!! term "<small><http://schema.org/contentUrl></small>"
@@ -45,14 +53,6 @@
     Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
 
     **Comment**:  Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
-
-### **identifier**
-
-!!! term "<small><http://schema.org/identifier></small>"
-
-    The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details.
-
-    **Comment**:  Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
 
 ### **license**
 

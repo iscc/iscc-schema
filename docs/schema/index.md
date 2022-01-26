@@ -21,7 +21,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 | $schema | `string-uri` | http://purl.org/iscc/schema | The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.         |
 
 ## iscc-minimal
-Minimal ISCC Metadata
+Minimal required ISCC Metadata
 
 !!! example
 
@@ -62,6 +62,13 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
 | ---- | ---- | --------|--------------------------------|
 | description | `string` | none | Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.         |
 
+### **metadata**
+<http://purl.org/iscc/terms/#properties>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| metadata | `None` | none | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.         |
+
 ### **image**
 <http://schema.org/image>
 
@@ -83,6 +90,13 @@ Extended ISCC Metadata
       "redirect": "https://example.com/about-the-asset"
     }
     ```
+### **identifier**
+<http://schema.org/identifier>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| identifier | `['string', 'array']` | none | Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.         |
+
 ### **content**
 <http://schema.org/contentUrl>
 
@@ -103,13 +117,6 @@ Extended ISCC Metadata
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | keywords | `string` | none | Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.         |
-
-### **identifier**
-<http://schema.org/identifier>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| identifier | `['string', 'array']` | none | Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.         |
 
 ### **license**
 <http://schema.org/license>
@@ -138,46 +145,6 @@ Extended ISCC Metadata
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | version | `['integer', 'string']` | none | The version of the CreativeWork embodied by a specified resource.         |
-
-## iscc-properties
-Arbitrary properties. Values may be strings, numbers, object or arrays. Should be used for industry specific structured metadata.
-
-!!! example
-
-    ```json
-    {
-      "properties": {
-        "simple_property": "example value",
-        "rich_property": {
-          "name": "Name",
-          "value": "123",
-          "display_value": "123 Example Value",
-          "class": "emphasis",
-          "css": {
-            "color": "#ffffff",
-            "font-weight": "bold",
-            "text-decoration": "underline"
-          }
-        },
-        "array_property": {
-          "name": "Name",
-          "value": [
-            1,
-            2,
-            3,
-            4
-          ],
-          "class": "emphasis"
-        }
-      }
-    }
-    ```
-### **properties**
-<http://purl.org/iscc/terms/#properties>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| properties | `None` | none | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.         |
 
 ## iscc-technical
 Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor
@@ -302,28 +269,51 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 | ---- | ---- | --------|--------------------------------|
 | generator | `string` | none | Name and version of the software that generated the ISCC         |
 
+## iscc-nft
+Metadata for NFT Marketplaces
+### **external_url**
+<http://purl.org/iscc/terms/#external_url>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| external_url | `string-uri` | none | This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site.         |
+
+### **animation_url**
+<http://purl.org/iscc/terms/#animation_url>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| animation_url | `string-uri` | none | A URL to a multi-media attachment for the item.         |
+
+### **properties**
+<http://purl.org/iscc/terms/#properties>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| properties | `None` | none | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for the cryptographic `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.         |
+
 ## iscc-crypto
 Cryptography related ISCC Metadata
-### **datahash**
-<http://purl.org/iscc/terms/#datahash>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| datahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).         |
-
-### **metahash**
-<http://purl.org/iscc/terms/#metahash>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| metahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.         |
-
 ### **tophash**
 <http://purl.org/iscc/terms/#tophash>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | tophash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).         |
+
+### **metahash**
+<http://purl.org/iscc/terms/#metahash>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| metahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). The hash is created from `name` and `description` fields or `properties` if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied to `properties` before hashing if it is a JSON object.         |
+
+### **datahash**
+<http://purl.org/iscc/terms/#datahash>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| datahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).         |
 
 ## iscc-chains
 Chains that support ISCC Declarations

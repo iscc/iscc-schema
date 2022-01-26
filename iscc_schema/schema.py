@@ -33,6 +33,27 @@ class IsccCrypto(BaseModel):
     Cryptography related ISCC Metadata
     """
 
+    tophash: Optional[str] = Field(
+        None,
+        description=(
+            "A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of"
+            " metahash and datahash (default blake3)."
+        ),
+        min_length=40,
+        x_iscc_context="http://purl.org/iscc/terms/#tophash",
+    )
+    metahash: Optional[str] = Field(
+        None,
+        description=(
+            "A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default"
+            " blake3). The hash is created from `name` and `description` fields or `properties` if"
+            " supplied. For deterministic results [JSC"
+            " RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied"
+            " to `properties` before hashing if it is a JSON object."
+        ),
+        min_length=40,
+        x_iscc_context="http://purl.org/iscc/terms/#metahash",
+    )
     datahash: Optional[str] = Field(
         None,
         description=(
@@ -42,25 +63,44 @@ class IsccCrypto(BaseModel):
         min_length=40,
         x_iscc_context="http://purl.org/iscc/terms/#datahash",
     )
-    metahash: Optional[str] = Field(
-        None,
-        description=(
-            "A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default"
-            " blake3). For deterministic results [JSC"
-            " RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied"
-            " before hashing."
-        ),
-        min_length=40,
-        x_iscc_context="http://purl.org/iscc/terms/#metahash",
+
+
+class Property(BaseModel):
+    __root__: str = Field(
+        ...,
+        description="Base64 encoded file header metadata",
+        regex="^(?:[A-Za-z\\d+/]{4})*(?:[A-Za-z\\d+/]{3}=|[A-Za-z\\d+/]{2}==)?$",
     )
-    tophash: Optional[str] = Field(
+
+
+class IsccNft(BaseModel):
+    """
+    Metadata for NFT Marketplaces
+    """
+
+    external_url: Optional[AnyUrl] = Field(
         None,
         description=(
-            "A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of"
-            " metahash and datahash (default blake3)."
+            "This is the URL that will appear below the asset's image on some NFT Marketplaces and"
+            " will allow users to leave the site and view the item on your site."
         ),
-        min_length=40,
-        x_iscc_context="http://purl.org/iscc/terms/#tophash",
+        x_iscc_context="http://purl.org/iscc/terms/#external_url",
+    )
+    animation_url: Optional[AnyUrl] = Field(
+        None,
+        description="A URL to a multi-media attachment for the item.",
+        x_iscc_context="http://purl.org/iscc/terms/#animation_url",
+    )
+    properties: Optional[Union[Dict[str, Any], Property]] = Field(
+        None,
+        description=(
+            "Descriptive, industry-sector or use-case specific metadata. Can be any object that is"
+            " JSON/JCS serializable. If properties are provided they are the sole input for the"
+            " cryptographic `metahash` calculation. Also compatible with"
+            " [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string"
+            " it is assumed that it is base64 encoded binary file metadata."
+        ),
+        x_iscc_context="http://purl.org/iscc/terms/#properties",
     )
 
 
@@ -164,37 +204,19 @@ class IsccTechnical(BaseModel):
     )
 
 
-class Property(BaseModel):
-    __root__: str = Field(
-        ...,
-        description="Base64 encoded file header metadata",
-        regex="^(?:[A-Za-z\\d+/]{4})*(?:[A-Za-z\\d+/]{3}=|[A-Za-z\\d+/]{2}==)?$",
-    )
-
-
-class IsccProperties(BaseModel):
-    """
-    Arbitrary properties. Values may be strings, numbers, object or arrays. Should be used for industry specific structured metadata.
-    """
-
-    properties: Optional[Union[Property, Dict[str, Any]]] = Field(
-        None,
-        description=(
-            "Descriptive, industry-sector or use-case specific metadata. Can be any object that is"
-            " JSON/JCS serializable. If properties are provided they are the sole input for"
-            " `metahash` calculation. Also compatible with"
-            " [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string"
-            " it is assumed that it is base64 encoded binary file metadata."
-        ),
-        x_iscc_context="http://purl.org/iscc/terms/#properties",
-    )
-
-
 class IsccExtended(BaseModel):
     """
     Extended ISCC Metadata
     """
 
+    identifier: Optional[List[AnyUrl]] = Field(
+        None,
+        description=(
+            "Other identifier(s) referencing the work, product or other abstraction of which the"
+            " referenced **digital content** is a full or partial manifestation."
+        ),
+        x_iscc_context="http://schema.org/identifier",
+    )
     content: Optional[AnyUrl] = Field(
         None,
         description="URI of the *digital content* that was used to create this ISCC.",
@@ -212,14 +234,6 @@ class IsccExtended(BaseModel):
             " are typically delimited by commas."
         ),
         x_iscc_context="http://schema.org/keywords",
-    )
-    identifier: Optional[List[AnyUrl]] = Field(
-        None,
-        description=(
-            "Other identifier(s) referencing the work, product or other abstraction of which the"
-            " referenced **digital content** is a full or partial manifestation."
-        ),
-        x_iscc_context="http://schema.org/identifier",
     )
     license: Optional[AnyUrl] = Field(
         None,
@@ -243,6 +257,14 @@ class IsccExtended(BaseModel):
         None,
         description="The version of the CreativeWork embodied by a specified resource.",
         x_iscc_context="http://schema.org/version",
+    )
+
+
+class Metadatum(BaseModel):
+    __root__: str = Field(
+        ...,
+        description="Base64 encoded file header metadata",
+        regex="^(?:[A-Za-z\\d+/]{4})*(?:[A-Za-z\\d+/]{3}=|[A-Za-z\\d+/]{2}==)?$",
     )
 
 
@@ -274,6 +296,16 @@ class IsccBasic(BaseModel):
         min_length=1,
         x_iscc_context="http://schema.org/disambiguatingDescription",
     )
+    metadata: Optional[Union[Dict[str, Any], Metadatum]] = Field(
+        None,
+        description=(
+            "Descriptive, industry-sector or use-case specific metadata. Can be any object that is"
+            " JSON/JCS serializable. If `metadata` is provided it is the sole input for the"
+            " cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed"
+            " that it is base64 encoded binary file metadata."
+        ),
+        x_iscc_context="http://purl.org/iscc/terms/#properties",
+    )
     image: Optional[AnyUrl] = Field(
         None,
         description=(
@@ -291,7 +323,7 @@ class IsccBasic(BaseModel):
 
 class IsccMinimal(BaseModel):
     """
-    Minimal ISCC Metadata
+    Minimal required ISCC Metadata
     """
 
     iscc: str = Field(
@@ -345,14 +377,7 @@ class IsccJsonld(BaseModel):
 
 
 class ISCC(
-    IsccChains,
-    IsccCrypto,
-    IsccTechnical,
-    IsccProperties,
-    IsccExtended,
-    IsccBasic,
-    IsccMinimal,
-    IsccJsonld,
+    IsccChains, IsccCrypto, IsccNft, IsccTechnical, IsccExtended, IsccBasic, IsccMinimal, IsccJsonld
 ):
     """
     ISCC Metadata Schema

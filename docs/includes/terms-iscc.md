@@ -1,3 +1,9 @@
+### **metadata**
+
+!!! term "<small><http://purl.org/iscc/terms/#properties></small>"
+
+    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
+
 ### **redirect**
 
 !!! term "<small><http://purl.org/iscc/terms/#redirect></small>"
@@ -9,12 +15,6 @@
 !!! term "<small><http://purl.org/iscc/terms/#previous></small>"
 
     ISCC of the preceding version of this item.
-
-### **properties**
-
-!!! term "<small><http://purl.org/iscc/terms/#properties></small>"
-
-    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.
 
 ### **filename**
 
@@ -70,21 +70,39 @@
 
     Name and version of the software that generated the ISCC
 
-### **datahash**
+### **external_url**
 
-!!! term "<small><http://purl.org/iscc/terms/#datahash></small>"
+!!! term "<small><http://purl.org/iscc/terms/#external_url></small>"
 
-    A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
+    This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site.
 
-### **metahash**
+### **animation_url**
 
-!!! term "<small><http://purl.org/iscc/terms/#metahash></small>"
+!!! term "<small><http://purl.org/iscc/terms/#animation_url></small>"
 
-    A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.
+    A URL to a multi-media attachment for the item.
+
+### **properties**
+
+!!! term "<small><http://purl.org/iscc/terms/#properties></small>"
+
+    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for the cryptographic `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.
 
 ### **tophash**
 
 !!! term "<small><http://purl.org/iscc/terms/#tophash></small>"
 
     A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).
+
+### **metahash**
+
+!!! term "<small><http://purl.org/iscc/terms/#metahash></small>"
+
+    A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). The hash is created from `name` and `description` fields or `properties` if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied to `properties` before hashing if it is a JSON object.
+
+### **datahash**
+
+!!! term "<small><http://purl.org/iscc/terms/#datahash></small>"
+
+    A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
 
