@@ -1,0 +1,31 @@
+title: iscc-nft
+type: object
+description: Metadata for NFT Marketplaces
+properties:
+  external_url:
+    type: string
+    format: uri
+    description: This is the URL that will appear below the asset's image on some NFT Marketplaces
+      and will allow users to leave the site and view the item on your site.
+    x-iscc-context: http://purl.org/iscc/terms/#external_url
+  animation_url:
+    type: string
+    format: uri
+    description: A URL to a multi-media attachment for the item.
+    x-iscc-context: http://purl.org/iscc/terms/#animation_url
+  properties:
+    oneOf:
+    - type: object
+      minProperties: 1
+      description: Any object that is JSON/JCS serializable
+    - type: string
+      format: byte
+      pattern: ^(?:[A-Za-z\d+/]{4})*(?:[A-Za-z\d+/]{3}=|[A-Za-z\d+/]{2}==)?$
+      description: Base64 encoded file header metadata
+    minProperties: 1
+    description: Descriptive, industry-sector or use-case specific metadata. Can be any object
+      that is JSON/JCS serializable. If properties are provided they are the sole input for
+      the cryptographic `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155).
+      If properties is set to a string it is assumed that it is base64 encoded binary file
+      metadata.
+    x-iscc-context: http://purl.org/iscc/terms/#properties
