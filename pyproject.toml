@@ -42,6 +42,7 @@ disable-timestamp = true
 target-python-version = "3.7"
 validation = true
 endocing = "utf-8"
+enum-field-as-literal = "one"
 
 
 [tool.poe.tasks]
