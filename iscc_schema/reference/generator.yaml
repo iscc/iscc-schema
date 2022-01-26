@@ -2,30 +2,28 @@ openapi: 3.1.0
 info:
   title: ISCC Generator
   version: '1.0'
-  contact:
-    name: Titusz Pan
-    email: tp@iscc.io
   description: Service for generating ISCC codes for media files.
+  summary: ISCC Generator Service
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
 servers:
-- url: http://localhost:3000
-- url: https://iscc.io/api/v1/generator
-  description: ''
+- url: https://api.iscc.io/v1.0
 tags:
 - name: generate
-- description: Generate ISCC Codes
 paths:
   /iscc:
     post:
-      summary: ''
-      operationId: generate-iscc
-      description: Generate an ISCC for a file.
-      requestBody:
-        $ref: '#/components/requestBodies/GenerateRequest'
+      summary: Create an ISCC for a media asset
+      tags:
+      - generate
       responses:
         '200':
           $ref: '#/components/responses/GenerateResponse'
-      tags:
-      - generate
+      operationId: post-iscc
+      description: Create an ISCC Code
+      requestBody:
+        $ref: '#/components/requestBodies/GenerateRequest'
 components:
   schemas: {}
   requestBodies:
@@ -41,23 +39,32 @@ components:
                 description: The media asset for which to create an ISCC
               name:
                 type: string
-                description: The name or title of the digital content.
+                description: The title or name of the intangible creation manifested by the
+                  identified digital content (used as input for ISCC Meta-Code generation).
               description:
                 type: string
-                description: Description of the digital content identified by the ISCC (may
-                  include markdown).
+                description: Description of the digital content identified by the ISCC (used
+                  as input for Meta-Code generation). Any user presentable text string (including
+                  Markdown text) indicative of the identity of the referent may be used.
+              properties:
+                $ref: ../models/iscc-properties.yaml
+              embed:
+                type: boolean
+                description: Embed `name` and `description` metadata into `file` before creating
+                  the ISCC. May fail for media types where metadata embedding is not supported.
+                default: true
+              extract:
+                type: boolean
+                description: Use extracted metadata for Meta-Code generation.
+                default: true
             required:
             - file
-      description: Generate an ISCC for a media file.
+      description: Request to generate an ISCC code
   responses:
     GenerateResponse:
-      description: Result of ISCC generator process
+      description: Example response
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              task_id:
-                type: string
-              result:
-                $ref: ../models/iscc.yaml
+            $ref: ../models/iscc-generator-response.yaml
+  securitySchemes: {}
