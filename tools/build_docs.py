@@ -16,11 +16,9 @@ SRC = join(HERE, "../README.md")
 DST = join(HERE, "../docs/index.md")
 
 
-# TODO update purl.org forwardings
 # TODO test json-ld normalization
 # TODO add more examples
 # TODO add logging to tool actions
-# TODO maybe don`t redefine json-ld type to §schema
 
 
 def copy_readme():
@@ -36,13 +34,14 @@ def build_json_schema_docs():
     """Build markdown from JSON Schema"""
     header = "# JSON Schema for ISCC Metadata\n\n"
     schemata = [
-        # "iscc-jsonld.yaml",
+        "iscc-jsonld.yaml",
         "iscc-minimal.yaml",
         "iscc-basic.yaml",
         "iscc-extended.yaml",
         "iscc-properties.yaml",
         "iscc-technical.yaml",
         "iscc-crypto.yaml",
+        "iscc-chains.yaml",
     ]
     content = header
     for schema in schemata:
@@ -69,10 +68,11 @@ def build_json_schema_docs():
             if attrs.get("x-iscc-context"):
                 title += f"<{attrs.get('x-iscc-context')}>\n"
             description = attrs.get("description")
+            default = attrs.get("default", "none")
             content += f"### {title}\n"
-            content += f"| Name | Type | Definition                               |\n"
-            content += f"| ---- | ---- | -----------------------------------------|\n"
-            content += f"| {prop} | `{type_}` | {description}                     |\n\n"
+            content += f"| Name | Type | Default | Definition                     |\n"
+            content += f"| ---- | ---- | --------|--------------------------------|\n"
+            content += f"| {prop} | `{type_}` | {default} | {description}         |\n\n"
 
     with open(MARKDOWN_SCHEMA, "wt", encoding="utf-8") as outf:
         outf.write(content)
