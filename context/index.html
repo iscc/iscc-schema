@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://schema.iscc.codes/context/">
       
       <link rel="icon" href="../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.7">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.8">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.cd566b2a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.6e60f8b8.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -353,10 +353,20 @@
 <div class="admonition term">
 <p>Description of the <em>digital content</em> identified by the <strong>ISCC</strong> (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.</p>
 </div>
+<h2 id="metadata">metadata<a class="headerlink" href="#metadata" title="Permanent link">#</a></h2>
+<p><small><a href="http://purl.org/iscc/terms/#properties">http://purl.org/iscc/terms/#properties</a></small></p>
+<div class="admonition term">
+<p>Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If <code>metadata</code> is provided it is the sole input for the cryptographic <code>metahash</code> calculation. If <code>metadata</code> is set to a string it is assumed that it is base64 encoded binary file metadata.</p>
+</div>
 <h2 id="image">image<a class="headerlink" href="#image" title="Permanent link">#</a></h2>
 <p><small><a href="http://schema.org/image">http://schema.org/image</a></small></p>
 <div class="admonition term">
 <p>URI for a user-presentable image that serves as a preview of the <em>digital content</em>. The URI may be a Data-URL <a href="https://datatracker.ietf.org/doc/html/rfc2397">RFC2397</a>. If <strong>ISCC</strong> metadata is used as NFT metadata according to <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-721/">ERC-721</a> or <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/">ERC-1155</a> the URI should reference the actual digital content represented by the NFT.</p>
+</div>
+<h2 id="identifier">identifier<a class="headerlink" href="#identifier" title="Permanent link">#</a></h2>
+<p><small><a href="http://schema.org/identifier">http://schema.org/identifier</a></small></p>
+<div class="admonition term">
+<p>Other identifier(s) referencing the work, product or other abstraction of which the referenced <strong>digital content</strong> is a full or partial manifestation.</p>
 </div>
 <h2 id="content">content<a class="headerlink" href="#content" title="Permanent link">#</a></h2>
 <p><small><a href="http://schema.org/contentUrl">http://schema.org/contentUrl</a></small></p>
@@ -372,11 +382,6 @@
 <p><small><a href="http://schema.org/keywords">http://schema.org/keywords</a></small></p>
 <div class="admonition term">
 <p>Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.</p>
-</div>
-<h2 id="identifier">identifier<a class="headerlink" href="#identifier" title="Permanent link">#</a></h2>
-<p><small><a href="http://schema.org/identifier">http://schema.org/identifier</a></small></p>
-<div class="admonition term">
-<p>Other identifier(s) referencing the work, product or other abstraction of which the referenced <strong>digital content</strong> is a full or partial manifestation.</p>
 </div>
 <h2 id="license">license<a class="headerlink" href="#license" title="Permanent link">#</a></h2>
 <p><small><a href="http://schema.org/license">http://schema.org/license</a></small></p>
@@ -397,11 +402,6 @@
 <p><small><a href="http://schema.org/version">http://schema.org/version</a></small></p>
 <div class="admonition term">
 <p>The version of the CreativeWork embodied by a specified resource.</p>
-</div>
-<h2 id="properties">properties<a class="headerlink" href="#properties" title="Permanent link">#</a></h2>
-<p><small><a href="http://purl.org/iscc/terms/#properties">http://purl.org/iscc/terms/#properties</a></small></p>
-<div class="admonition term">
-<p>Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for <code>metahash</code> calculation. Also compatible with <a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a>. If properties is set to a string it is assumed that it is base64 encoded binary file metadata.</p>
 </div>
 <h2 id="created">created<a class="headerlink" href="#created" title="Permanent link">#</a></h2>
 <p><small><a href="http://schema.org/dateCreated">http://schema.org/dateCreated</a></small></p>
@@ -478,20 +478,35 @@
 <div class="admonition term">
 <p>Name and version of the software that generated the ISCC</p>
 </div>
-<h2 id="datahash">datahash<a class="headerlink" href="#datahash" title="Permanent link">#</a></h2>
-<p><small><a href="http://purl.org/iscc/terms/#datahash">http://purl.org/iscc/terms/#datahash</a></small></p>
+<h2 id="external_url">external_url<a class="headerlink" href="#external_url" title="Permanent link">#</a></h2>
+<p><small><a href="http://purl.org/iscc/terms/#external_url">http://purl.org/iscc/terms/#external_url</a></small></p>
 <div class="admonition term">
-<p>A <a href="https://multiformats.io/multihash/">Multihash</a> of the <em>digital content</em> (default blake3).</p>
+<p>This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site.</p>
 </div>
-<h2 id="metahash">metahash<a class="headerlink" href="#metahash" title="Permanent link">#</a></h2>
-<p><small><a href="http://purl.org/iscc/terms/#metahash">http://purl.org/iscc/terms/#metahash</a></small></p>
+<h2 id="animation_url">animation_url<a class="headerlink" href="#animation_url" title="Permanent link">#</a></h2>
+<p><small><a href="http://purl.org/iscc/terms/#animation_url">http://purl.org/iscc/terms/#animation_url</a></small></p>
 <div class="admonition term">
-<p>A <a href="https://multiformats.io/multihash/">Multihash</a> of the supplied metadata (default blake3). For deterministic results <a href="https://datatracker.ietf.org/doc/html/rfc8785">JSC RFC5452</a> canonicalization is applied before hashing.</p>
+<p>A URL to a multi-media attachment for the item.</p>
+</div>
+<h2 id="properties">properties<a class="headerlink" href="#properties" title="Permanent link">#</a></h2>
+<p><small><a href="http://purl.org/iscc/terms/#properties">http://purl.org/iscc/terms/#properties</a></small></p>
+<div class="admonition term">
+<p>Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for the cryptographic <code>metahash</code> calculation. Also compatible with <a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a>. If properties is set to a string it is assumed that it is base64 encoded binary file metadata.</p>
 </div>
 <h2 id="tophash">tophash<a class="headerlink" href="#tophash" title="Permanent link">#</a></h2>
 <p><small><a href="http://purl.org/iscc/terms/#tophash">http://purl.org/iscc/terms/#tophash</a></small></p>
 <div class="admonition term">
 <p>A <a href="https://multiformats.io/multihash/">Multihash</a> of the concatenation (binding) of metahash and datahash (default blake3).</p>
+</div>
+<h2 id="metahash">metahash<a class="headerlink" href="#metahash" title="Permanent link">#</a></h2>
+<p><small><a href="http://purl.org/iscc/terms/#metahash">http://purl.org/iscc/terms/#metahash</a></small></p>
+<div class="admonition term">
+<p>A <a href="https://multiformats.io/multihash/">Multihash</a> of the supplied metadata (default blake3). The hash is created from <code>name</code> and <code>description</code> fields or <code>properties</code> if supplied. For deterministic results <a href="https://datatracker.ietf.org/doc/html/rfc8785">JSC RFC5452</a> canonicalization is applied to <code>properties</code> before hashing if it is a JSON object.</p>
+</div>
+<h2 id="datahash">datahash<a class="headerlink" href="#datahash" title="Permanent link">#</a></h2>
+<p><small><a href="http://purl.org/iscc/terms/#datahash">http://purl.org/iscc/terms/#datahash</a></small></p>
+<div class="admonition term">
+<p>A <a href="https://multiformats.io/multihash/">Multihash</a> of the <em>digital content</em> (default blake3).</p>
 </div>
 
               
@@ -530,7 +545,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.22074ed6.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.01de222e.min.js"></script>
+      <script src="../assets/javascripts/bundle.960e086b.min.js"></script>
       
     
   </body>

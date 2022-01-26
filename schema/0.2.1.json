@@ -292,6 +292,14 @@
       "minLength": 40,
       "x_iscc_context": "http://purl.org/iscc/terms/#tophash",
       "type": "string"
+    },
+    "chain_id": {
+      "description": "Unique identifier of supported chain",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChainId"
+        }
+      ]
     }
   },
   "required": [
@@ -314,6 +322,15 @@
       "description": "Base64 encoded file header metadata",
       "pattern": "^(?:[A-Za-z\\d+/]{4})*(?:[A-Za-z\\d+/]{3}=|[A-Za-z\\d+/]{2}==)?$",
       "type": "string"
+    },
+    "ChainId": {
+      "title": "ChainId",
+      "description": "Unique identifier of supported chain",
+      "enum": [
+        0,
+        1,
+        2
+      ]
     }
   }
 }
