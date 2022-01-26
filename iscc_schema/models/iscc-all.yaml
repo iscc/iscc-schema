@@ -3,8 +3,8 @@ description: ISCC Metadata Schema
 allOf:
 - $ref: ./iscc-chains.yaml
 - $ref: ./iscc-crypto.yaml
+- $ref: ./iscc-nft.yaml
 - $ref: ./iscc-technical.yaml
-- $ref: ./iscc-properties.yaml
 - $ref: ./iscc-extended.yaml
 - $ref: ./iscc-basic.yaml
 - $ref: ./iscc-minimal.yaml
