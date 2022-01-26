@@ -16,8 +16,8 @@ def terms(context):
         "iscc-minimal.yaml",
         "iscc-basic.yaml",
         "iscc-extended.yaml",
-        "iscc-properties.yaml",
         "iscc-technical.yaml",
+        "iscc-nft.yaml",
         "iscc-crypto.yaml",
     ]
 

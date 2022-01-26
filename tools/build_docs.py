@@ -38,8 +38,8 @@ def build_json_schema_docs():
         "iscc-minimal.yaml",
         "iscc-basic.yaml",
         "iscc-extended.yaml",
-        "iscc-properties.yaml",
         "iscc-technical.yaml",
+        "iscc-nft.yaml",
         "iscc-crypto.yaml",
         "iscc-chains.yaml",
     ]
@@ -87,8 +87,8 @@ def build_json_ld_context_docs():
         "iscc-minimal.yaml",
         "iscc-basic.yaml",
         "iscc-extended.yaml",
-        "iscc-properties.yaml",
         "iscc-technical.yaml",
+        "iscc-nft.yaml",
         "iscc-crypto.yaml",
     ]
 
