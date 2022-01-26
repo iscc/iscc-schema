@@ -10,6 +10,24 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import AnyUrl, BaseModel, Field
 
 
+class ChainId(Enum):
+    """
+    Unique identifier of supported chain
+    """
+
+    PRIVATE = 0
+    BITCOIN = 1
+    ETHEREUM = 2
+
+
+class IsccChains(BaseModel):
+    """
+    Chains that support ISCC Declarations
+    """
+
+    chain_id: Optional[ChainId] = Field(None, description="Unique identifier of supported chain")
+
+
 class IsccCrypto(BaseModel):
     """
     Cryptography related ISCC Metadata
@@ -327,7 +345,14 @@ class IsccJsonld(BaseModel):
 
 
 class ISCC(
-    IsccCrypto, IsccTechnical, IsccProperties, IsccExtended, IsccBasic, IsccMinimal, IsccJsonld
+    IsccChains,
+    IsccCrypto,
+    IsccTechnical,
+    IsccProperties,
+    IsccExtended,
+    IsccBasic,
+    IsccMinimal,
+    IsccJsonld,
 ):
     """
     ISCC Metadata Schema

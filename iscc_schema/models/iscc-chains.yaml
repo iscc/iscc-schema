@@ -1,0 +1,16 @@
+title: iscc-chains
+type: object
+description: Chains that support ISCC Declarations
+properties:
+  chain_id:
+    description: Unique identifier of supported chain
+    enum:
+    - 0
+    - 1
+    - 2
+    type: number
+    x-enum-varnames:
+    - PRIVATE
+    - BITCOIN
+    - ETHEREUM
+    - POLYGON

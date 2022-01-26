@@ -1,5 +1,25 @@
 # JSON Schema for ISCC Metadata
 
+## iscc-jsonld
+The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-schema.org/) reference
+### **@context**
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| @context | `string-uri` | http://purl.org/iscc/context | The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.         |
+
+### **@type**
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| @type | `string` | CreativeWork | The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).         |
+
+### **$schema**
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| $schema | `string-uri` | http://purl.org/iscc/schema | The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.         |
+
 ## iscc-minimal
 Minimal ISCC Metadata
 
@@ -12,9 +32,9 @@ Minimal ISCC Metadata
     ```
 ### **iscc**
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| iscc | `string` | An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| iscc | `string` | none | An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.         |
 
 ## iscc-basic
 Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ethereum.org/EIPS/eip-721)
@@ -31,23 +51,23 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
 ### **name**
 <http://schema.org/name>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| name | `string` | The title or name of the intangible creation manifested by the identified *digital content* (used as input for **ISCC Meta-Code** generation).                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| name | `string` | none | The title or name of the intangible creation manifested by the identified *digital content* (used as input for **ISCC Meta-Code** generation).         |
 
 ### **description**
 <http://schema.org/disambiguatingDescription>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| description | `string` | Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| description | `string` | none | Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.         |
 
 ### **image**
 <http://schema.org/image>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| image | `string-uri` | URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| image | `string-uri` | none | URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.         |
 
 ## iscc-extended
 Extended ISCC Metadata
@@ -66,58 +86,58 @@ Extended ISCC Metadata
 ### **content**
 <http://schema.org/contentUrl>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| content | `string-uri` | URI of the *digital content* that was used to create this ISCC.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| content | `string-uri` | none | URI of the *digital content* that was used to create this ISCC.         |
 
 ### **creator**
 <http://schema.org/creator>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| creator | `['string', 'array']` | An entity primarily responsible for making the resource.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| creator | `['string', 'array']` | none | An entity primarily responsible for making the resource.         |
 
 ### **keywords**
 <http://schema.org/keywords>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| keywords | `string` | Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| keywords | `string` | none | Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.         |
 
 ### **identifier**
 <http://schema.org/identifier>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| identifier | `['string', 'array']` | Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| identifier | `['string', 'array']` | none | Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.         |
 
 ### **license**
 <http://schema.org/license>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| license | `string-uri` | URI of license for the identified *digital content*.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| license | `string-uri` | none | URI of license for the identified *digital content*.         |
 
 ### **redirect**
 <http://purl.org/iscc/terms/#redirect>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| redirect | `string-uri` | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.         |
 
 ### **previous**
 <http://purl.org/iscc/terms/#previous>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| previous | `string` | ISCC of the preceding version of this item.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| previous | `string` | none | ISCC of the preceding version of this item.         |
 
 ### **version**
 <http://schema.org/version>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| version | `['integer', 'string']` | The version of the CreativeWork embodied by a specified resource.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| version | `['integer', 'string']` | none | The version of the CreativeWork embodied by a specified resource.         |
 
 ## iscc-properties
 Arbitrary properties. Values may be strings, numbers, object or arrays. Should be used for industry specific structured metadata.
@@ -155,9 +175,9 @@ Arbitrary properties. Values may be strings, numbers, object or arrays. Should b
 ### **properties**
 <http://purl.org/iscc/terms/#properties>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| properties | `None` | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| properties | `None` | none | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.         |
 
 ## iscc-technical
 Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor
@@ -180,128 +200,136 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 ### **created**
 <http://schema.org/dateCreated>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| created | `string-date-time` | Datetime the ISCC was created for the item.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| created | `string-date-time` | none | Datetime the ISCC was created for the item.         |
 
 ### **filename**
 <http://purl.org/iscc/terms/#filename>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| filename | `string` | Filename of the referenced **digital content** (automatically used as fallback if the `name` field was not specified for ISCC processing)                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| filename | `string` | none | Filename of the referenced **digital content** (automatically used as fallback if the `name` field was not specified for ISCC processing)         |
 
 ### **filesize**
 <http://schema.org/fileSize>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| filesize | `integer` | File size of media asset in number of bytes.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| filesize | `integer` | none | File size of media asset in number of bytes.         |
 
 ### **mediatype**
 <http://schema.org/encodingFormat>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| mediatype | `string` | An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| mediatype | `string` | none | An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)         |
 
 ### **duration**
 <http://schema.org/duration>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| duration | `integer` | Duration of audio-visual media in secondes.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| duration | `integer` | none | Duration of audio-visual media in secondes.         |
 
 ### **fps**
 <http://purl.org/iscc/terms/#fps>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| fps | `number-float` | Frames per second of video assets.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| fps | `number-float` | none | Frames per second of video assets.         |
 
 ### **width**
 <http://purl.org/iscc/terms/#width>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| width | `integer-int32` | Width of visual media in number of pixels.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| width | `integer-int32` | none | Width of visual media in number of pixels.         |
 
 ### **height**
 <http://purl.org/iscc/terms/#height>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| height | `integer-int32` | Height of visual media in number of pixels.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| height | `integer-int32` | none | Height of visual media in number of pixels.         |
 
 ### **characters**
 <http://purl.org/iscc/terms/#characters>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| characters | `integer` | Number of text characters (code points after Unicode normalization)                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| characters | `integer` | none | Number of text characters (code points after Unicode normalization)         |
 
 ### **pages**
 <http://schema.org/numberOfPages>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| pages | `integer` | Number of pages (for paged documents only)                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| pages | `integer` | none | Number of pages (for paged documents only)         |
 
 ### **language**
 <http://schema.org/inLanguage>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| language | `None` | Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| language | `None` | none | Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).         |
 
 ### **parts**
 <http://purl.org/iscc/terms/#parts>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| parts | `array` | Indicates items that are part of this item via Content-Codes (inverse-property belongs).                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| parts | `array` | none | Indicates items that are part of this item via Content-Codes (inverse-property belongs).         |
 
 ### **part_of**
 <http://purl.org/iscc/terms/#part_of>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| part_of | `array` | Indicates that this item is part of other items via their Content-Code.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| part_of | `array` | none | Indicates that this item is part of other items via their Content-Code.         |
 
 ### **features**
 <http://purl.org/iscc/terms/#features>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| features | `array` | Granular features of the *digital content*.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| features | `array` | none | Granular features of the *digital content*.         |
 
 ### **generator**
 <http://purl.org/iscc/terms/#generator>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| generator | `string` | Name and version of the software that generated the ISCC                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| generator | `string` | none | Name and version of the software that generated the ISCC         |
 
 ## iscc-crypto
 Cryptography related ISCC Metadata
 ### **datahash**
 <http://purl.org/iscc/terms/#datahash>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| datahash | `string` | A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| datahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).         |
 
 ### **metahash**
 <http://purl.org/iscc/terms/#metahash>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| metahash | `string` | A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| metahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied before hashing.         |
 
 ### **tophash**
 <http://purl.org/iscc/terms/#tophash>
 
-| Name | Type | Definition                               |
-| ---- | ---- | -----------------------------------------|
-| tophash | `string` | A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).                     |
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| tophash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).         |
+
+## iscc-chains
+Chains that support ISCC Declarations
+### **chain_id**
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| chain_id | `number` | none | Unique identifier of supported chain         |
 
