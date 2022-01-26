@@ -2,22 +2,23 @@ title: iscc-crypto
 type: object
 description: Cryptography related ISCC Metadata
 properties:
-  datahash:
-    type: string
-    minLength: 40
-    description: A [Multihash](https://multiformats.io/multihash/) of the *digital content*
-      (default blake3).
-    x-iscc-context: http://purl.org/iscc/terms/#datahash
-  metahash:
-    type: string
-    minLength: 40
-    description: A [Multihash](https://multiformats.io/multihash/) of the supplied metadata
-      (default blake3). For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785)
-      canonicalization is applied before hashing.
-    x-iscc-context: http://purl.org/iscc/terms/#metahash
   tophash:
     type: string
     minLength: 40
     description: A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding)
       of metahash and datahash (default blake3).
     x-iscc-context: http://purl.org/iscc/terms/#tophash
+  metahash:
+    type: string
+    minLength: 40
+    description: A [Multihash](https://multiformats.io/multihash/) of the supplied metadata
+      (default blake3). The hash is created from `name` and `description` fields or `properties`
+      if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785)
+      canonicalization is applied to `properties` before hashing if it is a JSON object.
+    x-iscc-context: http://purl.org/iscc/terms/#metahash
+  datahash:
+    type: string
+    minLength: 40
+    description: A [Multihash](https://multiformats.io/multihash/) of the *digital content*
+      (default blake3).
+    x-iscc-context: http://purl.org/iscc/terms/#datahash
