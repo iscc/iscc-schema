@@ -1,6 +1,6 @@
 title: iscc-minimal
 type: object
-description: Minimal ISCC Metadata
+description: Minimal required ISCC Metadata
 examples:
 - iscc: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
 properties:
