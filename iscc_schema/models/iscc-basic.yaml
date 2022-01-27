@@ -41,7 +41,7 @@ properties:
       that is JSON/JCS serializable. If `metadata` is provided it is the sole input for the
       cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed
       that it is base64 encoded binary file metadata.
-    x-iscc-context: http://purl.org/iscc/terms/#properties
+    x-iscc-context: http://purl.org/iscc/terms/#metadata
   image:
     type: string
     format: uri
