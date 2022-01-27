@@ -1,6 +1,6 @@
 ### **metadata**
 
-!!! term "<small><http://purl.org/iscc/terms/#properties></small>"
+!!! term "<small><http://purl.org/iscc/terms/#metadata></small>"
 
     Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
 

@@ -304,7 +304,7 @@ class IsccBasic(BaseModel):
             " cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed"
             " that it is base64 encoded binary file metadata."
         ),
-        x_iscc_context="http://purl.org/iscc/terms/#properties",
+        x_iscc_context="http://purl.org/iscc/terms/#metadata",
     )
     image: Optional[AnyUrl] = Field(
         None,

@@ -63,7 +63,7 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
 | description | `string` | none | Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.         |
 
 ### **metadata**
-<http://purl.org/iscc/terms/#properties>
+<http://purl.org/iscc/terms/#metadata>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
