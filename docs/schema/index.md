@@ -67,7 +67,7 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| metadata | `None` | none | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.         |
+| metadata | `None` | none | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.         |
 
 ### **image**
 <http://schema.org/image>
@@ -110,6 +110,27 @@ Extended ISCC Metadata
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | creator | `['string', 'array']` | none | An entity primarily responsible for making the resource.         |
+
+### **acquire**
+<http://schema.org/acquireLicensePage>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| acquire | `string-uri` | none | This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.         |
+
+### **credit**
+<http://schema.org/creditText>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| credit | `string` | none | A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.         |
+
+### **rights**
+<http://schema.org/copyrightNotice>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| rights | `string` | none | Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.         |
 
 ### **keywords**
 <http://schema.org/keywords>

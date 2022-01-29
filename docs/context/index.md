@@ -16,7 +16,7 @@
 
 <small><http://purl.org/iscc/terms/#metadata></small>
 !!! term ""
-    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
+    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
 
 ## image
 
@@ -41,6 +41,24 @@
 <small><http://schema.org/creator></small>
 !!! term ""
     An entity primarily responsible for making the resource.
+
+## acquire
+
+<small><http://schema.org/acquireLicensePage></small>
+!!! term ""
+    This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.
+
+## credit
+
+<small><http://schema.org/creditText></small>
+!!! term ""
+    A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.
+
+## rights
+
+<small><http://schema.org/copyrightNotice></small>
+!!! term ""
+    Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.
 
 ## keywords
 
