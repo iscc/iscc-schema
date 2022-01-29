@@ -8,7 +8,7 @@ HERE = pathlib.Path(__file__).parent.absolute()
 
 def reformat():
     for f in HERE.parent.glob("**\*.yaml"):
-        with open(f) as infile:
+        with open(f, "rt", encoding="utf-8") as infile:
             data = yaml.safe_load(infile)
         with open(f, "wt", encoding="utf-8") as outf:
             yaml.safe_dump(

@@ -46,7 +46,7 @@ def build_json_schema_docs():
     content = header
     for schema in schemata:
         path = SCHEMAS / schema
-        with open(path) as infile:
+        with open(path, "rt", encoding="utf-8") as infile:
             data = yaml.safe_load(infile)
         content += f"## {data['title']}\n"
         content += f"{data['description']}\n"
@@ -68,6 +68,8 @@ def build_json_schema_docs():
             if attrs.get("x-iscc-context"):
                 title += f"<{attrs.get('x-iscc-context')}>\n"
             description = attrs.get("description")
+            if attrs.get("example"):
+                description += f"<br><br>**Example**: `{attrs['example']}`"
             default = attrs.get("default", "none")
             content += f"### {title}\n"
             content += f"| Name | Type | Default | Definition                     |\n"
@@ -94,7 +96,7 @@ def build_json_ld_context_docs():
 
     for schema in schemata:
         path = SCHEMAS / schema
-        with open(path) as infile:
+        with open(path, "rt", encoding="utf-8") as infile:
             data = yaml.safe_load(infile)
 
         for prop, fields in data["properties"].items():
@@ -104,7 +106,7 @@ def build_json_ld_context_docs():
                 doc += '!!! term ""\n'
                 doc += f"    {fields['description']}\n\n"
 
-    with open(MARKDOWN_CONTEXT, "wt", encoding="UTF-8") as outf:
+    with open(MARKDOWN_CONTEXT, "wt", encoding="utf-8") as outf:
         outf.write(doc)
 
 

@@ -253,7 +253,7 @@ class IsccExtended(BaseModel):
             "Contains any necessary copyright notice and should identify the current owner of the"
             " copyright of this work with associated intellectual property rights."
         ),
-        example="Copyright 2022 ISCC Foundation - www.iscc.codes",
+        example="© Copyright 2022 ISCC Foundation - www.iscc.codes",
         x_iscc_context="http://schema.org/copyrightNotice",
     )
     keywords: Optional[str] = Field(

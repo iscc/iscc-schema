@@ -41,14 +41,13 @@ class-name = "ISCC"
 disable-timestamp = true
 target-python-version = "3.7"
 validation = true
-endocing = "utf-8"
 enum-field-as-literal = "one"
 
 
 [tool.poe.tasks]
 update = { cmd = "poetry update", help = "Update project dependencies"}
 fromatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
-buildpydantic = { cmd = "datamodel-codegen", help = "Build pydantic model"}
+buildpydantic = { cmd = "datamodel-codegen --encoding UTF-8", help = "Build pydantic model"}
 formatcode = { cmd = "black .", help = "Code style formating with black" }
 buildterms = { script = "tools.build_terms:build", help = "Build markdown for terms" }
 buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON Schema" }

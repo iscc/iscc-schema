@@ -60,7 +60,7 @@ properties:
     type: string
     description: Contains any necessary copyright notice and should identify the current owner
       of the copyright of this work with associated intellectual property rights.
-    example: Copyright 2022 ISCC Foundation - www.iscc.codes
+    example: © Copyright 2022 ISCC Foundation - www.iscc.codes
     x-iscc-context: http://schema.org/copyrightNotice
     x-iscc-schema-doc: Text of a notice appropriate for describing the copyright aspects of
       this Creative Work, ideally indicating the owner of the copyright for the Work.

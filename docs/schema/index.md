@@ -34,7 +34,7 @@ Minimal required ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| iscc | `string` | none | An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.         |
+| iscc | `string` | none | An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.<br><br>**Example**: `ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY`         |
 
 ## iscc-basic
 Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ethereum.org/EIPS/eip-721)
@@ -53,14 +53,14 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| name | `string` | none | The title or name of the intangible creation manifested by the identified *digital content* (used as input for **ISCC Meta-Code** generation).         |
+| name | `string` | none | The title or name of the intangible creation manifested by the identified *digital content* (used as input for **ISCC Meta-Code** generation).<br><br>**Example**: `The Never Ending Story`         |
 
 ### **description**
 <http://schema.org/disambiguatingDescription>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| description | `string` | none | Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.         |
+| description | `string` | none | Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.<br><br>**Example**: `a 1984 fantasy film co-written and directed by *Wolfgang Petersen*`         |
 
 ### **metadata**
 <http://purl.org/iscc/terms/#metadata>
@@ -74,7 +74,7 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| image | `string-uri` | none | URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.         |
+| image | `string-uri` | none | URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.<br><br>**Example**: `https://picsum.photos/200/300.jpg`         |
 
 ## iscc-extended
 Extended ISCC Metadata
@@ -109,28 +109,28 @@ Extended ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| creator | `['string', 'array']` | none | An entity primarily responsible for making the resource.         |
+| creator | `['string', 'array']` | none | An entity primarily responsible for making the resource.<br><br>**Example**: `Joanne K. Rowling`         |
 
 ### **acquire**
 <http://schema.org/acquireLicensePage>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| acquire | `string-uri` | none | This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.         |
+| acquire | `string-uri` | none | This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.<br><br>**Example**: `https://example.com/buy-license-for-item-here`         |
 
 ### **credit**
 <http://schema.org/creditText>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| credit | `string` | none | A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.         |
+| credit | `string` | none | A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.<br><br>**Example**: `Frank Farian - Getty Images`         |
 
 ### **rights**
 <http://schema.org/copyrightNotice>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| rights | `string` | none | Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.         |
+| rights | `string` | none | Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.<br><br>**Example**: `© Copyright 2022 ISCC Foundation - www.iscc.codes`         |
 
 ### **keywords**
 <http://schema.org/keywords>
@@ -144,14 +144,14 @@ Extended ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| license | `string-uri` | none | URI of license for the identified *digital content*.         |
+| license | `string-uri` | none | URI of license for the identified *digital content*.<br><br>**Example**: `https://example.com/license-terms-for-this-item`         |
 
 ### **redirect**
 <http://purl.org/iscc/terms/#redirect>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.         |
+| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
 
 ### **previous**
 <http://purl.org/iscc/terms/#previous>
@@ -211,7 +211,7 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| mediatype | `string` | none | An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)         |
+| mediatype | `string` | none | An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)<br><br>**Example**: `image/png`         |
 
 ### **duration**
 <http://schema.org/duration>
@@ -225,42 +225,42 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| fps | `number-float` | none | Frames per second of video assets.         |
+| fps | `number-float` | none | Frames per second of video assets.<br><br>**Example**: `24`         |
 
 ### **width**
 <http://purl.org/iscc/terms/#width>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| width | `integer-int32` | none | Width of visual media in number of pixels.         |
+| width | `integer-int32` | none | Width of visual media in number of pixels.<br><br>**Example**: `640`         |
 
 ### **height**
 <http://purl.org/iscc/terms/#height>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| height | `integer-int32` | none | Height of visual media in number of pixels.         |
+| height | `integer-int32` | none | Height of visual media in number of pixels.<br><br>**Example**: `480`         |
 
 ### **characters**
 <http://purl.org/iscc/terms/#characters>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| characters | `integer` | none | Number of text characters (code points after Unicode normalization)         |
+| characters | `integer` | none | Number of text characters (code points after Unicode normalization)<br><br>**Example**: `55689`         |
 
 ### **pages**
 <http://schema.org/numberOfPages>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| pages | `integer` | none | Number of pages (for paged documents only)         |
+| pages | `integer` | none | Number of pages (for paged documents only)<br><br>**Example**: `77`         |
 
 ### **language**
 <http://schema.org/inLanguage>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| language | `None` | none | Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).         |
+| language | `None` | none | Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).<br><br>**Example**: `en-US`         |
 
 ### **parts**
 <http://purl.org/iscc/terms/#parts>
