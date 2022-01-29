@@ -853,7 +853,7 @@
 <td>iscc</td>
 <td><code>string</code></td>
 <td>none</td>
-<td>An <strong><abbr title="An multi-component ISCC built from several ISCC-UNITS with a common header">ISCC-CODE</abbr></strong> in canonical representation. This is the minimal required field for a valid ISCC Metadata object.</td>
+<td>An <strong><abbr title="An multi-component ISCC built from several ISCC-UNITS with a common header">ISCC-CODE</abbr></strong> in canonical representation. This is the minimal required field for a valid ISCC Metadata object.<br><br><strong>Example</strong>: <code>ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY</code></td>
 </tr>
 </tbody>
 </table>
@@ -884,7 +884,7 @@
 <td>name</td>
 <td><code>string</code></td>
 <td>none</td>
-<td>The title or name of the intangible creation manifested by the identified <em>digital content</em> (used as input for <strong>ISCC Meta-Code</strong> generation).</td>
+<td>The title or name of the intangible creation manifested by the identified <em>digital content</em> (used as input for <strong>ISCC Meta-Code</strong> generation).<br><br><strong>Example</strong>: <code>The Never Ending Story</code></td>
 </tr>
 </tbody>
 </table>
@@ -904,7 +904,7 @@
 <td>description</td>
 <td><code>string</code></td>
 <td>none</td>
-<td>Description of the <em>digital content</em> identified by the <strong>ISCC</strong> (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.</td>
+<td>Description of the <em>digital content</em> identified by the <strong>ISCC</strong> (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.<br><br><strong>Example</strong>: <code>a 1984 fantasy film co-written and directed by *Wolfgang Petersen*</code></td>
 </tr>
 </tbody>
 </table>
@@ -944,7 +944,7 @@
 <td>image</td>
 <td><code>string-uri</code></td>
 <td>none</td>
-<td>URI for a user-presentable image that serves as a preview of the <em>digital content</em>. The URI may be a Data-URL <a href="https://datatracker.ietf.org/doc/html/rfc2397">RFC2397</a>. If <strong>ISCC</strong> metadata is used as NFT metadata according to <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-721/">ERC-721</a> or <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/">ERC-1155</a> the URI should reference the actual digital content represented by the NFT.</td>
+<td>URI for a user-presentable image that serves as a preview of the <em>digital content</em>. The URI may be a Data-URL <a href="https://datatracker.ietf.org/doc/html/rfc2397">RFC2397</a>. If <strong>ISCC</strong> metadata is used as NFT metadata according to <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-721/">ERC-721</a> or <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/">ERC-1155</a> the URI should reference the actual digital content represented by the NFT.<br><br><strong>Example</strong>: <code>https://picsum.photos/200/300.jpg</code></td>
 </tr>
 </tbody>
 </table>
@@ -1017,7 +1017,7 @@
 <td>creator</td>
 <td><code>['string', 'array']</code></td>
 <td>none</td>
-<td>An entity primarily responsible for making the resource.</td>
+<td>An entity primarily responsible for making the resource.<br><br><strong>Example</strong>: <code>Joanne K. Rowling</code></td>
 </tr>
 </tbody>
 </table>
@@ -1037,7 +1037,7 @@
 <td>acquire</td>
 <td><code>string-uri</code></td>
 <td>none</td>
-<td>This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.</td>
+<td>This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.<br><br><strong>Example</strong>: <code>https://example.com/buy-license-for-item-here</code></td>
 </tr>
 </tbody>
 </table>
@@ -1057,7 +1057,7 @@
 <td>credit</td>
 <td><code>string</code></td>
 <td>none</td>
-<td>A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.</td>
+<td>A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.<br><br><strong>Example</strong>: <code>Frank Farian - Getty Images</code></td>
 </tr>
 </tbody>
 </table>
@@ -1077,7 +1077,7 @@
 <td>rights</td>
 <td><code>string</code></td>
 <td>none</td>
-<td>Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.</td>
+<td>Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.<br><br><strong>Example</strong>: <code>© Copyright 2022 ISCC Foundation - www.iscc.codes</code></td>
 </tr>
 </tbody>
 </table>
@@ -1117,7 +1117,7 @@
 <td>license</td>
 <td><code>string-uri</code></td>
 <td>none</td>
-<td>URI of license for the identified <em>digital content</em>.</td>
+<td>URI of license for the identified <em>digital content</em>.<br><br><strong>Example</strong>: <code>https://example.com/license-terms-for-this-item</code></td>
 </tr>
 </tbody>
 </table>
@@ -1137,7 +1137,7 @@
 <td>redirect</td>
 <td><code>string-uri</code></td>
 <td>none</td>
-<td>URL to which a resolver should redirect an <abbr title="A short, unique and owned identifier for *digital content*">ISCC-ID</abbr> that has been minted from a declartion that includes the IPFS-hash of this metadata instance.</td>
+<td>URL to which a resolver should redirect an <abbr title="A short, unique and owned identifier for *digital content*">ISCC-ID</abbr> that has been minted from a declartion that includes the IPFS-hash of this metadata instance.<br><br><strong>Example</strong>: <code>https://example.com/land-here-when-resolving-iscc-id</code></td>
 </tr>
 </tbody>
 </table>
@@ -1274,7 +1274,7 @@
 <td>mediatype</td>
 <td><code>string</code></td>
 <td>none</td>
-<td>An <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA Media Type</a> (MIME type)</td>
+<td>An <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA Media Type</a> (MIME type)<br><br><strong>Example</strong>: <code>image/png</code></td>
 </tr>
 </tbody>
 </table>
@@ -1314,7 +1314,7 @@
 <td>fps</td>
 <td><code>number-float</code></td>
 <td>none</td>
-<td>Frames per second of video assets.</td>
+<td>Frames per second of video assets.<br><br><strong>Example</strong>: <code>24</code></td>
 </tr>
 </tbody>
 </table>
@@ -1334,7 +1334,7 @@
 <td>width</td>
 <td><code>integer-int32</code></td>
 <td>none</td>
-<td>Width of visual media in number of pixels.</td>
+<td>Width of visual media in number of pixels.<br><br><strong>Example</strong>: <code>640</code></td>
 </tr>
 </tbody>
 </table>
@@ -1354,7 +1354,7 @@
 <td>height</td>
 <td><code>integer-int32</code></td>
 <td>none</td>
-<td>Height of visual media in number of pixels.</td>
+<td>Height of visual media in number of pixels.<br><br><strong>Example</strong>: <code>480</code></td>
 </tr>
 </tbody>
 </table>
@@ -1374,7 +1374,7 @@
 <td>characters</td>
 <td><code>integer</code></td>
 <td>none</td>
-<td>Number of text characters (code points after Unicode normalization)</td>
+<td>Number of text characters (code points after Unicode normalization)<br><br><strong>Example</strong>: <code>55689</code></td>
 </tr>
 </tbody>
 </table>
@@ -1394,7 +1394,7 @@
 <td>pages</td>
 <td><code>integer</code></td>
 <td>none</td>
-<td>Number of pages (for paged documents only)</td>
+<td>Number of pages (for paged documents only)<br><br><strong>Example</strong>: <code>77</code></td>
 </tr>
 </tbody>
 </table>
@@ -1414,7 +1414,7 @@
 <td>language</td>
 <td><code>None</code></td>
 <td>none</td>
-<td>Language(s) of content <a href="https://tools.ietf.org/search/bcp47">BCP 47</a>.</td>
+<td>Language(s) of content <a href="https://tools.ietf.org/search/bcp47">BCP 47</a>.<br><br><strong>Example</strong>: <code>en-US</code></td>
 </tr>
 </tbody>
 </table>
