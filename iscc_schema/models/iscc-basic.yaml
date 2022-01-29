@@ -15,6 +15,8 @@ properties:
       *digital content* (used as input for **ISCC Meta-Code** generation).
     x-iscc-context: http://schema.org/name
     x-iscc-schema-doc: The name of the item.
+    x-iscc-embed: Use `Iptc.Application2.Headline` and `Xmp.photoshop.Headline` for image
+      embedding
   description:
     type: string
     example: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
@@ -27,6 +29,8 @@ properties:
     x-iscc-schema-doc: A sub property of description. A short description of the item used
       to disambiguate from other, similar items. Information from other properties (in particular,
       name) may be necessary for the description to be useful for disambiguation.
+    x-iscc-embed: Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description`
+      for image embedding.
   metadata:
     oneOf:
     - type: object
@@ -38,9 +42,10 @@ properties:
       description: Base64 encoded file header metadata
     minProperties: 1
     description: Descriptive, industry-sector or use-case specific metadata. Can be any object
-      that is JSON/JCS serializable. If `metadata` is provided it is the sole input for the
-      cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed
-      that it is base64 encoded binary file metadata.
+      that is JSON/JCS serializable. If `metadata` is provided it is used as an input for
+      Meta-Code generation and as the sole input for the cryptographic `metahash` calculation.
+      If `metadata` is set to a string it is assumed that it is base64 encoded binary file
+      metadata.
     x-iscc-context: http://purl.org/iscc/terms/#metadata
   image:
     type: string
