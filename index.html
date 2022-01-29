@@ -359,6 +359,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#openapi-docs" class="md-nav__link">
+    OpenAPI Docs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#openapi-extensions" class="md-nav__link">
     OpenAPI Extensions
   </a>
@@ -477,6 +484,7 @@ The outputs produced when running <code>poe build</code> are:</p>
 <li><a href="https://github.com/iscc/iscc-schema/blob/main/docs/context/iscc.jsonld"><code>docs/context/iscc.jsonld</code></a> - <abbr title="A JSON-based Serialization for Linked Data">JSON-LD</abbr> context for ISCC Metadata</li>
 <li><a href="https://github.com/iscc/iscc-schema/blob/main/docs/context/index.md"><code>docs/terms/index.md</code></a> - ISCC Metadata Vocabulary documentation</li>
 <li><a href="https://github.com/iscc/iscc-schema/blob/main/iscc_schema/schema.py"><code>iscc_schema/schema.py</code></a> - Pydantic models for ISCC Metadata</li>
+<li><a href="https://github.com/iscc/iscc-schema/blob/main/iscc_schema/generator.py"><code>iscc_schema/generator.py</code></a> - Pydantic models for Generator Service API</li>
 </ul>
 <h2 id="published-files">Published files<a class="headerlink" href="#published-files" title="Permanent link">#</a></h2>
 <p>The generated files are published under the following canonical URLs:</p>
@@ -486,6 +494,10 @@ The outputs produced when running <code>poe build</code> are:</p>
 <li><a href="http://purl.org/iscc/terms"><code>http://purl.org/iscc/terms</code></a> - ISCC Metadata Vocabulary latest version</li>
 <li><a href="http://pypi.org/project/iscc-schema"><code>http://pypi.org/project/iscc-schema</code></a> - Python package with pydantic models</li>
 </ul>
+<h2 id="openapi-docs">OpenAPI Docs<a class="headerlink" href="#openapi-docs" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://elements-demo.stoplight.io/?spec=https://raw.githubusercontent.com/iscc/iscc-schema/main/iscc_schema/reference/iscc-generator-service.yaml#/">ISCC Generator Service</a></li>
+</ul>
 <h2 id="openapi-extensions">OpenAPI Extensions<a class="headerlink" href="#openapi-extensions" title="Permanent link">#</a></h2>
 <p>The OpenAPI Specification allows for
 <a href="https://spec.openapis.org/oas/latest.html#specification-extensions">extending</a> the
@@ -493,7 +505,8 @@ specification with custom fields. Extensions must start with <code>x-</code>.
 All ISCC extensions start with <code>x-iscc-</code>:</p>
 <ul>
 <li><code>x-iscc-context</code> - for documenting <abbr title="A JSON-based Serialization for Linked Data">JSON-LD</abbr> contexts.</li>
-<li><code>x-iscc-schema-doc</code> - for original descriptions from <a href="https://schema.org">schema.org</a></li>
+<li><code>x-iscc-schema-doc</code> - for original descriptions from <a href="https://schema.org">schema.org</a>.</li>
+<li><code>x-iscc-embed</code> - for information on how to embed fields into media assets.</li>
 </ul>
 <h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">#</a></h2>
 <h3 id="021-2022-01-19">0.2.1 - 2022-01-19<a class="headerlink" href="#021-2022-01-19" title="Permanent link">#</a></h3>
