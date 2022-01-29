@@ -31,6 +31,8 @@ The outputs produced when running `poe build` are:
 - [`docs/context/iscc.jsonld`](https://github.com/iscc/iscc-schema/blob/main/docs/context/iscc.jsonld) - JSON-LD context for ISCC Metadata
 - [`docs/terms/index.md`](https://github.com/iscc/iscc-schema/blob/main/docs/context/index.md) - ISCC Metadata Vocabulary documentation
 - [`iscc_schema/schema.py`](https://github.com/iscc/iscc-schema/blob/main/iscc_schema/schema.py) - Pydantic models for ISCC Metadata
+- [`iscc_schema/generator.py`](https://github.com/iscc/iscc-schema/blob/main/iscc_schema/generator.py) - Pydantic models for Generator Service API
+
 
 ## Published files
 
@@ -41,6 +43,10 @@ The generated files are published under the following canonical URLs:
 - [`http://purl.org/iscc/terms`](http://purl.org/iscc/terms) - ISCC Metadata Vocabulary latest version
 - [`http://pypi.org/project/iscc-schema`](http://pypi.org/project/iscc-schema) - Python package with pydantic models
 
+## OpenAPI Docs
+
+- [ISCC Generator Service](https://elements-demo.stoplight.io/?spec=https://raw.githubusercontent.com/iscc/iscc-schema/main/iscc_schema/reference/iscc-generator-service.yaml#/)
+
 ## OpenAPI Extensions
 
 The OpenAPI Specification allows for
@@ -49,8 +55,8 @@ specification with custom fields. Extensions must start with `x-`.
 All ISCC extensions start with `x-iscc-`:
 
 - `x-iscc-context` - for documenting JSON-LD contexts.
-- `x-iscc-schema-doc` - for original descriptions from [schema.org](https://schema.org)
-
+- `x-iscc-schema-doc` - for original descriptions from [schema.org](https://schema.org).
+- `x-iscc-embed` - for information on how to embed fields into media assets.
 
 ## Changelog
 

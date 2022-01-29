@@ -48,13 +48,14 @@ enum-field-as-literal = "one"
 update = { cmd = "poetry update", help = "Update project dependencies"}
 fromatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
 buildpydantic = { cmd = "datamodel-codegen --encoding UTF-8", help = "Build pydantic model"}
+buildcode = { script = "tools.build_code:build", help = "Build code for API models"}
 formatcode = { cmd = "black .", help = "Code style formating with black" }
 buildterms = { script = "tools.build_terms:build", help = "Build markdown for terms" }
 buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON Schema" }
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
 test = { cmd = "pytest", help = "Run tests"}
-build = ["fromatyaml", "buildpydantic", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
+build = ["fromatyaml", "buildpydantic", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
