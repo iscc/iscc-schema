@@ -389,6 +389,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#acquire" class="md-nav__link">
+    acquire
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credit" class="md-nav__link">
+    credit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rights" class="md-nav__link">
+    rights
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#keywords" class="md-nav__link">
     keywords
   </a>
@@ -645,12 +666,14 @@ to clarify the definition in context with ISCC metadata.</p>
 <p class="admonition-title"><small><a href="http://schema.org/name">http://schema.org/name</a></small></p>
 <p>The name of the item.</p>
 <p><strong>Comment</strong>:  The title or name of the intangible creation manifested by the identified <em>digital content</em> (used as input for <strong>ISCC Meta-Code</strong> generation).</p>
+<p><strong>Embedding</strong>:  Use <code>Iptc.Application2.Headline</code> and <code>Xmp.photoshop.Headline</code> for image embedding</p>
 </div>
 <h3 id="description"><strong>description</strong><a class="headerlink" href="#description" title="Permanent link">#</a></h3>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://schema.org/disambiguatingDescription">http://schema.org/disambiguatingDescription</a></small></p>
 <p>A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.</p>
 <p><strong>Comment</strong>:  Description of the <em>digital content</em> identified by the <strong>ISCC</strong> (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.</p>
+<p><strong>Embedding</strong>:  Use <code>Exif.Image.ImageDescription</code>, <code>Iptc.Application2.Caption</code> and <code>Xmp.dc.description</code> for image embedding.</p>
 </div>
 <h3 id="image"><strong>image</strong><a class="headerlink" href="#image" title="Permanent link">#</a></h3>
 <div class="admonition term">
@@ -675,6 +698,28 @@ to clarify the definition in context with ISCC metadata.</p>
 <p class="admonition-title"><small><a href="http://schema.org/creator">http://schema.org/creator</a></small></p>
 <p>The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.</p>
 <p><strong>Comment</strong>:  An entity primarily responsible for making the resource.</p>
+<p><strong>Embedding</strong>:  Use <code>Exif.Image.Artist</code>, <code>Iptc.Application2.Byline</code> and <code>Xmp.dc.creator</code> for emedding this field into image metadata.</p>
+</div>
+<h3 id="acquire"><strong>acquire</strong><a class="headerlink" href="#acquire" title="Permanent link">#</a></h3>
+<div class="admonition term">
+<p class="admonition-title"><small><a href="http://schema.org/acquireLicensePage">http://schema.org/acquireLicensePage</a></small></p>
+<p>Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.</p>
+<p><strong>Comment</strong>:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.</p>
+<p><strong>Embedding</strong>:  Use <code>Xmp.plus.Licensor[1]/plus:LicensorURL</code> for embedding in images.</p>
+</div>
+<h3 id="credit"><strong>credit</strong><a class="headerlink" href="#credit" title="Permanent link">#</a></h3>
+<div class="admonition term">
+<p class="admonition-title"><small><a href="http://schema.org/creditText">http://schema.org/creditText</a></small></p>
+<p>Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.</p>
+<p><strong>Comment</strong>:  A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.</p>
+<p><strong>Embedding</strong>:  Use <code>Iptc.Application2.Credit</code> and <code>Xmp.photoshop.Credit</code> for metadata embedding.</p>
+</div>
+<h3 id="rights"><strong>rights</strong><a class="headerlink" href="#rights" title="Permanent link">#</a></h3>
+<div class="admonition term">
+<p class="admonition-title"><small><a href="http://schema.org/copyrightNotice">http://schema.org/copyrightNotice</a></small></p>
+<p>Text of a notice appropriate for describing the copyright aspects of this Creative Work, ideally indicating the owner of the copyright for the Work.</p>
+<p><strong>Comment</strong>:  Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.</p>
+<p><strong>Embedding</strong>:  Use <code>Exif.Image.Copyright</code>, <code>Iptc.Application2.Copyright</code> and <code>Xmp.dc.rights</code> for embedding.</p>
 </div>
 <h3 id="keywords"><strong>keywords</strong><a class="headerlink" href="#keywords" title="Permanent link">#</a></h3>
 <div class="admonition term">
@@ -687,6 +732,7 @@ to clarify the definition in context with ISCC metadata.</p>
 <p class="admonition-title"><small><a href="http://schema.org/license">http://schema.org/license</a></small></p>
 <p>A license document that applies to this content, typically indicated by URL.</p>
 <p><strong>Comment</strong>:  URI of license for the identified <em>digital content</em>.</p>
+<p><strong>Embedding</strong>:  Use <code>Xmp.xmpRights.WebStatement</code> for embedding as image metadata.</p>
 </div>
 <h3 id="version"><strong>version</strong><a class="headerlink" href="#version" title="Permanent link">#</a></h3>
 <div class="admonition term">
@@ -736,7 +782,7 @@ use-cases.</p>
 <h3 id="metadata"><strong>metadata</strong><a class="headerlink" href="#metadata" title="Permanent link">#</a></h3>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://purl.org/iscc/terms/#metadata">http://purl.org/iscc/terms/#metadata</a></small></p>
-<p>Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If <code>metadata</code> is provided it is the sole input for the cryptographic <code>metahash</code> calculation. If <code>metadata</code> is set to a string it is assumed that it is base64 encoded binary file metadata.</p>
+<p>Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If <code>metadata</code> is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic <code>metahash</code> calculation. If <code>metadata</code> is set to a string it is assumed that it is base64 encoded binary file metadata.</p>
 </div>
 <h3 id="redirect"><strong>redirect</strong><a class="headerlink" href="#redirect" title="Permanent link">#</a></h3>
 <div class="admonition term">

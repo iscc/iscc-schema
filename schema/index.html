@@ -478,6 +478,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#acquire" class="md-nav__link">
+    acquire
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#credit" class="md-nav__link">
+    credit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rights" class="md-nav__link">
+    rights
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#keywords" class="md-nav__link">
     keywords
   </a>
@@ -903,7 +924,7 @@
 <td>metadata</td>
 <td><code>None</code></td>
 <td>none</td>
-<td>Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If <code>metadata</code> is provided it is the sole input for the cryptographic <code>metahash</code> calculation. If <code>metadata</code> is set to a string it is assumed that it is base64 encoded binary file metadata.</td>
+<td>Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If <code>metadata</code> is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic <code>metahash</code> calculation. If <code>metadata</code> is set to a string it is assumed that it is base64 encoded binary file metadata.</td>
 </tr>
 </tbody>
 </table>
@@ -997,6 +1018,66 @@
 <td><code>['string', 'array']</code></td>
 <td>none</td>
 <td>An entity primarily responsible for making the resource.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="acquire"><strong>acquire</strong><a class="headerlink" href="#acquire" title="Permanent link">#</a></h3>
+<p><a href="http://schema.org/acquireLicensePage">http://schema.org/acquireLicensePage</a></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>acquire</td>
+<td><code>string-uri</code></td>
+<td>none</td>
+<td>This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="credit"><strong>credit</strong><a class="headerlink" href="#credit" title="Permanent link">#</a></h3>
+<p><a href="http://schema.org/creditText">http://schema.org/creditText</a></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>credit</td>
+<td><code>string</code></td>
+<td>none</td>
+<td>A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rights"><strong>rights</strong><a class="headerlink" href="#rights" title="Permanent link">#</a></h3>
+<p><a href="http://schema.org/copyrightNotice">http://schema.org/copyrightNotice</a></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rights</td>
+<td><code>string</code></td>
+<td>none</td>
+<td>Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.</td>
 </tr>
 </tbody>
 </table>
