@@ -13,6 +13,10 @@ single source of truth for auto-generated [JSON Schema](https://json-schema.org/
 definitions, [JSON-LD](https://json-ld.org/) contexts, and other schema related
 artifacts.
 
+## Documentation
+
+Documentation is hosted at [schema.iscc.codes](https://schema.iscc.codes)
+
 ## Generated files
 
 The source of code generation are the files at `iscc_schema/models/*`.
