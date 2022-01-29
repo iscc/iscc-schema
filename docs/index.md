@@ -17,6 +17,10 @@ artifacts.
 
 Documentation is hosted at [schema.iscc.codes](https://schema.iscc.codes)
 
+## Status
+
+Under development. Expect breaking changes until we reach a version 1.0 release.
+
 ## Generated files
 
 The source of code generation are the files at `iscc_schema/models/*`.
