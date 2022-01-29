@@ -33,14 +33,14 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#components/schemas/IsccRequest'
+              $ref: '#/components/schemas/IsccRequest'
       responses:
         '200':
           description: Success (result in response)
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/IsccResponse'
+                $ref: '#/components/schemas/IsccResponse'
   /nft:
     post:
       summary: Generate NFT
@@ -54,14 +54,14 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: '#components/schemas/NftRequest'
+              $ref: '#/components/schemas/NftRequest'
       responses:
         '200':
           description: Success (result in response)
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/NftResponse'
+                $ref: '#/components/schemas/NftResponse'
 components:
   schemas:
     BaseRequest:
@@ -80,7 +80,7 @@ components:
       description: Generate ISCC for media asset
       type: object
       allOf:
-      - $ref: '#components/schemas/BaseRequest'
+      - $ref: '#/components/schemas/BaseRequest'
       - $ref: ../models/iscc-basic.yaml
       - $ref: ../models/iscc-embeddable.yaml
     IsccResponse:
@@ -100,7 +100,7 @@ components:
         - chain
         - wallet
       allOf:
-      - $ref: '#components/schemas/BaseRequest'
+      - $ref: '#/components/schemas/BaseRequest'
       - type: object
         properties:
           chain:
