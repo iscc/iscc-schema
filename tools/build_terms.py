@@ -39,6 +39,8 @@ def build_terms_schema():
         doc += f'!!! term "<small><{data["x-iscc-context"]}></small>"\n\n'
         doc += f"    {data['x-iscc-schema-doc']}\n\n"
         doc += f"    **Comment**:  {data['description']}\n\n"
+        if data.get("x-iscc-embed"):
+            doc += f"    **Embedding**:  {data['x-iscc-embed']}\n\n"
 
     with open(MARKDOWN_TERMS_SCHEMA, "wt", encoding="UTF-8") as outf:
         outf.write(doc)
