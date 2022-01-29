@@ -37,7 +37,7 @@ Minimal required ISCC Metadata
 | iscc | `string` | none | An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.<br><br>**Example**: `ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY`         |
 
 ## iscc-basic
-Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ethereum.org/EIPS/eip-721)
+Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash generation.
 
 !!! example
 
@@ -69,13 +69,6 @@ Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ether
 | ---- | ---- | --------|--------------------------------|
 | metadata | `None` | none | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.         |
 
-### **image**
-<http://schema.org/image>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| image | `string-uri` | none | URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.<br><br>**Example**: `https://picsum.photos/200/300.jpg`         |
-
 ## iscc-extended
 Extended ISCC Metadata
 
@@ -90,6 +83,13 @@ Extended ISCC Metadata
       "redirect": "https://example.com/about-the-asset"
     }
     ```
+### **image**
+<http://schema.org/image>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| image | `string-uri` | none | URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.<br><br>**Example**: `https://picsum.photos/200/300.jpg`         |
+
 ### **identifier**
 <http://schema.org/identifier>
 

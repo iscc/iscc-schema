@@ -209,6 +209,19 @@ class IsccExtended(BaseModel):
     Extended ISCC Metadata
     """
 
+    image: Optional[AnyUrl] = Field(
+        None,
+        description=(
+            "URI for a user-presentable image that serves as a preview of the *digital content*."
+            " The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397)."
+            " If **ISCC** metadata is used as NFT metadata according to"
+            " [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or"
+            " [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the"
+            " URI should reference the actual digital content represented by the NFT."
+        ),
+        example="https://picsum.photos/200/300.jpg",
+        x_iscc_context="http://schema.org/image",
+    )
     identifier: Optional[List[AnyUrl]] = Field(
         None,
         description=(
@@ -301,7 +314,7 @@ class Metadatum(BaseModel):
 
 class IsccBasic(BaseModel):
     """
-    Basic user presentable ISCC Metadata conformant with [ERC721](https://eips.ethereum.org/EIPS/eip-721)
+    Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash generation.
     """
 
     name: Optional[str] = Field(
@@ -337,19 +350,6 @@ class IsccBasic(BaseModel):
             " metadata."
         ),
         x_iscc_context="http://purl.org/iscc/terms/#metadata",
-    )
-    image: Optional[AnyUrl] = Field(
-        None,
-        description=(
-            "URI for a user-presentable image that serves as a preview of the *digital content*."
-            " The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397)."
-            " If **ISCC** metadata is used as NFT metadata according to"
-            " [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or"
-            " [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the"
-            " URI should reference the actual digital content represented by the NFT."
-        ),
-        example="https://picsum.photos/200/300.jpg",
-        x_iscc_context="http://schema.org/image",
     )
 
 
