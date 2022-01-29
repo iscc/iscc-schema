@@ -436,43 +436,29 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#image" class="md-nav__link">
-    image
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#iscc-extended" class="md-nav__link">
-    iscc-extended
+  <a href="#iscc-embeddable" class="md-nav__link">
+    iscc-embeddable
   </a>
   
-    <nav class="md-nav" aria-label="iscc-extended">
+    <nav class="md-nav" aria-label="iscc-embeddable">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#identifier" class="md-nav__link">
-    identifier
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#content" class="md-nav__link">
-    content
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#creator" class="md-nav__link">
     creator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    license
   </a>
   
 </li>
@@ -498,16 +484,43 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iscc-extended" class="md-nav__link">
+    iscc-extended
+  </a>
+  
+    <nav class="md-nav" aria-label="iscc-extended">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
-  <a href="#keywords" class="md-nav__link">
-    keywords
+  <a href="#image" class="md-nav__link">
+    image
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    license
+  <a href="#identifier" class="md-nav__link">
+    identifier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content" class="md-nav__link">
+    content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keywords" class="md-nav__link">
+    keywords
   </a>
   
 </li>
@@ -858,7 +871,7 @@
 </tbody>
 </table>
 <h2 id="iscc-basic">iscc-basic<a class="headerlink" href="#iscc-basic" title="Permanent link">#</a></h2>
-<p>Basic user presentable ISCC Metadata conformant with <a href="https://eips.ethereum.org/EIPS/eip-721">ERC721</a></p>
+<p>Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash generation.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span><span class="w"></span>
@@ -928,6 +941,121 @@
 </tr>
 </tbody>
 </table>
+<h2 id="iscc-embeddable">iscc-embeddable<a class="headerlink" href="#iscc-embeddable" title="Permanent link">#</a></h2>
+<p>Metadata intended to be embedded into the media asset.</p>
+<h3 id="creator"><strong>creator</strong><a class="headerlink" href="#creator" title="Permanent link">#</a></h3>
+<p><a href="http://schema.org/creator">http://schema.org/creator</a></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>creator</td>
+<td><code>string</code></td>
+<td>none</td>
+<td>An entity primarily responsible for making the resource.<br><br><strong>Example</strong>: <code>Joanne K. Rowling</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="license"><strong>license</strong><a class="headerlink" href="#license" title="Permanent link">#</a></h3>
+<p><a href="http://schema.org/license">http://schema.org/license</a></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>license</td>
+<td><code>string-uri</code></td>
+<td>none</td>
+<td>URI of license for the identified <em>digital content</em>.<br><br><strong>Example</strong>: <code>https://example.com/license-terms-for-this-item</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="acquire"><strong>acquire</strong><a class="headerlink" href="#acquire" title="Permanent link">#</a></h3>
+<p><a href="http://schema.org/acquireLicensePage">http://schema.org/acquireLicensePage</a></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>acquire</td>
+<td><code>string-uri</code></td>
+<td>none</td>
+<td>This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.<br><br><strong>Example</strong>: <code>https://example.com/buy-license-for-item-here</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="credit"><strong>credit</strong><a class="headerlink" href="#credit" title="Permanent link">#</a></h3>
+<p><a href="http://schema.org/creditText">http://schema.org/creditText</a></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>credit</td>
+<td><code>string</code></td>
+<td>none</td>
+<td>A line of text that you expect users of the image (such as Google Images) to display alongside the image.<br><br><strong>Example</strong>: <code>Frank Farian - Getty Images</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="rights"><strong>rights</strong><a class="headerlink" href="#rights" title="Permanent link">#</a></h3>
+<p><a href="http://schema.org/copyrightNotice">http://schema.org/copyrightNotice</a></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rights</td>
+<td><code>string</code></td>
+<td>none</td>
+<td>Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.<br><br><strong>Example</strong>: <code>© Copyright 2022 ISCC Foundation - www.iscc.codes</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="iscc-extended">iscc-extended<a class="headerlink" href="#iscc-extended" title="Permanent link">#</a></h2>
+<p>Extended ISCC Metadata</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/the-asset.epub&quot;</span><span class="p">,</span><span class="w"></span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;identifier&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:isbn:3-8273-7019-1&quot;</span><span class="p">,</span><span class="w"></span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;creator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Frank Fancy&quot;</span><span class="p">,</span><span class="w"></span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;license&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/license.txt&quot;</span><span class="p">,</span><span class="w"></span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">&quot;redirect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/about-the-asset&quot;</span><span class="w"></span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+</div>
 <h3 id="image"><strong>image</strong><a class="headerlink" href="#image" title="Permanent link">#</a></h3>
 <p><a href="http://schema.org/image">http://schema.org/image</a></p>
 <table>
@@ -948,19 +1076,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="iscc-extended">iscc-extended<a class="headerlink" href="#iscc-extended" title="Permanent link">#</a></h2>
-<p>Extended ISCC Metadata</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="w"></span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/the-asset.epub&quot;</span><span class="p">,</span><span class="w"></span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;identifier&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;urn:isbn:3-8273-7019-1&quot;</span><span class="p">,</span><span class="w"></span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;creator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Frank Fancy&quot;</span><span class="p">,</span><span class="w"></span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;license&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/license.txt&quot;</span><span class="p">,</span><span class="w"></span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">&quot;redirect&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/about-the-asset&quot;</span><span class="w"></span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span><span class="w"></span>
-</code></pre></div>
-</div>
 <h3 id="identifier"><strong>identifier</strong><a class="headerlink" href="#identifier" title="Permanent link">#</a></h3>
 <p><a href="http://schema.org/identifier">http://schema.org/identifier</a></p>
 <table>
@@ -1001,86 +1116,6 @@
 </tr>
 </tbody>
 </table>
-<h3 id="creator"><strong>creator</strong><a class="headerlink" href="#creator" title="Permanent link">#</a></h3>
-<p><a href="http://schema.org/creator">http://schema.org/creator</a></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>creator</td>
-<td><code>['string', 'array']</code></td>
-<td>none</td>
-<td>An entity primarily responsible for making the resource.<br><br><strong>Example</strong>: <code>Joanne K. Rowling</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="acquire"><strong>acquire</strong><a class="headerlink" href="#acquire" title="Permanent link">#</a></h3>
-<p><a href="http://schema.org/acquireLicensePage">http://schema.org/acquireLicensePage</a></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>acquire</td>
-<td><code>string-uri</code></td>
-<td>none</td>
-<td>This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.<br><br><strong>Example</strong>: <code>https://example.com/buy-license-for-item-here</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="credit"><strong>credit</strong><a class="headerlink" href="#credit" title="Permanent link">#</a></h3>
-<p><a href="http://schema.org/creditText">http://schema.org/creditText</a></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>credit</td>
-<td><code>string</code></td>
-<td>none</td>
-<td>A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.<br><br><strong>Example</strong>: <code>Frank Farian - Getty Images</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="rights"><strong>rights</strong><a class="headerlink" href="#rights" title="Permanent link">#</a></h3>
-<p><a href="http://schema.org/copyrightNotice">http://schema.org/copyrightNotice</a></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>rights</td>
-<td><code>string</code></td>
-<td>none</td>
-<td>Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.<br><br><strong>Example</strong>: <code>© Copyright 2022 ISCC Foundation - www.iscc.codes</code></td>
-</tr>
-</tbody>
-</table>
 <h3 id="keywords"><strong>keywords</strong><a class="headerlink" href="#keywords" title="Permanent link">#</a></h3>
 <p><a href="http://schema.org/keywords">http://schema.org/keywords</a></p>
 <table>
@@ -1098,26 +1133,6 @@
 <td><code>string</code></td>
 <td>none</td>
 <td>Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="license"><strong>license</strong><a class="headerlink" href="#license" title="Permanent link">#</a></h3>
-<p><a href="http://schema.org/license">http://schema.org/license</a></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>license</td>
-<td><code>string-uri</code></td>
-<td>none</td>
-<td>URI of license for the identified <em>digital content</em>.<br><br><strong>Example</strong>: <code>https://example.com/license-terms-for-this-item</code></td>
 </tr>
 </tbody>
 </table>

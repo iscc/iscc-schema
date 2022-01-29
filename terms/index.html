@@ -361,29 +361,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#image" class="md-nav__link">
-    image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#identifier" class="md-nav__link">
-    identifier
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#content" class="md-nav__link">
-    content
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#creator" class="md-nav__link">
     creator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    license
   </a>
   
 </li>
@@ -410,15 +396,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#keywords" class="md-nav__link">
-    keywords
+  <a href="#image" class="md-nav__link">
+    image
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    license
+  <a href="#identifier" class="md-nav__link">
+    identifier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content" class="md-nav__link">
+    content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keywords" class="md-nav__link">
+    keywords
   </a>
   
 </li>
@@ -675,6 +675,41 @@ to clarify the definition in context with ISCC metadata.</p>
 <p><strong>Comment</strong>:  Description of the <em>digital content</em> identified by the <strong>ISCC</strong> (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.</p>
 <p><strong>Embedding</strong>:  Use <code>Exif.Image.ImageDescription</code>, <code>Iptc.Application2.Caption</code> and <code>Xmp.dc.description</code> for image embedding.</p>
 </div>
+<h3 id="creator"><strong>creator</strong><a class="headerlink" href="#creator" title="Permanent link">#</a></h3>
+<div class="admonition term">
+<p class="admonition-title"><small><a href="http://schema.org/creator">http://schema.org/creator</a></small></p>
+<p>The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.</p>
+<p><strong>Comment</strong>:  An entity primarily responsible for making the resource.</p>
+<p><strong>Embedding</strong>:  Use <code>Exif.Image.Artist</code>, <code>Iptc.Application2.Byline</code> and <code>Xmp.dc.creator</code> for emedding this field into image metadata.</p>
+</div>
+<h3 id="license"><strong>license</strong><a class="headerlink" href="#license" title="Permanent link">#</a></h3>
+<div class="admonition term">
+<p class="admonition-title"><small><a href="http://schema.org/license">http://schema.org/license</a></small></p>
+<p>A license document that applies to this content, typically indicated by URL.</p>
+<p><strong>Comment</strong>:  URI of license for the identified <em>digital content</em>.</p>
+<p><strong>Embedding</strong>:  Use <code>Xmp.xmpRights.WebStatement</code> for embedding as image metadata.</p>
+</div>
+<h3 id="acquire"><strong>acquire</strong><a class="headerlink" href="#acquire" title="Permanent link">#</a></h3>
+<div class="admonition term">
+<p class="admonition-title"><small><a href="http://schema.org/acquireLicensePage">http://schema.org/acquireLicensePage</a></small></p>
+<p>Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.</p>
+<p><strong>Comment</strong>:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.</p>
+<p><strong>Embedding</strong>:  Use <code>Xmp.plus.Licensor[1]/plus:LicensorURL</code> for embedding in images.</p>
+</div>
+<h3 id="credit"><strong>credit</strong><a class="headerlink" href="#credit" title="Permanent link">#</a></h3>
+<div class="admonition term">
+<p class="admonition-title"><small><a href="http://schema.org/creditText">http://schema.org/creditText</a></small></p>
+<p>Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.</p>
+<p><strong>Comment</strong>:  A line of text that you expect users of the image (such as Google Images) to display alongside the image.</p>
+<p><strong>Embedding</strong>:  Use <code>Iptc.Application2.Credit</code> and <code>Xmp.photoshop.Credit</code> for metadata embedding.</p>
+</div>
+<h3 id="rights"><strong>rights</strong><a class="headerlink" href="#rights" title="Permanent link">#</a></h3>
+<div class="admonition term">
+<p class="admonition-title"><small><a href="http://schema.org/copyrightNotice">http://schema.org/copyrightNotice</a></small></p>
+<p>Text of a notice appropriate for describing the copyright aspects of this Creative Work, ideally indicating the owner of the copyright for the Work.</p>
+<p><strong>Comment</strong>:  Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.</p>
+<p><strong>Embedding</strong>:  Use <code>Exif.Image.Copyright</code>, <code>Iptc.Application2.Copyright</code> and <code>Xmp.dc.rights</code> for embedding.</p>
+</div>
 <h3 id="image"><strong>image</strong><a class="headerlink" href="#image" title="Permanent link">#</a></h3>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://schema.org/image">http://schema.org/image</a></small></p>
@@ -693,46 +728,11 @@ to clarify the definition in context with ISCC metadata.</p>
 <p>Actual bytes of the media object, for example the image file or video file.</p>
 <p><strong>Comment</strong>:  URI of the <em>digital content</em> that was used to create this ISCC.</p>
 </div>
-<h3 id="creator"><strong>creator</strong><a class="headerlink" href="#creator" title="Permanent link">#</a></h3>
-<div class="admonition term">
-<p class="admonition-title"><small><a href="http://schema.org/creator">http://schema.org/creator</a></small></p>
-<p>The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.</p>
-<p><strong>Comment</strong>:  An entity primarily responsible for making the resource.</p>
-<p><strong>Embedding</strong>:  Use <code>Exif.Image.Artist</code>, <code>Iptc.Application2.Byline</code> and <code>Xmp.dc.creator</code> for emedding this field into image metadata.</p>
-</div>
-<h3 id="acquire"><strong>acquire</strong><a class="headerlink" href="#acquire" title="Permanent link">#</a></h3>
-<div class="admonition term">
-<p class="admonition-title"><small><a href="http://schema.org/acquireLicensePage">http://schema.org/acquireLicensePage</a></small></p>
-<p>Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.</p>
-<p><strong>Comment</strong>:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.</p>
-<p><strong>Embedding</strong>:  Use <code>Xmp.plus.Licensor[1]/plus:LicensorURL</code> for embedding in images.</p>
-</div>
-<h3 id="credit"><strong>credit</strong><a class="headerlink" href="#credit" title="Permanent link">#</a></h3>
-<div class="admonition term">
-<p class="admonition-title"><small><a href="http://schema.org/creditText">http://schema.org/creditText</a></small></p>
-<p>Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.</p>
-<p><strong>Comment</strong>:  A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.</p>
-<p><strong>Embedding</strong>:  Use <code>Iptc.Application2.Credit</code> and <code>Xmp.photoshop.Credit</code> for metadata embedding.</p>
-</div>
-<h3 id="rights"><strong>rights</strong><a class="headerlink" href="#rights" title="Permanent link">#</a></h3>
-<div class="admonition term">
-<p class="admonition-title"><small><a href="http://schema.org/copyrightNotice">http://schema.org/copyrightNotice</a></small></p>
-<p>Text of a notice appropriate for describing the copyright aspects of this Creative Work, ideally indicating the owner of the copyright for the Work.</p>
-<p><strong>Comment</strong>:  Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.</p>
-<p><strong>Embedding</strong>:  Use <code>Exif.Image.Copyright</code>, <code>Iptc.Application2.Copyright</code> and <code>Xmp.dc.rights</code> for embedding.</p>
-</div>
 <h3 id="keywords"><strong>keywords</strong><a class="headerlink" href="#keywords" title="Permanent link">#</a></h3>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://schema.org/keywords">http://schema.org/keywords</a></small></p>
 <p>Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.</p>
 <p><strong>Comment</strong>:  Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.</p>
-</div>
-<h3 id="license"><strong>license</strong><a class="headerlink" href="#license" title="Permanent link">#</a></h3>
-<div class="admonition term">
-<p class="admonition-title"><small><a href="http://schema.org/license">http://schema.org/license</a></small></p>
-<p>A license document that applies to this content, typically indicated by URL.</p>
-<p><strong>Comment</strong>:  URI of license for the identified <em>digital content</em>.</p>
-<p><strong>Embedding</strong>:  Use <code>Xmp.xmpRights.WebStatement</code> for embedding as image metadata.</p>
 </div>
 <h3 id="version"><strong>version</strong><a class="headerlink" href="#version" title="Permanent link">#</a></h3>
 <div class="admonition term">
