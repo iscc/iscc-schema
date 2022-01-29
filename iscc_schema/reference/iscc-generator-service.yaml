@@ -8,9 +8,9 @@ info:
 
     The ISCC Generator Service API is an implementation-agnostig API
 
-    - For use and implementation by ISCC sservice providers
+    - For use and implementation by ISCC service providers
 
-    - For us in client mode by Web and GUI-based applications
+    - For use by Web and GUI-based applications via REST client
 
     '
 servers:
@@ -37,12 +37,6 @@ paths:
             application/json:
               schema:
                 $ref: '#components/schemas/IsccResult'
-        '202':
-          description: Success (task-id in response)
-          content:
-            application/json:
-              schema:
-                $ref: '#components/schemas/IsccResultTask'
   /nft:
     post:
       summary: Generate NFT
@@ -64,12 +58,6 @@ paths:
             application/json:
               schema:
                 $ref: '#components/schemas/NftResult'
-        '202':
-          description: Success (task-id in response)
-          content:
-            application/json:
-              schema:
-                $ref: '#components/schemas/NftResultTask'
 components:
   schemas:
     GeneratorRequest:
@@ -92,6 +80,9 @@ components:
       - $ref: ../models/iscc-embeddable.yaml
     NftGeneratorRequest:
       description: Inputs for generating an ISCC for an NFT asset
+      required:
+      - chain
+      - wallet
       allOf:
       - $ref: '#components/schemas/GeneratorRequest'
       - type: object
@@ -147,19 +138,3 @@ components:
             encoded)
           type: string
           format: byte
-    ResultTask:
-      description: A result that is a background processing task
-      type: object
-      properties:
-        task_url:
-          description: Task-URL to retrieving the results
-          type: string
-          format: uri
-    IsccResultTask:
-      description: Task-URL to retrieve ISCC generator results
-      allOf:
-      - $ref: '#components/schemas/ResultTask'
-    NftResultTask:
-      description: Task-URL to retrieve NFT generator results
-      allOf:
-      - $ref: '#components/schemas/ResultTask'
