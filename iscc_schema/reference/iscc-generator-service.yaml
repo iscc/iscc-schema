@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: ISCC Generator Service
-  version: 1.5.0
+  version: "1.5.0"
   description: '## About this spec
 
     The ISCC Generator Service API is an implementation-agnostig API
@@ -26,6 +26,8 @@ paths:
       description: Generate ISCC for uploaded or linked media file. The media asset for ISCC
         processing must be passed either in the `file`-field or with the `url`-field. All
         other form fields are optional.
+      tags:
+        - generate
       requestBody:
         required: true
         content:
@@ -39,9 +41,6 @@ paths:
             application/json:
               schema:
                 $ref: '#components/schemas/IsccResponse'
-      operationId: generate-iscc
-      tags:
-      - generate
   /nft:
     post:
       summary: Generate NFT
@@ -63,7 +62,6 @@ paths:
             application/json:
               schema:
                 $ref: '#components/schemas/NftResponse'
-      operationId: generate-nft
 components:
   schemas:
     BaseRequest:
@@ -80,12 +78,14 @@ components:
           description: URL to a media file to create an ISCC for.
     IsccRequest:
       description: Generate ISCC for media asset
+      type: object
       allOf:
       - $ref: '#components/schemas/BaseRequest'
       - $ref: ../models/iscc-basic.yaml
       - $ref: ../models/iscc-embeddable.yaml
     IsccResponse:
       description: Result of generating an ISCC
+      type: object
       allOf:
       - $ref: ../models/iscc-jsonld.yaml
       - $ref: ../models/iscc-minimal.yaml
@@ -95,9 +95,10 @@ components:
       - $ref: ../models/iscc-technical.yaml
     NftRequest:
       description: Inputs for generating an ISCC for an NFT asset
+      type: object
       required:
-      - chain
-      - wallet
+        - chain
+        - wallet
       allOf:
       - $ref: '#components/schemas/BaseRequest'
       - type: object
