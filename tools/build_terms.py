@@ -15,6 +15,7 @@ def terms(context):
     schemata = [
         "iscc-minimal.yaml",
         "iscc-basic.yaml",
+        "iscc-embeddable.yaml",
         "iscc-extended.yaml",
         "iscc-technical.yaml",
         "iscc-nft.yaml",

@@ -69,6 +69,43 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 | ---- | ---- | --------|--------------------------------|
 | metadata | `None` | none | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.         |
 
+## iscc-embeddable
+Metadata intended to be embedded into the media asset.
+### **creator**
+<http://schema.org/creator>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| creator | `string` | none | An entity primarily responsible for making the resource.<br><br>**Example**: `Joanne K. Rowling`         |
+
+### **license**
+<http://schema.org/license>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| license | `string-uri` | none | URI of license for the identified *digital content*.<br><br>**Example**: `https://example.com/license-terms-for-this-item`         |
+
+### **acquire**
+<http://schema.org/acquireLicensePage>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| acquire | `string-uri` | none | This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.<br><br>**Example**: `https://example.com/buy-license-for-item-here`         |
+
+### **credit**
+<http://schema.org/creditText>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| credit | `string` | none | A line of text that you expect users of the image (such as Google Images) to display alongside the image.<br><br>**Example**: `Frank Farian - Getty Images`         |
+
+### **rights**
+<http://schema.org/copyrightNotice>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| rights | `string` | none | Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.<br><br>**Example**: `© Copyright 2022 ISCC Foundation - www.iscc.codes`         |
+
 ## iscc-extended
 Extended ISCC Metadata
 
@@ -104,47 +141,12 @@ Extended ISCC Metadata
 | ---- | ---- | --------|--------------------------------|
 | content | `string-uri` | none | URI of the *digital content* that was used to create this ISCC.         |
 
-### **creator**
-<http://schema.org/creator>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| creator | `['string', 'array']` | none | An entity primarily responsible for making the resource.<br><br>**Example**: `Joanne K. Rowling`         |
-
-### **acquire**
-<http://schema.org/acquireLicensePage>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| acquire | `string-uri` | none | This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.<br><br>**Example**: `https://example.com/buy-license-for-item-here`         |
-
-### **credit**
-<http://schema.org/creditText>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| credit | `string` | none | A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.<br><br>**Example**: `Frank Farian - Getty Images`         |
-
-### **rights**
-<http://schema.org/copyrightNotice>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| rights | `string` | none | Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.<br><br>**Example**: `© Copyright 2022 ISCC Foundation - www.iscc.codes`         |
-
 ### **keywords**
 <http://schema.org/keywords>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | keywords | `string` | none | Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.         |
-
-### **license**
-<http://schema.org/license>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| license | `string-uri` | none | URI of license for the identified *digital content*.<br><br>**Example**: `https://example.com/license-terms-for-this-item`         |
 
 ### **redirect**
 <http://purl.org/iscc/terms/#redirect>

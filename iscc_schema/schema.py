@@ -235,40 +235,6 @@ class IsccExtended(BaseModel):
         description="URI of the *digital content* that was used to create this ISCC.",
         x_iscc_context="http://schema.org/contentUrl",
     )
-    creator: Optional[List[str]] = Field(
-        None,
-        description="An entity primarily responsible for making the resource.",
-        example="Joanne K. Rowling",
-        x_iscc_context="http://schema.org/creator",
-    )
-    acquire: Optional[AnyUrl] = Field(
-        None,
-        description=(
-            "This field must contain a valid URL referring to a page showing information about how"
-            " one can acquire a license for the item. This may be a page of a web shop or NFT"
-            " marketplace ready for providing a license."
-        ),
-        example="https://example.com/buy-license-for-item-here",
-        x_iscc_context="http://schema.org/acquireLicensePage",
-    )
-    credit: Optional[str] = Field(
-        None,
-        description=(
-            "A line of text that the supplier expects users of the image (such as Google Images) to"
-            " display to users alongside the image."
-        ),
-        example="Frank Farian - Getty Images",
-        x_iscc_context="http://schema.org/creditText",
-    )
-    rights: Optional[str] = Field(
-        None,
-        description=(
-            "Contains any necessary copyright notice and should identify the current owner of the"
-            " copyright of this work with associated intellectual property rights."
-        ),
-        example="© Copyright 2022 ISCC Foundation - www.iscc.codes",
-        x_iscc_context="http://schema.org/copyrightNotice",
-    )
     keywords: Optional[str] = Field(
         None,
         description=(
@@ -276,12 +242,6 @@ class IsccExtended(BaseModel):
             " are typically delimited by commas."
         ),
         x_iscc_context="http://schema.org/keywords",
-    )
-    license: Optional[AnyUrl] = Field(
-        None,
-        description="URI of license for the identified *digital content*.",
-        example="https://example.com/license-terms-for-this-item",
-        x_iscc_context="http://schema.org/license",
     )
     redirect: Optional[AnyUrl] = Field(
         None,
@@ -301,6 +261,53 @@ class IsccExtended(BaseModel):
         None,
         description="The version of the CreativeWork embodied by a specified resource.",
         x_iscc_context="http://schema.org/version",
+    )
+
+
+class IsccEmbeddable(BaseModel):
+    """
+    Metadata intended to be embedded into the media asset.
+    """
+
+    creator: Optional[str] = Field(
+        None,
+        description="An entity primarily responsible for making the resource.",
+        example="Joanne K. Rowling",
+        x_iscc_context="http://schema.org/creator",
+    )
+    license: Optional[AnyUrl] = Field(
+        None,
+        description="URI of license for the identified *digital content*.",
+        example="https://example.com/license-terms-for-this-item",
+        x_iscc_context="http://schema.org/license",
+    )
+    acquire: Optional[AnyUrl] = Field(
+        None,
+        description=(
+            "This field must contain a valid URL referring to a page showing information about how"
+            " one can acquire a license for the item. This may be a page of a web shop or NFT"
+            " marketplace ready for providing a license."
+        ),
+        example="https://example.com/buy-license-for-item-here",
+        x_iscc_context="http://schema.org/acquireLicensePage",
+    )
+    credit: Optional[str] = Field(
+        None,
+        description=(
+            "A line of text that you expect users of the image (such as Google Images) to display"
+            " alongside the image."
+        ),
+        example="Frank Farian - Getty Images",
+        x_iscc_context="http://schema.org/creditText",
+    )
+    rights: Optional[str] = Field(
+        None,
+        description=(
+            "Contains any necessary copyright notice and should identify the current owner of the"
+            " copyright of this work with associated intellectual property rights."
+        ),
+        example="© Copyright 2022 ISCC Foundation - www.iscc.codes",
+        x_iscc_context="http://schema.org/copyrightNotice",
     )
 
 
@@ -409,7 +416,15 @@ class IsccJsonld(BaseModel):
 
 
 class ISCC(
-    IsccChains, IsccCrypto, IsccNft, IsccTechnical, IsccExtended, IsccBasic, IsccMinimal, IsccJsonld
+    IsccChains,
+    IsccCrypto,
+    IsccNft,
+    IsccTechnical,
+    IsccExtended,
+    IsccEmbeddable,
+    IsccBasic,
+    IsccMinimal,
+    IsccJsonld,
 ):
     """
     ISCC Metadata Schema

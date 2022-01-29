@@ -6,6 +6,7 @@ allOf:
 - $ref: ./iscc-nft.yaml
 - $ref: ./iscc-technical.yaml
 - $ref: ./iscc-extended.yaml
+- $ref: ./iscc-embeddable.yaml
 - $ref: ./iscc-basic.yaml
 - $ref: ./iscc-minimal.yaml
 - $ref: ./iscc-jsonld.yaml

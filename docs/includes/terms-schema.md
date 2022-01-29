@@ -18,6 +18,56 @@
 
     **Embedding**:  Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description` for image embedding.
 
+### **creator**
+
+!!! term "<small><http://schema.org/creator></small>"
+
+    The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.
+
+    **Comment**:  An entity primarily responsible for making the resource.
+
+    **Embedding**:  Use `Exif.Image.Artist`, `Iptc.Application2.Byline` and `Xmp.dc.creator` for emedding this field into image metadata.
+
+### **license**
+
+!!! term "<small><http://schema.org/license></small>"
+
+    A license document that applies to this content, typically indicated by URL.
+
+    **Comment**:  URI of license for the identified *digital content*.
+
+    **Embedding**:  Use `Xmp.xmpRights.WebStatement` for embedding as image metadata.
+
+### **acquire**
+
+!!! term "<small><http://schema.org/acquireLicensePage></small>"
+
+    Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.
+
+    **Comment**:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.
+
+    **Embedding**:  Use `Xmp.plus.Licensor[1]/plus:LicensorURL` for embedding in images.
+
+### **credit**
+
+!!! term "<small><http://schema.org/creditText></small>"
+
+    Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.
+
+    **Comment**:  A line of text that you expect users of the image (such as Google Images) to display alongside the image.
+
+    **Embedding**:  Use `Iptc.Application2.Credit` and `Xmp.photoshop.Credit` for metadata embedding.
+
+### **rights**
+
+!!! term "<small><http://schema.org/copyrightNotice></small>"
+
+    Text of a notice appropriate for describing the copyright aspects of this Creative Work, ideally indicating the owner of the copyright for the Work.
+
+    **Comment**:  Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.
+
+    **Embedding**:  Use `Exif.Image.Copyright`, `Iptc.Application2.Copyright` and `Xmp.dc.rights` for embedding.
+
 ### **image**
 
 !!! term "<small><http://schema.org/image></small>"
@@ -42,46 +92,6 @@
 
     **Comment**:  URI of the *digital content* that was used to create this ISCC.
 
-### **creator**
-
-!!! term "<small><http://schema.org/creator></small>"
-
-    The creator/author of this CreativeWork. This is the same as the Author property for CreativeWork.
-
-    **Comment**:  An entity primarily responsible for making the resource.
-
-    **Embedding**:  Use `Exif.Image.Artist`, `Iptc.Application2.Byline` and `Xmp.dc.creator` for emedding this field into image metadata.
-
-### **acquire**
-
-!!! term "<small><http://schema.org/acquireLicensePage></small>"
-
-    Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.
-
-    **Comment**:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.
-
-    **Embedding**:  Use `Xmp.plus.Licensor[1]/plus:LicensorURL` for embedding in images.
-
-### **credit**
-
-!!! term "<small><http://schema.org/creditText></small>"
-
-    Text that can be used to credit person(s) and/or organization(s) associated with a published Creative Work.
-
-    **Comment**:  A line of text that the supplier expects users of the image (such as Google Images) to display to users alongside the image.
-
-    **Embedding**:  Use `Iptc.Application2.Credit` and `Xmp.photoshop.Credit` for metadata embedding.
-
-### **rights**
-
-!!! term "<small><http://schema.org/copyrightNotice></small>"
-
-    Text of a notice appropriate for describing the copyright aspects of this Creative Work, ideally indicating the owner of the copyright for the Work.
-
-    **Comment**:  Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.
-
-    **Embedding**:  Use `Exif.Image.Copyright`, `Iptc.Application2.Copyright` and `Xmp.dc.rights` for embedding.
-
 ### **keywords**
 
 !!! term "<small><http://schema.org/keywords></small>"
@@ -89,16 +99,6 @@
     Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
 
     **Comment**:  Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
-
-### **license**
-
-!!! term "<small><http://schema.org/license></small>"
-
-    A license document that applies to this content, typically indicated by URL.
-
-    **Comment**:  URI of license for the identified *digital content*.
-
-    **Embedding**:  Use `Xmp.xmpRights.WebStatement` for embedding as image metadata.
 
 ### **version**
 

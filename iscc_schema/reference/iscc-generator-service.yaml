@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: ISCC Generator Service
+  version: 1.5.0
+  description: '
+
+    ## About this spec
+
+    The ISCC Generator Service API is an implementation-agnostig API
+
+    - For use and implementation by ISCC sservice providers
+
+    - For us in client mode by Web and GUI-based applications
+
+    '
+servers:
+- url: https://api.example.com/v1.5/
+paths:
+  /iscc:
+    post:
+      summary: Generate ISCC
+      description: Generate ISCC for uploaded or linked media file. The media asset for ISCC
+        processing must be passed either in the `file`-field or with the `url`-field. All
+        other form fields are optional.
+      tags:
+      - generate
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#components/schemas/IsccGeneratorRequest'
+      responses:
+        '200':
+          description: Success (result in response)
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/IsccResult'
+        '202':
+          description: Success (task-id in response)
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/IsccResultTask'
+  /nft:
+    post:
+      summary: Generate NFT
+      description: Generate ISCC for NFT minting and decleration. The media asset for ISCC
+        processing must be passed either in the `file`-field or with the `url`-field. All
+        other form fields are optional.
+      tags:
+      - generate
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#components/schemas/NftGeneratorRequest'
+      responses:
+        '200':
+          description: Success (result in response)
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/NftResult'
+        '202':
+          description: Success (task-id in response)
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/NftResultTask'
+components:
+  schemas:
+    GeneratorRequest:
+      description: Basic request for ISCC generation with a file or url field
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+          description: A media file to create an ISCC for.
+        url:
+          type: string
+          format: uri
+          description: URL to a media file to create an ISCC for.
+    IsccGeneratorRequest:
+      description: Generate ISCC for media asset
+      allOf:
+      - $ref: '#components/schemas/GeneratorRequest'
+      - $ref: ../models/iscc-basic.yaml
+      - $ref: ../models/iscc-embeddable.yaml
+    NftGeneratorRequest:
+      description: Inputs for generating an ISCC for an NFT asset
+      allOf:
+      - $ref: '#components/schemas/GeneratorRequest'
+      - type: object
+        properties:
+          chain:
+            description: The blockchain used for NFT minting / ISCC decleration
+            type: string
+            enum:
+            - PRIVATE
+            - BITCOIN
+            - ETHEREUM
+            - POLYGON
+          wallet:
+            description: Wallet address of the declarer (must be used for the minting/decleration
+              transaction)
+            type: string
+          redirect:
+            description: URI to which an ISCC resolver should redirect for this item. May
+              be an URI Template where `{iscc-id}` will be replaced with the calculated ISCC-ID
+            type: string
+            format: uri
+            example: https://example.com/{iscc-id}
+      - $ref: ../models/iscc-basic.yaml
+      - $ref: ../models/iscc-embeddable.yaml
+    IsccResult:
+      description: Result of generating an ISCC
+      allOf:
+      - $ref: ../models/iscc-jsonld.yaml
+      - $ref: ../models/iscc-minimal.yaml
+      - $ref: ../models/iscc-basic.yaml
+      - $ref: ../models/iscc-embeddable.yaml
+      - $ref: ../models/iscc-crypto.yaml
+      - $ref: ../models/iscc-technical.yaml
+    NftResult:
+      description: All data required for NFT minting with ISCC support
+      type: object
+      properties:
+        ipfs_cid:
+          description: CIDv1 of NFT metadata (base16 encoded)
+          type: string
+        token_id:
+          description: The token-id to use for NFT Minting (hex encoded)
+          type: string
+        iscc_code:
+          description: The ISCC to use for ISCC Declartion (hex encoded)
+          type: string
+        ipfs_payload_metadata:
+          description: The NFT metadata payload to be published via IPFS (base64 encoded)
+          type: string
+          format: byte
+        ipfs_payload_image:
+          description: The NFT asset with embedded metadata to be published via IPFS (base64
+            encoded)
+          type: string
+          format: byte
+    ResultTask:
+      description: A result that is a background processing task
+      type: object
+      properties:
+        task_url:
+          description: Task-URL to retrieving the results
+          type: string
+          format: uri
+    IsccResultTask:
+      description: Task-URL to retrieve ISCC generator results
+      allOf:
+      - $ref: '#components/schemas/ResultTask'
+    NftResultTask:
+      description: Task-URL to retrieve NFT generator results
+      allOf:
+      - $ref: '#components/schemas/ResultTask'
