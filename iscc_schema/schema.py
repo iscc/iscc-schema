@@ -225,6 +225,7 @@ class IsccExtended(BaseModel):
     creator: Optional[List[str]] = Field(
         None,
         description="An entity primarily responsible for making the resource.",
+        example="Joanne K. Rowling",
         x_iscc_context="http://schema.org/creator",
     )
     acquire: Optional[AnyUrl] = Field(
@@ -234,6 +235,7 @@ class IsccExtended(BaseModel):
             " one can acquire a license for the item. This may be a page of a web shop or NFT"
             " marketplace ready for providing a license."
         ),
+        example="https://example.com/buy-license-for-item-here",
         x_iscc_context="http://schema.org/acquireLicensePage",
     )
     credit: Optional[str] = Field(
@@ -242,6 +244,7 @@ class IsccExtended(BaseModel):
             "A line of text that the supplier expects users of the image (such as Google Images) to"
             " display to users alongside the image."
         ),
+        example="Frank Farian - Getty Images",
         x_iscc_context="http://schema.org/creditText",
     )
     rights: Optional[str] = Field(
@@ -250,6 +253,7 @@ class IsccExtended(BaseModel):
             "Contains any necessary copyright notice and should identify the current owner of the"
             " copyright of this work with associated intellectual property rights."
         ),
+        example="Copyright 2022 ISCC Foundation - www.iscc.codes",
         x_iscc_context="http://schema.org/copyrightNotice",
     )
     keywords: Optional[str] = Field(
@@ -263,6 +267,7 @@ class IsccExtended(BaseModel):
     license: Optional[AnyUrl] = Field(
         None,
         description="URI of license for the identified *digital content*.",
+        example="https://example.com/license-terms-for-this-item",
         x_iscc_context="http://schema.org/license",
     )
     redirect: Optional[AnyUrl] = Field(
@@ -271,6 +276,7 @@ class IsccExtended(BaseModel):
             "URL to which a resolver should redirect an ISCC-ID that has been minted from a"
             " declartion that includes the IPFS-hash of this metadata instance."
         ),
+        example="https://example.com/land-here-when-resolving-iscc-id",
         x_iscc_context="http://purl.org/iscc/terms/#redirect",
     )
     previous: Optional[str] = Field(

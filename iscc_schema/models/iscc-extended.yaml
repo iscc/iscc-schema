@@ -25,6 +25,7 @@ properties:
       file.
   creator:
     description: An entity primarily responsible for making the resource.
+    example: Joanne K. Rowling
     type:
     - string
     - array
@@ -39,6 +40,7 @@ properties:
     description: This field must contain a valid URL referring to a page showing information
       about how one can acquire a license for the item. This may be a page of a web shop or
       NFT marketplace ready for providing a license.
+    example: https://example.com/buy-license-for-item-here
     type: string
     format: uri
     x-iscc-context: http://schema.org/acquireLicensePage
@@ -48,6 +50,7 @@ properties:
   credit:
     description: A line of text that the supplier expects users of the image (such as Google
       Images) to display to users alongside the image.
+    example: Frank Farian - Getty Images
     type: string
     x-iscc-context: http://schema.org/creditText
     x-iscc-schema-doc: Text that can be used to credit person(s) and/or organization(s) associated
@@ -57,6 +60,7 @@ properties:
     type: string
     description: Contains any necessary copyright notice and should identify the current owner
       of the copyright of this work with associated intellectual property rights.
+    example: Copyright 2022 ISCC Foundation - www.iscc.codes
     x-iscc-context: http://schema.org/copyrightNotice
     x-iscc-schema-doc: Text of a notice appropriate for describing the copyright aspects of
       this Creative Work, ideally indicating the owner of the copyright for the Work.
@@ -72,6 +76,7 @@ properties:
   license:
     type: string
     description: URI of license for the identified *digital content*.
+    example: https://example.com/license-terms-for-this-item
     format: uri
     x-iscc-context: http://schema.org/license
     x-iscc-schema-doc: A license document that applies to this content, typically indicated
@@ -81,6 +86,7 @@ properties:
     type: string
     description: URL to which a resolver should redirect an ISCC-ID that has been minted from
       a declartion that includes the IPFS-hash of this metadata instance.
+    example: https://example.com/land-here-when-resolving-iscc-id
     format: uri
     x-iscc-context: http://purl.org/iscc/terms/#redirect
   previous:
