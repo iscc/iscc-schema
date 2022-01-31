@@ -17,6 +17,8 @@ def build_apis():
         output=outfile,
         encoding="UTF-8",
         wrap_string_literal=True,
+        disable_timestamp=True,
+        use_schema_description=True,
     )
 
 
