@@ -45,7 +45,7 @@ The generated files are published under the following canonical URLs:
 
 ## OpenAPI Docs
 
-- [ISCC Generator Service](https://elements-demo.stoplight.io/?spec=https://raw.githubusercontent.com/iscc/iscc-schema/main/iscc_schema/reference/iscc-generator-service.yaml#/)
+- [ISCC Generator Service](https://schema.iscc.codes/api)
 
 ## OpenAPI Extensions
 
