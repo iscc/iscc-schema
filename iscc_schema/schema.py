@@ -65,14 +65,6 @@ class IsccCrypto(BaseModel):
     )
 
 
-class Property(BaseModel):
-    __root__: str = Field(
-        ...,
-        description="Base64 encoded file header metadata",
-        regex="^(?:[A-Za-z\\d+/]{4})*(?:[A-Za-z\\d+/]{3}=|[A-Za-z\\d+/]{2}==)?$",
-    )
-
-
 class IsccNft(BaseModel):
     """
     Metadata for NFT Marketplaces
@@ -91,14 +83,12 @@ class IsccNft(BaseModel):
         description="A URL to a multi-media attachment for the item.",
         x_iscc_context="http://purl.org/iscc/terms/#animation_url",
     )
-    properties: Optional[Union[Dict[str, Any], Property]] = Field(
+    properties: Optional[Dict[str, Any]] = Field(
         None,
         description=(
-            "Descriptive, industry-sector or use-case specific metadata. Can be any object that is"
-            " JSON/JCS serializable. If properties are provided they are the sole input for the"
-            " cryptographic `metahash` calculation. Also compatible with"
-            " [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string"
-            " it is assumed that it is base64 encoded binary file metadata."
+            "Arbitrary properties. Values may be strings, numbers, object or arrays. Properties"
+            " defined here may show up on NFT marketplaces. See"
+            " [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)"
         ),
         x_iscc_context="http://purl.org/iscc/terms/#properties",
     )
@@ -247,7 +237,8 @@ class IsccExtended(BaseModel):
         None,
         description=(
             "URL to which a resolver should redirect an ISCC-ID that has been minted from a"
-            " declartion that includes the IPFS-hash of this metadata instance."
+            " declartion that includes the IPFS-hash of this metadata instance. **Supports URI"
+            " template `{iscc-id}`**."
         ),
         example="https://example.com/land-here-when-resolving-iscc-id",
         x_iscc_context="http://purl.org/iscc/terms/#redirect",
@@ -277,7 +268,10 @@ class IsccEmbeddable(BaseModel):
     )
     license: Optional[AnyUrl] = Field(
         None,
-        description="URI of license for the identified *digital content*.",
+        description=(
+            "URI of license for the identified *digital content*. **Supports URI template"
+            " `{iscc-id}`**."
+        ),
         example="https://example.com/license-terms-for-this-item",
         x_iscc_context="http://schema.org/license",
     )
@@ -286,7 +280,7 @@ class IsccEmbeddable(BaseModel):
         description=(
             "This field must contain a valid URL referring to a page showing information about how"
             " one can acquire a license for the item. This may be a page of a web shop or NFT"
-            " marketplace ready for providing a license."
+            " marketplace ready for providing a license. **Supports URI template `{iscc-id}`**."
         ),
         example="https://example.com/buy-license-for-item-here",
         x_iscc_context="http://schema.org/acquireLicensePage",
@@ -328,7 +322,7 @@ class IsccBasic(BaseModel):
         None,
         description=(
             "The title or name of the intangible creation manifested by the identified *digital"
-            " content* (used as input for **ISCC Meta-Code** generation)."
+            " content*. **Used as input for ISCC Meta-Code generation**."
         ),
         example="The Never Ending Story",
         max_length=128,
@@ -338,9 +332,9 @@ class IsccBasic(BaseModel):
     description: Optional[str] = Field(
         None,
         description=(
-            "Description of the *digital content* identified by the **ISCC** (used as input for"
-            " Meta-Code generation). Any user presentable text string (including Markdown text)"
-            " indicative of the identity  of the referent may be used."
+            "Description of the *digital content* identified by the **ISCC**. **Used as input for"
+            " ISCC Meta-Code generation**. Any user presentable text string (including Markdown"
+            " text) indicative of the identity  of the referent may be used."
         ),
         example="a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
         max_length=1024,
@@ -350,11 +344,11 @@ class IsccBasic(BaseModel):
     metadata: Optional[Union[Dict[str, Any], Metadatum]] = Field(
         None,
         description=(
-            "Descriptive, industry-sector or use-case specific metadata. Can be any object that is"
-            " JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code"
-            " generation and as the sole input for the cryptographic `metahash` calculation. If"
-            " `metadata` is set to a string it is assumed that it is base64 encoded binary file"
-            " metadata."
+            "Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC"
+            " Meta-Code generation**. Can be any object that is JSON/JCS serializable. If"
+            " `metadata` is provided it is used as an input for Meta-Code generation and as the"
+            " sole input for the cryptographic `metahash` calculation. If `metadata` is set to a"
+            " string it is assumed that it is base64 encoded binary file metadata."
         ),
         x_iscc_context="http://purl.org/iscc/terms/#metadata",
     )

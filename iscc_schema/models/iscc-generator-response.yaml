@@ -1,9 +1,0 @@
-title: iscc-generator-response
-description: ISCC Generator Response
-allOf:
-- $ref: ./iscc-basic.yaml
-- $ref: ./iscc-crypto.yaml
-- $ref: ./iscc-technical.yaml
-- $ref: ./iscc-extended.yaml
-- $ref: ./iscc-minimal.yaml
-- $ref: ./iscc-jsonld.yaml

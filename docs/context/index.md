@@ -4,19 +4,19 @@
 
 <small><http://schema.org/name></small>
 !!! term ""
-    The title or name of the intangible creation manifested by the identified *digital content* (used as input for **ISCC Meta-Code** generation).
+    The title or name of the intangible creation manifested by the identified *digital content*. **Used as input for ISCC Meta-Code generation**.
 
 ## description
 
 <small><http://schema.org/disambiguatingDescription></small>
 !!! term ""
-    Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.
+    Description of the *digital content* identified by the **ISCC**. **Used as input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.
 
 ## metadata
 
 <small><http://purl.org/iscc/terms/#metadata></small>
 !!! term ""
-    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
+    Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
 
 ## creator
 
@@ -28,13 +28,13 @@
 
 <small><http://schema.org/license></small>
 !!! term ""
-    URI of license for the identified *digital content*.
+    URI of license for the identified *digital content*. **Supports URI template `{iscc-id}`**.
 
 ## acquire
 
 <small><http://schema.org/acquireLicensePage></small>
 !!! term ""
-    This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.
+    This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license. **Supports URI template `{iscc-id}`**.
 
 ## credit
 
@@ -76,7 +76,7 @@
 
 <small><http://purl.org/iscc/terms/#redirect></small>
 !!! term ""
-    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.
+    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.
 
 ## previous
 
@@ -196,7 +196,7 @@
 
 <small><http://purl.org/iscc/terms/#properties></small>
 !!! term ""
-    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for the cryptographic `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.
+    Arbitrary properties. Values may be strings, numbers, object or arrays. Properties defined here may show up on NFT marketplaces. See [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)
 
 ## tophash
 

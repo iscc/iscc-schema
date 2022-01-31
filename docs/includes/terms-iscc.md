@@ -2,13 +2,13 @@
 
 !!! term "<small><http://purl.org/iscc/terms/#metadata></small>"
 
-    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
+    Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
 
 ### **redirect**
 
 !!! term "<small><http://purl.org/iscc/terms/#redirect></small>"
 
-    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.
+    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.
 
 ### **previous**
 
@@ -86,7 +86,7 @@
 
 !!! term "<small><http://purl.org/iscc/terms/#properties></small>"
 
-    Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for the cryptographic `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.
+    Arbitrary properties. Values may be strings, numbers, object or arrays. Properties defined here may show up on NFT marketplaces. See [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)
 
 ### **tophash**
 

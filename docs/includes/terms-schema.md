@@ -4,7 +4,7 @@
 
     The name of the item.
 
-    **Comment**:  The title or name of the intangible creation manifested by the identified *digital content* (used as input for **ISCC Meta-Code** generation).
+    **Comment**:  The title or name of the intangible creation manifested by the identified *digital content*. **Used as input for ISCC Meta-Code generation**.
 
     **Embedding**:  Use `Iptc.Application2.Headline` and `Xmp.photoshop.Headline` for image embedding
 
@@ -14,7 +14,7 @@
 
     A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.
 
-    **Comment**:  Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.
+    **Comment**:  Description of the *digital content* identified by the **ISCC**. **Used as input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.
 
     **Embedding**:  Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description` for image embedding.
 
@@ -34,7 +34,7 @@
 
     A license document that applies to this content, typically indicated by URL.
 
-    **Comment**:  URI of license for the identified *digital content*.
+    **Comment**:  URI of license for the identified *digital content*. **Supports URI template `{iscc-id}`**.
 
     **Embedding**:  Use `Xmp.xmpRights.WebStatement` for embedding as image metadata.
 
@@ -44,7 +44,7 @@
 
     Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.
 
-    **Comment**:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.
+    **Comment**:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license. **Supports URI template `{iscc-id}`**.
 
     **Embedding**:  Use `Xmp.plus.Licensor[1]/plus:LicensorURL` for embedding in images.
 

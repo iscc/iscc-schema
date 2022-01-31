@@ -53,21 +53,21 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| name | `string` | none | The title or name of the intangible creation manifested by the identified *digital content* (used as input for **ISCC Meta-Code** generation).<br><br>**Example**: `The Never Ending Story`         |
+| name | `string` | none | The title or name of the intangible creation manifested by the identified *digital content*. **Used as input for ISCC Meta-Code generation**.<br><br>**Example**: `The Never Ending Story`         |
 
 ### **description**
 <http://schema.org/disambiguatingDescription>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| description | `string` | none | Description of the *digital content* identified by the **ISCC** (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.<br><br>**Example**: `a 1984 fantasy film co-written and directed by *Wolfgang Petersen*`         |
+| description | `string` | none | Description of the *digital content* identified by the **ISCC**. **Used as input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.<br><br>**Example**: `a 1984 fantasy film co-written and directed by *Wolfgang Petersen*`         |
 
 ### **metadata**
 <http://purl.org/iscc/terms/#metadata>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| metadata | `None` | none | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.         |
+| metadata | `None` | none | Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.         |
 
 ## iscc-embeddable
 Metadata intended to be embedded into the media asset.
@@ -83,14 +83,14 @@ Metadata intended to be embedded into the media asset.
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| license | `string-uri` | none | URI of license for the identified *digital content*.<br><br>**Example**: `https://example.com/license-terms-for-this-item`         |
+| license | `string-uri` | none | URI of license for the identified *digital content*. **Supports URI template `{iscc-id}`**.<br><br>**Example**: `https://example.com/license-terms-for-this-item`         |
 
 ### **acquire**
 <http://schema.org/acquireLicensePage>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| acquire | `string-uri` | none | This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.<br><br>**Example**: `https://example.com/buy-license-for-item-here`         |
+| acquire | `string-uri` | none | This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license. **Supports URI template `{iscc-id}`**.<br><br>**Example**: `https://example.com/buy-license-for-item-here`         |
 
 ### **credit**
 <http://schema.org/creditText>
@@ -153,7 +153,7 @@ Extended ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
+| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
 
 ### **previous**
 <http://purl.org/iscc/terms/#previous>
@@ -313,7 +313,7 @@ Metadata for NFT Marketplaces
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| properties | `None` | none | Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for the cryptographic `metahash` calculation. Also compatible with [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155). If properties is set to a string it is assumed that it is base64 encoded binary file metadata.         |
+| properties | `object` | none | Arbitrary properties. Values may be strings, numbers, object or arrays. Properties defined here may show up on NFT marketplaces. See [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)         |
 
 ## iscc-crypto
 Cryptography related ISCC Metadata
