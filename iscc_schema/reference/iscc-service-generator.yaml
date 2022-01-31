@@ -15,7 +15,7 @@ info:
     name: ISCC Foundation
     url: https://schema.iscc.codes
   x-logo:
-    url: https://schema.iscc.codes/images/iscc-logo-back.png
+    url: https://schema.iscc.codes/images/iscc-logo-blue.png
 servers:
 - url: https://api.example.com/v1.5
 tags:
