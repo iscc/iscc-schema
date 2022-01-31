@@ -9,7 +9,7 @@ APIS = CODE / "reference"
 
 
 def build_apis():
-    infile = APIS / "iscc-generator-service.yaml"
+    infile = APIS / "iscc-service-generator.yaml"
     outfile = CODE / "generator.py"
     generate(
         infile,

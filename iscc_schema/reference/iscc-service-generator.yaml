@@ -14,6 +14,8 @@ info:
   contact:
     name: ISCC Foundation
     url: https://iscc.foundation
+  x-logo:
+    url: http://schema.iscc.codes/images/iscc-logo-icon-white.svg
 servers:
 - url: https://api.example.com/v1.5
 tags:
@@ -65,23 +67,11 @@ paths:
       operationId: generate-nft
 components:
   schemas:
-    BaseRequest:
-      description: Basic request for ISCC generation with a file or url field
-      type: object
-      properties:
-        file:
-          type: string
-          format: binary
-          description: A media file to create an ISCC for.
-        url:
-          type: string
-          format: uri
-          description: URL to a media file to create an ISCC for.
     IsccRequest:
       description: Generate ISCC for media asset
       type: object
       allOf:
-      - $ref: '#/components/schemas/BaseRequest'
+      - $ref: ../models/iscc-generator.yaml
       - $ref: ../models/iscc-basic.yaml
       - $ref: ../models/iscc-embeddable.yaml
     IsccResponse:
@@ -101,7 +91,7 @@ components:
       - chain
       - wallet
       allOf:
-      - $ref: '#/components/schemas/BaseRequest'
+      - $ref: ../models/iscc-generator.yaml
       - type: object
         properties:
           chain:
@@ -117,8 +107,8 @@ components:
               transaction)
             type: string
           redirect:
-            description: URI to which an ISCC resolver should redirect for this item. May
-              be an URI Template where `{iscc-id}` will be replaced with the calculated ISCC-ID
+            description: URI to which an ISCC resolver should redirect for this item. **Supports
+              URI template `{iscc-id}`**.
             type: string
             format: uri
             example: https://example.com/{iscc-id}
