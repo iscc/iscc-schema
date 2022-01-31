@@ -231,6 +231,18 @@
   </li>
 
       
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../api" class="md-tabs__link">
+      API
+    </a>
+  </li>
+
+      
     </ul>
   </div>
 </nav>
@@ -639,6 +651,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api" class="md-nav__link">
+        API
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -665,14 +692,14 @@ to clarify the definition in context with ISCC metadata.</p>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://schema.org/name">http://schema.org/name</a></small></p>
 <p>The name of the item.</p>
-<p><strong>Comment</strong>:  The title or name of the intangible creation manifested by the identified <em>digital content</em> (used as input for <strong>ISCC Meta-Code</strong> generation).</p>
+<p><strong>Comment</strong>:  The title or name of the intangible creation manifested by the identified <em>digital content</em>. <strong>Used as input for ISCC Meta-Code generation</strong>.</p>
 <p><strong>Embedding</strong>:  Use <code>Iptc.Application2.Headline</code> and <code>Xmp.photoshop.Headline</code> for image embedding</p>
 </div>
 <h3 id="description"><strong>description</strong><a class="headerlink" href="#description" title="Permanent link">#</a></h3>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://schema.org/disambiguatingDescription">http://schema.org/disambiguatingDescription</a></small></p>
 <p>A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.</p>
-<p><strong>Comment</strong>:  Description of the <em>digital content</em> identified by the <strong>ISCC</strong> (used as input for Meta-Code generation). Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.</p>
+<p><strong>Comment</strong>:  Description of the <em>digital content</em> identified by the <strong>ISCC</strong>. <strong>Used as input for ISCC Meta-Code generation</strong>. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.</p>
 <p><strong>Embedding</strong>:  Use <code>Exif.Image.ImageDescription</code>, <code>Iptc.Application2.Caption</code> and <code>Xmp.dc.description</code> for image embedding.</p>
 </div>
 <h3 id="creator"><strong>creator</strong><a class="headerlink" href="#creator" title="Permanent link">#</a></h3>
@@ -686,14 +713,14 @@ to clarify the definition in context with ISCC metadata.</p>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://schema.org/license">http://schema.org/license</a></small></p>
 <p>A license document that applies to this content, typically indicated by URL.</p>
-<p><strong>Comment</strong>:  URI of license for the identified <em>digital content</em>.</p>
+<p><strong>Comment</strong>:  URI of license for the identified <em>digital content</em>. <strong>Supports URI template <code>{iscc-id}</code></strong>.</p>
 <p><strong>Embedding</strong>:  Use <code>Xmp.xmpRights.WebStatement</code> for embedding as image metadata.</p>
 </div>
 <h3 id="acquire"><strong>acquire</strong><a class="headerlink" href="#acquire" title="Permanent link">#</a></h3>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://schema.org/acquireLicensePage">http://schema.org/acquireLicensePage</a></small></p>
 <p>Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.</p>
-<p><strong>Comment</strong>:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.</p>
+<p><strong>Comment</strong>:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license. <strong>Supports URI template <code>{iscc-id}</code></strong>.</p>
 <p><strong>Embedding</strong>:  Use <code>Xmp.plus.Licensor[1]/plus:LicensorURL</code> for embedding in images.</p>
 </div>
 <h3 id="credit"><strong>credit</strong><a class="headerlink" href="#credit" title="Permanent link">#</a></h3>
@@ -782,12 +809,12 @@ use-cases.</p>
 <h3 id="metadata"><strong>metadata</strong><a class="headerlink" href="#metadata" title="Permanent link">#</a></h3>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://purl.org/iscc/terms/#metadata">http://purl.org/iscc/terms/#metadata</a></small></p>
-<p>Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If <code>metadata</code> is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic <code>metahash</code> calculation. If <code>metadata</code> is set to a string it is assumed that it is base64 encoded binary file metadata.</p>
+<p>Descriptive, industry-sector or use-case specific metadata. <strong>Used as input for ISCC Meta-Code generation</strong>. Can be any object that is JSON/JCS serializable. If <code>metadata</code> is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic <code>metahash</code> calculation. If <code>metadata</code> is set to a string it is assumed that it is base64 encoded binary file metadata.</p>
 </div>
 <h3 id="redirect"><strong>redirect</strong><a class="headerlink" href="#redirect" title="Permanent link">#</a></h3>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://purl.org/iscc/terms/#redirect">http://purl.org/iscc/terms/#redirect</a></small></p>
-<p>URL to which a resolver should redirect an <abbr title="A short, unique and owned identifier for *digital content*">ISCC-ID</abbr> that has been minted from a declartion that includes the IPFS-hash of this metadata instance.</p>
+<p>URL to which a resolver should redirect an <abbr title="A short, unique and owned identifier for *digital content*">ISCC-ID</abbr> that has been minted from a declartion that includes the IPFS-hash of this metadata instance. <strong>Supports URI template <code>{iscc-id}</code></strong>.</p>
 </div>
 <h3 id="previous"><strong>previous</strong><a class="headerlink" href="#previous" title="Permanent link">#</a></h3>
 <div class="admonition term">
@@ -852,7 +879,7 @@ use-cases.</p>
 <h3 id="properties"><strong>properties</strong><a class="headerlink" href="#properties" title="Permanent link">#</a></h3>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://purl.org/iscc/terms/#properties">http://purl.org/iscc/terms/#properties</a></small></p>
-<p>Descriptive, industry-sector or use-case specific metadata. Can be any object that is JSON/JCS serializable. If properties are provided they are the sole input for the cryptographic <code>metahash</code> calculation. Also compatible with <a href="https://eips.ethereum.org/EIPS/eip-1155">ERC-1155</a>. If properties is set to a string it is assumed that it is base64 encoded binary file metadata.</p>
+<p>Arbitrary properties. Values may be strings, numbers, object or arrays. Properties defined here may show up on NFT marketplaces. See <a href="https://eips.ethereum.org/EIPS/eip-1155#metadata">ERC-1155</a></p>
 </div>
 <h3 id="tophash"><strong>tophash</strong><a class="headerlink" href="#tophash" title="Permanent link">#</a></h3>
 <div class="admonition term">
