@@ -13,25 +13,29 @@ examples:
   - identification
 properties:
   created:
-    type: string
     description: Datetime the ISCC was created for the item.
+    type: string
+    format: date-time
+    readOnly: true
     x-iscc-context: http://schema.org/dateCreated
     x-iscc-schema-doc: The date on which the CreativeWork was created or the item was added
       to a DataFeed.
-    format: date-time
   filename:
     type: string
+    readOnly: true
     description: Filename of the referenced **digital content** (automatically used as fallback
       if the `name` field was not specified for ISCC processing)
     x-iscc-context: http://purl.org/iscc/terms/#filename
   filesize:
     type: integer
+    readOnly: true
     description: File size of media asset in number of bytes.
     x-iscc-context: http://schema.org/fileSize
     x-iscc-schema-doc: Size of the application / package (e.g. 18MB). In the absence of a
       unit (MB, KB etc.), KB will be assumed.
   mediatype:
     type: string
+    readOnly: true
     description: An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml)
       (MIME type)
     example: image/png
@@ -44,11 +48,13 @@ properties:
       appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.
   duration:
     type: integer
+    readOnly: true
     description: Duration of audio-visual media in secondes.
     x-iscc-context: http://schema.org/duration
     x-iscc-schema-doc: The duration of the item (movie, audio recording, event, etc.) in [ISO
       8601 date format](https://en.wikipedia.org/wiki/ISO_8601).
   fps:
+    readOnly: true
     type: number
     description: Frames per second of video assets.
     format: float
@@ -56,12 +62,14 @@ properties:
     x-iscc-context: http://purl.org/iscc/terms/#fps
     minimum: 1
   width:
+    readOnly: true
     type: integer
     description: Width of visual media in number of pixels.
     format: int32
     example: 640
     x-iscc-context: http://purl.org/iscc/terms/#width
   height:
+    readOnly: true
     type: integer
     description: Height of visual media in number of pixels.
     format: int32
@@ -69,11 +77,13 @@ properties:
     minimum: 1
     x-iscc-context: http://purl.org/iscc/terms/#height
   characters:
+    readOnly: true
     type: integer
     description: Number of text characters (code points after Unicode normalization)
     example: 55689
     x-iscc-context: http://purl.org/iscc/terms/#characters
   pages:
+    readOnly: true
     type: integer
     description: Number of pages (for paged documents only)
     example: 77
@@ -105,12 +115,14 @@ properties:
     items:
       type: string
   features:
+    readOnly: true
     type: array
     description: Granular features of the *digital content*.
     x-iscc-context: http://purl.org/iscc/terms/#features
     items:
       type: object
   generator:
+    readOnly: true
     type: string
     description: Name and version of the software that generated the ISCC
     x-iscc-context: http://purl.org/iscc/terms/#generator

@@ -8,8 +8,10 @@ properties:
     format: uri
     default: http://purl.org/iscc/context
     description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
+    readOnly: true
   '@type':
     type: string
+    readOnly: true
     default: CreativeWork
     enum:
     - CreativeWork
@@ -24,3 +26,4 @@ properties:
     format: uri
     default: http://purl.org/iscc/schema
     description: The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.
+    readOnly: true

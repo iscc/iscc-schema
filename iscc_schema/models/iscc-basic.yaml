@@ -12,7 +12,7 @@ properties:
     maxLength: 128
     example: The Never Ending Story
     description: The title or name of the intangible creation manifested by the identified
-      *digital content* (used as input for **ISCC Meta-Code** generation).
+      *digital content*. **Used as input for ISCC Meta-Code generation**.
     x-iscc-context: http://schema.org/name
     x-iscc-schema-doc: The name of the item.
     x-iscc-embed: Use `Iptc.Application2.Headline` and `Xmp.photoshop.Headline` for image
@@ -22,8 +22,8 @@ properties:
     example: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
     minLength: 1
     maxLength: 1024
-    description: Description of the *digital content* identified by the **ISCC** (used as
-      input for Meta-Code generation). Any user presentable text string (including Markdown
+    description: Description of the *digital content* identified by the **ISCC**. **Used as
+      input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown
       text) indicative of the identity  of the referent may be used.
     x-iscc-context: http://schema.org/disambiguatingDescription
     x-iscc-schema-doc: A sub property of description. A short description of the item used
@@ -41,9 +41,9 @@ properties:
       pattern: ^(?:[A-Za-z\d+/]{4})*(?:[A-Za-z\d+/]{3}=|[A-Za-z\d+/]{2}==)?$
       description: Base64 encoded file header metadata
     minProperties: 1
-    description: Descriptive, industry-sector or use-case specific metadata. Can be any object
-      that is JSON/JCS serializable. If `metadata` is provided it is used as an input for
-      Meta-Code generation and as the sole input for the cryptographic `metahash` calculation.
-      If `metadata` is set to a string it is assumed that it is base64 encoded binary file
-      metadata.
+    description: Descriptive, industry-sector or use-case specific metadata. **Used as input
+      for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If
+      `metadata` is provided it is used as an input for Meta-Code generation and as the sole
+      input for the cryptographic `metahash` calculation. If `metadata` is set to a string
+      it is assumed that it is base64 encoded binary file metadata.
     x-iscc-context: http://purl.org/iscc/terms/#metadata
