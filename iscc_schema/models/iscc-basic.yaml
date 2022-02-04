@@ -35,11 +35,16 @@ properties:
     oneOf:
     - type: object
       minProperties: 1
-      description: Any object that is JSON/JCS serializable
+      description: Structured JSON or JSON-LD metadata. Used as sole input for Meta-Code and
+        Meta-Hash generation if supplied.
+      example:
+        custom_field: custom_value
     - type: string
       format: byte
+      example: VGhpcyBjb3VsZCBiZSBhIGJpbmFyeSBmaWxlIGhlYWRlciBmb3IgZXhhbXBsZQ==
       pattern: ^(?:[A-Za-z\d+/]{4})*(?:[A-Za-z\d+/]{3}=|[A-Za-z\d+/]{2}==)?$
-      description: Base64 encoded file header metadata
+      description: Base64-encoded file header metadata. Used as sole input for Meta-Code and
+        Meta-Hash generation if supplied.
     minProperties: 1
     description: Descriptive, industry-sector or use-case specific metadata. **Used as input
       for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If

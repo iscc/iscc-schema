@@ -3,63 +3,15 @@
 
 from __future__ import annotations
 
-from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Field, confloat, conint, constr
-
-
-class IsccGenerator(BaseModel):
-    """
-    Inputs for ISCC generation
-    """
-
-    source_file: Optional[bytes] = Field(
-        None, description="The media file used as source for ISCC generation."
-    )
-    source_url: Optional[AnyUrl] = Field(
-        None, description="URL of a the media file used as source for ISCC generation."
-    )
-
-
-class IsccBasic(BaseModel):
-    """
-    Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash generation.
-    """
-
-    name: Optional[constr(min_length=1, max_length=128)] = Field(
-        None,
-        description=(
-            "The title or name of the intangible creation manifested by the identified *digital"
-            " content*. **Used as input for ISCC Meta-Code generation**."
-        ),
-        example="The Never Ending Story",
-    )
-    description: Optional[constr(min_length=1, max_length=1024)] = Field(
-        None,
-        description=(
-            "Description of the *digital content* identified by the **ISCC**. **Used as input for"
-            " ISCC Meta-Code generation**. Any user presentable text string (including Markdown"
-            " text) indicative of the identity  of the referent may be used."
-        ),
-        example="a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
-    )
-    metadata: Optional[Union[Dict[str, Any], str]] = Field(
-        None,
-        description=(
-            "Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC"
-            " Meta-Code generation**. Can be any object that is JSON/JCS serializable. If"
-            " `metadata` is provided it is used as an input for Meta-Code generation and as the"
-            " sole input for the cryptographic `metahash` calculation. If `metadata` is set to a"
-            " string it is assumed that it is base64 encoded binary file metadata."
-        ),
-    )
+from pydantic import AnyUrl, BaseModel, Field, constr
 
 
 class IsccEmbeddable(BaseModel):
     """
-    Metadata intended to be embedded into the media asset.
+    Metadata to be embedded into the digital asset.
     """
 
     creator: Optional[str] = Field(
@@ -102,69 +54,95 @@ class IsccEmbeddable(BaseModel):
     )
 
 
-class _Type(Enum):
+class Chain(Enum):
     """
-    The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).
-    """
-
-    CreativeWork = "CreativeWork"
-    TextDigitalDocument = "TextDigitalDocument"
-    ImageObject = "ImageObject"
-    AudioObject = "AudioObject"
-    VideoObject = "VideoObject"
-
-
-class IsccJsonld(BaseModel):
-    """
-    The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-schema.org/) reference
+    The blockchain on wich the ISCC-CODE will be declared.
     """
 
-    _context: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/context",
-        alias="@context",
-        description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
+    PRIVATE = "PRIVATE"
+    BITCOIN = "BITCOIN"
+    ETHEREUM = "ETHEREUM"
+    POLYGON = "POLYGON"
+
+
+class IsccId(BaseModel):
+    """
+    An ISCC-ID
+    """
+
+    iscc_id: Optional[AnyUrl] = Field(
+        None,
+        description="A globaly unique, owned ISCC-ID (unconfirmed)",
+        example="ISCC:MEADJVWXP67HW7NI",
     )
-    _type: Optional[_Type] = Field(
-        "CreativeWork",
-        alias="@type",
-        description=(
-            "The type of digital content according to schema.org classes (TextDigitalDocument,"
-            " ImageObject, AudioObject, VideoObject)."
-        ),
-    )
-    _schema: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/schema",
-        alias="$schema",
-        description="The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
-    )
-
-
-class IsccMinimal(BaseModel):
-    """
-    Minimal required ISCC Metadata
-    """
-
-    iscc: constr(regex=r"^ISCC:[A-Z2-7]{10,73}$", min_length=15, max_length=73) = Field(
+    iscc_code: str = Field(
         ...,
+        description="The ISCC-CODE from wich the ISCC-ID will be minted.",
+        example="ISCC:KQDZJFP6WBM3IIFZ7CRXCNDCNUU3ZEWGL5HAKHNMYHLN2WULPN3ZFHJO7AUS6VQQVM7Q",
+    )
+    chain: Chain = Field(
+        ...,
+        description="The blockchain on wich the ISCC-CODE will be declared.",
+        example="ETHEREUM",
+    )
+    wallet: str = Field(
+        ...,
+        description="The wallet-address that will sign the ISCC declaration.",
+        example="0xb794f5ea0ba39494ce839613fffba74279579268",
+    )
+    counter: Optional[int] = Field(
+        None, description="The uniqueness counter of the ISCC-ID.", example=2
+    )
+
+
+class Iscc(BaseModel):
+    """
+    ISCC Metadata
+    """
+
+    iscc: Optional[constr(regex=r"^ISCC:[A-Z2-7]{10,73}$", min_length=15, max_length=73)] = Field(
+        None,
         description=(
             "An **ISCC-CODE** in canonical representation. This is the minimal required field for a"
             " valid ISCC Metadata object."
         ),
         example="ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
     )
-
-
-class IsccCrypto(BaseModel):
-    """
-    Cryptography related ISCC Metadata
-    """
-
+    name: Optional[constr(min_length=1, max_length=128)] = Field(
+        None,
+        description=(
+            "The title or name of the intangible creation manifested by the identified *digital"
+            " content*. **Used as input for ISCC Meta-Code generation**."
+        ),
+        example="The Never Ending Story",
+    )
+    description: Optional[constr(min_length=1, max_length=1024)] = Field(
+        None,
+        description=(
+            "Description of the *digital content* identified by the **ISCC**. **Used as input for"
+            " ISCC Meta-Code generation**. Any user presentable text string (including Markdown"
+            " text) indicative of the identity  of the referent may be used."
+        ),
+        example="a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
+    )
+    metadata: Optional[Union[Dict[str, Any], str]] = Field(
+        None,
+        description=(
+            "Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC"
+            " Meta-Code generation**. Can be any object that is JSON/JCS serializable. If"
+            " `metadata` is provided it is used as an input for Meta-Code generation and as the"
+            " sole input for the cryptographic `metahash` calculation. If `metadata` is set to a"
+            " string it is assumed that it is base64 encoded binary file metadata."
+        ),
+    )
+    embed: Optional[IsccEmbeddable] = None
     tophash: Optional[constr(min_length=40)] = Field(
         None,
         description=(
             "A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of"
             " metahash and datahash (default blake3)."
         ),
+        example="bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja",
     )
     metahash: Optional[constr(min_length=40)] = Field(
         None,
@@ -175,6 +153,7 @@ class IsccCrypto(BaseModel):
             " RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied"
             " to `properties` before hashing if it is a JSON object."
         ),
+        example="bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q",
     )
     datahash: Optional[constr(min_length=40)] = Field(
         None,
@@ -182,145 +161,53 @@ class IsccCrypto(BaseModel):
             "A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default"
             " blake3)."
         ),
+        example="bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
     )
 
 
-class IsccTechnical(BaseModel):
+class Nft(BaseModel):
     """
-    Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor
+    An ISCC NFT package to be used for NFT minting
     """
 
-    created: Optional[datetime] = Field(
-        None, description="Datetime the ISCC was created for the item."
-    )
-    filename: Optional[str] = Field(
+    iscc: Optional[str] = Field(
         None,
-        description=(
-            "Filename of the referenced **digital content** (automatically used as fallback if the"
-            " `name` field was not specified for ISCC processing)"
-        ),
-    )
-    filesize: Optional[int] = Field(
-        None, description="File size of media asset in number of bytes."
-    )
-    mediatype: Optional[str] = Field(
-        None,
-        description=(
-            "An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml)"
-            " (MIME type)"
-        ),
-        example="image/png",
-    )
-    duration: Optional[int] = Field(None, description="Duration of audio-visual media in secondes.")
-    fps: Optional[confloat(ge=1.0)] = Field(
-        None, description="Frames per second of video assets.", example=24
-    )
-    width: Optional[int] = Field(
-        None, description="Width of visual media in number of pixels.", example=640
-    )
-    height: Optional[conint(ge=1)] = Field(
-        None, description="Height of visual media in number of pixels.", example=480
-    )
-    characters: Optional[int] = Field(
-        None,
-        description="Number of text characters (code points after Unicode normalization)",
-        example=55689,
-    )
-    pages: Optional[int] = Field(
-        None, description="Number of pages (for paged documents only)", example=77
-    )
-    language: Optional[Union[str, List[str]]] = Field(
-        None,
-        description="Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).",
-        example="en-US",
-    )
-    parts: Optional[List[str]] = Field(
-        None,
-        description=(
-            "Indicates items that are part of this item via Content-Codes (inverse-property"
-            " belongs)."
-        ),
-    )
-    part_of: Optional[List[str]] = Field(
-        None, description="Indicates that this item is part of other items via their Content-Code."
-    )
-    features: Optional[List[Dict[str, Any]]] = Field(
-        None, description="Granular features of the *digital content*."
-    )
-    generator: Optional[str] = Field(
-        None, description="Name and version of the software that generated the ISCC"
-    )
-
-
-class Chain(Enum):
-    """
-    The blockchain used for NFT minting / ISCC decleration
-    """
-
-    PRIVATE = "PRIVATE"
-    BITCOIN = "BITCOIN"
-    ETHEREUM = "ETHEREUM"
-    POLYGON = "POLYGON"
-
-
-class NftRequest(IsccGenerator, IsccBasic, IsccEmbeddable):
-    """
-    Inputs for generating an ISCC for an NFT asset
-    """
-
-    chain: Optional[Chain] = Field(
-        None, description="The blockchain used for NFT minting / ISCC decleration"
-    )
-    wallet: Optional[str] = Field(
-        None,
-        description=(
-            "Wallet address of the declarer (must be used for the minting/decleration transaction)"
-        ),
-    )
-    redirect: Optional[AnyUrl] = Field(
-        None,
-        description=(
-            "URI to which an ISCC resolver should redirect for this item. **Supports URI template"
-            " `{iscc-id}`**."
-        ),
-        example="https://example.com/{iscc-id}",
-    )
-
-
-class NftResponse(BaseModel):
-    """
-    All data required for NFT minting with ISCC support
-    """
-
-    ipfs_cid: Optional[str] = Field(None, description="CIDv1 of NFT metadata (base16 encoded)")
-    token_id: Optional[str] = Field(
-        None, description="The token-id to use for NFT Minting (hex encoded)"
+        description="The ISCC-ID or ISCC-CODE for which to create an NFT Package",
+        example="ISCC:MEADJVWXP67HW7NI",
     )
     iscc_code: Optional[str] = Field(
-        None, description="The ISCC to use for ISCC Declartion (hex encoded)"
+        None,
+        description="ISCC-CODE to be passed to the ISCC declaration contract.",
+        example="ISCC:KQDZJFP6WBM3IIFZ7CRXCNDCNUU3ZEWGL5HAKHNMYHLN2WULPN3ZFHJO7AUS6VQQVM7Q",
     )
-    ipfs_payload_metadata: Optional[str] = Field(
-        None, description="The NFT metadata payload to be published via IPFS (base64 encoded)"
-    )
-    ipfs_payload_image: Optional[str] = Field(
+    token_id: Optional[constr(regex=r"^(0|[1-9][0-9]*)$")] = Field(
         None,
         description=(
-            "The NFT asset with embedded metadata to be published via IPFS (base64 encoded)"
+            "Token-ID to be passed to the NFT minting contract. (The Token-ID is an integer"
+            " representation (uint256) of the `ipfs_metadata_cid` without the static CID prefix."
         ),
+        example="24264217585278480942562880083667472973488514177954865383155936279336351816001166239115842587",
     )
-
-
-class IsccRequest(IsccGenerator, IsccBasic, IsccEmbeddable):
-    """
-    Generate ISCC for media asset
-    """
-
-    pass
-
-
-class IsccResponse(IsccJsonld, IsccMinimal, IsccBasic, IsccEmbeddable, IsccCrypto, IsccTechnical):
-    """
-    Result of generating an ISCC
-    """
-
-    pass
+    ipfs_metadata_cid: Optional[str] = Field(
+        None,
+        description="The IPFS CIDv1 of the NFT Metadata ",
+        example="bafkreiez43ignrqddzxy5faretffft3zbx43of4jxarbvav6jrqdlyfvpm",
+    )
+    ipfs_metadata_payload: Optional[str] = Field(
+        None,
+        description="The base64-encoded payload of the metadata.",
+        example="ew0KICAidmVyc2lvbiI6ICIwLTAtMCIsDQogICJpc2NjIjogIktFRFpLTkRFWlFWQ0tXSEtWNDdOQUE0RzZGRUg1UVlPR002SVNGSjNZVFEzUFJUUVhORkY3TVkiLA0KICAidGl0bGUiOiAiSVNDQyBMb2dvIiwNCiAgImZpbGVuYW1lIjogImlzY2MtbG9nby5wbmciLA0KICAiZmlsZXNpemUiOiAyODkyMiwNCiAgIm1lZGlhdHlwZSI6ICJpbWFnZS9wbmciLA0KICAidG9waGFzaCI6ICJkYzgyZWIzMjk4MzAyZGVhYjIyOTFhNzBkMDcxYTc1YWNmYjJmZTA2YTg0OWExZGNiYTU0YWMyMGYxYTI4Y2ZiIiwNCiAgIm1ldGFoYXNoIjogIjJhYjEzNjJhOTYyNDUzOTIzMzM3YTRhYTA1NTQ1N2U4Y2Q2ZGQ5MjVmNjIwYThlNzA2YmJjNmYzZDdjNTNkYmMiLA0KICAiZGF0YWhhc2giOiAiZTFiN2M2NzBiYjRhNWZiM2QzZjA1Zjc4NTRiMThiOTBkMDg1NmEzYmNlNDA3ZjM5ZGM4YzY5NjJlNTE3MWM3ZCIsDQogICJnbXQiOiAiaW1hZ2UiLA0KICAid2lkdGgiOiAxMTgyLA0KICAiaGVpZ2h0IjogMzczDQp9DQo=",
+    )
+    ipfs_image_cid: Optional[str] = Field(
+        None,
+        description="The IPFS CIDv1 of the NFT image.",
+        example="bafybeihcck6iocb2steuf4zwq53nfyce34xamke5za7gaq2qqoshmgab6u",
+    )
+    ipfs_image_uri: Optional[AnyUrl] = Field(
+        None,
+        description=(
+            "The URI to the NFT image (either a local relative URL or a Data-URI depending on"
+            " server configuration)"
+        ),
+        example="/media/d8541cb6f21e952c2c532535c77ac145c09ee1e4184e7f4b19d07c836f83d16a",
+    )

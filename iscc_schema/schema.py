@@ -39,6 +39,7 @@ class IsccCrypto(BaseModel):
             "A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of"
             " metahash and datahash (default blake3)."
         ),
+        example="bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja",
         min_length=40,
         x_iscc_context="http://purl.org/iscc/terms/#tophash",
     )
@@ -51,6 +52,7 @@ class IsccCrypto(BaseModel):
             " RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied"
             " to `properties` before hashing if it is a JSON object."
         ),
+        example="bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q",
         min_length=40,
         x_iscc_context="http://purl.org/iscc/terms/#metahash",
     )
@@ -60,6 +62,7 @@ class IsccCrypto(BaseModel):
             "A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default"
             " blake3)."
         ),
+        example="bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
         min_length=40,
         x_iscc_context="http://purl.org/iscc/terms/#datahash",
     )
@@ -308,7 +311,11 @@ class IsccEmbeddable(BaseModel):
 class Metadatum(BaseModel):
     __root__: str = Field(
         ...,
-        description="Base64 encoded file header metadata",
+        description=(
+            "Base64-encoded file header metadata. Used as sole input for Meta-Code and Meta-Hash"
+            " generation if supplied."
+        ),
+        example="VGhpcyBjb3VsZCBiZSBhIGJpbmFyeSBmaWxlIGhlYWRlciBmb3IgZXhhbXBsZQ==",
         regex="^(?:[A-Za-z\\d+/]{4})*(?:[A-Za-z\\d+/]{3}=|[A-Za-z\\d+/]{2}==)?$",
     )
 

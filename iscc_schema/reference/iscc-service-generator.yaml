@@ -1,138 +1,500 @@
-openapi: 3.0.3
+openapi: 3.0.0
 info:
   title: ISCC Generator Service
   version: 1.5.0
-  description: '## About this spec
-
-    The ISCC Generator Service API is an implementation-agnostig API
-
-    - For use and implementation by ISCC service providers
-
-    - For use by Web and GUI-based applications via REST client
-
-    '
+  license:
+    name: Apache License 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  description: A service for generating ISCCs
   contact:
-    name: ISCC Foundation
-    url: https://schema.iscc.codes
-  x-logo:
-    url: https://schema.iscc.codes/images/iscc-logo-blue.png
+    name: Titusz Pan
 servers:
-- url: https://api.example.com/v1.5
+- url: http://localhost:3000
+  description: iscc-generator
 tags:
-- name: generate
-  description: Endpoints that generate ISCC codes
+- name: generator
+  description: ISCC Generator related endpoints
 paths:
-  /iscc:
+  /iscc_code:
     post:
-      summary: Generate ISCC
-      description: Generate ISCC for uploaded or linked media file. The media asset for ISCC
-        processing must be passed either in the `file`-field or with the `url`-field. All
-        other form fields are optional.
+      summary: Generate an ISCC-CODE
       tags:
-      - generate
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/IsccRequest'
+      - generator
       responses:
         '200':
-          description: Success (result in response)
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IsccResponse'
-      operationId: generate-iscc
+                $ref: '#/components/schemas/Iscc'
+          headers:
+            iscc-task-id:
+              schema:
+                type: string
+                example: 068a358ce0ca48dd906c740d3cb452d4
+              description: ID of the background task that processed the ISCC
+        '202':
+          description: Accepted
+          headers:
+            iscc-task-id:
+              schema:
+                type: string
+              description: ID of the background task that processed the ISCC
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task_url:
+                    type: string
+                    description: ID of the ISCC processing task.
+                    format: uri-reference
+                    example: /task/kjdsf09asudf09
+                required:
+                - task_url
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      operationId: generate-iscc-code
+      description: 'Create an ISCC-CODE for a media file. You may upload a file or provide
+        an URL of the file to be processed. '
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              allOf:
+              - type: object
+                properties:
+                  source_file:
+                    type: string
+                    format: binary
+                    description: The file used for generating the ISCC
+                    writeOnly: true
+                  source_url:
+                    type: string
+                    format: uri
+                    example: https://picsum.photos/200/300.jpg
+                    maxLength: 2048
+                    description: URL of file used for generating the ISCC
+                    writeOnly: true
+              - $ref: '#/components/schemas/Iscc'
+            examples: {}
+        description: Request for generating an ISCC-CODE. Either `source_file` or `source_url`
+          must be provided. All other fields are optional.
+  /iscc_code/{iscc}:
+    parameters:
+    - schema:
+        type: string
+      name: iscc
+      in: path
+      required: true
+      description: ISCC-CODE
+    get:
+      summary: Get metadata for an ISCC-CODE
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Iscc'
+        '404':
+          description: Not Found
+      operationId: get-iscc-code
+      description: Retrieve metadata for given ISCC-CODE
+    delete:
+      summary: Delete ISCC-CODE entry
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: delete-iscc-code
+      description: Delete ISCC-CODE entry
+  /iscc_id:
+    post:
+      summary: Generate an ISCC-ID
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Iscc-id'
+        '404':
+          description: Not Found
+      operationId: generate-iscc-id
+      description: Pre-generate an unconfirmed ISCC-ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Iscc-id'
+        description: Request pre-generated unconfirmed ISCC-ID.
+  /iscc_id/{iscc}:
+    parameters:
+    - schema:
+        type: string
+      name: iscc
+      in: path
+      required: true
+      description: ISCC-ID
+    get:
+      summary: Get metadata for an ISCC-ID
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Iscc-id'
+        '404':
+          description: Not Found
+      operationId: get-iscc-id
+      description: Retrieve information for given ISCC-ID
+    delete:
+      summary: Delete ISCC-ID entry
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: delete-iscc-id
+      description: Delete ISCC-ID entry
+  /task/{task_id}:
+    parameters:
+    - schema:
+        type: string
+      name: task_id
+      in: path
+      required: true
+      description: Task-ID
+    get:
+      summary: Get the status of an ISCC creation task.
+      tags:
+      - generator
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task_id:
+                    type: string
+                    example: 068a358ce0ca48dd906c740d3cb452d4
+                    description: Unique identifier of the task.
+                    readOnly: true
+                  result_url:
+                    type: string
+                    format: uri-reference
+                    example: /iscc_code/ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
+                    description: URL of the task result.
+                    readOnly: true
+                  started:
+                    type: string
+                    format: date-time
+                    example: '2021-01-21T17:32:28Z'
+                    description: Timestamp when the task was picked up by a worker
+                    readOnly: true
+                  stopped:
+                    type: string
+                    format: date-time
+                    example: '2021-01-21T17:34:36Z'
+                    description: Timestamp of task completion
+                    readOnly: true
+                  success:
+                    type: boolean
+                    description: Whether the task succeeded
+                    readOnly: true
+                required:
+                - task_id
+      operationId: get-task
+      description: Returns status of Task
+  /media/{media_id}:
+    parameters:
+    - schema:
+        type: string
+        example: "\td8541cb6f21e952c2c532535c77ac145c09ee1e4184e7f4b19d07c836f83d16a"
+      name: media_id
+      in: path
+      required: true
+      description: Media-ID
+    get:
+      summary: Retrieve the Media Asset
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+                properties: {}
+        '404':
+          description: Not Found
+      operationId: get-media
+      description: Download media item associated with an ISCC
   /nft:
     post:
-      summary: Generate NFT
-      description: Generate ISCC for NFT minting and decleration. The media asset for ISCC
-        processing must be passed either in the `file`-field or with the `url`-field.
+      summary: Create an ISCC-NFT
       tags:
-      - generate
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/NftRequest'
+      - generator
       responses:
         '200':
-          description: Success (result in response)
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NftResponse'
-      operationId: generate-nft
+                $ref: '#/components/schemas/Nft'
+        '405':
+          description: Method Not Allowed
+        '500':
+          description: Internal Server Error
+      operationId: generate--nft
+      description: Create an NFT package for a given ISCC
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nft'
+        description: An ISCC-CODE or ISCC-ID for which to create an NFT package
+    parameters: []
+  /nft/{id}:
+    parameters:
+    - schema:
+        type: string
+      name: id
+      in: path
+      required: true
+    get:
+      summary: Get ISCC-NFT package
+      tags:
+      - generator
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nft'
+        '404':
+          description: Not Found
+      operationId: get-nft
+      description: Returns a bundled package of IDs and data to be used for NFT minting
+    delete:
+      summary: Delete ISCC-NFT entry
+      tags:
+      - generator
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+      operationId: deleta-nft
+      description: Delete ISCC-NFT Package
 components:
   schemas:
-    IsccRequest:
-      description: Generate ISCC for media asset
+    Iscc-embeddable:
+      title: iscc-embeddable
       type: object
-      allOf:
-      - $ref: ../models/iscc-generator.yaml
-      - $ref: ../models/iscc-basic.yaml
-      - $ref: ../models/iscc-embeddable.yaml
-    IsccResponse:
-      description: Result of generating an ISCC
+      description: Metadata to be embedded into the digital asset.
+      properties:
+        creator:
+          type: string
+          description: An entity primarily responsible for making the resource.
+          example: Joanne K. Rowling
+        license:
+          type: string
+          format: uri
+          description: URI of license for the identified *digital content*. **Supports URI
+            template `{iscc-id}`**.
+          example: https://example.com/license-terms-for-this-item
+        acquire:
+          type: string
+          format: uri
+          description: This field must contain a valid URL referring to a page showing information
+            about how one can acquire a license for the item. This may be a page of a web
+            shop or NFT marketplace ready for providing a license. **Supports URI template
+            `{iscc-id}`**.
+          example: https://example.com/buy-license-for-item-here
+        credit:
+          type: string
+          description: A line of text that you expect users of the image (such as Google Images)
+            to display alongside the image.
+          example: Frank Farian - Getty Images
+        rights:
+          type: string
+          description: Contains any necessary copyright notice and should identify the current
+            owner of the copyright of this work with associated intellectual property rights.
+          example: © Copyright 2022 ISCC Foundation - www.iscc.codes
+    Iscc-id:
+      title: ISCC-ID
       type: object
-      allOf:
-      - $ref: ../models/iscc-jsonld.yaml
-      - $ref: ../models/iscc-minimal.yaml
-      - $ref: ../models/iscc-basic.yaml
-      - $ref: ../models/iscc-embeddable.yaml
-      - $ref: ../models/iscc-crypto.yaml
-      - $ref: ../models/iscc-technical.yaml
-    NftRequest:
-      description: Inputs for generating an ISCC for an NFT asset
-      type: object
+      description: An ISCC-ID
+      properties:
+        iscc_id:
+          type: string
+          format: uri
+          example: ISCC:MEADJVWXP67HW7NI
+          description: A globaly unique, owned ISCC-ID (unconfirmed)
+          readOnly: true
+        iscc_code:
+          type: string
+          description: The ISCC-CODE from wich the ISCC-ID will be minted.
+          example: ISCC:KQDZJFP6WBM3IIFZ7CRXCNDCNUU3ZEWGL5HAKHNMYHLN2WULPN3ZFHJO7AUS6VQQVM7Q
+        chain:
+          type: string
+          description: The blockchain on wich the ISCC-CODE will be declared.
+          example: ETHEREUM
+          enum:
+          - PRIVATE
+          - BITCOIN
+          - ETHEREUM
+          - POLYGON
+        wallet:
+          type: string
+          description: The wallet-address that will sign the ISCC declaration.
+          example: '0xb794f5ea0ba39494ce839613fffba74279579268'
+        counter:
+          type: integer
+          description: The uniqueness counter of the ISCC-ID.
+          example: 2
       required:
+      - iscc_code
       - chain
       - wallet
-      allOf:
-      - $ref: ../models/iscc-generator.yaml
-      - type: object
-        properties:
-          chain:
-            description: The blockchain used for NFT minting / ISCC decleration
-            type: string
-            enum:
-            - PRIVATE
-            - BITCOIN
-            - ETHEREUM
-            - POLYGON
-          wallet:
-            description: Wallet address of the declarer (must be used for the minting/decleration
-              transaction)
-            type: string
-          redirect:
-            description: URI to which an ISCC resolver should redirect for this item. **Supports
-              URI template `{iscc-id}`**.
-            type: string
-            format: uri
-            example: https://example.com/{iscc-id}
-      - $ref: ../models/iscc-basic.yaml
-      - $ref: ../models/iscc-embeddable.yaml
-    NftResponse:
-      description: All data required for NFT minting with ISCC support
+      examples:
+      - iscc_id: ISCC:MEADJVWXP67HW7NI
+        iscc_code: ISCC:KQDZJFP6WBM3IIFZ7CRXCNDCNUU3ZEWGL5HAKHNMYHLN2WULPN3ZFHJO7AUS6VQQVM7Q
+        chain: ETHEREUM
+        wallet: '0xb794f5ea0ba39494ce839613fffba74279579268'
+        counter: 2
+    Iscc:
+      title: ISCC
       type: object
+      description: ISCC Metadata
       properties:
-        ipfs_cid:
-          description: CIDv1 of NFT metadata (base16 encoded)
+        iscc:
           type: string
-        token_id:
-          description: The token-id to use for NFT Minting (hex encoded)
+          description: An **ISCC-CODE** in canonical representation. This is the minimal required
+            field for a valid ISCC Metadata object.
+          example: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
+          minLength: 15
+          maxLength: 73
+          pattern: ^ISCC:[A-Z2-7]{10,73}$
+          readOnly: true
+        name:
           type: string
+          minLength: 1
+          maxLength: 128
+          example: The Never Ending Story
+          description: The title or name of the intangible creation manifested by the identified
+            *digital content*. **Used as input for ISCC Meta-Code generation**.
+        description:
+          type: string
+          example: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
+          minLength: 1
+          maxLength: 1024
+          description: Description of the *digital content* identified by the **ISCC**. **Used
+            as input for ISCC Meta-Code generation**. Any user presentable text string (including
+            Markdown text) indicative of the identity  of the referent may be used.
+        metadata:
+          oneOf:
+          - type: object
+            minProperties: 1
+            example:
+              custom_field: custom_value
+            description: Structured JSON or JSON-LD metadata. Used as sole input for Meta-Code
+              and Meta-Hash generation if supplied.
+          - type: string
+            format: byte
+            pattern: ^(?:[A-Za-z\d+/]{4})*(?:[A-Za-z\d+/]{3}=|[A-Za-z\d+/]{2}==)?$
+            description: Base64-encoded file header metadata. Used as sole input for Meta-Code
+              and Meta-Hash generation if supplied.
+            example: VGhpcyBjb3VsZCBiZSBhIGJpbmFyeSBmaWxlIGhlYWRlciBmb3IgZXhhbXBsZQ==
+          minProperties: 1
+          description: Descriptive, industry-sector or use-case specific metadata. **Used
+            as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable.
+            If `metadata` is provided it is used as an input for Meta-Code generation and
+            as the sole input for the cryptographic `metahash` calculation. If `metadata`
+            is set to a string it is assumed that it is base64 encoded binary file metadata.
+        embed:
+          $ref: '#/components/schemas/Iscc-embeddable'
+        tophash:
+          type: string
+          minLength: 40
+          description: A [Multihash](https://multiformats.io/multihash/) of the concatenation
+            (binding) of metahash and datahash (default blake3).
+          example: bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja
+          readOnly: true
+        metahash:
+          type: string
+          minLength: 40
+          description: A [Multihash](https://multiformats.io/multihash/) of the supplied metadata
+            (default blake3). The hash is created from `name` and `description` fields or
+            `properties` if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785)
+            canonicalization is applied to `properties` before hashing if it is a JSON object.
+          example: bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q
+          readOnly: true
+        datahash:
+          type: string
+          minLength: 40
+          description: A [Multihash](https://multiformats.io/multihash/) of the *digital content*
+            (default blake3).
+          example: bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq
+          readOnly: true
+    Nft:
+      title: nft
+      type: object
+      description: An ISCC NFT package to be used for NFT minting
+      properties:
+        iscc:
+          type: string
+          description: The ISCC-ID or ISCC-CODE for which to create an NFT Package
+          example: ISCC:MEADJVWXP67HW7NI
+          writeOnly: true
         iscc_code:
-          description: The ISCC to use for ISCC Declartion (hex encoded)
           type: string
-        ipfs_payload_metadata:
-          description: The NFT metadata payload to be published via IPFS (base64 encoded)
+          description: ISCC-CODE to be passed to the ISCC declaration contract.
+          example: ISCC:KQDZJFP6WBM3IIFZ7CRXCNDCNUU3ZEWGL5HAKHNMYHLN2WULPN3ZFHJO7AUS6VQQVM7Q
+          readOnly: true
+        token_id:
           type: string
+          description: Token-ID to be passed to the NFT minting contract. (The Token-ID is
+            an integer representation (uint256) of the `ipfs_metadata_cid` without the static
+            CID prefix.
+          example: '24264217585278480942562880083667472973488514177954865383155936279336351816001166239115842587'
+          pattern: ^(0|[1-9][0-9]*)$
+          readOnly: true
+        ipfs_metadata_cid:
+          type: string
+          description: 'The IPFS CIDv1 of the NFT Metadata '
+          example: bafkreiez43ignrqddzxy5faretffft3zbx43of4jxarbvav6jrqdlyfvpm
+          readOnly: true
+        ipfs_metadata_payload:
+          type: string
+          description: The base64-encoded payload of the metadata.
           format: byte
-        ipfs_payload_image:
-          description: The NFT asset with embedded metadata to be published via IPFS (base64
-            encoded)
+          example: ew0KICAidmVyc2lvbiI6ICIwLTAtMCIsDQogICJpc2NjIjogIktFRFpLTkRFWlFWQ0tXSEtWNDdOQUE0RzZGRUg1UVlPR002SVNGSjNZVFEzUFJUUVhORkY3TVkiLA0KICAidGl0bGUiOiAiSVNDQyBMb2dvIiwNCiAgImZpbGVuYW1lIjogImlzY2MtbG9nby5wbmciLA0KICAiZmlsZXNpemUiOiAyODkyMiwNCiAgIm1lZGlhdHlwZSI6ICJpbWFnZS9wbmciLA0KICAidG9waGFzaCI6ICJkYzgyZWIzMjk4MzAyZGVhYjIyOTFhNzBkMDcxYTc1YWNmYjJmZTA2YTg0OWExZGNiYTU0YWMyMGYxYTI4Y2ZiIiwNCiAgIm1ldGFoYXNoIjogIjJhYjEzNjJhOTYyNDUzOTIzMzM3YTRhYTA1NTQ1N2U4Y2Q2ZGQ5MjVmNjIwYThlNzA2YmJjNmYzZDdjNTNkYmMiLA0KICAiZGF0YWhhc2giOiAiZTFiN2M2NzBiYjRhNWZiM2QzZjA1Zjc4NTRiMThiOTBkMDg1NmEzYmNlNDA3ZjM5ZGM4YzY5NjJlNTE3MWM3ZCIsDQogICJnbXQiOiAiaW1hZ2UiLA0KICAid2lkdGgiOiAxMTgyLA0KICAiaGVpZ2h0IjogMzczDQp9DQo=
+          readOnly: true
+        ipfs_image_cid:
           type: string
-          format: byte
+          description: The IPFS CIDv1 of the NFT image.
+          example: bafybeihcck6iocb2steuf4zwq53nfyce34xamke5za7gaq2qqoshmgab6u
+          readOnly: true
+        ipfs_image_uri:
+          type: string
+          description: The URI to the NFT image (either a local relative URL or a Data-URI
+            depending on server configuration)
+          format: uri
+          example: /media/d8541cb6f21e952c2c532535c77ac145c09ee1e4184e7f4b19d07c836f83d16a
+          readOnly: true
+  examples: {}
