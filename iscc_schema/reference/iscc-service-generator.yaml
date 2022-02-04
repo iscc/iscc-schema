@@ -7,7 +7,9 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0
   description: A service for generating ISCCs
   contact:
-    name: Titusz Pan
+    name: ISCC Foundation
+    url: https://iscc.foundation
+    email: tp@iscc.foundation
 servers:
 - url: http://localhost:3000
   description: iscc-generator
@@ -17,7 +19,7 @@ tags:
 paths:
   /iscc_code:
     post:
-      summary: Generate an ISCC-CODE
+      summary: generat-iscc-code
       tags:
       - generator
       responses:
@@ -91,8 +93,9 @@ paths:
       required: true
       description: ISCC-CODE
     get:
-      summary: Get metadata for an ISCC-CODE
-      tags: []
+      summary: get-iscc-code
+      tags:
+      - generator
       responses:
         '200':
           description: OK
@@ -116,8 +119,9 @@ paths:
       description: Delete ISCC-CODE entry
   /iscc_id:
     post:
-      summary: Generate an ISCC-ID
-      tags: []
+      summary: generate-iscc-id
+      tags:
+      - generator
       responses:
         '200':
           description: OK
@@ -144,8 +148,9 @@ paths:
       required: true
       description: ISCC-ID
     get:
-      summary: Get metadata for an ISCC-ID
-      tags: []
+      summary: get-iscc-id
+      tags:
+      - generator
       responses:
         '200':
           description: OK
@@ -176,7 +181,7 @@ paths:
       required: true
       description: Task-ID
     get:
-      summary: Get the status of an ISCC creation task.
+      summary: get-task
       tags:
       - generator
       responses:
@@ -228,8 +233,9 @@ paths:
       required: true
       description: Media-ID
     get:
-      summary: Retrieve the Media Asset
-      tags: []
+      summary: get-media
+      tags:
+      - generator
       responses:
         '200':
           description: OK
@@ -244,7 +250,7 @@ paths:
       description: Download media item associated with an ISCC
   /nft:
     post:
-      summary: Create an ISCC-NFT
+      summary: generate-nft
       tags:
       - generator
       responses:
@@ -275,7 +281,7 @@ paths:
       in: path
       required: true
     get:
-      summary: Get ISCC-NFT package
+      summary: get-nft
       tags:
       - generator
       responses:
@@ -433,6 +439,7 @@ components:
           minLength: 40
           description: A [Multihash](https://multiformats.io/multihash/) of the concatenation
             (binding) of metahash and datahash (default blake3).
+          x-iscc-context: http://purl.org/iscc/terms/#tophash
           example: bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja
           readOnly: true
         metahash:
@@ -442,6 +449,7 @@ components:
             (default blake3). The hash is created from `name` and `description` fields or
             `properties` if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785)
             canonicalization is applied to `properties` before hashing if it is a JSON object.
+          x-iscc-context: http://purl.org/iscc/terms/#metahash
           example: bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q
           readOnly: true
         datahash:
@@ -449,6 +457,7 @@ components:
           minLength: 40
           description: A [Multihash](https://multiformats.io/multihash/) of the *digital content*
             (default blake3).
+          x-iscc-context: http://purl.org/iscc/terms/#datahash
           example: bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq
           readOnly: true
     Nft:
@@ -498,3 +507,4 @@ components:
           example: /media/d8541cb6f21e952c2c532535c77ac145c09ee1e4184e7f4b19d07c836f83d16a
           readOnly: true
   examples: {}
+x-logo: https://schema.iscc.codes/images/iscc-logo-blue.png
