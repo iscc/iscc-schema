@@ -2,6 +2,7 @@ openapi: 3.0.0
 info:
   title: ISCC Generator Service
   version: 1.5.0
+  x-logo: https://schema.iscc.codes/images/iscc-logo-blue.png
   license:
     name: Apache License 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -233,6 +234,8 @@ paths:
                     readOnly: true
                 required:
                 - task_id
+        '404':
+          description: Not Found
       operationId: get-task
       description: Returns status of Task
       tags:
@@ -521,4 +524,3 @@ components:
           example: /media/d8541cb6f21e952c2c532535c77ac145c09ee1e4184e7f4b19d07c836f83d16a
           readOnly: true
   examples: {}
-x-logo: https://schema.iscc.codes/images/iscc-logo-blue.png
