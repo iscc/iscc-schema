@@ -5,7 +5,21 @@ info:
   license:
     name: Apache License 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
-  description: A service for generating ISCCs
+  description: '# A service for generating ISCCs
+
+
+    ## About this spec
+
+
+    The ISCC Generator Service API is an implementation-agnostig API
+
+
+    - For use and implementation by ISCC service providers
+
+
+    - For use by Web and GUI-based applications via REST client
+
+    '
   contact:
     name: ISCC Foundation
     url: https://iscc.foundation
@@ -108,8 +122,9 @@ paths:
       operationId: get-iscc-code
       description: Retrieve metadata for given ISCC-CODE
     delete:
-      summary: Delete ISCC-CODE entry
-      tags: []
+      summary: delete-iscc-code
+      tags:
+      - generator
       responses:
         '200':
           description: OK
@@ -163,8 +178,9 @@ paths:
       operationId: get-iscc-id
       description: Retrieve information for given ISCC-ID
     delete:
-      summary: Delete ISCC-ID entry
-      tags: []
+      summary: delete-iscc-id
+      tags:
+      - generator
       responses:
         '200':
           description: OK
@@ -296,7 +312,7 @@ paths:
       operationId: get-nft
       description: Returns a bundled package of IDs and data to be used for NFT minting
     delete:
-      summary: Delete ISCC-NFT entry
+      summary: delete-nft
       tags:
       - generator
       responses:
