@@ -2,7 +2,9 @@ openapi: 3.0.0
 info:
   title: ISCC Generator Service
   version: 1.5.0
-  x-logo: https://schema.iscc.codes/images/iscc-logo-blue.png
+  x-logo:
+    url: https://schema.iscc.codes/images/iscc-logo-blue.png
+    altText: ISCC Logo
   license:
     name: Apache License 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
