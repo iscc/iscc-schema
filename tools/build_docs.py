@@ -26,7 +26,7 @@ def copy_readme():
     with open(SRC, "rt", encoding="utf-8") as infile:
         text = infile.read()
 
-    with open(DST, "wt", encoding="utf-8") as outf:
+    with open(DST, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(text)
 
 
@@ -77,7 +77,7 @@ def build_json_schema_docs():
             content += f"| ---- | ---- | --------|--------------------------------|\n"
             content += f"| {prop} | `{type_}` | {default} | {description}         |\n\n"
 
-    with open(MARKDOWN_SCHEMA, "wt", encoding="utf-8") as outf:
+    with open(MARKDOWN_SCHEMA, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(content)
 
 
@@ -108,7 +108,7 @@ def build_json_ld_context_docs():
                 doc += '!!! term ""\n'
                 doc += f"    {fields['description']}\n\n"
 
-    with open(MARKDOWN_CONTEXT, "wt", encoding="utf-8") as outf:
+    with open(MARKDOWN_CONTEXT, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(doc)
 
 

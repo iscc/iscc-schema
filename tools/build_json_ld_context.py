@@ -39,13 +39,13 @@ def build_context():
 
 def build_latest():
     """Build `iscc.json` JSON-LD context"""
-    with open(PATH_LATEST, "wt", encoding="utf-8") as outf:
+    with open(PATH_LATEST, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(json.dumps(build_context(), indent=2, ensure_ascii=False))
 
 
 def build_version():
     """Build `<x.x.x>.json` JSON-LD context"""
-    with open(PATH_VERSION, "wt", encoding="utf-8") as outf:
+    with open(PATH_VERSION, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(json.dumps(build_context(), indent=2, ensure_ascii=False))
 
 
