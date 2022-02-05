@@ -10,7 +10,7 @@ def reformat():
     for f in HERE.parent.glob("**\*.yaml"):
         with open(f, "rt", encoding="utf-8") as infile:
             data = yaml.safe_load(infile)
-        with open(f, "wt", encoding="utf-8") as outf:
+        with open(f, "wt", encoding="utf-8", newline="\n") as outf:
             yaml.safe_dump(
                 data,
                 outf,
