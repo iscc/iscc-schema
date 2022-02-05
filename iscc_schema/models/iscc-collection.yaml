@@ -135,11 +135,12 @@ properties:
     type: boolean
     description: The signee of the declaring transaction claims to be the original creator
       of the work manifested by the identified digital content.
+    example: true
+    x-iscc-context: http://purl.org/iscc/terms/#original
   verify:
     description: A list of self-verifications. Self-verifications are public URLs under the
       account/authority of the signee. The verification URL must respond to a GET reqest with
-      text that contains a multihash of the signees wallet address in the format of
-      `verifystart:<multihash-of-wallet-address>:verifyend`.
+      text that contains a multihash of the signees wallet address in the format of `verifystart:<multihash-of-wallet-address>:verifyend`.
     example:
     - https://twitter.com/titusz/status/1490104312051257347
     type: array
@@ -148,6 +149,7 @@ properties:
     minItems: 1
     maxItems: 128
     uniqueItems: true
+    x-iscc-context: http://purl.org/iscc/terms/#verify
   image:
     type: string
     format: uri
