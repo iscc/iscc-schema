@@ -18,6 +18,7 @@ class ChainId(Enum):
     PRIVATE = 0
     BITCOIN = 1
     ETHEREUM = 2
+    POLYGON = 3
 
 
 class IsccChains(BaseModel):

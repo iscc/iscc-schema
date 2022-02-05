@@ -8,6 +8,7 @@ properties:
     - 0
     - 1
     - 2
+    - 3
     type: number
     x-enum-varnames:
     - PRIVATE
