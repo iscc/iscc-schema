@@ -148,9 +148,9 @@ class Iscc(BaseModel):
         None,
         description=(
             "A list of self-verifications. Self-verifications are public URLs under the"
-            " account/authority of the signee. The verification URL must respond to a GET reqest"
-            " with text that contains a multihash of the signees wallet address in the format of"
-            " `verifystart:<multihash-of-wallet-address>:verifyend`."
+            " account/authority of the signee. The verification URL must respond to a GET request"
+            " with text that contains a multihash of the ISCC declaration signees wallet address in"
+            " the format of `verifystart:<multihash-of-wallet-address>:verifyend`."
         ),
         example=["https://twitter.com/titusz/status/1490104312051257347"],
         max_items=128,
