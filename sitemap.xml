@@ -2,37 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://schema.iscc.codes/</loc>
-         <lastmod>2022-02-04</lastmod>
+         <lastmod>2022-02-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://schema.iscc.codes/context/</loc>
-         <lastmod>2022-02-04</lastmod>
+         <lastmod>2022-02-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://schema.iscc.codes/includes/abbreviations/</loc>
-         <lastmod>2022-02-04</lastmod>
+         <lastmod>2022-02-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://schema.iscc.codes/includes/terms-iscc/</loc>
-         <lastmod>2022-02-04</lastmod>
+         <lastmod>2022-02-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://schema.iscc.codes/includes/terms-schema/</loc>
-         <lastmod>2022-02-04</lastmod>
+         <lastmod>2022-02-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://schema.iscc.codes/schema/</loc>
-         <lastmod>2022-02-04</lastmod>
+         <lastmod>2022-02-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://schema.iscc.codes/terms/</loc>
-         <lastmod>2022-02-04</lastmod>
+         <lastmod>2022-02-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
