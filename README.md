@@ -60,6 +60,12 @@ All ISCC extensions start with `x-iscc-`:
 
 ## Changelog
 
+### 0.3.0 - 2022-02-10
+- Added draft API for ISCC Generator Service
+- Added new collection schema
+- Updated dependencies
+- Added new terms: verify, original, redirect
+
 ### 0.2.1 - 2022-01-19
 - Tweak code generator
 - Cleanup dependencies
