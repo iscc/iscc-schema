@@ -1,7 +1,7 @@
 """Build docs/context/<v>.json JSON-LD file from iscc_core.schema"""
 from typing import Dict
 
-import iscc_schema
+import iscc_schema.schema
 from os.path import dirname, abspath, join
 import json
 
@@ -31,7 +31,7 @@ def build_context():
         }
     }
     ctx = context["@context"]
-    for prop, fields in iscc_schema.ISCC.schema()["properties"].items():
+    for prop, fields in iscc_schema.schema.ISCC.schema()["properties"].items():
         if "x_iscc_context" in fields:
             ctx[prop] = fields["x_iscc_context"]
     return context

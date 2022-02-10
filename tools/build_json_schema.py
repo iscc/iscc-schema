@@ -1,5 +1,5 @@
 """Build JSON Schema file from Pydantic model"""
-import iscc_schema
+import iscc_schema.schema
 from os.path import dirname, abspath, join
 
 
@@ -12,14 +12,14 @@ def build_latest():
     """Build `iscc.json` schema"""
 
     with open(PATH_LATEST, "wt", encoding="utf-8", newline="\n") as outf:
-        outf.write(iscc_schema.ISCC.schema_json(indent=2, ensure_ascii=False))
+        outf.write(iscc_schema.schema.ISCC.schema_json(indent=2, ensure_ascii=False))
 
 
 def build_version():
     """Build `<x.x.x>.json` schema"""
 
     with open(PATH_VERSION, "wt", encoding="utf-8", newline="\n") as outf:
-        outf.write(iscc_schema.ISCC.schema_json(indent=2, ensure_ascii=False))
+        outf.write(iscc_schema.schema.ISCC.schema_json(indent=2, ensure_ascii=False))
 
 
 def build():
