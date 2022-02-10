@@ -6,6 +6,7 @@ from datamodel_code_generator import InputFileType, generate
 ROOT = pathlib.Path(__file__).parent.parent
 CODE = ROOT / "iscc_schema"
 APIS = CODE / "reference"
+MODELS = CODE / "models"
 
 
 def build_apis():
@@ -27,4 +28,4 @@ def build():
 
 
 if __name__ == "__main__":
-    build_apis()
+    build()

@@ -3,55 +3,11 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Field, constr
-
-
-class IsccEmbeddable(BaseModel):
-    """
-    Metadata to be embedded into the digital asset.
-    """
-
-    creator: Optional[str] = Field(
-        None,
-        description="An entity primarily responsible for making the resource.",
-        example="Joanne K. Rowling",
-    )
-    license: Optional[AnyUrl] = Field(
-        None,
-        description=(
-            "URI of license for the identified *digital content*. **Supports URI template"
-            " `{iscc-id}`**."
-        ),
-        example="https://example.com/license-terms-for-this-item",
-    )
-    acquire: Optional[AnyUrl] = Field(
-        None,
-        description=(
-            "This field must contain a valid URL referring to a page showing information about how"
-            " one can acquire a license for the item. This may be a page of a web shop or NFT"
-            " marketplace ready for providing a license. **Supports URI template `{iscc-id}`**."
-        ),
-        example="https://example.com/buy-license-for-item-here",
-    )
-    credit: Optional[str] = Field(
-        None,
-        description=(
-            "A line of text that you expect users of the image (such as Google Images) to display"
-            " alongside the image."
-        ),
-        example="Frank Farian - Getty Images",
-    )
-    rights: Optional[str] = Field(
-        None,
-        description=(
-            "Contains any necessary copyright notice and should identify the current owner of the"
-            " copyright of this work with associated intellectual property rights."
-        ),
-        example="© Copyright 2022 ISCC Foundation - www.iscc.codes",
-    )
+from pydantic import AnyUrl, BaseModel, Field, confloat, conint, constr
 
 
 class Chain(Enum):
@@ -95,18 +51,16 @@ class IsccId(BaseModel):
     )
 
 
-class Iscc(BaseModel):
+class IsccRequest(BaseModel):
     """
-    ISCC Metadata
+    A request for generating an ISCC-CODE
     """
 
-    iscc: Optional[constr(regex=r"^ISCC:[A-Z2-7]{10,73}$", min_length=15, max_length=73)] = Field(
+    source_file: Optional[bytes] = Field(None, description="The file used for generating the ISCC")
+    source_url: Optional[AnyUrl] = Field(
         None,
-        description=(
-            "An **ISCC-CODE** in canonical representation. This is the minimal required field for a"
-            " valid ISCC Metadata object."
-        ),
-        example="ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
+        description="URL of file used for generating the ISCC",
+        example="https://picsum.photos/200/300.jpg",
     )
     name: Optional[constr(min_length=1, max_length=128)] = Field(
         None,
@@ -125,45 +79,225 @@ class Iscc(BaseModel):
         ),
         example="a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
     )
-    metadata: Optional[Union[Dict[str, Any], str]] = Field(
+    metadata: Optional[Dict[str, Any]] = Field(
         None,
         description=(
-            "Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC"
-            " Meta-Code generation**. Can be any object that is JSON/JCS serializable. If"
-            " `metadata` is provided it is used as an input for Meta-Code generation and as the"
-            " sole input for the cryptographic `metahash` calculation. If `metadata` is set to a"
-            " string it is assumed that it is base64 encoded binary file metadata."
+            "Descriptive, industry-sector or use-case specific structured JSON or JSON-LD metadata."
+            " Used as sole input for Meta-Code and Meta-Hash generation if supplied."
+        ),
+        example={"custom_field": "custom_value"},
+    )
+    creator: Optional[str] = Field(
+        None,
+        description="An entity primarily responsible for making the resource.",
+        example="Joanne K. Rowling",
+    )
+    license: Optional[AnyUrl] = Field(
+        None,
+        description=(
+            "URI of license for the identified *digital content*. **Supports URI template"
+            " `{iscc-id}`**."
+        ),
+        example="https://example.com/license-terms-for-this-item",
+    )
+    acquire: Optional[AnyUrl] = Field(
+        None,
+        description=(
+            "This field must contain a valid URL referring to a page showing information about how"
+            " one can acquire a license for the item. This may be a page of a web shop or NFT"
+            " marketplace ready for providing a license. **Supports URI template `{iscc-id}`**."
+        ),
+        example="https://example.com/buy-license-for-item-here",
+    )
+    credit: Optional[str] = Field(
+        None,
+        description=(
+            "A line of text that you expect users of the image (such as Google Images) to display"
+            " alongside the image."
+        ),
+        example="Frank Farian - Getty Images",
+    )
+    rights: Optional[str] = Field(
+        None,
+        description=(
+            "Contains any necessary copyright notice and should identify the current owner of the"
+            " copyright of this work with associated intellectual property rights."
+        ),
+        example="© Copyright 2022 ISCC Foundation - www.iscc.codes",
+    )
+
+
+class _Type(Enum):
+    """
+    The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).
+    """
+
+    CreativeWork = "CreativeWork"
+    TextDigitalDocument = "TextDigitalDocument"
+    ImageObject = "ImageObject"
+    AudioObject = "AudioObject"
+    VideoObject = "VideoObject"
+
+
+class IsccResponse(BaseModel):
+    """
+    Result of ISCC Processing
+    """
+
+    _context: Optional[AnyUrl] = Field(
+        "http://purl.org/iscc/context",
+        alias="@context",
+        description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
+    )
+    _type: Optional[_Type] = Field(
+        "CreativeWork",
+        alias="@type",
+        description=(
+            "The type of digital content according to schema.org classes (TextDigitalDocument,"
+            " ImageObject, AudioObject, VideoObject)."
         ),
     )
-    embed: Optional[IsccEmbeddable] = None
-    original: Optional[bool] = Field(
-        None,
-        description=(
-            "The signee of the declaring transaction claims to be the original creator of the work"
-            " manifested by the identified digital content."
-        ),
-        example=True,
+    _schema: Optional[AnyUrl] = Field(
+        "http://purl.org/iscc/schema",
+        alias="$schema",
+        description="The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
     )
-    verify: Optional[List[str]] = Field(
+    iscc: Optional[constr(regex=r"^ISCC:[A-Z2-7]{10,73}$", min_length=15, max_length=73)] = Field(
         None,
         description=(
-            "A list of self-verifications. Self-verifications are public URLs under the"
-            " account/authority of the signee. The verification URL must respond to a GET request"
-            " with text that contains a multihash of the ISCC declaration signees wallet address in"
-            " the format of `verifystart:<multihash-of-wallet-address>:verifyend`."
+            "An **ISCC-CODE** in canonical representation. This is the minimal required field for a"
+            " valid ISCC Metadata object."
         ),
-        example=["https://twitter.com/titusz/status/1490104312051257347"],
-        max_items=128,
-        min_items=1,
+        example="ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
     )
-    redirect: Optional[AnyUrl] = Field(
+    name: Optional[constr(max_length=128)] = Field(
         None,
         description=(
-            "URL to which a resolver should redirect an ISCC-ID that has been minted from a"
-            " declartion that includes the IPFS-hash of this metadata instance. **Supports URI"
-            " template `{iscc-id}`**."
+            "The title or name of the intangible creation manifested by the identified *digital"
+            " content*. **Used as input for ISCC Meta-Code generation**."
         ),
-        example="https://example.com/land-here-when-resolving-iscc-id",
+        example="The Never Ending Story",
+    )
+    description: Optional[constr(max_length=1024)] = Field(
+        None,
+        description=(
+            "Description of the *digital content* identified by the **ISCC**. **Used as input for"
+            " ISCC Meta-Code generation**. Any user presentable text string (including Markdown"
+            " text) indicative of the identity  of the referent may be used."
+        ),
+        example="a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
+    )
+    metadata: Optional[Dict[str, Any]] = Field(
+        None,
+        description=(
+            "Structured JSON or JSON-LD metadata. Used as sole input for Meta-Code and Meta-Hash"
+            " generation if supplied."
+        ),
+        example={"custom_field": "custom_value"},
+    )
+    creator: Optional[str] = Field(
+        None,
+        description="An entity primarily responsible for making the resource.",
+        example="Joanne K. Rowling",
+    )
+    license: Optional[AnyUrl] = Field(
+        None,
+        description=(
+            "URI of license for the identified *digital content*. **Supports URI template"
+            " `{iscc-id}`**."
+        ),
+        example="https://example.com/license-terms-for-this-item",
+    )
+    acquire: Optional[AnyUrl] = Field(
+        None,
+        description=(
+            "This field must contain a valid URL referring to a page showing information about how"
+            " one can acquire a license for the item. This may be a page of a web shop or NFT"
+            " marketplace ready for providing a license. **Supports URI template `{iscc-id}`**."
+        ),
+        example="https://example.com/buy-license-for-item-here",
+    )
+    credit: Optional[str] = Field(
+        None,
+        description=(
+            "A line of text that you expect users of the image (such as Google Images) to display"
+            " alongside the image."
+        ),
+        example="Frank Farian - Getty Images",
+    )
+    rights: Optional[str] = Field(
+        None,
+        description=(
+            "Contains any necessary copyright notice and should identify the current owner of the"
+            " copyright of this work with associated intellectual property rights."
+        ),
+        example="© Copyright 2022 ISCC Foundation - www.iscc.codes",
+    )
+    preview: Optional[AnyUrl] = Field(
+        None,
+        description=(
+            "URI for a small user-presentable thumbnail image that serves as a preview of the"
+            " *digital content*. The URI may be a Data-URL"
+            " [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397)"
+        ),
+        example="https://picsum.photos/200/300.jpg",
+    )
+    content: Optional[AnyUrl] = Field(
+        None, description="URI of the *digital content* that was used to create this ISCC."
+    )
+    created: Optional[datetime] = Field(
+        None, description="Datetime the ISCC was created for the item."
+    )
+    filename: Optional[str] = Field(
+        None,
+        description=(
+            "Filename of the referenced **digital content** (automatically used as fallback if the"
+            " `name` field was not specified for ISCC processing)"
+        ),
+    )
+    filesize: Optional[int] = Field(
+        None, description="File size of media asset in number of bytes.", example="somefile.jpg"
+    )
+    mediatype: Optional[str] = Field(
+        None,
+        description=(
+            "An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml)"
+            " (MIME type)"
+        ),
+        example="image/png",
+    )
+    duration: Optional[float] = Field(
+        None, description="Duration of audio-visual media in secondes.", example=60.251
+    )
+    fps: Optional[confloat(ge=1.0)] = Field(
+        None, description="Frames per second of video assets.", example=24
+    )
+    width: Optional[int] = Field(
+        None, description="Width of visual media in number of pixels.", example=640
+    )
+    height: Optional[conint(ge=1)] = Field(
+        None, description="Height of visual media in number of pixels.", example=480
+    )
+    characters: Optional[int] = Field(
+        None,
+        description="Number of text characters (code points after Unicode normalization)",
+        example=55689,
+    )
+    pages: Optional[int] = Field(
+        None, description="Number of pages (for paged documents only)", example=77
+    )
+    language: Optional[Union[str, List[str]]] = Field(
+        None,
+        description="Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).",
+        example="en-US",
+    )
+    features: Optional[List[Dict[str, Any]]] = Field(
+        None, description="Granular features of the *digital content*."
+    )
+    generator: Optional[str] = Field(
+        None,
+        description="Name and version of the software that generated the ISCC",
+        example="ISCC Generator Service - v1.5.0",
     )
     tophash: Optional[constr(min_length=40)] = Field(
         None,
@@ -177,10 +311,10 @@ class Iscc(BaseModel):
         None,
         description=(
             "A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default"
-            " blake3). The hash is created from `name` and `description` fields or `properties` if"
+            " blake3). The hash is created from `name` and `description` fields or `metadata` if"
             " supplied. For deterministic results [JSC"
             " RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied"
-            " to `properties` before hashing if it is a JSON object."
+            " to `metadata` before hashing if it is a JSON object."
         ),
         example="bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q",
     )

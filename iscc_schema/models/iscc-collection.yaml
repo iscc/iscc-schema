@@ -354,9 +354,9 @@ properties:
     example: bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q
     readOnly: true
     description: A [Multihash](https://multiformats.io/multihash/) of the supplied metadata
-      (default blake3). The hash is created from `name` and `description` fields or `properties`
+      (default blake3). The hash is created from `name` and `description` fields or `metadata`
       if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785)
-      canonicalization is applied to `properties` before hashing if it is a JSON object.
+      canonicalization is applied to `metadata` before hashing if it is a JSON object.
     x-iscc-context: http://purl.org/iscc/terms/#metahash
   datahash:
     type: string
@@ -366,16 +366,18 @@ properties:
     description: A [Multihash](https://multiformats.io/multihash/) of the *digital content*
       (default blake3).
     x-iscc-context: http://purl.org/iscc/terms/#datahash
-  chain_id:
-    description: Unique identifier of supported chain
+  chain:
+    type: string
+    description: The blockchain on which an ISCC-CODE is declared.
+    example: ETHEREUM
     enum:
-    - 0
-    - 1
-    - 2
-    - 3
-    type: number
-    x-enum-varnames:
     - PRIVATE
     - BITCOIN
     - ETHEREUM
     - POLYGON
+    x-iscc-context: http://purl.org/iscc/terms/#chain
+  wallet:
+    type: string
+    description: The wallet-address that signs an ISCC declaration.
+    example: '0xb794f5ea0ba39494ce839613fffba74279579268'
+    x-iscc-context: http://purl.org/iscc/terms/#wallet
