@@ -1,0 +1,389 @@
+{
+  "title": "ISCC",
+  "description": "ISCC Metadata Schema",
+  "type": "object",
+  "properties": {
+    "@context": {
+      "title": "@Context",
+      "description": "The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
+      "default": "http://purl.org/iscc/context",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "@type": {
+      "description": "The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).",
+      "default": "CreativeWork",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
+      ]
+    },
+    "$schema": {
+      "title": "$Schema",
+      "description": "The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
+      "default": "http://purl.org/iscc/schema",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "iscc": {
+      "title": "Iscc",
+      "description": "An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.",
+      "maxLength": 73,
+      "minLength": 15,
+      "pattern": "^ISCC:[A-Z2-7]{10,73}$",
+      "example": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "description": "The title or name of the intangible creation manifested by the identified *digital content*. **Used as input for ISCC Meta-Code generation**.",
+      "maxLength": 128,
+      "minLength": 1,
+      "example": "The Never Ending Story",
+      "x_iscc_context": "http://schema.org/name",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "description": "Description of the *digital content* identified by the **ISCC**. **Used as input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.",
+      "maxLength": 1024,
+      "minLength": 1,
+      "example": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
+      "x_iscc_context": "http://schema.org/disambiguatingDescription",
+      "type": "string"
+    },
+    "metadata": {
+      "title": "Metadata",
+      "description": "Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.",
+      "x_iscc_context": "http://purl.org/iscc/terms/#metadata",
+      "anyOf": [
+        {
+          "type": "object"
+        },
+        {
+          "$ref": "#/definitions/Metadatum"
+        }
+      ]
+    },
+    "creator": {
+      "title": "Creator",
+      "description": "An entity primarily responsible for making the resource.",
+      "example": "Joanne K. Rowling",
+      "x_iscc_context": "http://schema.org/creator",
+      "type": "string"
+    },
+    "license": {
+      "title": "License",
+      "description": "URI of license for the identified *digital content*. **Supports URI template `{iscc-id}`**.",
+      "example": "https://example.com/license-terms-for-this-item",
+      "x_iscc_context": "http://schema.org/license",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "acquire": {
+      "title": "Acquire",
+      "description": "This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license. **Supports URI template `{iscc-id}`**.",
+      "example": "https://example.com/buy-license-for-item-here",
+      "x_iscc_context": "http://schema.org/acquireLicensePage",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "credit": {
+      "title": "Credit",
+      "description": "A line of text that you expect users of the image (such as Google Images) to display alongside the image.",
+      "example": "Frank Farian - Getty Images",
+      "x_iscc_context": "http://schema.org/creditText",
+      "type": "string"
+    },
+    "rights": {
+      "title": "Rights",
+      "description": "Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.",
+      "example": "© Copyright 2022 ISCC Foundation - www.iscc.codes",
+      "x_iscc_context": "http://schema.org/copyrightNotice",
+      "type": "string"
+    },
+    "image": {
+      "title": "Image",
+      "description": "URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.",
+      "example": "https://picsum.photos/200/300.jpg",
+      "x_iscc_context": "http://schema.org/image",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "identifier": {
+      "title": "Identifier",
+      "description": "Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.",
+      "x_iscc_context": "http://schema.org/identifier",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 65536,
+        "format": "uri"
+      }
+    },
+    "content": {
+      "title": "Content",
+      "description": "URI of the *digital content* that was used to create this ISCC.",
+      "x_iscc_context": "http://schema.org/contentUrl",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "keywords": {
+      "title": "Keywords",
+      "description": "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.",
+      "x_iscc_context": "http://schema.org/keywords",
+      "type": "string"
+    },
+    "redirect": {
+      "title": "Redirect",
+      "description": "URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.",
+      "example": "https://example.com/land-here-when-resolving-iscc-id",
+      "x_iscc_context": "http://purl.org/iscc/terms/#redirect",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "previous": {
+      "title": "Previous",
+      "description": "ISCC of the preceding version of this item.",
+      "x_iscc_context": "http://purl.org/iscc/terms/#previous",
+      "type": "string"
+    },
+    "version": {
+      "title": "Version",
+      "description": "The version of the CreativeWork embodied by a specified resource.",
+      "x_iscc_context": "http://schema.org/version",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "created": {
+      "title": "Created",
+      "description": "Datetime the ISCC was created for the item.",
+      "x_iscc_context": "http://schema.org/dateCreated",
+      "type": "string",
+      "format": "date-time"
+    },
+    "filename": {
+      "title": "Filename",
+      "description": "Filename of the referenced **digital content** (automatically used as fallback if the `name` field was not specified for ISCC processing)",
+      "x_iscc_context": "http://purl.org/iscc/terms/#filename",
+      "type": "string"
+    },
+    "filesize": {
+      "title": "Filesize",
+      "description": "File size of media asset in number of bytes.",
+      "x_iscc_context": "http://schema.org/fileSize",
+      "type": "integer"
+    },
+    "mediatype": {
+      "title": "Mediatype",
+      "description": "An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)",
+      "example": "image/png",
+      "x_iscc_context": "http://schema.org/encodingFormat",
+      "type": "string"
+    },
+    "duration": {
+      "title": "Duration",
+      "description": "Duration of audio-visual media in secondes.",
+      "x_iscc_context": "http://schema.org/duration",
+      "type": "integer"
+    },
+    "fps": {
+      "title": "Fps",
+      "description": "Frames per second of video assets.",
+      "minimum": 1.0,
+      "example": 24,
+      "x_iscc_context": "http://purl.org/iscc/terms/#fps",
+      "type": "number"
+    },
+    "width": {
+      "title": "Width",
+      "description": "Width of visual media in number of pixels.",
+      "example": 640,
+      "x_iscc_context": "http://purl.org/iscc/terms/#width",
+      "type": "integer"
+    },
+    "height": {
+      "title": "Height",
+      "description": "Height of visual media in number of pixels.",
+      "minimum": 1.0,
+      "example": 480,
+      "x_iscc_context": "http://purl.org/iscc/terms/#height",
+      "type": "integer"
+    },
+    "characters": {
+      "title": "Characters",
+      "description": "Number of text characters (code points after Unicode normalization)",
+      "example": 55689,
+      "x_iscc_context": "http://purl.org/iscc/terms/#characters",
+      "type": "integer"
+    },
+    "pages": {
+      "title": "Pages",
+      "description": "Number of pages (for paged documents only)",
+      "example": 77,
+      "x_iscc_context": "http://schema.org/numberOfPages",
+      "type": "integer"
+    },
+    "language": {
+      "title": "Language",
+      "description": "Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).",
+      "example": "en-US",
+      "x_iscc_context": "http://schema.org/inLanguage",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "parts": {
+      "title": "Parts",
+      "description": "Indicates items that are part of this item via Content-Codes (inverse-property belongs).",
+      "x_iscc_context": "http://purl.org/iscc/terms/#parts",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "part_of": {
+      "title": "Part Of",
+      "description": "Indicates that this item is part of other items via their Content-Code.",
+      "x_iscc_context": "http://purl.org/iscc/terms/#part_of",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "features": {
+      "title": "Features",
+      "description": "Granular features of the *digital content*.",
+      "x_iscc_context": "http://purl.org/iscc/terms/#features",
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "generator": {
+      "title": "Generator",
+      "description": "Name and version of the software that generated the ISCC",
+      "x_iscc_context": "http://purl.org/iscc/terms/#generator",
+      "type": "string"
+    },
+    "external_url": {
+      "title": "External Url",
+      "description": "This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site.",
+      "x_iscc_context": "http://purl.org/iscc/terms/#external_url",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "animation_url": {
+      "title": "Animation Url",
+      "description": "A URL to a multi-media attachment for the item.",
+      "x_iscc_context": "http://purl.org/iscc/terms/#animation_url",
+      "minLength": 1,
+      "maxLength": 65536,
+      "format": "uri",
+      "type": "string"
+    },
+    "properties": {
+      "title": "Properties",
+      "description": "Arbitrary properties. Values may be strings, numbers, object or arrays. Properties defined here may show up on NFT marketplaces. See [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)",
+      "x_iscc_context": "http://purl.org/iscc/terms/#properties",
+      "type": "object"
+    },
+    "tophash": {
+      "title": "Tophash",
+      "description": "A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).",
+      "minLength": 40,
+      "example": "bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja",
+      "x_iscc_context": "http://purl.org/iscc/terms/#tophash",
+      "type": "string"
+    },
+    "metahash": {
+      "title": "Metahash",
+      "description": "A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). The hash is created from `name` and `description` fields or `properties` if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied to `properties` before hashing if it is a JSON object.",
+      "minLength": 40,
+      "example": "bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q",
+      "x_iscc_context": "http://purl.org/iscc/terms/#metahash",
+      "type": "string"
+    },
+    "datahash": {
+      "title": "Datahash",
+      "description": "A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).",
+      "minLength": 40,
+      "example": "bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
+      "x_iscc_context": "http://purl.org/iscc/terms/#datahash",
+      "type": "string"
+    },
+    "chain_id": {
+      "description": "Unique identifier of supported chain",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChainId"
+        }
+      ]
+    }
+  },
+  "required": [
+    "iscc"
+  ],
+  "definitions": {
+    "Type": {
+      "title": "Type",
+      "description": "The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).",
+      "enum": [
+        "CreativeWork",
+        "TextDigitalDocument",
+        "ImageObject",
+        "AudioObject",
+        "VideoObject"
+      ]
+    },
+    "Metadatum": {
+      "title": "Metadatum",
+      "description": "Base64-encoded file header metadata. Used as sole input for Meta-Code and Meta-Hash generation if supplied.",
+      "pattern": "^(?:[A-Za-z\\d+/]{4})*(?:[A-Za-z\\d+/]{3}=|[A-Za-z\\d+/]{2}==)?$",
+      "example": "VGhpcyBjb3VsZCBiZSBhIGJpbmFyeSBmaWxlIGhlYWRlciBmb3IgZXhhbXBsZQ==",
+      "type": "string"
+    },
+    "ChainId": {
+      "title": "ChainId",
+      "description": "Unique identifier of supported chain",
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  }
+}
