@@ -1,7 +1,7 @@
 title: iscc-all
 description: ISCC Metadata Schema
 allOf:
-- $ref: ./iscc-chains.yaml
+- $ref: ./iscc-declaration.yaml
 - $ref: ./iscc-crypto.yaml
 - $ref: ./iscc-nft.yaml
 - $ref: ./iscc-technical.yaml

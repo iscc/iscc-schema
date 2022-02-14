@@ -41,14 +41,6 @@ properties:
     x-iscc-context: http://schema.org/keywords
     x-iscc-schema-doc: Keywords or tags used to describe this content. Multiple entries in
       a keywords list are typically delimited by commas.
-  redirect:
-    type: string
-    description: URL to which a resolver should redirect an ISCC-ID that has been minted from
-      a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template
-      `{iscc-id}`**.
-    example: https://example.com/land-here-when-resolving-iscc-id
-    format: uri
-    x-iscc-context: http://purl.org/iscc/terms/#redirect
   previous:
     description: ISCC of the preceding version of this item.
     type: string

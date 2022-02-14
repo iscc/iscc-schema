@@ -42,7 +42,7 @@ def build_json_schema_docs():
         "iscc-technical.yaml",
         "iscc-nft.yaml",
         "iscc-crypto.yaml",
-        "iscc-chains.yaml",
+        "iscc-declaration.yaml",
     ]
     content = header
     for schema in schemata:
@@ -94,6 +94,7 @@ def build_json_ld_context_docs():
         "iscc-technical.yaml",
         "iscc-nft.yaml",
         "iscc-crypto.yaml",
+        "iscc-declaration.yaml",
     ]
 
     for schema in schemata:

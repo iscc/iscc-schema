@@ -4,12 +4,6 @@
 
     Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
 
-### **redirect**
-
-!!! term "<small><http://purl.org/iscc/terms/#redirect></small>"
-
-    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.
-
 ### **previous**
 
 !!! term "<small><http://purl.org/iscc/terms/#previous></small>"
@@ -105,4 +99,34 @@
 !!! term "<small><http://purl.org/iscc/terms/#datahash></small>"
 
     A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
+
+### **verify**
+
+!!! term "<small><http://purl.org/iscc/terms/#verify></small>"
+
+    A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verifystart:<multihash-of-wallet-address>:verifyend`.
+
+### **original**
+
+!!! term "<small><http://purl.org/iscc/terms/#original></small>"
+
+    The signee of the declaring transaction claims to be the original creator of the work manifested by the identified digital content.
+
+### **redirect**
+
+!!! term "<small><http://purl.org/iscc/terms/#redirect></small>"
+
+    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.
+
+### **chain**
+
+!!! term "<small><http://purl.org/iscc/terms/#chain></small>"
+
+    The blockchain on which an ISCC-CODE is declared.
+
+### **wallet**
+
+!!! term "<small><http://purl.org/iscc/terms/#wallet></small>"
+
+    The wallet-address that signs an ISCC declaration.
 

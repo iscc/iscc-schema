@@ -148,13 +148,6 @@ Extended ISCC Metadata
 | ---- | ---- | --------|--------------------------------|
 | keywords | `string` | none | Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.         |
 
-### **redirect**
-<http://purl.org/iscc/terms/#redirect>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
-
 ### **previous**
 <http://purl.org/iscc/terms/#previous>
 
@@ -338,11 +331,40 @@ Cryptography related ISCC Metadata
 | ---- | ---- | --------|--------------------------------|
 | datahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).<br><br>**Example**: `bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq`         |
 
-## iscc-chains
-Chains that support ISCC Declarations
-### **chain_id**
+## iscc-declaration
+Field relevant in context with public ISCC declerations
+### **verify**
+<http://purl.org/iscc/terms/#verify>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| chain_id | `number` | none | Unique identifier of supported chain         |
+| verify | `array` | none | A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verifystart:<multihash-of-wallet-address>:verifyend`.<br><br>**Example**: `['https://twitter.com/titusz/status/1490104312051257347']`         |
+
+### **original**
+<http://purl.org/iscc/terms/#original>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| original | `boolean` | none | The signee of the declaring transaction claims to be the original creator of the work manifested by the identified digital content.<br><br>**Example**: `True`         |
+
+### **redirect**
+<http://purl.org/iscc/terms/#redirect>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
+
+### **chain**
+<http://purl.org/iscc/terms/#chain>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| chain | `string` | none | The blockchain on which an ISCC-CODE is declared.<br><br>**Example**: `ETHEREUM`         |
+
+### **wallet**
+<http://purl.org/iscc/terms/#wallet>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| wallet | `string` | none | The wallet-address that signs an ISCC declaration.<br><br>**Example**: `0xb794f5ea0ba39494ce839613fffba74279579268`         |
 

@@ -72,12 +72,6 @@
 !!! term ""
     Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
 
-## redirect
-
-<small><http://purl.org/iscc/terms/#redirect></small>
-!!! term ""
-    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.
-
 ## previous
 
 <small><http://purl.org/iscc/terms/#previous></small>
@@ -215,4 +209,34 @@
 <small><http://purl.org/iscc/terms/#datahash></small>
 !!! term ""
     A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
+
+## verify
+
+<small><http://purl.org/iscc/terms/#verify></small>
+!!! term ""
+    A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verifystart:<multihash-of-wallet-address>:verifyend`.
+
+## original
+
+<small><http://purl.org/iscc/terms/#original></small>
+!!! term ""
+    The signee of the declaring transaction claims to be the original creator of the work manifested by the identified digital content.
+
+## redirect
+
+<small><http://purl.org/iscc/terms/#redirect></small>
+!!! term ""
+    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.
+
+## chain
+
+<small><http://purl.org/iscc/terms/#chain></small>
+!!! term ""
+    The blockchain on which an ISCC-CODE is declared.
+
+## wallet
+
+<small><http://purl.org/iscc/terms/#wallet></small>
+!!! term ""
+    The wallet-address that signs an ISCC declaration.
 

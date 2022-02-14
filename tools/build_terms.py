@@ -20,6 +20,7 @@ def terms(context):
         "iscc-technical.yaml",
         "iscc-nft.yaml",
         "iscc-crypto.yaml",
+        "iscc-declaration.yaml",
     ]
 
     for schema in schemata:

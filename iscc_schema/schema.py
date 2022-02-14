@@ -10,23 +10,66 @@ from typing import Any, Dict, List, Optional, Union
 from pydantic import AnyUrl, BaseModel, Field
 
 
-class ChainId(Enum):
+class Chain(Enum):
     """
-    Unique identifier of supported chain
-    """
-
-    PRIVATE = 0
-    BITCOIN = 1
-    ETHEREUM = 2
-    POLYGON = 3
-
-
-class IsccChains(BaseModel):
-    """
-    Chains that support ISCC Declarations
+    The blockchain on which an ISCC-CODE is declared.
     """
 
-    chain_id: Optional[ChainId] = Field(None, description="Unique identifier of supported chain")
+    PRIVATE = "PRIVATE"
+    BITCOIN = "BITCOIN"
+    ETHEREUM = "ETHEREUM"
+    POLYGON = "POLYGON"
+
+
+class IsccDeclaration(BaseModel):
+    """
+    Field relevant in context with public ISCC declerations
+    """
+
+    verify: Optional[List[str]] = Field(
+        None,
+        description=(
+            "A list of self-verifications. Self-verifications are public URLs under the"
+            " account/authority of the signee. The verification URL must respond to a GET request"
+            " with text that contains a multihash of the ISCC declaration signees wallet address in"
+            " the format of `verifystart:<multihash-of-wallet-address>:verifyend`."
+        ),
+        example=["https://twitter.com/titusz/status/1490104312051257347"],
+        max_items=128,
+        min_items=1,
+        x_iscc_context="http://purl.org/iscc/terms/#verify",
+    )
+    original: Optional[bool] = Field(
+        None,
+        description=(
+            "The signee of the declaring transaction claims to be the original creator of the work"
+            " manifested by the identified digital content."
+        ),
+        example=True,
+        x_iscc_context="http://purl.org/iscc/terms/#original",
+    )
+    redirect: Optional[AnyUrl] = Field(
+        None,
+        description=(
+            "URL to which a resolver should redirect an ISCC-ID that has been minted from a"
+            " declartion that includes the IPFS-hash of this metadata instance. **Supports URI"
+            " template `{iscc-id}`**."
+        ),
+        example="https://example.com/land-here-when-resolving-iscc-id",
+        x_iscc_context="http://purl.org/iscc/terms/#redirect",
+    )
+    chain: Optional[Chain] = Field(
+        None,
+        description="The blockchain on which an ISCC-CODE is declared.",
+        example="ETHEREUM",
+        x_iscc_context="http://purl.org/iscc/terms/#chain",
+    )
+    wallet: Optional[str] = Field(
+        None,
+        description="The wallet-address that signs an ISCC declaration.",
+        example="0xb794f5ea0ba39494ce839613fffba74279579268",
+        x_iscc_context="http://purl.org/iscc/terms/#wallet",
+    )
 
 
 class IsccCrypto(BaseModel):
@@ -237,16 +280,6 @@ class IsccExtended(BaseModel):
         ),
         x_iscc_context="http://schema.org/keywords",
     )
-    redirect: Optional[AnyUrl] = Field(
-        None,
-        description=(
-            "URL to which a resolver should redirect an ISCC-ID that has been minted from a"
-            " declartion that includes the IPFS-hash of this metadata instance. **Supports URI"
-            " template `{iscc-id}`**."
-        ),
-        example="https://example.com/land-here-when-resolving-iscc-id",
-        x_iscc_context="http://purl.org/iscc/terms/#redirect",
-    )
     previous: Optional[str] = Field(
         None,
         description="ISCC of the preceding version of this item.",
@@ -418,7 +451,7 @@ class IsccJsonld(BaseModel):
 
 
 class ISCC(
-    IsccChains,
+    IsccDeclaration,
     IsccCrypto,
     IsccNft,
     IsccTechnical,
