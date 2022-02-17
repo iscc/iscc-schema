@@ -38,6 +38,7 @@
     "external_url": "http://purl.org/iscc/terms/#external_url",
     "animation_url": "http://purl.org/iscc/terms/#animation_url",
     "properties": "http://purl.org/iscc/terms/#properties",
+    "attributes": "http://purl.org/iscc/terms/#attributes",
     "tophash": "http://purl.org/iscc/terms/#tophash",
     "metahash": "http://purl.org/iscc/terms/#metahash",
     "datahash": "http://purl.org/iscc/terms/#datahash",
