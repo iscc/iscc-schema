@@ -24,7 +24,7 @@ extra:
 
 theme:
   name: material
-  custom_dir: overrides
+  custom_dir: docs/overrides
   logo: images/iscc-logo-icon-white.svg
   favicon: images/iscc-logo-icon-black.svg
   language: en
@@ -81,3 +81,4 @@ nav:
   - Terms: terms/index.md
   - Schema: schema/index.md
   - API: api
+  - Examples: examples/index.md
