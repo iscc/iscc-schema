@@ -82,6 +82,12 @@
 
     Arbitrary properties. Values may be strings, numbers, object or arrays. Properties defined here may show up on NFT marketplaces. See [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)
 
+### **attributes**
+
+!!! term "<small><http://purl.org/iscc/terms/#attributes></small>"
+
+    Similar to `properties` but as an array of objects. These attributes will show up on some NFT marketplaces.
+
 ### **tophash**
 
 !!! term "<small><http://purl.org/iscc/terms/#tophash></small>"

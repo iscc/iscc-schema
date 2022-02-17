@@ -306,7 +306,14 @@ Metadata for NFT Marketplaces
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| properties | `object` | none | Arbitrary properties. Values may be strings, numbers, object or arrays. Properties defined here may show up on NFT marketplaces. See [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)         |
+| properties | `object` | none | Arbitrary properties. Values may be strings, numbers, object or arrays. Properties defined here may show up on NFT marketplaces. See [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)<br><br>**Example**: `{'simple_property': 'example value', 'rich_property': {'name': 'Name', 'value': '123', 'display_value': '123 Example Value', 'class': 'emphasis', 'css': {'color': '#ffffff', 'font-weight': 'bold', 'text-decoration': 'underline'}}, 'array_property': {'name': 'Name', 'value': [1, 2, 3, 4], 'class': 'emphasis'}}`         |
+
+### **attributes**
+<http://purl.org/iscc/terms/#attributes>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| attributes | `array` | none | Similar to `properties` but as an array of objects. These attributes will show up on some NFT marketplaces.<br><br>**Example**: `[{'trait_type': 'METAL', 'value': 'SILVER'}, {'display_type': 'number', 'trait_type': 'GENERATION', 'value': 1}]`         |
 
 ## iscc-crypto
 Cryptography related ISCC Metadata
