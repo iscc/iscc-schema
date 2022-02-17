@@ -13,6 +13,40 @@ single source of truth for auto-generated [JSON Schema](https://json-schema.org/
 definitions, [JSON-LD](https://json-ld.org/) contexts, and other schema related
 artifacts.
 
+## Metadata for Digital Content
+
+Metadata is data about data. For digital content, metadata may describe assets for different
+purposes such as data management, data provenance, allocation of royalties, indexing,
+disambiguation, process automation, etc.
+
+## ISCC Metadata
+
+Calculating ISCC codes requires extensive processing of media assets. As a by-product, an ISCC
+processor can automatically produce and retain metadata that describes the asset and helps with
+comparing and matching digital content. ISCC creation is also an opportunity to embed metadata
+into a digital asset. Once the metadata is embedded, an ISCC processor will automatically
+regenerate the same ISCC Meta-Code without manually supplying custom metadata for processing.
+As the ISCC targets a broad set of use-cases, it comes with a minimal and generic metadata schema.
+This site documents the ISCC metadata model.
+
+## Types of Metadata
+
+For the identification of digital assets, ISCC distinguishes between two major types of metadata:
+
+### Implicit Metadata
+
+Implicit metadata is data that can be measured by analyzing a media asset. For example, an ISCC
+processor can infer pixel width and height from an image or duration from an audio file. The use
+of implicit metadata is very efficient and robust. It does not require a human to verify the
+correctness of the data because it can be measured and verified automatically.
+
+### Explicit Metadata
+
+Explicit metadata is data about media assets assembled and curated by people. It is often stored
+separately from the files in databases but may also be embedded into media assets. In contrast to
+implicit metadata, human-curated metadata is prone to errors, laborious to manage, and often not
+up to date. Platforms also tend to remove embedded metadata from the files they are hosting.
+
 ## Documentation
 
 Documentation is hosted at [schema.iscc.codes](https://schema.iscc.codes)
