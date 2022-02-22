@@ -8,7 +8,7 @@
     "VideoObject": "http://schema.org/VideoObject",
     "name": "http://schema.org/name",
     "description": "http://schema.org/disambiguatingDescription",
-    "metadata": "http://purl.org/iscc/terms/#metadata",
+    "meta": "http://purl.org/iscc/terms/#metadata",
     "creator": "http://schema.org/creator",
     "license": "http://schema.org/license",
     "acquire": "http://schema.org/acquireLicensePage",
