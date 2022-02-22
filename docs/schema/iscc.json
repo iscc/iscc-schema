@@ -71,7 +71,7 @@
       "x-iscc-schema-doc": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
       "x-iscc-embed": "Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description` for image embedding."
     },
-    "metadata": {
+    "meta": {
       "oneOf": [
         {
           "type": "object",
@@ -517,7 +517,7 @@
       "x-iscc-schema-doc": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
       "x-iscc-embed": "Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description` for image embedding."
     },
-    "metadata": {
+    "meta": {
       "oneOf": [
         {
           "type": "object",

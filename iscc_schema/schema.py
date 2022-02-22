@@ -365,7 +365,7 @@ class IsccEmbeddable(BaseModel):
     )
 
 
-class Metadatum(BaseModel):
+class MetaItem(BaseModel):
     __root__: str = Field(
         ...,
         description=(
@@ -405,7 +405,7 @@ class IsccBasic(BaseModel):
         min_length=1,
         x_iscc_context="http://schema.org/disambiguatingDescription",
     )
-    metadata: Optional[Union[Dict[str, Any], Metadatum]] = Field(
+    meta: Optional[Union[Dict[str, Any], MetaItem]] = Field(
         None,
         description=(
             "Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC"

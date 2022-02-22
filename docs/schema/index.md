@@ -62,12 +62,12 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 | ---- | ---- | --------|--------------------------------|
 | description | `string` | none | Description of the *digital content* identified by the **ISCC**. **Used as input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.<br><br>**Example**: `a 1984 fantasy film co-written and directed by *Wolfgang Petersen*`         |
 
-### **metadata**
+### **meta**
 <http://purl.org/iscc/terms/#metadata>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| metadata | `None` | none | Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.         |
+| meta | `None` | none | Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.         |
 
 ## iscc-embeddable
 Metadata intended to be embedded into the media asset.

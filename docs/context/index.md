@@ -12,7 +12,7 @@
 !!! term ""
     Description of the *digital content* identified by the **ISCC**. **Used as input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.
 
-## metadata
+## meta
 
 <small><http://purl.org/iscc/terms/#metadata></small>
 !!! term ""

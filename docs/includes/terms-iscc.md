@@ -1,4 +1,4 @@
-### **metadata**
+### **meta**
 
 !!! term "<small><http://purl.org/iscc/terms/#metadata></small>"
 
