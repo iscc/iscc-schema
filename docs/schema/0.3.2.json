@@ -11,7 +11,7 @@
     "@context": {
       "type": "string",
       "format": "uri",
-      "default": "http://purl.org/iscc/context",
+      "default": "http://purl.org/iscc/context/0.3.2.jsonld",
       "description": "The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
       "readOnly": true
     },
@@ -31,7 +31,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "default": "http://purl.org/iscc/schema",
+      "default": "http://purl.org/iscc/schema/0.3.2.json",
       "description": "The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
       "readOnly": true
     },
@@ -65,33 +65,30 @@
       "type": "string",
       "example": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
       "minLength": 1,
-      "maxLength": 1024,
+      "maxLength": 4096,
       "description": "Description of the *digital content* identified by the **ISCC**. **Used as input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.",
       "x-iscc-context": "http://schema.org/disambiguatingDescription",
       "x-iscc-schema-doc": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
       "x-iscc-embed": "Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description` for image embedding."
     },
     "meta": {
-      "oneOf": [
-        {
-          "type": "object",
-          "minProperties": 1,
-          "description": "Structured JSON or JSON-LD metadata. Used as sole input for Meta-Code and Meta-Hash generation if supplied.",
-          "example": {
-            "custom_field": "custom_value"
-          }
-        },
-        {
-          "type": "string",
-          "format": "byte",
-          "example": "VGhpcyBjb3VsZCBiZSBhIGJpbmFyeSBmaWxlIGhlYWRlciBmb3IgZXhhbXBsZQ==",
-          "pattern": "^(?:[A-Za-z\\d+/]{4})*(?:[A-Za-z\\d+/]{3}=|[A-Za-z\\d+/]{2}==)?$",
-          "description": "Base64-encoded file header metadata. Used as sole input for Meta-Code and Meta-Hash generation if supplied."
-        }
+      "type": "string",
+      "maxLength": 16384,
+      "example": "data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=",
+      "description": "Subject, industry, or use-case specific metadata, eEncoded as JSON string or Data-URL (used as sole input for Meta-Code and `metahash` generation if supplied.)",
+      "x-iscc-context": "http://purl.org/iscc/terms/#meta"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "text",
+        "image",
+        "audio",
+        "video",
+        "mixed"
       ],
-      "minProperties": 1,
-      "description": "Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.",
-      "x-iscc-context": "http://purl.org/iscc/terms/#metadata"
+      "example": "video",
+      "description": "The perceptual mode used to create the ISCC-CODE."
     },
     "creator": {
       "type": "string",
@@ -141,19 +138,20 @@
       "example": true,
       "x-iscc-context": "http://purl.org/iscc/terms/#original"
     },
-    "verify": {
+    "verifications": {
       "description": "A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verifystart:<multihash-of-wallet-address>:verifyend`.",
       "example": [
-        "https://twitter.com/titusz/status/1490104312051257347"
+        {
+          "url": "https://twitter.com/titusz/status/1490104312051257347"
+        }
       ],
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object"
       },
-      "minItems": 1,
       "maxItems": 128,
       "uniqueItems": true,
-      "x-iscc-context": "http://purl.org/iscc/terms/#verify"
+      "x-iscc-context": "http://purl.org/iscc/terms/#verifications"
     },
     "image": {
       "type": "string",
@@ -412,9 +410,9 @@
     "metahash": {
       "type": "string",
       "minLength": 40,
-      "example": "bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q",
+      "example": "f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9",
       "readOnly": true,
-      "description": "A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). The hash is created from `name` and `description` fields or `metadata` if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied to `metadata` before hashing if it is a JSON object.",
+      "description": "A [Multiformats](https://multiformats.io) multihash of IPFS CIDv1 of the supplied metadata. The hash is created from `name` and `description` fields or `meta` if supplied.",
       "x-iscc-context": "http://purl.org/iscc/terms/#metahash"
     },
     "datahash": {
@@ -457,7 +455,7 @@
     "@context": {
       "type": "string",
       "format": "uri",
-      "default": "http://purl.org/iscc/context",
+      "default": "http://purl.org/iscc/context/0.3.2.jsonld",
       "description": "The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
       "readOnly": true
     },
@@ -477,7 +475,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "default": "http://purl.org/iscc/schema",
+      "default": "http://purl.org/iscc/schema/0.3.2.json",
       "description": "The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
       "readOnly": true
     },
@@ -511,33 +509,30 @@
       "type": "string",
       "example": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
       "minLength": 1,
-      "maxLength": 1024,
+      "maxLength": 4096,
       "description": "Description of the *digital content* identified by the **ISCC**. **Used as input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.",
       "x-iscc-context": "http://schema.org/disambiguatingDescription",
       "x-iscc-schema-doc": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
       "x-iscc-embed": "Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description` for image embedding."
     },
     "meta": {
-      "oneOf": [
-        {
-          "type": "object",
-          "minProperties": 1,
-          "description": "Structured JSON or JSON-LD metadata. Used as sole input for Meta-Code and Meta-Hash generation if supplied.",
-          "example": {
-            "custom_field": "custom_value"
-          }
-        },
-        {
-          "type": "string",
-          "format": "byte",
-          "example": "VGhpcyBjb3VsZCBiZSBhIGJpbmFyeSBmaWxlIGhlYWRlciBmb3IgZXhhbXBsZQ==",
-          "pattern": "^(?:[A-Za-z\\d+/]{4})*(?:[A-Za-z\\d+/]{3}=|[A-Za-z\\d+/]{2}==)?$",
-          "description": "Base64-encoded file header metadata. Used as sole input for Meta-Code and Meta-Hash generation if supplied."
-        }
+      "type": "string",
+      "maxLength": 16384,
+      "example": "data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=",
+      "description": "Subject, industry, or use-case specific metadata, eEncoded as JSON string or Data-URL (used as sole input for Meta-Code and `metahash` generation if supplied.)",
+      "x-iscc-context": "http://purl.org/iscc/terms/#meta"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "text",
+        "image",
+        "audio",
+        "video",
+        "mixed"
       ],
-      "minProperties": 1,
-      "description": "Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.",
-      "x-iscc-context": "http://purl.org/iscc/terms/#metadata"
+      "example": "video",
+      "description": "The perceptual mode used to create the ISCC-CODE."
     },
     "creator": {
       "type": "string",
@@ -587,19 +582,20 @@
       "example": true,
       "x-iscc-context": "http://purl.org/iscc/terms/#original"
     },
-    "verify": {
+    "verifications": {
       "description": "A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verifystart:<multihash-of-wallet-address>:verifyend`.",
       "example": [
-        "https://twitter.com/titusz/status/1490104312051257347"
+        {
+          "url": "https://twitter.com/titusz/status/1490104312051257347"
+        }
       ],
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object"
       },
-      "minItems": 1,
       "maxItems": 128,
       "uniqueItems": true,
-      "x-iscc-context": "http://purl.org/iscc/terms/#verify"
+      "x-iscc-context": "http://purl.org/iscc/terms/#verifications"
     },
     "image": {
       "type": "string",
@@ -858,9 +854,9 @@
     "metahash": {
       "type": "string",
       "minLength": 40,
-      "example": "bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q",
+      "example": "f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9",
       "readOnly": true,
-      "description": "A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). The hash is created from `name` and `description` fields or `metadata` if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied to `metadata` before hashing if it is a JSON object.",
+      "description": "A [Multiformats](https://multiformats.io) multihash of IPFS CIDv1 of the supplied metadata. The hash is created from `name` and `description` fields or `meta` if supplied.",
       "x-iscc-context": "http://purl.org/iscc/terms/#metahash"
     },
     "datahash": {

@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 import pytest
-from iscc_schema import schema
-from pyld import jsonld
+from iscc_schema import schema, __version__
 
 
 def test_schema():
     so = schema.ISCC(iscc="ISCC:EIAGUJFCEY")
     assert so.dict(exclude_none=True, by_alias=True) == {
-        "@context": "http://purl.org/iscc/context",
+        "@context": f"http://purl.org/iscc/context/{__version__}.jsonld",
         "@type": "CreativeWork",
-        "$schema": "http://purl.org/iscc/schema",
+        "$schema": f"http://purl.org/iscc/schema/{__version__}.json",
         "iscc": "ISCC:EIAGUJFCEY",
     }
 

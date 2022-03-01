@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Build Pydantic models for Schema definitions"""
 import pathlib
-from datamodel_code_generator import InputFileType, generate
+from datamodel_code_generator import InputFileType, generate, OpenAPIScope
 
 ROOT = pathlib.Path(__file__).parent.parent
 CODE = ROOT / "iscc_schema"
@@ -10,7 +10,7 @@ MODELS = CODE / "models"
 
 
 def build_apis():
-    infile = APIS / "iscc-service-generator.yaml"
+    infile = APIS / "iscc-generator.yaml"
     outfile = CODE / "generator.py"
     generate(
         infile,
@@ -20,6 +20,9 @@ def build_apis():
         wrap_string_literal=True,
         disable_timestamp=True,
         use_schema_description=True,
+        openapi_scopes=[OpenAPIScope.Schemas, OpenAPIScope.Paths],
+        reuse_model=True,
+        disable_appending_item_suffix=True,
     )
 
 

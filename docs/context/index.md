@@ -14,9 +14,9 @@
 
 ## meta
 
-<small><http://purl.org/iscc/terms/#metadata></small>
+<small><http://purl.org/iscc/terms/#meta></small>
 !!! term ""
-    Descriptive, industry-sector or use-case specific metadata. **Used as input for ISCC Meta-Code generation**. Can be any object that is JSON/JCS serializable. If `metadata` is provided it is used as an input for Meta-Code generation and as the sole input for the cryptographic `metahash` calculation. If `metadata` is set to a string it is assumed that it is base64 encoded binary file metadata.
+    Subject, industry, or use-case specific metadata, eEncoded as JSON string or Data-URL (used as sole input for Meta-Code and `metahash` generation if supplied.)
 
 ## creator
 
@@ -208,7 +208,7 @@
 
 <small><http://purl.org/iscc/terms/#metahash></small>
 !!! term ""
-    A [Multihash](https://multiformats.io/multihash/) of the supplied metadata (default blake3). The hash is created from `name` and `description` fields or `properties` if supplied. For deterministic results [JSC RFC5452](https://datatracker.ietf.org/doc/html/rfc8785) canonicalization is applied to `properties` before hashing if it is a JSON object.
+    A [Multiformats](https://multiformats.io) multihash of IPFS CIDv1 of the supplied metadata. The hash is created from `name` and `description` fields or `meta` if supplied.
 
 ## datahash
 
@@ -216,9 +216,9 @@
 !!! term ""
     A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
 
-## verify
+## verifications
 
-<small><http://purl.org/iscc/terms/#verify></small>
+<small><http://purl.org/iscc/terms/#verifications></small>
 !!! term ""
     A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verifystart:<multihash-of-wallet-address>:verifyend`.
 
