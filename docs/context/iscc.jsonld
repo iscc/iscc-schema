@@ -6,6 +6,7 @@
     "ImageObject": "http://schema.org/ImageObject",
     "AudioObject": "http://schema.org/AudioObject",
     "VideoObject": "http://schema.org/VideoObject",
+    "$schema": "http://purl.org/iscc/terms/#$schema",
     "name": "http://schema.org/name",
     "description": "http://schema.org/disambiguatingDescription",
     "meta": "http://purl.org/iscc/terms/#meta",

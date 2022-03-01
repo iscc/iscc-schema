@@ -27,3 +27,4 @@ properties:
     default: http://purl.org/iscc/schema/0.3.2.json
     description: The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.
     readOnly: true
+    x-iscc-context: http://purl.org/iscc/terms/#$schema

@@ -89,7 +89,7 @@ class IsccCrypto(BaseModel):
     metahash: Optional[str] = Field(
         None,
         description=(
-            "A [Multiformats](https://multiformats.io) multihash of IPFS CIDv1 of the supplied"
+            "A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of the supplied"
             " metadata. The hash is created from `name` and `description` fields or `meta` if"
             " supplied."
         ),
@@ -477,6 +477,7 @@ class IsccJsonld(BaseModel):
         "http://purl.org/iscc/schema/0.3.2.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
+        x_iscc_context="http://purl.org/iscc/terms/#$schema",
     )
 
 

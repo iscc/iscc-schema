@@ -15,6 +15,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 | @type | `string` | CreativeWork | The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).         |
 
 ### **$schema**
+<http://purl.org/iscc/terms/#$schema>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -341,7 +342,7 @@ Cryptography related ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| metahash | `string` | none | A [Multiformats](https://multiformats.io) multihash of IPFS CIDv1 of the supplied metadata. The hash is created from `name` and `description` fields or `meta` if supplied.<br><br>**Example**: `f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9`         |
+| metahash | `string` | none | A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of the supplied metadata. The hash is created from `name` and `description` fields or `meta` if supplied.<br><br>**Example**: `f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9`         |
 
 ### **datahash**
 <http://purl.org/iscc/terms/#datahash>

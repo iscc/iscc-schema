@@ -100,6 +100,7 @@ All ISCC extensions start with `x-iscc-`:
 - Added `mode` element
 - Added `thumbnail` element
 - Added versioned context and schema URIs
+- Added `$schema` element to context
 - Renamed `verify` to `verifications`
 
 

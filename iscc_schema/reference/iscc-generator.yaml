@@ -3,11 +3,9 @@ info:
   title: ISCC Generator
   version: 0.3.2
   summary: Create Internation Standard Content Codes
-  description: '## About this spec
+  description: '# About this spec
 
-
-    The ISCC Generator API is an implementation-agnostig API for creating ISCCs from media
-    assets.
+    The ISCC Generator API is an implementation-agnostig API for creating ISCCsfrom media assets.
 
 
     - For use and implementation by ISCC service providers
@@ -22,7 +20,6 @@ info:
     name: ISCC Foundation
   x-logo:
     url: https://schema.iscc.codes/images/iscc-logo-blue.png
-    altText: ISCC Logo
 servers:
 - url: http://localhost:8000
   description: development
@@ -289,8 +286,8 @@ components:
         '@context':
           type: string
           format: uri
-          example: http://purl.org/iscc/context
           description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
+          default: http://purl.org/iscc/context/0.3.2.jsonld
           readOnly: true
         '@type':
           type: string
@@ -305,10 +302,10 @@ components:
           readOnly: true
         $schema:
           type: string
-          example: http://purl.org/iscc/schema
           format: uri
           description: The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata
             schema.
+          default: http://purl.org/iscc/schema/0.3.2.json
           readOnly: true
         iscc:
           type: string
@@ -416,9 +413,10 @@ components:
         metahash:
           type: string
           minLength: 40
-          example: bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q
-          description: A [Multihash](https://multiformats.io/multihash/) of the ISCC seed
-            metadata.
+          example: f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
+          description: A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of
+            the ISCC seed metadata. The hash is created from `name` and `description` fields
+            or `meta` if supplied.
           readOnly: true
         datahash:
           type: string
@@ -771,3 +769,4 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/NftFrozen'
+

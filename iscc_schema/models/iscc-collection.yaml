@@ -28,6 +28,7 @@ properties:
     default: http://purl.org/iscc/schema/0.3.2.json
     description: The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.
     readOnly: true
+    x-iscc-context: http://purl.org/iscc/terms/#$schema
   iscc:
     type: string
     description: An **ISCC-CODE** in canonical representation. This is the minimal required
@@ -390,7 +391,7 @@ properties:
     minLength: 40
     example: f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
     readOnly: true
-    description: A [Multiformats](https://multiformats.io) multihash of IPFS CIDv1 of the
+    description: A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of the
       supplied metadata. The hash is created from `name` and `description` fields or `meta`
       if supplied.
     x-iscc-context: http://purl.org/iscc/terms/#metahash

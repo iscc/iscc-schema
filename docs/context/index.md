@@ -208,7 +208,7 @@
 
 <small><http://purl.org/iscc/terms/#metahash></small>
 !!! term ""
-    A [Multiformats](https://multiformats.io) multihash of IPFS CIDv1 of the supplied metadata. The hash is created from `name` and `description` fields or `meta` if supplied.
+    A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of the supplied metadata. The hash is created from `name` and `description` fields or `meta` if supplied.
 
 ## datahash
 

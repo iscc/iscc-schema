@@ -97,10 +97,9 @@ class IsccMetadata(BaseModel):
     """
 
     _context: Optional[AnyUrl] = Field(
-        None,
+        "http://purl.org/iscc/context/0.3.2.jsonld",
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
-        example="http://purl.org/iscc/context",
     )
     _type: Optional[_Type] = Field(
         None,
@@ -109,10 +108,9 @@ class IsccMetadata(BaseModel):
         example="ImageObject",
     )
     _schema: Optional[AnyUrl] = Field(
-        None,
+        "http://purl.org/iscc/schema/0.3.2.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata schema.",
-        example="http://purl.org/iscc/schema",
     )
     iscc: Optional[constr(regex=r"^ISCC:[A-Z2-7]{10,73}$", min_length=15, max_length=73)] = Field(
         None,
@@ -198,8 +196,12 @@ class IsccMetadata(BaseModel):
     )
     metahash: Optional[constr(min_length=40)] = Field(
         None,
-        description="A [Multihash](https://multiformats.io/multihash/) of the ISCC seed metadata.",
-        example="bdyqed6bziei6w4j2eilfyrwjbk4pb7mtthesakh5nuuisrfsh72365q",
+        description=(
+            "A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of the ISCC seed"
+            " metadata. The hash is created from `name` and `description` fields or `meta` if"
+            " supplied."
+        ),
+        example="f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9",
     )
     datahash: Optional[constr(min_length=40)] = Field(
         None,
