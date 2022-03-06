@@ -64,7 +64,7 @@ class MediaEmbeddedMetadata(BaseModel):
         description="URI of license for the digital content.",
         example="https://example.com/license-terms-for-this-item",
     )
-    aquire: Optional[AnyUrl] = Field(None, description="URI for acquiring a license for the item.")
+    acquire: Optional[AnyUrl] = Field(None, description="URI for acquiring a license for the item.")
 
 
 class _Type(Enum):
@@ -97,7 +97,7 @@ class IsccMetadata(BaseModel):
     """
 
     _context: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/context/0.3.2.jsonld",
+        "http://purl.org/iscc/context/0.3.3.jsonld",
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
     )
@@ -108,7 +108,7 @@ class IsccMetadata(BaseModel):
         example="ImageObject",
     )
     _schema: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/schema/0.3.2.json",
+        "http://purl.org/iscc/schema/0.3.3.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata schema.",
     )

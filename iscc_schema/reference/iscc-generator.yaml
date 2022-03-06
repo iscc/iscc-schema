@@ -5,7 +5,8 @@ info:
   summary: Create Internation Standard Content Codes
   description: '# About this spec
 
-    The ISCC Generator API is an implementation-agnostig API for creating ISCCsfrom media assets.
+    The ISCC Generator API is an implementation-agnostig API for creating ISCCsfrom media
+    assets.
 
 
     - For use and implementation by ISCC service providers
@@ -273,7 +274,7 @@ components:
           format: uri
           example: https://example.com/license-terms-for-this-item
           description: URI of license for the digital content.
-        aquire:
+        acquire:
           type: string
           description: URI for acquiring a license for the item.
           format: uri
@@ -287,7 +288,7 @@ components:
           type: string
           format: uri
           description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
-          default: http://purl.org/iscc/context/0.3.2.jsonld
+          default: http://purl.org/iscc/context/0.3.3.jsonld
           readOnly: true
         '@type':
           type: string
@@ -305,7 +306,7 @@ components:
           format: uri
           description: The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata
             schema.
-          default: http://purl.org/iscc/schema/0.3.2.json
+          default: http://purl.org/iscc/schema/0.3.3.json
           readOnly: true
         iscc:
           type: string
@@ -769,4 +770,3 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/NftFrozen'
-

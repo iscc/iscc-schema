@@ -6,7 +6,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| @context | `string-uri` | http://purl.org/iscc/context/0.3.2.jsonld | The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.         |
+| @context | `string-uri` | http://purl.org/iscc/context/0.3.3.jsonld | The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.         |
 
 ### **@type**
 
@@ -19,7 +19,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| $schema | `string-uri` | http://purl.org/iscc/schema/0.3.2.json | The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.         |
+| $schema | `string-uri` | http://purl.org/iscc/schema/0.3.3.json | The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.         |
 
 ## iscc-minimal
 Minimal required ISCC Metadata

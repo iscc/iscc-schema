@@ -94,6 +94,13 @@ All ISCC extensions start with `x-iscc-`:
 
 ## Changelog
 
+### 0.3.3 - 2022-03-06
+
+- Fixed typo in `acquire` field
+- Renamed main schema class `ISCC` to `IsccMeta`
+- Import schemas to package top-level
+- Updated dependencies
+
 ### 0.3.2 - 2022-03-01
 
 - Redesigned Generator API model
@@ -102,7 +109,6 @@ All ISCC extensions start with `x-iscc-`:
 - Added versioned context and schema URIs
 - Added `$schema` element to context
 - Renamed `verify` to `verifications`
-
 
 ### 0.3.1 - 2022-02-10
 - Fixed packaging error

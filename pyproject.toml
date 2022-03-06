@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iscc-schema"
-version = "0.3.2"
+version = "0.3.3"
 description = "OpenAPI representation of the ISCC data model"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
@@ -37,7 +37,7 @@ use-default = true
 use-schema-description = true
 wrap-string-literal = true
 use-annotated = false
-class-name = "ISCC"
+class-name = "IsccMeta"
 disable-timestamp = true
 target-python-version = "3.7"
 validation = true
@@ -55,7 +55,7 @@ buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON 
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
 test = { cmd = "pytest", help = "Run tests"}
-build = ["fromatyaml", "buildpydantic", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
+all = ["fromatyaml", "buildpydantic", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
