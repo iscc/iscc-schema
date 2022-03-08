@@ -12,5 +12,3 @@ properties:
     minLength: 15
     maxLength: 73
     pattern: ^ISCC:[A-Z2-7]{10,73}$
-required:
-- iscc

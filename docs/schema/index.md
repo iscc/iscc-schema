@@ -188,6 +188,7 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 | mode | `string` | none | The perceptual mode used to create the ISCC-CODE.<br><br>**Example**: `video`         |
 
 ### **thumbnail**
+<http://schema.org/thumbnailUrl>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -372,7 +373,7 @@ Field relevant in context with public ISCC declerations
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `{iscc-id}`**.<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
+| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
 
 ### **chain**
 <http://purl.org/iscc/terms/#chain>

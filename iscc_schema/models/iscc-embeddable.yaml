@@ -21,6 +21,7 @@ properties:
     x-iscc-schema-doc: A license document that applies to this content, typically indicated
       by URL.
     x-iscc-embed: Use `Xmp.xmpRights.WebStatement` for embedding as image metadata.
+    x-iscc-status: stable
   acquire:
     type: string
     format: uri
@@ -32,6 +33,7 @@ properties:
     x-iscc-schema-doc: Indicates a page documenting how licenses can be purchased or otherwise
       acquired, for the current item.
     x-iscc-embed: Use `Xmp.plus.Licensor[1]/plus:LicensorURL` for embedding in images.
+    x-iscc-status: stable
   credit:
     type: string
     description: A line of text that you expect users of the image (such as Google Images)

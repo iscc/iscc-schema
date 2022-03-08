@@ -51,8 +51,7 @@ class IsccDeclaration(BaseModel):
         None,
         description=(
             "URL to which a resolver should redirect an ISCC-ID that has been minted from a"
-            " declartion that includes the IPFS-hash of this metadata instance. **Supports URI"
-            " template `{iscc-id}`**."
+            " declartion that includes the IPFS-hash of this metadata instance."
         ),
         example="https://example.com/land-here-when-resolving-iscc-id",
         x_iscc_context="http://purl.org/iscc/terms/#redirect",
@@ -188,6 +187,7 @@ class IsccTechnical(BaseModel):
             " digital content. The URI may be a Data-URL RFC2397."
         ),
         example="https://picsum.photos/200/300.jpg",
+        x_iscc_context="http://schema.org/thumbnailUrl",
     )
     created: Optional[datetime] = Field(
         None,
@@ -398,7 +398,6 @@ class IsccBasic(BaseModel):
         ),
         example="The Never Ending Story",
         max_length=128,
-        min_length=1,
         x_iscc_context="http://schema.org/name",
     )
     description: Optional[str] = Field(
@@ -410,7 +409,6 @@ class IsccBasic(BaseModel):
         ),
         example="a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
         max_length=4096,
-        min_length=1,
         x_iscc_context="http://schema.org/disambiguatingDescription",
     )
     meta: Optional[str] = Field(
@@ -430,8 +428,8 @@ class IsccMinimal(BaseModel):
     Minimal required ISCC Metadata
     """
 
-    iscc: str = Field(
-        ...,
+    iscc: Optional[str] = Field(
+        None,
         description=(
             "An **ISCC-CODE** in canonical representation. This is the minimal required field for a"
             " valid ISCC Metadata object."

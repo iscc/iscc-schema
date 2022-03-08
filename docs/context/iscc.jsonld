@@ -21,6 +21,7 @@
     "keywords": "http://schema.org/keywords",
     "previous": "http://purl.org/iscc/terms/#previous",
     "version": "http://schema.org/version",
+    "thumbnail": "http://schema.org/thumbnailUrl",
     "created": "http://schema.org/dateCreated",
     "filename": "http://purl.org/iscc/terms/#filename",
     "filesize": "http://schema.org/fileSize",

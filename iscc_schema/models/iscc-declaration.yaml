@@ -21,14 +21,15 @@ properties:
       of the work manifested by the identified digital content.
     example: true
     x-iscc-context: http://purl.org/iscc/terms/#original
+    x-iscc-status: stable
   redirect:
     type: string
     description: URL to which a resolver should redirect an ISCC-ID that has been minted from
-      a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template
-      `{iscc-id}`**.
+      a declartion that includes the IPFS-hash of this metadata instance.
     example: https://example.com/land-here-when-resolving-iscc-id
     format: uri
     x-iscc-context: http://purl.org/iscc/terms/#redirect
+    x-iscc-status: stable
   chain:
     type: string
     description: The blockchain on which an ISCC-CODE is declared.
@@ -39,8 +40,10 @@ properties:
     - ETHEREUM
     - POLYGON
     x-iscc-context: http://purl.org/iscc/terms/#chain
+    x-iscc-status: stable
   wallet:
     type: string
     description: The wallet-address that signs an ISCC declaration.
     example: '0xb794f5ea0ba39494ce839613fffba74279579268'
     x-iscc-context: http://purl.org/iscc/terms/#wallet
+    x-iscc-status: stable

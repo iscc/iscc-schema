@@ -91,10 +91,16 @@ All ISCC extensions start with `x-iscc-`:
 - `x-iscc-context` - for documenting JSON-LD contexts.
 - `x-iscc-schema-doc` - for original descriptions from [schema.org](https://schema.org).
 - `x-iscc-embed` - for information on how to embed fields into media assets.
+- `x-iscc-status` - for information about status of the field
 
 ## Changelog
 
 ### 0.3.4 - unreleased
+
+- Mark stable fields
+- Change `iscc` field to not required
+- Add schema.org context to `thumbnail` field
+- Updated dependencies
 
 ### 0.3.3 - 2022-03-06
 
