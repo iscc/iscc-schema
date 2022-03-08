@@ -94,6 +94,8 @@ All ISCC extensions start with `x-iscc-`:
 
 ## Changelog
 
+### 0.3.4 - unreleased
+
 ### 0.3.3 - 2022-03-06
 
 - Fixed typo in `acquire` field

@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: ISCC Generator
-  version: 0.3.2
+  version: 0.3.4
   summary: Create Internation Standard Content Codes
   description: '# About this spec
 
@@ -288,7 +288,7 @@ components:
           type: string
           format: uri
           description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
-          default: http://purl.org/iscc/context/0.3.3.jsonld
+          default: http://purl.org/iscc/context/0.3.4.jsonld
           readOnly: true
         '@type':
           type: string
@@ -306,7 +306,7 @@ components:
           format: uri
           description: The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata
             schema.
-          default: http://purl.org/iscc/schema/0.3.3.json
+          default: http://purl.org/iscc/schema/0.3.4.json
           readOnly: true
         iscc:
           type: string
