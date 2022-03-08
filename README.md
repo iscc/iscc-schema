@@ -95,7 +95,7 @@ All ISCC extensions start with `x-iscc-`:
 
 ## Changelog
 
-### 0.3.4 - unreleased
+### 0.3.4 - 2022-03-08
 
 - Mark stable fields
 - Change `iscc` field to not required
