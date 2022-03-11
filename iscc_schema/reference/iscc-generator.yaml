@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: ISCC Generator
-  version: 0.3.4
+  version: 0.3.5
   summary: Create Internation Standard Content Codes
   description: '# About this spec
 
@@ -197,7 +197,7 @@ paths:
           description: Not Found
       operationId: get-task
       description: Get status of an ISCC processing task.
-  /freeze:
+  /nft/freeze:
     post:
       summary: Freeze NFT
       tags:
@@ -266,8 +266,8 @@ components:
         meta:
           type: string
           maxLength: 16384
-          description: Subject, industry, or use-case specific metadata. (Encoded as JSON
-            string or Data-URL)
+          description: Subject, industry, or use-case specific metadata, encoded as JSON string
+            or Data-URL (used as sole input for Meta-Code and `metahash` generation if supplied).
           example: data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=
         license:
           type: string
@@ -288,7 +288,7 @@ components:
           type: string
           format: uri
           description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
-          default: http://purl.org/iscc/context/0.3.4.jsonld
+          default: http://purl.org/iscc/context/0.3.5.jsonld
           readOnly: true
         '@type':
           type: string
@@ -306,7 +306,7 @@ components:
           format: uri
           description: The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata
             schema.
-          default: http://purl.org/iscc/schema/0.3.4.json
+          default: http://purl.org/iscc/schema/0.3.5.json
           readOnly: true
         iscc:
           type: string
@@ -631,7 +631,7 @@ components:
           type: string
           description: 'NFT Token-ID (uint256 encoded as hex). '
           example: b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
-        toxen_id_num:
+        token_id_num:
           type: string
           example: '83814198383102558219731078260892729932246618004265700685467928187377105751529'
           description: NFT Token-ID (uint256 digits as string)

@@ -7,7 +7,8 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional
 
-from pydantic import AnyUrl, BaseModel, Field, constr
+from pydantic import BaseModel, Field, constr
+from iscc_schema.fields import AnyUrl
 
 
 class MediaUpload(BaseModel):
@@ -55,7 +56,8 @@ class MediaEmbeddedMetadata(BaseModel):
     meta: Optional[constr(max_length=16384)] = Field(
         None,
         description=(
-            "Subject, industry, or use-case specific metadata. (Encoded as JSON string or Data-URL)"
+            "Subject, industry, or use-case specific metadata, encoded as JSON string or Data-URL"
+            " (used as sole input for Meta-Code and `metahash` generation if supplied)."
         ),
         example="data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=",
     )
@@ -97,7 +99,7 @@ class IsccMetadata(BaseModel):
     """
 
     _context: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/context/0.3.4.jsonld",
+        "http://purl.org/iscc/context/0.3.5.jsonld",
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
     )
@@ -108,7 +110,7 @@ class IsccMetadata(BaseModel):
         example="ImageObject",
     )
     _schema: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/schema/0.3.4.json",
+        "http://purl.org/iscc/schema/0.3.5.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata schema.",
     )
@@ -401,7 +403,7 @@ class NftFrozen(BaseModel):
         description="NFT Token-ID (uint256 encoded as hex). ",
         example="b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9",
     )
-    toxen_id_num: Optional[str] = Field(
+    token_id_num: Optional[str] = Field(
         None,
         description="NFT Token-ID (uint256 digits as string)",
         example="83814198383102558219731078260892729932246618004265700685467928187377105751529",
@@ -451,7 +453,7 @@ class NftPostRequest(BaseModel):
     verifications: Optional[List[AnyUrl]] = None
 
 
-class FreezePostRequest(BaseModel):
+class NftFreezePostRequest(BaseModel):
     """
     Any JSON object that can be serialized with JCS canonicaliztion.
     """

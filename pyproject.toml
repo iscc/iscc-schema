@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iscc-schema"
-version = "0.3.4"
+version = "0.3.5"
 description = "OpenAPI representation of the ISCC data model"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
@@ -27,27 +27,10 @@ skip-string-normalization = false
 line-length = 100
 target-version = ['py37']
 
-[tool.datamodel-codegen]
-field-constraints = true
-aliases = "iscc_schema/aliases.json"
-input = "iscc_schema/models/iscc-all.yaml"
-output = "iscc_schema/schema.py"
-field-extra-keys = ["x-iscc-context"]
-use-default = true
-use-schema-description = true
-wrap-string-literal = true
-use-annotated = false
-class-name = "IsccMeta"
-disable-timestamp = true
-target-python-version = "3.7"
-validation = true
-enum-field-as-literal = "one"
-
 
 [tool.poe.tasks]
 update = { cmd = "poetry update", help = "Update project dependencies"}
 fromatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
-buildpydantic = { cmd = "datamodel-codegen --encoding UTF-8", help = "Build pydantic model"}
 buildcode = { script = "tools.build_code:build", help = "Build code for API models"}
 formatcode = { cmd = "black .", help = "Code style formating with black" }
 buildterms = { script = "tools.build_terms:build", help = "Build markdown for terms" }
@@ -55,7 +38,7 @@ buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON 
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
 test = { cmd = "pytest", help = "Run tests"}
-all = ["fromatyaml", "buildpydantic", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
+all = ["fromatyaml", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

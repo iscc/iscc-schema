@@ -7,7 +7,8 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Field
+from pydantic import BaseModel, Field
+from iscc_schema.fields import AnyUrl
 
 
 class Chain(Enum):
@@ -414,8 +415,8 @@ class IsccBasic(BaseModel):
     meta: Optional[str] = Field(
         None,
         description=(
-            "Subject, industry, or use-case specific metadata, eEncoded as JSON string or Data-URL"
-            " (used as sole input for Meta-Code and `metahash` generation if supplied.)"
+            "Subject, industry, or use-case specific metadata, encoded as JSON string or Data-URL"
+            " (used as sole input for Meta-Code and `metahash` generation if supplied)."
         ),
         example="data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=",
         max_length=16384,
@@ -459,7 +460,7 @@ class IsccJsonld(BaseModel):
     """
 
     context_: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/context/0.3.4.jsonld",
+        "http://purl.org/iscc/context/0.3.5.jsonld",
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
     )
@@ -472,7 +473,7 @@ class IsccJsonld(BaseModel):
         ),
     )
     schema_: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/schema/0.3.4.json",
+        "http://purl.org/iscc/schema/0.3.5.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
         x_iscc_context="http://purl.org/iscc/terms/#$schema",

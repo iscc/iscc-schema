@@ -6,7 +6,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| @context | `string-uri` | http://purl.org/iscc/context/0.3.4.jsonld | The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.         |
+| @context | `string-uri` | http://purl.org/iscc/context/0.3.5.jsonld | The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.         |
 
 ### **@type**
 
@@ -19,7 +19,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| $schema | `string-uri` | http://purl.org/iscc/schema/0.3.4.json | The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.         |
+| $schema | `string-uri` | http://purl.org/iscc/schema/0.3.5.json | The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.         |
 
 ## iscc-minimal
 Minimal required ISCC Metadata
@@ -68,7 +68,7 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| meta | `string` | none | Subject, industry, or use-case specific metadata, eEncoded as JSON string or Data-URL (used as sole input for Meta-Code and `metahash` generation if supplied.)<br><br>**Example**: `data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=`         |
+| meta | `string` | none | Subject, industry, or use-case specific metadata, encoded as JSON string or Data-URL (used as sole input for Meta-Code and `metahash` generation if supplied).<br><br>**Example**: `data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=`         |
 
 ## iscc-embeddable
 Metadata intended to be embedded into the media asset.

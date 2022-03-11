@@ -95,6 +95,13 @@ All ISCC extensions start with `x-iscc-`:
 
 ## Changelog
 
+### 0.3.5 - 2000-03-11
+
+- Added custom field AnyUrl to support Data-URLs
+- Fix typo in NftFrozen
+- Change endpoint /freeze to /nft/freeze
+
+
 ### 0.3.4 - 2022-03-08
 
 - Mark stable fields
