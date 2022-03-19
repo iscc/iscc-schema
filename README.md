@@ -95,7 +95,7 @@ All ISCC extensions start with `x-iscc-`:
 
 ## Changelog
 
-### 0.3.6 - Unreleased
+### 0.3.6 - 2022-03-19
 
 - Use customized BaseModel for IsccMeta
 - Convert empty strings to `None`
@@ -109,7 +109,7 @@ All ISCC extensions start with `x-iscc-`:
 - Added `iscc_id` field
 - Updated OpenAPI definitions.
 
-### 0.3.5 - 2000-03-11
+### 0.3.5 - 2022-03-11
 
 - Added custom field AnyUrl to support Data-URLs
 - Fix typo in NftFrozen
