@@ -447,6 +447,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#036-unreleased" class="md-nav__link">
+    0.3.6 - Unreleased
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#035-2000-03-11" class="md-nav__link">
     0.3.5 - 2000-03-11
   </a>
@@ -673,6 +680,20 @@ All ISCC extensions start with <code>x-iscc-</code>:</p>
 <li><code>x-iscc-status</code> - for information about status of the field</li>
 </ul>
 <h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">#</a></h2>
+<h3 id="036-unreleased">0.3.6 - Unreleased<a class="headerlink" href="#036-unreleased" title="Permanent link">#</a></h3>
+<ul>
+<li>Use customized BaseModel for IsccMeta</li>
+<li>Convert empty strings to <code>None</code></li>
+<li>Exclude <code>None</code> and unset in IsccMeta.dict() by default</li>
+<li>Exclude <code>None</code> and use by_alis in IsccMeta.json()</li>
+<li>Added IsccMeta.jcs() serialization</li>
+<li>Added IsccMEta.iscc_obj property</li>
+<li>Fixed JSON Schema code generation</li>
+<li>Moved thumbnail field to the bottom</li>
+<li>Added <code>media_id</code> vendor identifier</li>
+<li>Added <code>iscc_id</code> field</li>
+<li>Updated OpenAPI definitions.</li>
+</ul>
 <h3 id="035-2000-03-11">0.3.5 - 2000-03-11<a class="headerlink" href="#035-2000-03-11" title="Permanent link">#</a></h3>
 <ul>
 <li>Added custom field AnyUrl to support Data-URLs</li>

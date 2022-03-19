@@ -490,11 +490,6 @@
 <p class="admonition-title"><small><a href="http://purl.org/iscc/terms/#datahash">http://purl.org/iscc/terms/#datahash</a></small></p>
 <p>A <a href="https://multiformats.io/multihash/">Multihash</a> of the <em>digital content</em> (default blake3).</p>
 </div>
-<h3 id="verifications"><strong>verifications</strong><a class="headerlink" href="#verifications" title="Permanent link">#</a></h3>
-<div class="admonition term">
-<p class="admonition-title"><small><a href="http://purl.org/iscc/terms/#verifications">http://purl.org/iscc/terms/#verifications</a></small></p>
-<p>A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of <code>verifystart:&lt;multihash-of-wallet-address&gt;:verifyend</code>.</p>
-</div>
 <h3 id="original"><strong>original</strong><a class="headerlink" href="#original" title="Permanent link">#</a></h3>
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://purl.org/iscc/terms/#original">http://purl.org/iscc/terms/#original</a></small></p>
@@ -514,6 +509,11 @@
 <div class="admonition term">
 <p class="admonition-title"><small><a href="http://purl.org/iscc/terms/#wallet">http://purl.org/iscc/terms/#wallet</a></small></p>
 <p>The wallet-address that signs an ISCC declaration.</p>
+</div>
+<h3 id="verifications"><strong>verifications</strong><a class="headerlink" href="#verifications" title="Permanent link">#</a></h3>
+<div class="admonition term">
+<p class="admonition-title"><small><a href="http://purl.org/iscc/terms/#verifications">http://purl.org/iscc/terms/#verifications</a></small></p>
+<p>A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of <code>verify:&lt;multihash-of-wallet-address&gt;:verify</code>.</p>
 </div>
 
               
