@@ -368,13 +368,6 @@ Cryptography related ISCC Metadata
 
 ## iscc-declaration
 Field relevant in context with public ISCC declerations
-### **verifications**
-<http://purl.org/iscc/terms/#verifications>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| verifications | `array` | none | A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verifystart:<multihash-of-wallet-address>:verifyend`.<br><br>**Example**: `[{'url': 'https://twitter.com/titusz/status/1490104312051257347'}]`         |
-
 ### **original**
 <http://purl.org/iscc/terms/#original>
 
@@ -402,4 +395,11 @@ Field relevant in context with public ISCC declerations
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | wallet | `string` | none | The wallet-address that signs an ISCC declaration.<br><br>**Example**: `0xb794f5ea0ba39494ce839613fffba74279579268`         |
+
+### **verifications**
+<http://purl.org/iscc/terms/#verifications>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| verifications | `array` | none | A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verify:<multihash-of-wallet-address>:verify`.<br><br>**Example**: `[{'url': 'https://twitter.com/titusz/status/1490104312051257347'}]`         |
 

@@ -2,19 +2,6 @@ title: iscc-declaration
 type: object
 description: Field relevant in context with public ISCC declerations
 properties:
-  verifications:
-    description: A list of self-verifications. Self-verifications are public URLs under the
-      account/authority of the signee. The verification URL must respond to a GET request
-      with text that contains a multihash of the ISCC declaration signees wallet address in
-      the format of `verifystart:<multihash-of-wallet-address>:verifyend`.
-    example:
-    - url: https://twitter.com/titusz/status/1490104312051257347
-    type: array
-    items:
-      type: object
-    maxItems: 128
-    uniqueItems: true
-    x-iscc-context: http://purl.org/iscc/terms/#verifications
   original:
     type: boolean
     description: The signee of the declaring transaction claims to be the original creator
@@ -47,3 +34,16 @@ properties:
     example: '0xb794f5ea0ba39494ce839613fffba74279579268'
     x-iscc-context: http://purl.org/iscc/terms/#wallet
     x-iscc-status: stable
+  verifications:
+    description: A list of self-verifications. Self-verifications are public URLs under the
+      account/authority of the signee. The verification URL must respond to a GET request
+      with text that contains a multihash of the ISCC declaration signees wallet address in
+      the format of `verify:<multihash-of-wallet-address>:verify`.
+    example:
+    - url: https://twitter.com/titusz/status/1490104312051257347
+    type: array
+    items:
+      type: object
+    maxItems: 128
+    uniqueItems: true
+    x-iscc-context: http://purl.org/iscc/terms/#verifications

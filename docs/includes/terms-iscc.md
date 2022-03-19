@@ -106,12 +106,6 @@
 
     A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
 
-### **verifications**
-
-!!! term "<small><http://purl.org/iscc/terms/#verifications></small>"
-
-    A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verifystart:<multihash-of-wallet-address>:verifyend`.
-
 ### **original**
 
 !!! term "<small><http://purl.org/iscc/terms/#original></small>"
@@ -135,4 +129,10 @@
 !!! term "<small><http://purl.org/iscc/terms/#wallet></small>"
 
     The wallet-address that signs an ISCC declaration.
+
+### **verifications**
+
+!!! term "<small><http://purl.org/iscc/terms/#verifications></small>"
+
+    A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verify:<multihash-of-wallet-address>:verify`.
 

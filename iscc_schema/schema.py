@@ -28,18 +28,6 @@ class IsccDeclaration(BaseModel):
     Field relevant in context with public ISCC declerations
     """
 
-    verifications: Optional[List[Dict[str, Any]]] = Field(
-        None,
-        description=(
-            "A list of self-verifications. Self-verifications are public URLs under the"
-            " account/authority of the signee. The verification URL must respond to a GET request"
-            " with text that contains a multihash of the ISCC declaration signees wallet address in"
-            " the format of `verifystart:<multihash-of-wallet-address>:verifyend`."
-        ),
-        example=[{"url": "https://twitter.com/titusz/status/1490104312051257347"}],
-        max_items=128,
-        x_iscc_context="http://purl.org/iscc/terms/#verifications",
-    )
     original: Optional[bool] = Field(
         None,
         description=(
@@ -69,6 +57,18 @@ class IsccDeclaration(BaseModel):
         description="The wallet-address that signs an ISCC declaration.",
         example="0xb794f5ea0ba39494ce839613fffba74279579268",
         x_iscc_context="http://purl.org/iscc/terms/#wallet",
+    )
+    verifications: Optional[List[Dict[str, Any]]] = Field(
+        None,
+        description=(
+            "A list of self-verifications. Self-verifications are public URLs under the"
+            " account/authority of the signee. The verification URL must respond to a GET request"
+            " with text that contains a multihash of the ISCC declaration signees wallet address in"
+            " the format of `verify:<multihash-of-wallet-address>:verify`."
+        ),
+        example=[{"url": "https://twitter.com/titusz/status/1490104312051257347"}],
+        max_items=128,
+        x_iscc_context="http://purl.org/iscc/terms/#verifications",
     )
 
 
