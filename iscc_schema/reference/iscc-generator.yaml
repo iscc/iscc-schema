@@ -288,7 +288,7 @@ components:
           type: string
           format: uri
           description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
-          default: http://purl.org/iscc/context/0.3.5.jsonld
+          default: http://purl.org/iscc/context/0.3.6.jsonld
           readOnly: true
         '@type':
           type: string
@@ -306,7 +306,7 @@ components:
           format: uri
           description: The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata
             schema.
-          default: http://purl.org/iscc/schema/0.3.5.json
+          default: http://purl.org/iscc/schema/0.3.6.json
           readOnly: true
         iscc:
           type: string

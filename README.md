@@ -95,6 +95,8 @@ All ISCC extensions start with `x-iscc-`:
 
 ## Changelog
 
+### 0.3.6 - Unreleased
+
 ### 0.3.5 - 2000-03-11
 
 - Added custom field AnyUrl to support Data-URLs

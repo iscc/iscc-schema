@@ -99,7 +99,7 @@ class IsccMetadata(BaseModel):
     """
 
     _context: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/context/0.3.5.jsonld",
+        "http://purl.org/iscc/context/0.3.6.jsonld",
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
     )
@@ -110,7 +110,7 @@ class IsccMetadata(BaseModel):
         example="ImageObject",
     )
     _schema: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/schema/0.3.5.json",
+        "http://purl.org/iscc/schema/0.3.6.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata schema.",
     )
