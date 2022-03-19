@@ -57,6 +57,12 @@ def test_jcs_big_int_raises():
         obj.jcs()
 
 
+def test_iscc_obj_raises():
+    obj = iss.IsccMeta()
+    with pytest.raises(ImportError):
+        assert obj.iscc_obj
+
+
 def test_schema():
     so = iss.IsccMeta(iscc="ISCC:EIAGUJFCEY")
     assert so.dict(exclude_none=True, by_alias=True, exclude_unset=False) == {

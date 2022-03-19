@@ -77,6 +77,6 @@ class BaseModel(OriginalBaseModel):
         """
         try:
             import iscc_core as ic
-        except Exception:
-            return None
+        except ImportError:
+            raise ImportError("IsccMeta.iscc_obj requires iscc_core package.")
         return ic.Code(self.iscc)
