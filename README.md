@@ -97,6 +97,13 @@ All ISCC extensions start with `x-iscc-`:
 
 ### 0.3.6 - Unreleased
 
+- Use customized BaseModel for IsccMeta
+- Convert empty strings to `None`
+- Exclude `None` and unset in IsccMeta.dict() by default
+- Exclude `None` and use by_alis in IsccMeta.json()
+- Added IsccMeta.jcs() serialization
+- Added IsccMEta.iscc_obj property
+
 ### 0.3.5 - 2000-03-11
 
 - Added custom field AnyUrl to support Data-URLs

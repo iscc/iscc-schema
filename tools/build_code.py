@@ -18,24 +18,28 @@ def build_schema():
     aliases = json.load(aliases.open("rb"))
     generate(
         infile,
-        field_constraints=True,
-        aliases=aliases,
         output=outfile,
-        field_extra_keys={"x-iscc-context"},
-        use_schema_description=True,
-        wrap_string_literal=True,
-        use_annotated=False,
-        class_name="IsccMeta",
-        disable_timestamp=True,
-        target_python_version=PythonVersion.PY_37,
-        validation=True,
         encoding="UTF-8",
+        aliases=aliases,
+        class_name="IsccMeta",
+        wrap_string_literal=True,
+        disable_timestamp=True,
+        use_schema_description=True,
+        use_annotated=False,
         reuse_model=True,
         disable_appending_item_suffix=True,
+        field_constraints=True,
+        field_extra_keys={"x-iscc-context"},
+        target_python_version=PythonVersion.PY_37,
+        validation=True,
     )
-    # Patch AnyUrl
+    # Patch Generated Code
     marker = "from pydantic import AnyUrl, BaseModel, Field\n"
-    replace = "from pydantic import BaseModel, Field\nfrom iscc_schema.fields import AnyUrl\n"
+    replace = (
+        "from pydantic import Field\n"
+        "from iscc_schema.fields import AnyUrl\n"
+        "from iscc_schema.base import BaseModel"
+    )
     with outfile.open("rt", encoding="utf-8") as infile:
         text = infile.read()
         text = text.replace(marker, replace)
