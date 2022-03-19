@@ -291,6 +291,12 @@ class IsccExtended(BaseModel):
     Extended ISCC Metadata
     """
 
+    media_id: Optional[str] = Field(
+        None,
+        description="Vendor specific (internal) identifier for the source media file.",
+        example="05VQ3BGTGFCJA",
+        x_iscc_context="http://schema.org/identifier",
+    )
     image: Optional[AnyUrl] = Field(
         None,
         description=(

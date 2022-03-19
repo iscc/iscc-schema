@@ -154,6 +154,13 @@
       "uniqueItems": true,
       "x-iscc-context": "http://purl.org/iscc/terms/#verifications"
     },
+    "media_id": {
+      "type": "string",
+      "description": "Vendor specific (internal) identifier for the source media file.",
+      "example": "05VQ3BGTGFCJA",
+      "x-iscc-context": "http://schema.org/identifier",
+      "x-iscc-schema-doc": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links."
+    },
     "image": {
       "type": "string",
       "format": "uri",

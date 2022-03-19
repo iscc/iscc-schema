@@ -48,6 +48,12 @@
 !!! term ""
     Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.
 
+## media_id
+
+<small><http://schema.org/identifier></small>
+!!! term ""
+    Vendor specific (internal) identifier for the source media file.
+
 ## image
 
 <small><http://schema.org/image></small>

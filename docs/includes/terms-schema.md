@@ -68,6 +68,14 @@
 
     **Embedding**:  Use `Exif.Image.Copyright`, `Iptc.Application2.Copyright` and `Xmp.dc.rights` for embedding.
 
+### **media_id**
+
+!!! term "<small><http://schema.org/identifier></small>"
+
+    The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links.
+
+    **Comment**:  Vendor specific (internal) identifier for the source media file.
+
 ### **image**
 
 !!! term "<small><http://schema.org/image></small>"

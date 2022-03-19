@@ -121,6 +121,13 @@ Extended ISCC Metadata
       "redirect": "https://example.com/about-the-asset"
     }
     ```
+### **media_id**
+<http://schema.org/identifier>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| media_id | `string` | none | Vendor specific (internal) identifier for the source media file.<br><br>**Example**: `05VQ3BGTGFCJA`         |
+
 ### **image**
 <http://schema.org/image>
 
