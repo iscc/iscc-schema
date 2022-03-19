@@ -18,7 +18,6 @@ def build_latest():
 
     with open(PATH_LATEST, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(json.dumps(data, indent=2, ensure_ascii=False))
-        json.dump(data, outf, indent=2)
 
 
 def build_version():
@@ -28,7 +27,6 @@ def build_version():
 
     with open(PATH_VERSION, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(json.dumps(data, indent=2, ensure_ascii=False))
-        json.dump(data, outf, indent=2)
 
 
 def build():

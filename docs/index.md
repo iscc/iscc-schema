@@ -103,6 +103,8 @@ All ISCC extensions start with `x-iscc-`:
 - Exclude `None` and use by_alis in IsccMeta.json()
 - Added IsccMeta.jcs() serialization
 - Added IsccMEta.iscc_obj property
+- Fixed JSON Schema code generation
+- Moved thumbnail field to the bottom
 
 ### 0.3.5 - 2000-03-11
 
