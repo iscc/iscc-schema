@@ -54,6 +54,12 @@
 !!! term ""
     Vendor specific (internal) identifier for the source media file.
 
+## iscc_id
+
+<small><http://schema.org/identifier></small>
+!!! term ""
+    The **ISCC-ID** of the digital content in canonical representation.
+
 ## image
 
 <small><http://schema.org/image></small>

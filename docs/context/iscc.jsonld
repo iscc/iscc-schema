@@ -16,6 +16,7 @@
     "credit": "http://schema.org/creditText",
     "rights": "http://schema.org/copyrightNotice",
     "media_id": "http://schema.org/identifier",
+    "iscc_id": "http://schema.org/identifier",
     "image": "http://schema.org/image",
     "identifier": "http://schema.org/identifier",
     "content": "http://schema.org/contentUrl",

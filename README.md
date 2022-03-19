@@ -106,6 +106,7 @@ All ISCC extensions start with `x-iscc-`:
 - Fixed JSON Schema code generation
 - Moved thumbnail field to the bottom
 - Added `media_id` vendor identifier
+- Added `iscc_id` field
 
 ### 0.3.5 - 2000-03-11
 

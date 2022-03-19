@@ -76,6 +76,14 @@
 
     **Comment**:  Vendor specific (internal) identifier for the source media file.
 
+### **iscc_id**
+
+!!! term "<small><http://schema.org/identifier></small>"
+
+    The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links.
+
+    **Comment**:  The **ISCC-ID** of the digital content in canonical representation.
+
 ### **image**
 
 !!! term "<small><http://schema.org/image></small>"

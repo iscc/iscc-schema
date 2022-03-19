@@ -297,6 +297,15 @@ class IsccExtended(BaseModel):
         example="05VQ3BGTGFCJA",
         x_iscc_context="http://schema.org/identifier",
     )
+    iscc_id: Optional[str] = Field(
+        None,
+        description="The **ISCC-ID** of the digital content in canonical representation.",
+        example="ISCC:MAACAJINXFXA2SQX",
+        max_length=73,
+        min_length=15,
+        regex="^ISCC:[A-Z2-7]{10,73}$",
+        x_iscc_context="http://schema.org/identifier",
+    )
     image: Optional[AnyUrl] = Field(
         None,
         description=(
