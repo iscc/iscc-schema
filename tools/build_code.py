@@ -61,11 +61,15 @@ def build_apis():
         openapi_scopes=[OpenAPIScope.Schemas, OpenAPIScope.Paths],
         reuse_model=True,
         disable_appending_item_suffix=True,
+        target_python_version=PythonVersion.PY_37,
+        field_constraints=True,  # This does not allow format-uri with maxLength constraint
     )
     # Patch AnyUrl
-    marker = "from pydantic import AnyUrl, BaseModel, Field, constr\n"
+    marker = "from pydantic import AnyUrl, BaseModel, Field\n"
     replace = (
-        "from pydantic import BaseModel, Field, constr\nfrom iscc_schema.fields import AnyUrl\n"
+        "from pydantic import Field\n"
+        "from iscc_schema.fields import AnyUrl\n"
+        "from iscc_schema.base import BaseModel\n"
     )
     with outfile.open("rt", encoding="utf-8") as infile:
         text = infile.read()

@@ -1,11 +1,12 @@
 openapi: 3.1.0
 info:
   title: ISCC Generator
-  version: 0.3.5
+  version: 0.3.6
   summary: Create Internation Standard Content Codes
   description: '# About this spec
 
-    The ISCC Generator API is an implementation-agnostig API for creating ISCCsfrom media
+
+    The ISCC Generator API is an implementation-agnostig API for creating ISCCs from media
     assets.
 
 
@@ -23,7 +24,9 @@ info:
     url: https://schema.iscc.codes/images/iscc-logo-blue.png
 servers:
 - url: http://localhost:8000
-  description: development
+  description: develop
+- url: https://api-test.iscc.id/api
+  description: test
 tags:
 - name: iscc
 - name: media
@@ -84,8 +87,12 @@ paths:
       tags:
       - media
       responses:
-        '200':
+        '201':
           $ref: '#/components/responses/MediaUploadResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+        '500':
+          $ref: '#/components/responses/MessageResponse'
       operationId: post-media
       description: Upload Media
       requestBody:
@@ -138,7 +145,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/MediaIDResponse'
-      operationId: patch-media-metadata-media_id
+      operationId: embed-metadata
       description: Update Metadata
       requestBody:
         $ref: '#/components/requestBodies/MediaEmbedRequest'
@@ -179,6 +186,21 @@ paths:
           description: OK
       operationId: delete-nft
       description: Delete NFT
+  /nft/freeze:
+    post:
+      summary: Freeze NFT
+      tags:
+      - nft
+      responses:
+        '200':
+          $ref: '#/components/responses/NftFrozenResponse'
+        '400':
+          $ref: '#/components/responses/MessageResponse'
+      operationId: post-freeze
+      description: Freeze NFT Metadata
+      requestBody:
+        $ref: '#/components/requestBodies/NftFreezeRequest'
+    parameters: []
   /task/{task_id}:
     parameters:
     - schema:
@@ -197,20 +219,6 @@ paths:
           description: Not Found
       operationId: get-task
       description: Get status of an ISCC processing task.
-  /nft/freeze:
-    post:
-      summary: Freeze NFT
-      tags:
-      - nft
-      responses:
-        '200':
-          $ref: '#/components/responses/NftFrozenResponse'
-        '400':
-          $ref: '#/components/responses/MessageResponse'
-      operationId: post-freeze
-      description: Freeze NFT Metadata
-      requestBody:
-        $ref: '#/components/requestBodies/NftFreezeRequest'
 components:
   schemas:
     MediaUpload:
@@ -227,7 +235,7 @@ components:
           type: string
           format: uri
           description: URL of file used for generating the ISCC.
-          maxLength: 4096
+          example: https://picsum.photos/200/300.jpg
     MediaID:
       title: MediaID
       type: object
@@ -249,36 +257,10 @@ components:
       readOnly: true
     MediaEmbeddedMetadata:
       title: MediaEmbeddedMetadata
-      type: object
       description: Media Metadata
-      properties:
-        name:
-          type: string
-          maxLength: 128
-          description: The title or name of the creation manifested by digital content.
-          example: Harry Potter and the Philosopher's Stone
-        description:
-          type: string
-          maxLength: 4096
-          description: Description of the digital content.
-          example: A 2001 fantasy film directed by Chris Columbus and distributed by Warner
-            Bros.
-        meta:
-          type: string
-          maxLength: 16384
-          description: Subject, industry, or use-case specific metadata, encoded as JSON string
-            or Data-URL (used as sole input for Meta-Code and `metahash` generation if supplied).
-          example: data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=
-        license:
-          type: string
-          format: uri
-          example: https://example.com/license-terms-for-this-item
-          description: URI of license for the digital content.
-        acquire:
-          type: string
-          description: URI for acquiring a license for the item.
-          format: uri
-          maxLength: 4096
+      allOf:
+      - $ref: '#/components/schemas/IsccExtraMetadata'
+      - $ref: '#/components/schemas/IsccBasicMetadata'
     IsccMetadata:
       title: IsccMetadata
       type: object
@@ -288,7 +270,7 @@ components:
           type: string
           format: uri
           description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
-          default: http://purl.org/iscc/context/0.3.6.jsonld
+          default: http://purl.org/iscc/context/0.3.2.jsonld
           readOnly: true
         '@type':
           type: string
@@ -306,7 +288,7 @@ components:
           format: uri
           description: The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata
             schema.
-          default: http://purl.org/iscc/schema/0.3.6.json
+          default: http://purl.org/iscc/schema/0.3.2.json
           readOnly: true
         iscc:
           type: string
@@ -315,6 +297,12 @@ components:
           pattern: ^ISCC:[A-Z2-7]{10,73}$
           minLength: 15
           maxLength: 73
+        media_id:
+          type: string
+          description: Vendor specific internal identifier for media file.
+          example: 05VJUVTH3DCP6
+          minLength: 13
+          maxLength: 13
         name:
           type: string
           description: The title or name of the intangible creation manifested by the identified
@@ -332,6 +320,20 @@ components:
           description: Extended metadata, wrapped in a Data-URL string.
           maxLength: 16384
           example: data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=
+        creator:
+          type: string
+          description: An entity primarily responsible for making the resource.
+          example: Joanne K. Rowling
+        license:
+          type: string
+          format: uri
+          example: https://example.com/license-terms-for-this-item
+          description: URL of license for the digital content.
+        acquire:
+          type: string
+          description: URL for acquiring a license for the item.
+          format: uri
+          example: https://example.com/buy-this-item-here
         mode:
           type: string
           enum:
@@ -343,12 +345,6 @@ components:
           example: video
           description: The perceptual mode used to create the ISCC-CODE.
           readOnly: true
-        thumbnail:
-          type: string
-          description: URI for a user-presentable image that serves as a preview of the digital
-            content. The URI may be a Data-URL RFC2397.
-          format: uri
-          example: https://picsum.photos/200/300.jpg
         mediatype:
           type: string
           example: image/png
@@ -433,12 +429,12 @@ components:
           description: A [Multihash](https://multiformats.io/multihash/) of the concatenation
             (binding) of metahash and datahash.
           readOnly: true
-        features:
-          type: array
-          description: Granular features of the digital content.
-          items:
-            type: object
-          readOnly: true
+        thumbnail:
+          type: string
+          description: URI for a user-presentable image that serves as a preview of the digital
+            content. The URI may be a Data-URL RFC2397.
+          format: uri
+          example: https://picsum.photos/200/300.jpg
     NftMetadata:
       title: NftMetadata
       type: object
@@ -473,9 +469,6 @@ components:
           description: The **ISCC-ID** of the digital content.
           example: ISCC:MEAJU5AXCPOIOYFL
           pattern: ^ISCC:[A-Z2-7]{10,73}$
-          minLength: 15
-          maxLength: 73
-          format: uri
         name:
           type: string
           description: The title or name of the intangible creation manifested by the identified
@@ -510,6 +503,10 @@ components:
             value: 1
           items:
             type: object
+        properties:
+          type: object
+          description: Arbitrary properties. Values may be strings, numbers, object or arrays.
+            Properties defined here may show up on NFT marketplaces. See [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)
         external_url:
           type: string
           format: uri
@@ -537,9 +534,11 @@ components:
             request with text that contains a multihash of the ISCC declaration signees wallet
             address in the format of `verify:<multihash-of-wallet-address>:verify`.
           example:
-          - url: https://twitter.com/titusz/status/1490104312051257347
+          - https://twitter.com/titusz/status/1490104312051257347
           items:
-            type: object
+            type: string
+            example: https://twitter.com/titusz/status/1490104312051257347
+            format: uri
     NftPackage:
       title: NftPackage
       type: object
@@ -615,13 +614,13 @@ components:
     Message:
       title: Message
       type: object
+      description: Informational message to the client
       properties:
-        message:
+        detail:
           type: string
           description: Informational message about the request.
           example: Either source_file or source_url must be provided.
           readOnly: true
-      description: Informational message to the client
     NftFrozen:
       title: NftFrozen
       type: object
@@ -645,6 +644,25 @@ components:
           format: byte
           example: aGVsbG8gd29ybGQ=
           description: JCS serialized and base64 encoded NFT metadata for publishing to IPFS
+    IsccExtraMetadata:
+      title: IsccExtraMetadata
+      type: object
+      description: Additional embeddable metadata
+      properties:
+        creator:
+          type: string
+          description: An entity primarily responsible for making the resource.
+          example: Joanne K. Rowling
+        license:
+          type: string
+          format: uri
+          example: https://example.com/license-terms-for-this-item
+          description: URL of license for the digital content.
+        acquire:
+          type: string
+          description: URL for acquiring a license for the item.
+          format: uri
+          example: https://example.com/buy-this-item-here
   requestBodies:
     MediaUploadRequest:
       content:
@@ -663,8 +681,8 @@ components:
         multipart/form-data:
           schema:
             allOf:
+            - $ref: '#/components/schemas/MediaEmbeddedMetadata'
             - $ref: '#/components/schemas/MediaUpload'
-            - $ref: '#/components/schemas/IsccBasicMetadata'
       description: Generate ISCC-CODE
     NftGenerateRequest:
       content:
@@ -674,13 +692,33 @@ components:
             properties:
               media_id_image:
                 type: string
+                description: The `media_id` of the image for the NFT
+                example: 05VJUVTH3DCP6
+                minLength: 13
+                maxLength: 13
               media_id_animation:
                 type: string
+                description: Optional `media_id` of an animation for the NFT
+                example: 05VJUVTH3DCP6
+                minLength: 13
+                maxLength: 13
               attributes:
+                description: Similar to properties but as an array of objects. These attributes
+                  will show up on some NFT marketplaces.
+                type: array
+                items:
+                  type: object
+              properties:
                 type: object
+                description: Arbitrary properties. Values may be strings, numbers, object
+                  or arrays. Properties defined here may show up on NFT marketplaces. See
+                  [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)
               external_url:
                 type: string
                 format: uri
+                description: This is the URL that will appear below the asset's image on some
+                  NFT Marketplaces and will allow users to leave the site and view the item
+                  on your site.
               chain:
                 type: string
                 example: POLYGON
@@ -693,20 +731,28 @@ components:
                 type: string
                 example: '0xb794f5ea0ba39494ce839613fffba74279579268'
                 description: The wallet-address used for ISCC-CODE decleration.
-              license:
-                type: string
-                format: uri
               original:
                 type: boolean
+                description: The signee of the declaring transaction claims to be the original
+                  creator of the work manifested by the identified digital content.
               redirect:
                 type: string
                 format: uri
+                description: URL to which a resolver should redirect an ISCC-ID that has been
+                  minted from a declartion that includes the IPFS-hash of this metadata instance.
               verifications:
                 type: array
                 format: uri
+                description: A list of self-verifications. Self-verifications are public URLs
+                  under the account/authority of the signee. The verification URL must respond
+                  to a GET request with text that contains a multihash of the ISCC declaration
+                  signees wallet address in the format of `verify:<multihash-of-wallet-address>:verify`.
                 items:
                   type: string
+                  example: https://twitter.com/titusz/status/1490104312051257347
                   format: uri
+            required:
+            - media_id_image
       description: ''
     NftFreezeRequest:
       content:

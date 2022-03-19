@@ -107,6 +107,7 @@ All ISCC extensions start with `x-iscc-`:
 - Moved thumbnail field to the bottom
 - Added `media_id` vendor identifier
 - Added `iscc_id` field
+- Updated OpenAPI definitions.
 
 ### 0.3.5 - 2000-03-11
 
