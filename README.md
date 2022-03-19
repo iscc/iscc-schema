@@ -1,6 +1,6 @@
 # **ISCC** - Schema
 
-*OpenAPI representation of the ISCC data model*
+*ISCC - JSON-LD Metadata and OpenAPI Service Descriptions*
 
 [![Build](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml)
 [![Version](https://img.shields.io/pypi/v/iscc-schema.svg)](https://pypi.python.org/pypi/iscc-schema/)
