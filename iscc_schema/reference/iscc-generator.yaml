@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: ISCC Generator
-  version: 0.3.6
+  version: 0.3.7
   summary: Create Internation Standard Content Codes
   description: '# About this spec
 

@@ -95,6 +95,8 @@ All ISCC extensions start with `x-iscc-`:
 
 ## Changelog
 
+### 0.3.7 - Unrlreleased
+
 ### 0.3.6 - 2022-03-19
 
 - Use customized BaseModel for IsccMeta
