@@ -40,9 +40,8 @@ class IsccDeclaration(BaseModel):
     redirect: Optional[AnyUrl] = Field(
         None,
         description=(
-            "URL to which a resolver should redirect an ISCC-ID that has been minted from a"
-            " declartion that includes the IPFS-hash of this metadata instance. **Supports URI"
-            " template `(iscc-id)`**."
+            "URL to which an ISCC resolver should redirect the ISCC-ID. **Supports URI template"
+            " `(iscc-id)`**"
         ),
         example="https://example.com/land-here-when-resolving-iscc-id",
         x_iscc_context="http://purl.org/iscc/terms/#redirect",

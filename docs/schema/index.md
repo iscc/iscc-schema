@@ -380,7 +380,7 @@ Field relevant in context with public ISCC declerations
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `(iscc-id)`**.<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
+| redirect | `string-uri` | none | URL to which an ISCC resolver should redirect the ISCC-ID. **Supports URI template `(iscc-id)`**<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
 
 ### **chain**
 <http://purl.org/iscc/terms/#chain>

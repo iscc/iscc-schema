@@ -244,7 +244,7 @@
 
 <small><http://purl.org/iscc/terms/#redirect></small>
 !!! term ""
-    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `(iscc-id)`**.
+    URL to which an ISCC resolver should redirect the ISCC-ID. **Supports URI template `(iscc-id)`**
 
 ## chain
 

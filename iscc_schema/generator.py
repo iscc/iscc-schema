@@ -319,7 +319,10 @@ class NftMetadata(BaseModel):
     )
     redirect: Optional[AnyUrl] = Field(
         None,
-        description="URL to which an ISCC resolver should redirect the ISCC-ID.",
+        description=(
+            "URL to which an ISCC resolver should redirect the ISCC-ID. **Supports URI template"
+            " `(iscc-id)`**"
+        ),
         example="https://example.com/redirect-here-for-iscc-id",
     )
     verifications: Optional[List[AnyUrl]] = Field(
@@ -524,8 +527,8 @@ class NftPostRequest(BaseModel):
     redirect: Optional[AnyUrl] = Field(
         None,
         description=(
-            "URL to which a resolver should redirect an ISCC-ID that has been minted from a"
-            " declartion that includes the IPFS-hash of this metadata instance."
+            "URL to which an ISCC resolver should redirect the ISCC-ID. **Supports URI template"
+            " `(iscc-id)`**"
         ),
     )
     verifications: Optional[List[AnyUrl]] = Field(
