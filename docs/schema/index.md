@@ -84,14 +84,14 @@ Metadata intended to be embedded into the media asset.
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| license | `string-uri` | none | URI of license for the identified *digital content*. **Supports URI template `{iscc-id}`**.<br><br>**Example**: `https://example.com/license-terms-for-this-item`         |
+| license | `string-uri` | none | URI of license for the identified *digital content*.<br><br>**Example**: `https://example.com/license-terms-for-this-item`         |
 
 ### **acquire**
 <http://schema.org/acquireLicensePage>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| acquire | `string-uri` | none | This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license. **Supports URI template `{iscc-id}`**.<br><br>**Example**: `https://example.com/buy-license-for-item-here`         |
+| acquire | `string-uri` | none | This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.<br><br>**Example**: `https://example.com/buy-license-for-item-here`         |
 
 ### **credit**
 <http://schema.org/creditText>
@@ -320,7 +320,7 @@ Metadata for NFT Marketplaces
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| external_url | `string-uri` | none | This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site.         |
+| external_url | `string-uri` | none | This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site. **Supports URI template `(iscc-id)`**.         |
 
 ### **animation_url**
 <http://purl.org/iscc/terms/#animation_url>
@@ -380,7 +380,7 @@ Field relevant in context with public ISCC declerations
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
+| redirect | `string-uri` | none | URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `(iscc-id)`**.<br><br>**Example**: `https://example.com/land-here-when-resolving-iscc-id`         |
 
 ### **chain**
 <http://purl.org/iscc/terms/#chain>

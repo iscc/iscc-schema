@@ -28,13 +28,13 @@
 
 <small><http://schema.org/license></small>
 !!! term ""
-    URI of license for the identified *digital content*. **Supports URI template `{iscc-id}`**.
+    URI of license for the identified *digital content*.
 
 ## acquire
 
 <small><http://schema.org/acquireLicensePage></small>
 !!! term ""
-    This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license. **Supports URI template `{iscc-id}`**.
+    This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.
 
 ## credit
 
@@ -196,7 +196,7 @@
 
 <small><http://purl.org/iscc/terms/#external_url></small>
 !!! term ""
-    This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site.
+    This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site. **Supports URI template `(iscc-id)`**.
 
 ## animation_url
 
@@ -244,7 +244,7 @@
 
 <small><http://purl.org/iscc/terms/#redirect></small>
 !!! term ""
-    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.
+    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `(iscc-id)`**.
 
 ## chain
 

@@ -41,7 +41,8 @@ class IsccDeclaration(BaseModel):
         None,
         description=(
             "URL to which a resolver should redirect an ISCC-ID that has been minted from a"
-            " declartion that includes the IPFS-hash of this metadata instance."
+            " declartion that includes the IPFS-hash of this metadata instance. **Supports URI"
+            " template `(iscc-id)`**."
         ),
         example="https://example.com/land-here-when-resolving-iscc-id",
         x_iscc_context="http://purl.org/iscc/terms/#redirect",
@@ -119,7 +120,8 @@ class IsccNft(BaseModel):
         None,
         description=(
             "This is the URL that will appear below the asset's image on some NFT Marketplaces and"
-            " will allow users to leave the site and view the item on your site."
+            " will allow users to leave the site and view the item on your site. **Supports URI"
+            " template `(iscc-id)`**."
         ),
         x_iscc_context="http://purl.org/iscc/terms/#external_url",
     )
@@ -365,10 +367,7 @@ class IsccEmbeddable(BaseModel):
     )
     license: Optional[AnyUrl] = Field(
         None,
-        description=(
-            "URI of license for the identified *digital content*. **Supports URI template"
-            " `{iscc-id}`**."
-        ),
+        description="URI of license for the identified *digital content*.",
         example="https://example.com/license-terms-for-this-item",
         x_iscc_context="http://schema.org/license",
     )
@@ -377,7 +376,7 @@ class IsccEmbeddable(BaseModel):
         description=(
             "This field must contain a valid URL referring to a page showing information about how"
             " one can acquire a license for the item. This may be a page of a web shop or NFT"
-            " marketplace ready for providing a license. **Supports URI template `{iscc-id}`**."
+            " marketplace ready for providing a license."
         ),
         example="https://example.com/buy-license-for-item-here",
         x_iscc_context="http://schema.org/acquireLicensePage",

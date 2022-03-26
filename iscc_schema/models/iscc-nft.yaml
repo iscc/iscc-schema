@@ -4,7 +4,8 @@ description: Metadata for NFT Marketplaces
 properties:
   external_url:
     description: This is the URL that will appear below the asset's image on some NFT Marketplaces
-      and will allow users to leave the site and view the item on your site.
+      and will allow users to leave the site and view the item on your site. **Supports URI
+      template `(iscc-id)`**.
     type: string
     format: uri
     x-iscc-context: http://purl.org/iscc/terms/#external_url

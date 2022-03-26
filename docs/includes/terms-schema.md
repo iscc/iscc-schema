@@ -34,7 +34,7 @@
 
     A license document that applies to this content, typically indicated by URL.
 
-    **Comment**:  URI of license for the identified *digital content*. **Supports URI template `{iscc-id}`**.
+    **Comment**:  URI of license for the identified *digital content*.
 
     **Embedding**:  Use `Xmp.xmpRights.WebStatement` for embedding as image metadata.
 
@@ -44,7 +44,7 @@
 
     Indicates a page documenting how licenses can be purchased or otherwise acquired, for the current item.
 
-    **Comment**:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license. **Supports URI template `{iscc-id}`**.
+    **Comment**:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.
 
     **Embedding**:  Use `Xmp.plus.Licensor[1]/plus:LicensorURL` for embedding in images.
 

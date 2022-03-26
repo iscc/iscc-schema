@@ -68,7 +68,7 @@
 
 !!! term "<small><http://purl.org/iscc/terms/#external_url></small>"
 
-    This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site.
+    This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site. **Supports URI template `(iscc-id)`**.
 
 ### **animation_url**
 
@@ -116,7 +116,7 @@
 
 !!! term "<small><http://purl.org/iscc/terms/#redirect></small>"
 
-    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance.
+    URL to which a resolver should redirect an ISCC-ID that has been minted from a declartion that includes the IPFS-hash of this metadata instance. **Supports URI template `(iscc-id)`**.
 
 ### **chain**
 
