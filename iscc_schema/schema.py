@@ -161,6 +161,24 @@ class IsccNft(BaseModel):
         ],
         x_iscc_context="http://purl.org/iscc/terms/#attributes",
     )
+    nft_chain: Optional[str] = Field(
+        None,
+        description="Blockchain that hosts the NFT contract for the digital content.",
+        example="ETHEREUM",
+        x_iscc_context="http://purl.org/iscc/terms/#nft_chain",
+    )
+    nft_contract: Optional[str] = Field(
+        None,
+        description="Smartcontract address of the NFT for the digital content.",
+        example="200793916856438270206911388949256346351665768371",
+        x_iscc_context="http://purl.org/iscc/terms/#nft_contract",
+    )
+    nft_token: Optional[str] = Field(
+        None,
+        description="Token-ID of the NFT for the digital content.",
+        example="1235",
+        x_iscc_context="http://purl.org/iscc/terms/#nft_token_id",
+    )
 
 
 class Mode(Enum):

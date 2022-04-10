@@ -1,7 +1,9 @@
 ## Changelog
 
 ### 0.3.7 - Unreleased
+- Added new nft_chain, nft_contract, nft_token fields
 - Moved changelog
+- Updated examples
 
 ### 0.3.6 - 2022-03-19
 

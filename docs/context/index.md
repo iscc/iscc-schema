@@ -216,6 +216,24 @@
 !!! term ""
     Similar to `properties` but as an array of objects. These attributes will show up on some NFT marketplaces.
 
+## nft_chain
+
+<small><http://purl.org/iscc/terms/#nft_chain></small>
+!!! term ""
+    Blockchain that hosts the NFT contract for the digital content.
+
+## nft_contract
+
+<small><http://purl.org/iscc/terms/#nft_contract></small>
+!!! term ""
+    Smartcontract address of the NFT for the digital content.
+
+## nft_token
+
+<small><http://purl.org/iscc/terms/#nft_token_id></small>
+!!! term ""
+    Token-ID of the NFT for the digital content.
+
 ## tophash
 
 <small><http://purl.org/iscc/terms/#tophash></small>

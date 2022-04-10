@@ -58,3 +58,21 @@ properties:
     x-iscc-context: http://purl.org/iscc/terms/#attributes
     x-iscc-category: nft
     x-iscc-status: stable
+  nft_chain:
+    description: Blockchain that hosts the NFT contract for the digital content.
+    example: ETHEREUM
+    type: string
+    x-iscc-context: http://purl.org/iscc/terms/#nft_chain
+    x-iscc-category: nft
+  nft_contract:
+    description: Smartcontract address of the NFT for the digital content.
+    example: '200793916856438270206911388949256346351665768371'
+    type: string
+    x-iscc-context: http://purl.org/iscc/terms/#nft_contract
+    x-iscc-category: nft
+  nft_token:
+    description: Token-ID of the NFT for the digital content.
+    type: string
+    example: '1235'
+    x-iscc-context: http://purl.org/iscc/terms/#nft_token_id
+    x-iscc-category: nft
