@@ -51,7 +51,7 @@ def test_jcs():
 
 
 def test_jcs_big_int_raises():
-    obj = iss.IsccMeta(duration=2 ** 60)
+    obj = iss.IsccMeta(duration=2**60)
     assert obj.dict() == {"duration": 1152921504606846976}
     with pytest.raises(ValueError):
         obj.jcs()
