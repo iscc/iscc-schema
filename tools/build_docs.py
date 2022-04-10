@@ -14,6 +14,8 @@ MARKDOWN_CONTEXT = ROOT / "docs/context/index.md"
 HERE = dirname(abspath(__file__))
 SRC = join(HERE, "../README.md")
 DST = join(HERE, "../docs/index.md")
+CHANGELOG_SRC = join(HERE, "../CHANGELOG.md")
+CHANGELOG_DST = join(HERE, "../docs/changelog.md")
 
 
 # TODO test json-ld normalization
@@ -21,12 +23,18 @@ DST = join(HERE, "../docs/index.md")
 # TODO add logging to tool actions
 
 
-def copy_readme():
-    """Copy README.md to documentation index.md"""
+def copy_root_files():
+    """Copy README and CHANGELOG to documentation"""
     with open(SRC, "rt", encoding="utf-8") as infile:
         text = infile.read()
 
     with open(DST, "wt", encoding="utf-8", newline="\n") as outf:
+        outf.write(text)
+
+    with open(CHANGELOG_SRC, "rt", encoding="utf-8") as infile:
+        text = infile.read()
+
+    with open(CHANGELOG_DST, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(text)
 
 
@@ -114,7 +122,7 @@ def build_json_ld_context_docs():
 
 
 def build():
-    copy_readme()
+    copy_root_files()
     build_json_schema_docs()
     build_json_ld_context_docs()
 

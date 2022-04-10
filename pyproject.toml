@@ -5,8 +5,15 @@ description = "ISCC - JSON-LD Metadata and OpenAPI Service Descriptions"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
 readme = "README.md"
+homepage = "https://iscc.codes"
 repository = "https://github.com/iscc/iscc-schema"
+documentation = "https://schema.iscc.codes/"
 keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "similarity"]
+
+[tool.poetry.urls]
+"Changelog" = "https://schema.iscc.codes/changelog"
+"Bug Tracker" = "https://github.com/iscc/iscc-schema/issues"
+
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0.0"
@@ -14,16 +21,15 @@ pydantic = "^1.9"
 jcs = "^0.2"
 
 [tool.poetry.dev-dependencies]
-pytest = "*"
+pytest = "7.1"
 datamodel-code-generator = "^0.11"
-poethepoet = "*"
-black = { version = "21.12b0", allow-prereleases = true }
-mkdocs-material = "*"
+poethepoet = "^0.13"
+black = "^22.3"
+mkdocs-material = "^8.2"
 PyLD = "*"
-requests = "^2.27.1"
+requests = "^2.27"
 
 [tool.black]
-skip-string-normalization = false
 line-length = 100
 target-version = ['py37']
 

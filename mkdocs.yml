@@ -83,3 +83,4 @@ nav:
   - Schema: schema/index.md
   - API: api
   - Examples: examples/index.md
+  - Changelog: changelog.md
