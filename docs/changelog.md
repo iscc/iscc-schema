@@ -1,5 +1,7 @@
 ## Changelog
 
+### [0.3.8] - Unreleased
+
 ### [0.3.7] - 2022-04-10
 - Added new nft_chain, nft_contract, nft_token fields
 - Moved changelog

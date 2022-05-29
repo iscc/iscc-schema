@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iscc-schema"
-version = "0.3.7"
+version = "0.3.8"
 description = "ISCC - JSON-LD Metadata and OpenAPI Service Descriptions"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
