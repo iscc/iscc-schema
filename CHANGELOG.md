@@ -1,6 +1,6 @@
 ## Changelog
 
-### [0.3.8] - Unreleased
+### [0.3.8] - 2022-06-08
 - Updated dependencies
 - Refactor NFT reference to support CAIP-22 and CAIP-29 standards
 
