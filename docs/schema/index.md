@@ -343,26 +343,12 @@ Metadata for NFT Marketplaces
 | ---- | ---- | --------|--------------------------------|
 | attributes | `array` | none | Similar to `properties` but as an array of objects. These attributes will show up on some NFT marketplaces.<br><br>**Example**: `[{'trait_type': 'METAL', 'value': 'SILVER'}, {'display_type': 'number', 'trait_type': 'GENERATION', 'value': 1}]`         |
 
-### **nft_chain**
-<http://purl.org/iscc/terms/#nft_chain>
+### **nft**
+<http://purl.org/iscc/terms/#nft>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| nft_chain | `string` | none | Blockchain that hosts the NFT contract for the digital content.<br><br>**Example**: `ETHEREUM`         |
-
-### **nft_contract**
-<http://purl.org/iscc/terms/#nft_contract>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| nft_contract | `string` | none | Smartcontract address of the NFT for the digital content.<br><br>**Example**: `200793916856438270206911388949256346351665768371`         |
-
-### **nft_token**
-<http://purl.org/iscc/terms/#nft_token_id>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| nft_token | `string` | none | Token-ID of the NFT for the digital content.<br><br>**Example**: `1235`         |
+| nft | `string-uri` | none | A unique URI for a non-fungible token of the identified content. The URI must contain references to the blockchain, smart-contract and token. The recommended schemes are [CAIP-22](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-22.md) and [CAIP-29](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-29.md).<br><br>**Example**: `eip155:1/erc721:0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/771769`         |
 
 ## iscc-crypto
 Cryptography related ISCC Metadata

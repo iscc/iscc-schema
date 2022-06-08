@@ -409,6 +409,14 @@
       "x-iscc-context": "http://purl.org/iscc/terms/#attributes",
       "x-iscc-category": "nft"
     },
+    "nft": {
+      "description": "A unique URI for a non-fungible token of the identified content. The URI must contain references to the blockchain, smart-contract and token. The recommended schemes are [CAIP-22](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-22.md) and [CAIP-29](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-29.md).",
+      "type": "string",
+      "format": "uri",
+      "example": "eip155:1/erc721:0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/771769",
+      "x-iscc-context": "http://purl.org/iscc/terms/#nft",
+      "x-iscc-category": "nft"
+    },
     "tophash": {
       "type": "string",
       "readOnly": true,

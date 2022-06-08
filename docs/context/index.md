@@ -216,23 +216,11 @@
 !!! term ""
     Similar to `properties` but as an array of objects. These attributes will show up on some NFT marketplaces.
 
-## nft_chain
+## nft
 
-<small><http://purl.org/iscc/terms/#nft_chain></small>
+<small><http://purl.org/iscc/terms/#nft></small>
 !!! term ""
-    Blockchain that hosts the NFT contract for the digital content.
-
-## nft_contract
-
-<small><http://purl.org/iscc/terms/#nft_contract></small>
-!!! term ""
-    Smartcontract address of the NFT for the digital content.
-
-## nft_token
-
-<small><http://purl.org/iscc/terms/#nft_token_id></small>
-!!! term ""
-    Token-ID of the NFT for the digital content.
+    A unique URI for a non-fungible token of the identified content. The URI must contain references to the blockchain, smart-contract and token. The recommended schemes are [CAIP-22](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-22.md) and [CAIP-29](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-29.md).
 
 ## tophash
 

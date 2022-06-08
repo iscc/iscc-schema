@@ -161,23 +161,16 @@ class IsccNft(BaseModel):
         ],
         x_iscc_context="http://purl.org/iscc/terms/#attributes",
     )
-    nft_chain: Optional[str] = Field(
+    nft: Optional[AnyUrl] = Field(
         None,
-        description="Blockchain that hosts the NFT contract for the digital content.",
-        example="ETHEREUM",
-        x_iscc_context="http://purl.org/iscc/terms/#nft_chain",
-    )
-    nft_contract: Optional[str] = Field(
-        None,
-        description="Smartcontract address of the NFT for the digital content.",
-        example="200793916856438270206911388949256346351665768371",
-        x_iscc_context="http://purl.org/iscc/terms/#nft_contract",
-    )
-    nft_token: Optional[str] = Field(
-        None,
-        description="Token-ID of the NFT for the digital content.",
-        example="1235",
-        x_iscc_context="http://purl.org/iscc/terms/#nft_token_id",
+        description=(
+            "A unique URI for a non-fungible token of the identified content. The URI must contain"
+            " references to the blockchain, smart-contract and token. The recommended schemes are"
+            " [CAIP-22](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-22.md) and"
+            " [CAIP-29](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-29.md)."
+        ),
+        example="eip155:1/erc721:0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/771769",
+        x_iscc_context="http://purl.org/iscc/terms/#nft",
     )
 
 

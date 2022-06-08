@@ -1,6 +1,8 @@
 ## Changelog
 
 ### [0.3.8] - Unreleased
+- Updated dependencies
+- Refactor NFT reference to support CAIP-22 and CAIP-29 standards
 
 ### [0.3.7] - 2022-04-10
 - Added new nft_chain, nft_contract, nft_token fields
