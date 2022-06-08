@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://schema.iscc.codes/schema/">
       
       <link rel="icon" href="../images/iscc-logo-icon-black.svg">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.3">
     
     
       
@@ -23,11 +23,12 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.120efc48.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.4a0965b7.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.9647289d.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
         
+      
       
     
     
@@ -764,22 +765,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#nft_chain" class="md-nav__link">
-    nft_chain
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nft_contract" class="md-nav__link">
-    nft_contract
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nft_token" class="md-nav__link">
-    nft_token
+  <a href="#nft" class="md-nav__link">
+    nft
   </a>
   
 </li>
@@ -959,7 +946,7 @@
 <tr>
 <td>@context</td>
 <td><code>string-uri</code></td>
-<td><a href="http://purl.org/iscc/context/0.3.7.jsonld">http://purl.org/iscc/context/0.3.7.jsonld</a></td>
+<td><a href="http://purl.org/iscc/context/0.3.8.jsonld">http://purl.org/iscc/context/0.3.8.jsonld</a></td>
 <td>The <a href="https://json-ld.org/"><abbr title="A JSON-based Serialization for Linked Data">JSON-LD</abbr></a> Context URI for ISCC metadata.</td>
 </tr>
 </tbody>
@@ -998,7 +985,7 @@
 <tr>
 <td>$schema</td>
 <td><code>string-uri</code></td>
-<td><a href="http://purl.org/iscc/schema/0.3.7.json">http://purl.org/iscc/schema/0.3.7.json</a></td>
+<td><a href="http://purl.org/iscc/schema/0.3.8.json">http://purl.org/iscc/schema/0.3.8.json</a></td>
 <td>The <a href="https://json-schema.org/">JSON Schema</a> URI for ISCC metadata.</td>
 </tr>
 </tbody>
@@ -1815,8 +1802,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="nft_chain"><strong>nft_chain</strong><a class="headerlink" href="#nft_chain" title="Permanent link">#</a></h3>
-<p><a href="http://purl.org/iscc/terms/#nft_chain">http://purl.org/iscc/terms/#nft_chain</a></p>
+<h3 id="nft"><strong>nft</strong><a class="headerlink" href="#nft" title="Permanent link">#</a></h3>
+<p><a href="http://purl.org/iscc/terms/#nft">http://purl.org/iscc/terms/#nft</a></p>
 <table>
 <thead>
 <tr>
@@ -1828,50 +1815,10 @@
 </thead>
 <tbody>
 <tr>
-<td>nft_chain</td>
-<td><code>string</code></td>
+<td>nft</td>
+<td><code>string-uri</code></td>
 <td>none</td>
-<td>Blockchain that hosts the NFT contract for the digital content.<br><br><strong>Example</strong>: <code>ETHEREUM</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="nft_contract"><strong>nft_contract</strong><a class="headerlink" href="#nft_contract" title="Permanent link">#</a></h3>
-<p><a href="http://purl.org/iscc/terms/#nft_contract">http://purl.org/iscc/terms/#nft_contract</a></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>nft_contract</td>
-<td><code>string</code></td>
-<td>none</td>
-<td>Smartcontract address of the NFT for the digital content.<br><br><strong>Example</strong>: <code>200793916856438270206911388949256346351665768371</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="nft_token"><strong>nft_token</strong><a class="headerlink" href="#nft_token" title="Permanent link">#</a></h3>
-<p><a href="http://purl.org/iscc/terms/#nft_token_id">http://purl.org/iscc/terms/#nft_token_id</a></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>nft_token</td>
-<td><code>string</code></td>
-<td>none</td>
-<td>Token-ID of the NFT for the digital content.<br><br><strong>Example</strong>: <code>1235</code></td>
+<td>A unique URI for a non-fungible token of the identified content. The URI must contain references to the blockchain, smart-contract and token. The recommended schemes are <a href="https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-22.md">CAIP-22</a> and <a href="https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-29.md">CAIP-29</a>.<br><br><strong>Example</strong>: <code>eip155:1/erc721:0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/771769</code></td>
 </tr>
 </tbody>
 </table>
@@ -2042,6 +1989,7 @@
 
               
             </article>
+            
           </div>
         </div>
         
@@ -2049,7 +1997,8 @@
       
         <footer class="md-footer">
   
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
         <a href="../terms/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Terms" rel="prev">
@@ -2108,10 +2057,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["toc.integrate", "navigation.indexes", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.expand"], "search": "../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      <script src="../assets/javascripts/bundle.f758a944.min.js"></script>
       
     
   </body>
