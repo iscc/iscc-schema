@@ -1,6 +1,6 @@
 ## Changelog
 
-### [0.3.9] - Unreleased
+### [0.3.9] - 2022-07-03
 - Fixed identifier element to support stings and list of strings
 - Add string/list support for creators and keywords fields
 - Updated dependencies
