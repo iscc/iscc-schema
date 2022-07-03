@@ -94,7 +94,19 @@
       "description": "The perceptual mode used to create the ISCC-CODE."
     },
     "creator": {
-      "type": "string",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            }
+          ]
+        }
+      ],
       "description": "An entity primarily responsible for making the resource.",
       "example": "Joanne K. Rowling",
       "x-iscc-context": "http://schema.org/creator",
@@ -173,14 +185,19 @@
     },
     "identifier": {
       "description": "Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.",
-      "type": [
-        "string",
-        "array"
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            }
+          ]
+        }
       ],
-      "items": {
-        "type": "string",
-        "format": "uri"
-      },
       "x-iscc-context": "http://schema.org/identifier",
       "x-iscc-schema-doc": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details."
     },
@@ -192,7 +209,19 @@
       "x-iscc-schema-doc": "Actual bytes of the media object, for example the image file or video file."
     },
     "keywords": {
-      "type": "string",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            }
+          ]
+        }
+      ],
       "description": "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.",
       "x-iscc-context": "http://schema.org/keywords",
       "x-iscc-schema-doc": "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas."

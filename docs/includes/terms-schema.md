@@ -114,7 +114,7 @@
 
     Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
 
-    **Comment**:  Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
+    **Comment**:  Keywords or tags used to describe this content. Either a list of keywords or a sting with comma separated keywords.
 
 ### **version**
 

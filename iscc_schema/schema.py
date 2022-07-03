@@ -344,11 +344,11 @@ class IsccExtended(BaseModel):
         description="URI of the *digital content* that was used to create this ISCC.",
         x_iscc_context="http://schema.org/contentUrl",
     )
-    keywords: Optional[str] = Field(
+    keywords: Optional[Union[str, List[str]]] = Field(
         None,
         description=(
-            "Keywords or tags used to describe this content. Multiple entries in a keywords list"
-            " are typically delimited by commas."
+            "Keywords or tags used to describe this content. Either a list of keywords or a sting"
+            " with comma separated keywords."
         ),
         x_iscc_context="http://schema.org/keywords",
     )
@@ -369,7 +369,7 @@ class IsccEmbeddable(BaseModel):
     Metadata intended to be embedded into the media asset.
     """
 
-    creator: Optional[str] = Field(
+    creator: Optional[Union[str, List[str]]] = Field(
         None,
         description="An entity primarily responsible for making the resource.",
         example="Joanne K. Rowling",

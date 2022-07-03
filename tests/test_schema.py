@@ -88,21 +88,11 @@ def test_pydantic_model_iscc_to_long_raises():
         )
 
 
-def test_identifier():
-    assert iss.IsccMeta(identifier="some-id").dict() == {'identifier': 'some-id'}
+def test_identifier_string():
+    assert iss.IsccMeta(identifier="some-id").dict() == {"identifier": "some-id"}
 
 
-# def test_json_ld_normalize():
-#     so = schema.ISCC(iscc="ISCC:EIAGUJFCEY")
-#     data = so.dict(exclude_none=True, by_alias=True)
-#     assert data == {
-#         "@context": "http://purl.org/iscc/context",
-#         "@type": "CreativeWork",
-#         "$schema": "http://purl.org/iscc/schema",
-#         "iscc": "ISCC:EIAGUJFCEY",
-#     }
-#
-#     norm = jsonld.normalize(data, {"algorithm": "URDNA2015", "format": "application/n-quads"})
-#     assert norm == (
-#         "<ISCC:EIAGUJFCEY> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork> .\n"
-#     )
+def test_identifier_list():
+    assert iss.IsccMeta(identifier=["some-id", "other-id"]).dict() == {
+        "identifier": ["some-id", "other-id"]
+    }

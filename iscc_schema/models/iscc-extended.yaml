@@ -53,9 +53,13 @@ properties:
     x-iscc-schema-doc: Actual bytes of the media object, for example the image file or video
       file.
   keywords:
-    type: string
-    description: Keywords or tags used to describe this content. Multiple entries in a keywords
-      list are typically delimited by commas.
+    oneOf:
+    - type: string
+    - type: array
+      items:
+      - type: string
+    description: Keywords or tags used to describe this content. Either a list of keywords
+      or a sting with comma separated keywords.
     x-iscc-context: http://schema.org/keywords
     x-iscc-schema-doc: Keywords or tags used to describe this content. Multiple entries in
       a keywords list are typically delimited by commas.

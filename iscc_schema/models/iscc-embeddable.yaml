@@ -3,7 +3,11 @@ type: object
 description: Metadata intended to be embedded into the media asset.
 properties:
   creator:
-    type: string
+    oneOf:
+    - type: string
+    - type: array
+      items:
+      - type: string
     description: An entity primarily responsible for making the resource.
     example: Joanne K. Rowling
     x-iscc-context: http://schema.org/creator

@@ -82,7 +82,7 @@
 
 <small><http://schema.org/keywords></small>
 !!! term ""
-    Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
+    Keywords or tags used to describe this content. Either a list of keywords or a sting with comma separated keywords.
 
 ## previous
 

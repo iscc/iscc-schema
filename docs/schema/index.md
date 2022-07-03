@@ -77,7 +77,7 @@ Metadata intended to be embedded into the media asset.
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| creator | `string` | none | An entity primarily responsible for making the resource.<br><br>**Example**: `Joanne K. Rowling`         |
+| creator | `None` | none | An entity primarily responsible for making the resource.<br><br>**Example**: `Joanne K. Rowling`         |
 
 ### **license**
 <http://schema.org/license>
@@ -161,7 +161,7 @@ Extended ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| keywords | `string` | none | Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.         |
+| keywords | `None` | none | Keywords or tags used to describe this content. Either a list of keywords or a sting with comma separated keywords.         |
 
 ### **previous**
 <http://purl.org/iscc/terms/#previous>
