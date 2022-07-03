@@ -88,6 +88,10 @@ def test_pydantic_model_iscc_to_long_raises():
         )
 
 
+def test_identifier():
+    assert iss.IsccMeta(identifier="some-id") == {}
+
+
 # def test_json_ld_normalize():
 #     so = schema.ISCC(iscc="ISCC:EIAGUJFCEY")
 #     data = so.dict(exclude_none=True, by_alias=True)
