@@ -6,7 +6,7 @@ properties:
   '@context':
     type: string
     format: uri
-    default: http://purl.org/iscc/context/0.3.8.jsonld
+    default: http://purl.org/iscc/context/0.3.9.jsonld
     description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
     readOnly: true
   '@type':
@@ -24,7 +24,7 @@ properties:
   $schema:
     type: string
     format: uri
-    default: http://purl.org/iscc/schema/0.3.8.json
+    default: http://purl.org/iscc/schema/0.3.9.json
     description: The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.
     readOnly: true
     x-iscc-context: http://purl.org/iscc/terms/#$schema
