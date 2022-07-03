@@ -331,7 +331,7 @@ class IsccExtended(BaseModel):
         example="https://picsum.photos/200/300.jpg",
         x_iscc_context="http://schema.org/image",
     )
-    identifier: Optional[List[AnyUrl]] = Field(
+    identifier: Optional[Union[str, List[str]]] = Field(
         None,
         description=(
             "Other identifier(s) referencing the work, product or other abstraction of which the"

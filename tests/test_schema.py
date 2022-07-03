@@ -89,7 +89,7 @@ def test_pydantic_model_iscc_to_long_raises():
 
 
 def test_identifier():
-    assert iss.IsccMeta(identifier="some-id") == {}
+    assert iss.IsccMeta(identifier="some-id").dict() == {'identifier': 'some-id'}
 
 
 # def test_json_ld_normalize():

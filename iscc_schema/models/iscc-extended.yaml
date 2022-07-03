@@ -35,12 +35,11 @@ properties:
   identifier:
     description: Other identifier(s) referencing the work, product or other abstraction of
       which the referenced **digital content** is a full or partial manifestation.
-    type:
-    - string
-    - array
-    items:
-      type: string
-      format: uri
+    oneOf:
+    - type: string
+    - type: array
+      items:
+      - type: string
     x-iscc-context: http://schema.org/identifier
     x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
       of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
