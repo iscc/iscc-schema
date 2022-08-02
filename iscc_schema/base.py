@@ -71,12 +71,16 @@ class BaseModel(OriginalBaseModel):
 
     @property
     def iscc_obj(self):
+        # type: () -> "iscc_core.Code"
         """
-        :return: ISCC-CODE object if iscc_core is available else None
-        :rtype: Optional[ic.Code]
+        Convenience method that wraps an ISCC string in an iscc_core.Code object
+
+        :return: `iscc_core.Code` object if the iscc-core package is installed
+        :rtype: iscc_core.Code
+        :raise: `ImportError` if iscc-core package is not instlled.
         """
         try:
-            import iscc_core as ic
+            from iscc_core import Code
         except ImportError:
-            raise ImportError("IsccMeta.iscc_obj requires iscc_core package.")
-        return ic.Code(self.iscc)
+            raise ImportError("IsccMeta.iscc_obj requires iscc-core package.")
+        return Code(self.iscc)
