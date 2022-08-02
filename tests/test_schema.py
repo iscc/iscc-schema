@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
+from pydantic import ValidationError
+
 import iscc_schema as iss
 
 
@@ -96,3 +98,11 @@ def test_identifier_list():
     assert iss.IsccMeta(identifier=["some-id", "other-id"]).dict() == {
         "identifier": ["some-id", "other-id"]
     }
+
+
+def test_forbid_extra_fields():
+    with pytest.raises(ValidationError):
+        iss.IsccMeta(
+            iscc="ISCC:KID6X6GUH5F5GAXO2AUKQLUQFCUC4LNBCROR3QEP26N2PEOYVTDO2OY",
+            other="other",
+        )
