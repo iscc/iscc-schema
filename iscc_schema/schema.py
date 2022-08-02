@@ -439,10 +439,7 @@ class IsccBasic(BaseModel):
     )
     meta: Optional[str] = Field(
         None,
-        description=(
-            "Subject, industry, or use-case specific metadata, encoded as JSON string or Data-URL"
-            " (used as sole input for Meta-Code and `metahash` generation if supplied)."
-        ),
+        description="Subject, industry, or use-case specific metadata encoded as Data-URL.",
         example="data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=",
         max_length=16384,
         x_iscc_context="http://purl.org/iscc/terms/#meta",

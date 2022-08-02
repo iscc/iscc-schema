@@ -1,6 +1,8 @@
 ## Changelog
 
 ### [0.4.0] - Unreleased
+- Addded test for error on extra fields.
+- Updated definition of `meta`-field
 
 ### [0.3.9] - 2022-07-03
 - Fixed identifier element to support stings and list of strings

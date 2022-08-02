@@ -16,7 +16,7 @@
 
 <small><http://purl.org/iscc/terms/#meta></small>
 !!! term ""
-    Subject, industry, or use-case specific metadata, encoded as JSON string or Data-URL (used as sole input for Meta-Code and `metahash` generation if supplied).
+    Subject, industry, or use-case specific metadata encoded as Data-URL.
 
 ## creator
 

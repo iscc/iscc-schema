@@ -77,9 +77,9 @@ properties:
     type: string
     maxLength: 16384
     example: data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=
-    description: Subject, industry, or use-case specific metadata, eEncoded as JSON string
-      or Data-URL (used as sole input for Meta-Code and `metahash` generation if supplied.)
+    description: Subject, industry, or use-case specific metadata encoded as Data-URL.
     x-iscc-context: http://purl.org/iscc/terms/#meta
+    x-iscc-status: stable
   mode:
     type: string
     enum:

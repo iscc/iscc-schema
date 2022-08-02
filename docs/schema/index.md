@@ -68,7 +68,7 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| meta | `string` | none | Subject, industry, or use-case specific metadata, encoded as JSON string or Data-URL (used as sole input for Meta-Code and `metahash` generation if supplied).<br><br>**Example**: `data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=`         |
+| meta | `string` | none | Subject, industry, or use-case specific metadata encoded as Data-URL.<br><br>**Example**: `data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=`         |
 
 ## iscc-embeddable
 Metadata intended to be embedded into the media asset.
