@@ -1,9 +1,10 @@
 ## Changelog
 
 ### [0.4.0] - Unreleased
-- Addded test for error on extra fields.
+- Addded test for error on extra fields
 - Added typing information to IsccMeta.iscc_obj property
 - Updated definition of `meta`-field
+- Updated dependencies
 
 ### [0.3.9] - 2022-07-03
 - Fixed identifier element to support stings and list of strings
