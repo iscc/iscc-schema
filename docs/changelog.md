@@ -1,6 +1,6 @@
 ## Changelog
 
-### [0.4.0] - Unreleased
+### [0.4.0] - 2022-11-24
 - Addded test for error on extra fields
 - Added typing information to IsccMeta.iscc_obj property
 - Updated definition of `meta`-field
