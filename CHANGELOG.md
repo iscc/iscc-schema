@@ -1,6 +1,7 @@
 ## Changelog
 
 ### [0.4.1] - Unreleased
+- Updated dependencies
 
 ### [0.4.0] - 2022-11-24
 - Addded test for error on extra fields
