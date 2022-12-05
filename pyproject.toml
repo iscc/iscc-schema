@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "iscc-schema"
-version = "0.4.0"
+version = "0.4.1"
 description = "ISCC - JSON-LD Metadata and OpenAPI Service Descriptions"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
@@ -32,6 +32,7 @@ requests = "^2.27"
 [tool.black]
 line-length = 100
 target-version = ['py37']
+preview = true
 
 
 [tool.poe.tasks]
