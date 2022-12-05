@@ -1,0 +1,31 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    {
+      "Ed25519VerificationKey2018": "https://w3id.org/security#Ed25519VerificationKey2018",
+      "publicKeyJwk": {
+        "@id": "https://w3id.org/security#publicKeyJwk",
+        "@type": "@json"
+      }
+    }
+  ],
+  "id": "did:web:schema.iscc.codes:examples",
+  "verificationMethod": [
+    {
+      "id": "did:web:schema.iscc.codes:examples#owner",
+      "type": "Ed25519VerificationKey2018",
+      "controller": "did:web:schema.iscc.codes:examples",
+      "publicKeyJwk": {
+        "kty": "OKP",
+        "crv": "Ed25519",
+        "x": "Fp1svsEbUMuR2RfpcrVJRxq3dqczdVcakyRJAqbyGms"
+      }
+    }
+  ],
+  "authentication": [
+    "did:web:schema.iscc.codes:examples#owner"
+  ],
+  "assertionMethod": [
+    "did:web:schema.iscc.codes:examples#owner"
+  ]
+}

@@ -51,6 +51,7 @@
     "redirect": "http://purl.org/iscc/terms/#redirect",
     "chain": "http://purl.org/iscc/terms/#chain",
     "wallet": "http://purl.org/iscc/terms/#wallet",
+    "credentials": "https://www.w3.org/2018/credentials#VerifiableCredential",
     "verifications": "http://purl.org/iscc/terms/#verifications"
   }
 }

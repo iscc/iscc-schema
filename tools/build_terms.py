@@ -36,13 +36,16 @@ def build_terms_schema():
     """Build schema.org terms markdown for inclusion into /terms/index.md"""
     doc = ""
 
-    for term, data in terms("http://schema.org"):
-        doc += f"### **{term}**\n\n"
-        doc += f'!!! term "<small><{data["x-iscc-context"]}></small>"\n\n'
-        doc += f"    {data['x-iscc-schema-doc']}\n\n"
-        doc += f"    **Comment**:  {data['description']}\n\n"
-        if data.get("x-iscc-embed"):
-            doc += f"    **Embedding**:  {data['x-iscc-embed']}\n\n"
+    contexts = ["http://schema.org", "https://www.w3.org/2018/credentials"]
+
+    for cont in contexts:
+        for term, data in terms(cont):
+            doc += f"### **{term}**\n\n"
+            doc += f'!!! term "<small><{data["x-iscc-context"]}></small>"\n\n'
+            doc += f"    {data['x-iscc-schema-doc']}\n\n"
+            doc += f"    **Comment**:  {data['description']}\n\n"
+            if data.get("x-iscc-embed"):
+                doc += f"    **Embedding**:  {data['x-iscc-embed']}\n\n"
 
     with open(MARKDOWN_TERMS_SCHEMA, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(doc)

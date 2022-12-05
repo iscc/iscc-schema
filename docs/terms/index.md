@@ -2,9 +2,9 @@
 
 ## Mapped Terms
 
-The following terms used in the ISCC metadata vocabulary are mapped to their
-<https://schema.org> equivalents. We added comments to the original term descriptions
-to clarify the definition in context with ISCC metadata.
+The following terms used in the ISCC metadata vocabulary are mapped to equivalents in other schemas.
+We added comments to the original term descriptions to clarify the definition in context with ISCC
+metadata.
 
 --8<-- "terms-schema.md"
 

@@ -264,6 +264,13 @@
 !!! term ""
     The wallet-address that signs an ISCC declaration.
 
+## credentials
+
+<small><https://www.w3.org/2018/credentials#VerifiableCredential></small>
+!!! term ""
+    One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one ore more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a string interpret it as an URI. The expectation is that the URI returns a response with Content-type `application/json` where the data is a VC or an array of VCs.</li><li>If the value is an object interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an array and an item in the array is an object interpret it as a VC.</li><li>If the value is an array and an items is a string interpret the item as an URI to VC(s)</li><li>Credentials are only taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) can be matched to the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul>
+
+
 ## verifications
 
 <small><http://purl.org/iscc/terms/#verifications></small>

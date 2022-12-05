@@ -148,6 +148,30 @@ properties:
       of the work manifested by the identified digital content.
     example: true
     x-iscc-context: http://purl.org/iscc/terms/#original
+  credentials:
+    oneOf:
+    - type: string
+    - type: object
+    - type: array
+    description: 'One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/)
+      or one ore more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret
+      the value according to the following rules <ul> <li>If the value is a string interpret
+      it as an URI. The expectation is that the URI returns a response with Content-type `application/json`
+      where the data is a VC or an array of VCs.</li><li>If the value is an object interpret
+      it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If
+      the value is an array and an item in the array is an object interpret it as a VC.</li><li>If
+      the value is an array and an items is a string interpret the item as an URI to VC(s)</li><li>Credentials
+      are only taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions)
+      can be matched to the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md)
+      representation of the declarers address).</li> </ul>
+
+      '
+    x-iscc-context: https://www.w3.org/2018/credentials#VerifiableCredential
+    x-iscc-schema-doc: A credential is a set of one or more claims made by an issuer. A verifiable
+      credential is a tamper-evident credential that has authorship that can be cryptographically
+      verified. Verifiable credentials can be used to build verifiable presentations, which
+      can also be cryptographically verified. The claims in a credential can be about different
+      subjects.
   verifications:
     description: A list of self-verifications. Self-verifications are public URLs under the
       account/authority of the signee. The verification URL must respond to a GET request
