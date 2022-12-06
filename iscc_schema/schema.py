@@ -71,7 +71,7 @@ class IsccDeclaration(BaseModel):
             " Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an"
             " `array` and an item in the `array` is a JSON `object` interpret it as a"
             " VC.</li><li>If the value is an `array` and an items is a `string` interpret the item"
-            " as an URI that dereferences to VC(s)</li><li>Credentials should only taken into"
+            " as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into"
             " account if the"
             " [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions)"
             " matches with the declarer (e.g."
