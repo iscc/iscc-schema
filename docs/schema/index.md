@@ -28,9 +28,9 @@ Minimal required ISCC Metadata
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context/iscc.jsonld",
+      "@context": "http://purl.org/iscc/context",
       "@type": "CreativeWork",
-      "$schema": "http://purl.org/iscc/schema/iscc.json",
+      "$schema": "http://purl.org/iscc/schema",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
     }
     ```
@@ -48,9 +48,9 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context/iscc.jsonld",
+      "@context": "http://purl.org/iscc/context",
       "@type": "VideoObject",
-      "$schema": "http://purl.org/iscc/schema/iscc.json",
+      "$schema": "http://purl.org/iscc/schema",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "name": "The Never Ending Story",
       "description": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
@@ -122,9 +122,9 @@ Extended ISCC Metadata
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context/iscc.jsonld",
+      "@context": "http://purl.org/iscc/context",
       "@type": "TextDigitalDocument",
-      "$schema": "http://purl.org/iscc/schema/iscc.json",
+      "$schema": "http://purl.org/iscc/schema",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "name": "The Never Ending Story",
       "description": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
@@ -199,9 +199,9 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context/iscc.jsonld",
+      "@context": "http://purl.org/iscc/context",
       "@type": "ImageObject",
-      "$schema": "http://purl.org/iscc/schema/iscc.json",
+      "$schema": "http://purl.org/iscc/schema",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "filename": "the-file.png",
       "filesize": 46356,

@@ -75,9 +75,9 @@ properties:
     x-iscc-context: http://schema.org/version
     x-iscc-schema-doc: The version of the *digital content* identified by the ISCC.
 examples:
-- '@context': http://purl.org/iscc/context/iscc.jsonld
+- '@context': http://purl.org/iscc/context
   '@type': TextDigitalDocument
-  $schema: http://purl.org/iscc/schema/iscc.json
+  $schema: http://purl.org/iscc/schema
   iscc: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
   name: The Never Ending Story
   description: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*

@@ -3,9 +3,9 @@ type: object
 description: Technical ISCC Metadata automaticaly inferred from the *digital content* by an
   ISCC Processor
 examples:
-- '@context': http://purl.org/iscc/context/iscc.jsonld
+- '@context': http://purl.org/iscc/context
   '@type': ImageObject
-  $schema: http://purl.org/iscc/schema/iscc.json
+  $schema: http://purl.org/iscc/schema
   iscc: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
   filename: the-file.png
   filesize: 46356

@@ -2,9 +2,9 @@ title: iscc-minimal
 type: object
 description: Minimal required ISCC Metadata
 examples:
-- '@context': http://purl.org/iscc/context/iscc.jsonld
+- '@context': http://purl.org/iscc/context
   '@type': CreativeWork
-  $schema: http://purl.org/iscc/schema/iscc.json
+  $schema: http://purl.org/iscc/schema
   iscc: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
 properties:
   iscc:
