@@ -396,7 +396,7 @@ class IsccEmbeddable(BaseModel):
     creator: Optional[Union[str, List[str]]] = Field(
         None,
         description="An entity primarily responsible for making the resource.",
-        example="Joanne K. Rowling",
+        example="Agatha Christie",
         x_iscc_context="http://schema.org/creator",
     )
     license: Optional[AnyUrl] = Field(

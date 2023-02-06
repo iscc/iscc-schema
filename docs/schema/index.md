@@ -77,7 +77,7 @@ Metadata intended to be embedded into the media asset.
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| creator | `None` | none | An entity primarily responsible for making the resource.<br><br>**Example**: `Joanne K. Rowling`         |
+| creator | `None` | none | An entity primarily responsible for making the resource.<br><br>**Example**: `Agatha Christie`         |
 
 ### **license**
 <http://schema.org/license>

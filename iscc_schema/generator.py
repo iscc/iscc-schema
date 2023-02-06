@@ -107,7 +107,7 @@ class IsccMetadata(BaseModel):
             "The title or name of the intangible creation manifested by the identified *digital"
             " content*."
         ),
-        example="Harry Potter and the Philosopher's Stone",
+        example="The Secret Adversary",
         max_length=128,
     )
     description: Optional[str] = Field(
@@ -125,7 +125,7 @@ class IsccMetadata(BaseModel):
     creator: Optional[str] = Field(
         None,
         description="An entity primarily responsible for making the resource.",
-        example="Joanne K. Rowling",
+        example="Agatha Christie",
     )
     license: Optional[AnyUrl] = Field(
         None,
@@ -261,7 +261,7 @@ class NftMetadata(BaseModel):
             "The title or name of the intangible creation manifested by the identified *digital"
             " content*."
         ),
-        example="Harry Potter and the Philosopher's Stone",
+        example="The Secret Adversary",
         max_length=128,
     )
     description: Optional[str] = Field(
@@ -364,7 +364,7 @@ class IsccBasicMetadata(BaseModel):
     name: Optional[str] = Field(
         None,
         description="The title or name of the creation manifested by digital content.",
-        example="Harry Potter and the Philosopher's Stone",
+        example="The Secret Adversary",
         max_length=128,
     )
     description: Optional[str] = Field(
@@ -448,7 +448,7 @@ class IsccExtraMetadata(BaseModel):
     creator: Optional[str] = Field(
         None,
         description="An entity primarily responsible for making the resource.",
-        example="Joanne K. Rowling",
+        example="Agatha Christie",
     )
     license: Optional[AnyUrl] = Field(
         None,
