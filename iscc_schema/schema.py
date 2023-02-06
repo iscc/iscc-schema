@@ -91,6 +91,7 @@ class IsccDeclaration(BaseModel):
         ),
         example=[{"url": "https://twitter.com/titusz/status/1490104312051257347"}],
         max_items=128,
+        unique_items=True,
         x_iscc_context="http://purl.org/iscc/terms/#verifications",
     )
 
@@ -266,7 +267,7 @@ class IsccTechnical(BaseModel):
         None,
         description="Height of visual media in number of pixels.",
         example=480,
-        ge=1.0,
+        ge=1,
         x_iscc_context="http://purl.org/iscc/terms/#height",
     )
     characters: Optional[int] = Field(

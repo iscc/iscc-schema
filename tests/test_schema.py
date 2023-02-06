@@ -43,10 +43,12 @@ def test_json():
 
 def test_jcs():
     assert iss.IsccMeta().jcs() == bytes(
-        "{"
-        f'"$schema":"http://purl.org/iscc/schema/{iss.__version__}.json","@context":"http://purl.'
-        f'org/iscc/context/{iss.__version__}.jsonld","@type":"CreativeWork"'
-        "}",
+        (
+            "{"
+            f'"$schema":"http://purl.org/iscc/schema/{iss.__version__}.json","@context":"http://purl.'
+            f'org/iscc/context/{iss.__version__}.jsonld","@type":"CreativeWork"'
+            "}"
+        ),
         encoding="utf-8",
     )
 

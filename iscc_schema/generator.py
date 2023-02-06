@@ -41,7 +41,7 @@ class MediaDownload(BaseModel):
     )
 
 
-class _Type(Enum):
+class FieldType(Enum):
     """
     The type of digital content according to schema.org classes.
     """
@@ -70,18 +70,18 @@ class IsccMetadata(BaseModel):
     ISCC Metadata
     """
 
-    _context: Optional[AnyUrl] = Field(
+    field_context: Optional[AnyUrl] = Field(
         "http://purl.org/iscc/context/0.3.2.jsonld",
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
     )
-    _type: Optional[_Type] = Field(
+    field_type: Optional[FieldType] = Field(
         None,
         alias="@type",
         description="The type of digital content according to schema.org classes.",
         example="ImageObject",
     )
-    _schema: Optional[AnyUrl] = Field(
+    field_schema: Optional[AnyUrl] = Field(
         "http://purl.org/iscc/schema/0.3.2.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata schema.",
@@ -231,19 +231,19 @@ class NftMetadata(BaseModel):
     NFT Metadata
     """
 
-    _context: Optional[AnyUrl] = Field(
+    field_context: Optional[AnyUrl] = Field(
         None,
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
         example="http://purl.org/iscc/context",
     )
-    _type: Optional[_Type] = Field(
+    field_type: Optional[FieldType] = Field(
         None,
         alias="@type",
         description="The type of digital content according to schema.org classes.",
         example="ImageObject",
     )
-    _schema: Optional[AnyUrl] = Field(
+    field_schema: Optional[AnyUrl] = Field(
         None,
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata schema.",
