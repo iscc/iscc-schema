@@ -17,17 +17,17 @@ keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "simil
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0.0"
-pydantic = "^1.9"
+pydantic = "^1.10"
 jcs = "^0.2"
 
 [tool.poetry.dev-dependencies]
-pytest = "7.1"
-datamodel-code-generator = "^0.11"
-poethepoet = "^0.13"
-black = "^22.3"
-mkdocs-material = "^8.2"
+pytest = "*"
+datamodel-code-generator = "^0.17"
+poethepoet = "*"
+black = "*"
+mkdocs-material = "^9.0"
 PyLD = "*"
-requests = "^2.27"
+requests = "*"
 
 [tool.black]
 line-length = 100
