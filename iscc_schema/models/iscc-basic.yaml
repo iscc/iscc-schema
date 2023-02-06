@@ -2,7 +2,11 @@ title: iscc-basic
 type: object
 description: Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash generation.
 examples:
-- name: The Never Ending Story
+- '@context': http://purl.org/iscc/context/iscc.jsonld
+  '@type': VideoObject
+  $schema: http://purl.org/iscc/schema/iscc.json
+  iscc: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
+  name: The Never Ending Story
   description: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
   image: https://picsum.photos/200/300.jpg
 properties:

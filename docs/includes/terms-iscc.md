@@ -1,3 +1,9 @@
+### **iscc**
+
+!!! term "<small><http://purl.org/iscc/terms/#iscc></small>"
+
+    An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.
+
 ### **meta**
 
 !!! term "<small><http://purl.org/iscc/terms/#meta></small>"

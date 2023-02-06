@@ -28,10 +28,14 @@ Minimal required ISCC Metadata
 
     ```json
     {
+      "@context": "http://purl.org/iscc/context/iscc.jsonld",
+      "@type": "CreativeWork",
+      "$schema": "http://purl.org/iscc/schema/iscc.json",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
     }
     ```
 ### **iscc**
+<http://purl.org/iscc/terms/#iscc>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -44,6 +48,10 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 
     ```json
     {
+      "@context": "http://purl.org/iscc/context/iscc.jsonld",
+      "@type": "VideoObject",
+      "$schema": "http://purl.org/iscc/schema/iscc.json",
+      "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "name": "The Never Ending Story",
       "description": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
       "image": "https://picsum.photos/200/300.jpg"
@@ -114,6 +122,13 @@ Extended ISCC Metadata
 
     ```json
     {
+      "@context": "http://purl.org/iscc/context/iscc.jsonld",
+      "@type": "TextDigitalDocument",
+      "$schema": "http://purl.org/iscc/schema/iscc.json",
+      "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
+      "name": "The Never Ending Story",
+      "description": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
+      "image": "https://picsum.photos/200/300.jpg",
       "content": "https://example.com/the-asset.epub",
       "identifier": "urn:isbn:3-8273-7019-1",
       "creator": "Frank Fancy",
@@ -184,6 +199,10 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 
     ```json
     {
+      "@context": "http://purl.org/iscc/context/iscc.jsonld",
+      "@type": "ImageObject",
+      "$schema": "http://purl.org/iscc/schema/iscc.json",
+      "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "filename": "the-file.png",
       "filesize": 46356,
       "mediatype": "image/png",

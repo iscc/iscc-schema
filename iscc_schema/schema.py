@@ -485,6 +485,7 @@ class IsccMinimal(BaseModel):
         max_length=73,
         min_length=15,
         regex="^ISCC:[A-Z2-7]{10,73}$",
+        x_iscc_context="http://purl.org/iscc/terms/#iscc",
     )
 
 
