@@ -90,7 +90,6 @@ def build_json_schema_docs():
 
 
 def build_json_ld_context_docs():
-
     doc = f"# **ISCC** - Metadata Vocabulary\n\n"
 
     schemata = [

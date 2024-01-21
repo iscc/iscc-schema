@@ -68,6 +68,7 @@ class IsccDeclaration(BaseModel):
         ),
         example=[{"url": "https://twitter.com/titusz/status/1490104312051257347"}],
         max_items=128,
+        unique_items=True,
         x_iscc_context="http://purl.org/iscc/terms/#verifications",
     )
 
@@ -243,7 +244,7 @@ class IsccTechnical(BaseModel):
         None,
         description="Height of visual media in number of pixels.",
         example=480,
-        ge=1.0,
+        ge=1,
         x_iscc_context="http://purl.org/iscc/terms/#height",
     )
     characters: Optional[int] = Field(
@@ -482,7 +483,7 @@ class IsccJsonld(BaseModel):
     """
 
     context_: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/context/0.4.0.jsonld",
+        "http://purl.org/iscc/context/0.4.1.jsonld",
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
     )
@@ -495,7 +496,7 @@ class IsccJsonld(BaseModel):
         ),
     )
     schema_: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/schema/0.4.0.json",
+        "http://purl.org/iscc/schema/0.4.1.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
         x_iscc_context="http://purl.org/iscc/terms/#$schema",
