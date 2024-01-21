@@ -5,6 +5,7 @@ info:
   summary: Create Internation Standard Content Codes
   description: '# About this spec
 
+    **DEPRECATED:** This API spec has been deprecated! For latest API see https://iscc.io/docs
 
     The ISCC Generator API is an implementation-agnostig API for creating ISCCs from media
     assets.
