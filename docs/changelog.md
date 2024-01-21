@@ -3,6 +3,7 @@
 ### [0.4.1] - Unreleased
 - Added `credentials`-field
 - Updated dependencies
+- Add pydantic v2 compatibility
 
 ### [0.4.0] - 2022-11-24
 - Added test for error on extra fields

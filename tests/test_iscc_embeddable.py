@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 import pytest
-from pydantic import ValidationError
+
+try:
+    from pydantic.v1 import ValidationError
+except ImportError:
+    from pydantic import ValidationError
 
 import iscc_schema as iss
 

@@ -9,8 +9,13 @@ License:
 import re
 from re import Pattern
 from typing import Dict, Any, cast
-from pydantic.utils import update_not_none
-from pydantic.validators import constr_length_validator
+
+try:
+    from pydantic.v1.utils import update_not_none
+    from pydantic.v1.validators import constr_length_validator
+except ImportError:
+    from pydantic.utils import update_not_none
+    from pydantic.validators import constr_length_validator
 
 
 class RFC3986Regex:

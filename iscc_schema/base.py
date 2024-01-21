@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 import json
-
 import jcs
-from pydantic import BaseModel as OriginalBaseModel
-from pydantic import root_validator
+
+try:
+    from pydantic.v1 import BaseModel as OriginalBaseModel
+    from pydantic.v1 import root_validator
+except ImportError:
+    from pydantic import BaseModel as OriginalBaseModel
+    from pydantic import root_validator
 
 
 class BaseModel(OriginalBaseModel):

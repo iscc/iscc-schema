@@ -35,7 +35,10 @@ def build_schema():
     # Patch Generated Code
     marker = "from pydantic import AnyUrl, BaseModel, Field\n"
     replace = (
-        "from pydantic import Field\n"
+        "try:\n"
+        "    from pydantic.v1 import Field\n"
+        "except ImportError:\n"
+        "    from pydantic import Field\n"
         "from iscc_schema.fields import AnyUrl\n"
         "from iscc_schema.base import BaseModel"
     )
@@ -65,7 +68,10 @@ def build_apis():
     # Patch AnyUrl
     marker = "from pydantic import AnyUrl, BaseModel, Field\n"
     replace = (
-        "from pydantic import Field\n"
+        "try:\n"
+        "    from pydantic.v1 import Field\n"
+        "except ImportError:\n"
+        "    from pydantic import Field\n"
         "from iscc_schema.fields import AnyUrl\n"
         "from iscc_schema.base import BaseModel\n"
     )

@@ -7,7 +7,10 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional
 
-from pydantic import Field
+try:
+    from pydantic.v1 import Field
+except ImportError:
+    from pydantic import Field
 from iscc_schema.fields import AnyUrl
 from iscc_schema.base import BaseModel
 
@@ -547,15 +550,11 @@ class NftFreezePostRequest(BaseModel):
     Any JSON object that can be serialized with JCS canonicaliztion.
     """
 
-    pass
-
 
 class MediaEmbeddedMetadata(IsccExtraMetadata, IsccBasicMetadata):
     """
     Media Metadata
     """
-
-    pass
 
 
 class IsccCodePostRequest(MediaEmbeddedMetadata, MediaUpload):

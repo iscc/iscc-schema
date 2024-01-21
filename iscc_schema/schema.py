@@ -7,7 +7,10 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import Field
+try:
+    from pydantic.v1 import Field
+except ImportError:
+    from pydantic import Field
 from iscc_schema.fields import AnyUrl
 from iscc_schema.base import BaseModel
 
@@ -541,5 +544,3 @@ class IsccMeta(
     """
     ISCC Metadata Schema
     """
-
-    pass
