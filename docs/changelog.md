@@ -1,6 +1,6 @@
 ## Changelog
 
-### [0.4.1] - Unreleased
+### [0.4.1] - 2024-01-21
 - Added `credentials`-field
 - Updated dependencies
 - Add pydantic v2 compatibility
