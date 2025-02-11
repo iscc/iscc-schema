@@ -1,8 +1,13 @@
 title: iscc-collection
+
 type: object
+
 description: Collection of all ISCC Metadata fields
+
 examples:
+
 - iscc: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
+
 properties:
   '@context':
     type: string

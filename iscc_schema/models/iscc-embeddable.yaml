@@ -1,6 +1,9 @@
 title: iscc-embeddable
+
 type: object
+
 description: Metadata intended to be embedded into the media asset.
+
 properties:
   creator:
     oneOf:

@@ -4,6 +4,7 @@
   default: http://purl.org/iscc/context
   description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
   readOnly: true
+
 '@type':
   type: string
   readOnly: true
@@ -16,6 +17,7 @@
   - VideoObject
   description: The type of digital content according to schema.org classes (TextDigitalDocument,
     ImageObject, AudioObject, VideoObject).
+
 $schema:
   type: string
   format: uri
@@ -23,6 +25,7 @@ $schema:
   description: The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.
   readOnly: true
   x-iscc-context: http://purl.org/iscc/terms/#$schema
+
 iscc:
   type: string
   description: An **ISCC-CODE** in canonical representation. This is the minimal required
@@ -33,6 +36,7 @@ iscc:
   pattern: ^ISCC:[A-Z2-7]{10,73}$
   x-iscc-context: http://purl.org/iscc/terms/#iscc
   x-iscc-status: stable
+
 name:
   type: string
   maxLength: 128
@@ -43,6 +47,7 @@ name:
   x-iscc-schema-doc: The name of the item.
   x-iscc-embed: Use `Iptc.Application2.Headline` and `Xmp.photoshop.Headline` for image embedding
   x-iscc-status: stable
+
 description:
   type: string
   example: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
@@ -57,6 +62,7 @@ description:
   x-iscc-embed: Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description`
     for image embedding.
   x-iscc-status: stable
+
 meta:
   type: string
   maxLength: 16384

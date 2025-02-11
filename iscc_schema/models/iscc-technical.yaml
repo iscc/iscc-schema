@@ -1,8 +1,12 @@
 title: iscc-technical
+
 type: object
+
 description: Technical ISCC Metadata automatically inferred from the *digital content* by
   an ISCC Processor
+
 examples:
+
 - '@context': http://purl.org/iscc/context
   '@type': ImageObject
   $schema: http://purl.org/iscc/schema
@@ -15,6 +19,7 @@ examples:
   keywords:
   - hashing
   - identification
+
 properties:
   mode:
     type: string

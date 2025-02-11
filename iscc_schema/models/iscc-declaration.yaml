@@ -1,6 +1,9 @@
 title: iscc-declaration
+
 type: object
+
 description: Fields relevant in context with public ISCC declarations
+
 properties:
   original:
     type: boolean

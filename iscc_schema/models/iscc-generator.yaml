@@ -1,6 +1,9 @@
 title: iscc-generator
+
 type: object
+
 description: Inputs for ISCC generation
+
 properties:
   source_file:
     description: The media file used as source for ISCC generation.

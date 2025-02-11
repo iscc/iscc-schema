@@ -1,7 +1,10 @@
 title: iscc-jsonld
+
 type: object
+
 description: The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-schema.org/)
   reference
+
 properties:
   '@context':
     type: string

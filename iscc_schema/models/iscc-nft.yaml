@@ -1,6 +1,9 @@
 title: iscc-nft
+
 type: object
+
 description: Metadata for NFT Marketplaces
+
 properties:
   external_url:
     description: This is the URL that will appear below the asset's image on some NFT Marketplaces

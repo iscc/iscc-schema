@@ -1,6 +1,9 @@
 title: iscc-crypto
+
 type: object
+
 description: Cryptography related ISCC Metadata
+
 properties:
   tophash:
     type: string

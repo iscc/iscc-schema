@@ -1,6 +1,9 @@
 title: iscc-extended
+
 type: object
+
 description: Extended ISCC Metadata
+
 properties:
   media_id:
     type: string
@@ -74,7 +77,9 @@ properties:
     - string
     x-iscc-context: http://schema.org/version
     x-iscc-schema-doc: The version of the *digital content* identified by the ISCC.
+
 examples:
+
 - '@context': http://purl.org/iscc/context
   '@type': TextDigitalDocument
   $schema: http://purl.org/iscc/schema

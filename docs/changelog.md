@@ -3,6 +3,7 @@
 ### [0.5.0] - Unreleased
 - Add pydantic 2.x code generation
 - Add `pubkey` and `signature` fields to ISCC crypto schema
+- Improved YAML file readability
 
 ### [0.4.1] - 2024-01-21
 - Added `credentials`-field

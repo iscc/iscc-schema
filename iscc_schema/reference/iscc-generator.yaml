@@ -1,4 +1,5 @@
 openapi: 3.1.0
+
 info:
   title: ISCC Generator
   version: 0.3.7
@@ -14,16 +15,25 @@ info:
     name: ISCC Foundation
   x-logo:
     url: https://schema.iscc.codes/images/iscc-logo-blue.png
+
 servers:
+
 - url: http://localhost:8000
   description: develop
+
 - url: https://api-test.iscc.id/api
   description: test
+
 tags:
+
 - name: iscc
+
 - name: media
+
 - name: nft
+
 - name: task
+
 paths:
   /iscc_code:
     post:
@@ -211,6 +221,7 @@ paths:
           description: Not Found
       operationId: get-task
       description: Get status of an ISCC processing task.
+
 components:
   schemas:
     MediaUpload:
