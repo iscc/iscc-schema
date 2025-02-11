@@ -4,7 +4,6 @@ import json
 import pathlib
 from datamodel_code_generator import InputFileType, generate, OpenAPIScope, PythonVersion
 
-
 ROOT = pathlib.Path(__file__).parent.parent
 CODE = ROOT / "iscc_schema"
 APIS = CODE / "reference"

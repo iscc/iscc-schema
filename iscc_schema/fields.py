@@ -6,6 +6,7 @@ License:
     https://gist.github.com/yu-ichiro/87c29b96cbddb44bdd8fc50b68de5a77
 
 """
+
 import re
 from re import Pattern
 from typing import Dict, Any, cast
@@ -77,7 +78,9 @@ class RFC3986Regex:
     PATH_NO_SCHEME: Pattern = rf"{SEGMENT_NZ_NC}(/{SEGMENT})*"
     PATH_ABSOLUTE: Pattern = rf"/({SEGMENT_NZ}(/{SEGMENT})*)?"
     PATH_ABSOLUTE_EMPTY: Pattern = rf"(/{SEGMENT})*"
-    PATH: Pattern = rf"(?P<path>{PATH_ABSOLUTE_EMPTY}|{PATH_ABSOLUTE}|{PATH_NO_SCHEME}|{PATH_ROOTLESS}|{PATH_EMPTY})"
+    PATH: Pattern = (
+        rf"(?P<path>{PATH_ABSOLUTE_EMPTY}|{PATH_ABSOLUTE}|{PATH_NO_SCHEME}|{PATH_ROOTLESS}|{PATH_EMPTY})"
+    )
 
     QUERY: Pattern = rf"({PATH_CHAR}|[/\?])*"
     FRAGMENT: Pattern = rf"({PATH_CHAR}|[/\?])*"
@@ -89,7 +92,9 @@ class RFC3986Regex:
         rf"(?P<path_rootless>{PATH_ROOTLESS})|"
         rf"{PATH_EMPTY})"
     )
-    URI: Pattern = rf"{SCHEME}:{HIERARCHY_PART}(?P<query_full>\?(?P<query>{QUERY}))?(?P<fragment_full>#(?P<fragment>{FRAGMENT}))?"
+    URI: Pattern = (
+        rf"{SCHEME}:{HIERARCHY_PART}(?P<query_full>\?(?P<query>{QUERY}))?(?P<fragment_full>#(?P<fragment>{FRAGMENT}))?"
+    )
 
     RELATIVE_PART: Pattern = (
         rf"(?P<relative_part>"
@@ -98,7 +103,9 @@ class RFC3986Regex:
         rf"(?P<path_no_scheme>{PATH_NO_SCHEME})|"
         rf"{PATH_EMPTY})"
     )
-    RELATIVE_REFERENCE: Pattern = rf"{RELATIVE_PART}(?P<query_full>\?(?P<query>{QUERY}))?(?P<fragment_full>#(?P<fragment>{FRAGMENT}))?"
+    RELATIVE_REFERENCE: Pattern = (
+        rf"{RELATIVE_PART}(?P<query_full>\?(?P<query>{QUERY}))?(?P<fragment_full>#(?P<fragment>{FRAGMENT}))?"
+    )
 
     def __init__(self):
         self._cache = {}

@@ -37,8 +37,7 @@ def test_validate_uri_ipfs():
 
 def test_json():
     assert (
-        iss.IsccMeta().json()
-        == f"{{"
+        iss.IsccMeta().json() == f"{{"
         f'"@context": "http://purl.org/iscc/context", "@type": '
         f'"CreativeWork", "$schema": "http://purl.org/iscc/schema"'
         f"}}"

@@ -1,4 +1,5 @@
 """Build docs/context/<v>.json JSON-LD file from iscc_core.schema"""
+
 from typing import Dict
 
 import iscc_schema.schema
