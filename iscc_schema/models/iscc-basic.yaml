@@ -8,7 +8,6 @@ examples:
   iscc: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
   name: The Never Ending Story
   description: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
-  image: https://picsum.photos/200/300.jpg
 properties:
   name:
     type: string
