@@ -87,3 +87,10 @@ class BaseModel(OriginalBaseModel):
         except ImportError:
             raise ImportError("IsccMeta.iscc_obj requires iscc-core package.")
         return Code(self.iscc)
+
+    @classmethod
+    def construct(cls, *args, **kwargs):
+        """
+        Backwards compatibility wrapper for model_construct.
+        """
+        return cls.model_construct(*args, **kwargs)
