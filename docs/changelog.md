@@ -1,5 +1,7 @@
 ## Changelog
 
+### [0.5.0] - Unreleased
+
 ### [0.4.1] - 2024-01-21
 - Added `credentials`-field
 - Updated dependencies
