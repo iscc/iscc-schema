@@ -1,7 +1,7 @@
 title: iscc-technical
 type: object
-description: Technical ISCC Metadata automaticaly inferred from the *digital content* by an
-  ISCC Processor
+description: Technical ISCC Metadata automatically inferred from the *digital content* by
+  an ISCC Processor
 examples:
 - '@context': http://purl.org/iscc/context
   '@type': ImageObject
@@ -67,7 +67,7 @@ properties:
   duration:
     type: integer
     readOnly: true
-    description: Duration of audio-visual media in secondes.
+    description: Duration of audio-visual media in seconds.
     x-iscc-status: stable
     x-iscc-context: http://schema.org/duration
     x-iscc-schema-doc: The duration of the item (movie, audio recording, event, etc.) in [ISO

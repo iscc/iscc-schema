@@ -114,7 +114,7 @@
 
     Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
 
-    **Comment**:  Keywords or tags used to describe this content. Either a list of keywords or a sting with comma separated keywords.
+    **Comment**:  Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.
 
 ### **version**
 
@@ -154,7 +154,7 @@
 
     The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 date format](https://en.wikipedia.org/wiki/ISO_8601).
 
-    **Comment**:  Duration of audio-visual media in secondes.
+    **Comment**:  Duration of audio-visual media in seconds.
 
 ### **pages**
 
@@ -186,5 +186,5 @@
 
     A credential is a set of one or more claims made by an issuer. A verifiable credential is a tamper-evident credential that has authorship that can be cryptographically verified. Verifiable credentials can be used to build verifiable presentations, which can also be cryptographically verified. The claims in a credential can be about different subjects.
 
-    **Comment**:  One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one ore more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul>
+    **Comment**:  One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one or more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul>
 

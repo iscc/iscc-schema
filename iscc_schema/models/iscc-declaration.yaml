@@ -1,6 +1,6 @@
 title: iscc-declaration
 type: object
-description: Field relevant in context with public ISCC declerations
+description: Fields relevant in context with public ISCC declarations
 properties:
   original:
     type: boolean
@@ -40,7 +40,7 @@ properties:
     - type: object
     - type: array
     description: One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/)
-      or one ore more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret
+      or one or more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret
       the value according to the following rules <ul> <li>If the value is a JSON `string`
       interpret it as an URI. The expectation is that the URI dereferences to a response with
       Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If

@@ -88,7 +88,7 @@
 
 <small><http://schema.org/keywords></small>
 !!! term ""
-    Keywords or tags used to describe this content. Either a list of keywords or a sting with comma separated keywords.
+    Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.
 
 ## previous
 
@@ -130,7 +130,7 @@
 
 <small><http://schema.org/duration></small>
 !!! term ""
-    Duration of audio-visual media in secondes.
+    Duration of audio-visual media in seconds.
 
 ## fps
 
@@ -274,7 +274,7 @@
 
 <small><https://www.w3.org/2018/credentials#VerifiableCredential></small>
 !!! term ""
-    One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one ore more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul>
+    One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one or more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul>
 
 ## verifications
 

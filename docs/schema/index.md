@@ -175,7 +175,7 @@ Extended ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| keywords | `None` | none | Keywords or tags used to describe this content. Either a list of keywords or a sting with comma separated keywords.         |
+| keywords | `None` | none | Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.         |
 
 ### **previous**
 <http://purl.org/iscc/terms/#previous>
@@ -192,7 +192,7 @@ Extended ISCC Metadata
 | version | `['integer', 'string']` | none | The version of the CreativeWork embodied by a specified resource.         |
 
 ## iscc-technical
-Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor
+Technical ISCC Metadata automatically inferred from the *digital content* by an ISCC Processor
 
 !!! example
 
@@ -252,7 +252,7 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| duration | `integer` | none | Duration of audio-visual media in secondes.         |
+| duration | `integer` | none | Duration of audio-visual media in seconds.         |
 
 ### **fps**
 <http://purl.org/iscc/terms/#fps>
@@ -392,7 +392,7 @@ Cryptography related ISCC Metadata
 | datahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).<br><br>**Example**: `bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq`         |
 
 ## iscc-declaration
-Field relevant in context with public ISCC declerations
+Fields relevant in context with public ISCC declarations
 ### **original**
 <http://purl.org/iscc/terms/#original>
 
@@ -426,7 +426,7 @@ Field relevant in context with public ISCC declerations
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| credentials | `None` | none | One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one ore more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul><br><br>**Example**: `https://schema.iscc.codes/examples/vc.json`         |
+| credentials | `None` | none | One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one or more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul><br><br>**Example**: `https://schema.iscc.codes/examples/vc.json`         |
 
 ### **verifications**
 <http://purl.org/iscc/terms/#verifications>

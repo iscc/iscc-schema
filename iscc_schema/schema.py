@@ -28,7 +28,7 @@ class Chain(Enum):
 
 class IsccDeclaration(BaseModel):
     """
-    Field relevant in context with public ISCC declerations
+    Fields relevant in context with public ISCC declarations
     """
 
     original: Optional[bool] = Field(
@@ -64,7 +64,7 @@ class IsccDeclaration(BaseModel):
     credentials: Optional[Union[str, Dict[str, Any], List]] = Field(
         None,
         description=(
-            "One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one ore"
+            "One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one or"
             " more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the"
             " value according to the following rules <ul> <li>If the value is a JSON `string`"
             " interpret it as an URI. The expectation is that the URI dereferences to a response"
@@ -215,7 +215,7 @@ class Mode(Enum):
 
 class IsccTechnical(BaseModel):
     """
-    Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor
+    Technical ISCC Metadata automatically inferred from the *digital content* by an ISCC Processor
     """
 
     mode: Optional[Mode] = Field(
@@ -250,7 +250,7 @@ class IsccTechnical(BaseModel):
     )
     duration: Optional[int] = Field(
         None,
-        description="Duration of audio-visual media in secondes.",
+        description="Duration of audio-visual media in seconds.",
         x_iscc_context="http://schema.org/duration",
     )
     fps: Optional[float] = Field(
@@ -374,7 +374,7 @@ class IsccExtended(BaseModel):
     keywords: Optional[Union[str, List[str]]] = Field(
         None,
         description=(
-            "Keywords or tags used to describe this content. Either a list of keywords or a sting"
+            "Keywords or tags used to describe this content. Either a list of keywords or a string"
             " with comma separated keywords."
         ),
         x_iscc_context="http://schema.org/keywords",
