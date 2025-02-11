@@ -230,3 +230,118 @@ thumbnail:
   x-iscc-context: http://schema.org/thumbnailUrl
   x-iscc-schema-doc: A thumbnail image relevant to the Thing.
   x-iscc-status: stable
+
+tophash:
+  type: string
+  readOnly: true
+  minLength: 40
+  example: bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja
+  description: A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding)
+    of metahash and datahash (default blake3).
+  x-iscc-context: http://purl.org/iscc/terms/#tophash
+
+metahash:
+  type: string
+  minLength: 40
+  example: f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9
+  readOnly: true
+  description: A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of the supplied
+    metadata. The hash is created from `name` and `description` fields or `meta` if supplied.
+  x-iscc-context: http://purl.org/iscc/terms/#metahash
+
+datahash:
+  type: string
+  minLength: 40
+  example: bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq
+  readOnly: true
+  description: A [Multihash](https://multiformats.io/multihash/) of the *digital content*
+    (default blake3).
+  x-iscc-context: http://purl.org/iscc/terms/#datahash
+
+pubkey:
+  type: string
+  minLength: 48
+  maxLength: 48
+  pattern: ^z[1-9A-HJ-NP-Za-km-z]+$
+  example: z6MkrJVnaZkeFzdQyMZu1cgjg7k1pZZ6pvBQ7XJPt4swbTQ2
+  description: Ed25519 public key encoded as multibase string (z + base58btc(0xED01 + 32-byte
+    public key) as specified in [W3C CID spec section 2.2.2 Multikey](https://www.w3.org/TR/cid/#Multikey).
+  x-iscc-context: http://purl.org/iscc/terms/#pubkey
+
+signature:
+  type: string
+  minLength: 89
+  maxLength: 89
+  pattern: ^z[1-9A-HJ-NP-Za-km-z]+$
+  example: z2HnFSSPPBzR36zdDgK8PbEHeXbR56YF24jwMpt3R1eHXQzJDMWS93FCzpvJpwTWd3GAVFuUfjoJdcnTMuVor51aX
+  description: Ed25519 signature encoded according to [eddsa-jcs-2022](https://www.w3.org/TR/vc-di-eddsa/#eddsa-jcs-2022)
+    cryptosuite (z + base58btc(64-byte signature)).
+  x-iscc-context: http://purl.org/iscc/terms/#signature
+
+media_id:
+  type: string
+  description: Vendor specific (internal) identifier for the source media file.
+  example: 05VQ3BGTGFCJA
+  x-iscc-context: http://schema.org/identifier
+  x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
+    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
+    for representing many of these, either as textual strings or as URL (URI) links.
+
+iscc_id:
+  type: string
+  description: The **ISCC-ID** of the digital content in canonical representation.
+  example: ISCC:MAACAJINXFXA2SQX
+  minLength: 15
+  maxLength: 73
+  pattern: ^ISCC:[A-Z2-7]{10,73}$
+  x-iscc-context: http://schema.org/identifier
+  x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
+    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
+    for representing many of these, either as textual strings or as URL (URI) links.
+
+identifier:
+  description: Other identifier(s) referencing the work, product or other abstraction of which
+    the referenced **digital content** is a full or partial manifestation.
+  oneOf:
+  - type: string
+  - type: array
+    items:
+    - type: string
+  x-iscc-context: http://schema.org/identifier
+  x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
+    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
+    for representing many of these, either as textual strings or as URL (URI) links. See background
+    notes for more details.
+
+content:
+  description: URI of the *digital content* that was used to create this ISCC.
+  type: string
+  format: uri
+  x-iscc-context: http://schema.org/contentUrl
+  x-iscc-schema-doc: Actual bytes of the media object, for example the image file or video
+    file.
+
+keywords:
+  oneOf:
+  - type: string
+  - type: array
+    items:
+    - type: string
+  description: Keywords or tags used to describe this content. Either a list of keywords or
+    a string with comma separated keywords.
+  x-iscc-context: http://schema.org/keywords
+  x-iscc-schema-doc: Keywords or tags used to describe this content. Multiple entries in a
+    keywords list are typically delimited by commas.
+
+previous:
+  description: ISCC of the preceding version of this item.
+  type: string
+  x-iscc-context: http://purl.org/iscc/terms/#previous
+
+version:
+  description: The version of the CreativeWork embodied by a specified resource.
+  type:
+  - integer
+  - string
+  x-iscc-context: http://schema.org/version
+  x-iscc-schema-doc: The version of the *digital content* identified by the ISCC.
