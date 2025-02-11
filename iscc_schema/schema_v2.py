@@ -133,6 +133,34 @@ class IsccCrypto(BaseModel):
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#datahash"},
         min_length=40,
     )
+    pubkey: Optional[str] = Field(
+        None,
+        description=(
+            "Ed25519 public key encoded as multibase string (z + base58btc(0xED01 + 32-byte public"
+            " key) as specified in [W3C CID spec section 2.2.2"
+            " Multikey](https://www.w3.org/TR/cid/#Multikey)."
+        ),
+        examples=["z6MkrJVnaZkeFzdQyMZu1cgjg7k1pZZ6pvBQ7XJPt4swbTQ2"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#pubkey"},
+        max_length=48,
+        min_length=48,
+        pattern="^z[1-9A-HJ-NP-Za-km-z]+$",
+    )
+    signature: Optional[str] = Field(
+        None,
+        description=(
+            "Ed25519 signature encoded according to"
+            " [eddsa-jcs-2022](https://www.w3.org/TR/vc-di-eddsa/#eddsa-jcs-2022) cryptosuite (z +"
+            " base58btc(64-byte signature))."
+        ),
+        examples=[
+            "z2HnFSSPPBzR36zdDgK8PbEHeXbR56YF24jwMpt3R1eHXQzJDMWS93FCzpvJpwTWd3GAVFuUfjoJdcnTMuVor51aX"
+        ],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#signature"},
+        max_length=89,
+        min_length=89,
+        pattern="^z[1-9A-HJ-NP-Za-km-z]+$",
+    )
 
 
 class IsccNft(BaseModel):

@@ -27,3 +27,21 @@ properties:
     description: A [Multihash](https://multiformats.io/multihash/) of the *digital content*
       (default blake3).
     x-iscc-context: http://purl.org/iscc/terms/#datahash
+  pubkey:
+    type: string
+    minLength: 48
+    maxLength: 48
+    pattern: ^z[1-9A-HJ-NP-Za-km-z]+$
+    example: z6MkrJVnaZkeFzdQyMZu1cgjg7k1pZZ6pvBQ7XJPt4swbTQ2
+    description: Ed25519 public key encoded as multibase string (z + base58btc(0xED01 + 32-byte
+      public key) as specified in [W3C CID spec section 2.2.2 Multikey](https://www.w3.org/TR/cid/#Multikey).
+    x-iscc-context: http://purl.org/iscc/terms/#pubkey
+  signature:
+    type: string
+    minLength: 89
+    maxLength: 89
+    pattern: ^z[1-9A-HJ-NP-Za-km-z]+$
+    example: z2HnFSSPPBzR36zdDgK8PbEHeXbR56YF24jwMpt3R1eHXQzJDMWS93FCzpvJpwTWd3GAVFuUfjoJdcnTMuVor51aX
+    description: Ed25519 signature encoded according to [eddsa-jcs-2022](https://www.w3.org/TR/vc-di-eddsa/#eddsa-jcs-2022)
+      cryptosuite (z + base58btc(64-byte signature)).
+    x-iscc-context: http://purl.org/iscc/terms/#signature

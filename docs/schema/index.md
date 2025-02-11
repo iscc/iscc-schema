@@ -391,6 +391,20 @@ Cryptography related ISCC Metadata
 | ---- | ---- | --------|--------------------------------|
 | datahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).<br><br>**Example**: `bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq`         |
 
+### **pubkey**
+<http://purl.org/iscc/terms/#pubkey>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| pubkey | `string` | none | Ed25519 public key encoded as multibase string (z + base58btc(0xED01 + 32-byte public key) as specified in [W3C CID spec section 2.2.2 Multikey](https://www.w3.org/TR/cid/#Multikey).<br><br>**Example**: `z6MkrJVnaZkeFzdQyMZu1cgjg7k1pZZ6pvBQ7XJPt4swbTQ2`         |
+
+### **signature**
+<http://purl.org/iscc/terms/#signature>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| signature | `string` | none | Ed25519 signature encoded according to [eddsa-jcs-2022](https://www.w3.org/TR/vc-di-eddsa/#eddsa-jcs-2022) cryptosuite (z + base58btc(64-byte signature)).<br><br>**Example**: `z2HnFSSPPBzR36zdDgK8PbEHeXbR56YF24jwMpt3R1eHXQzJDMWS93FCzpvJpwTWd3GAVFuUfjoJdcnTMuVor51aX`         |
+
 ## iscc-declaration
 Fields relevant in context with public ISCC declarations
 ### **original**

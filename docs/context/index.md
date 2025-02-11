@@ -246,6 +246,18 @@
 !!! term ""
     A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
 
+## pubkey
+
+<small><http://purl.org/iscc/terms/#pubkey></small>
+!!! term ""
+    Ed25519 public key encoded as multibase string (z + base58btc(0xED01 + 32-byte public key) as specified in [W3C CID spec section 2.2.2 Multikey](https://www.w3.org/TR/cid/#Multikey).
+
+## signature
+
+<small><http://purl.org/iscc/terms/#signature></small>
+!!! term ""
+    Ed25519 signature encoded according to [eddsa-jcs-2022](https://www.w3.org/TR/vc-di-eddsa/#eddsa-jcs-2022) cryptosuite (z + base58btc(64-byte signature)).
+
 ## original
 
 <small><http://purl.org/iscc/terms/#original></small>

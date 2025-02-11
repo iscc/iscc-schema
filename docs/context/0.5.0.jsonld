@@ -47,6 +47,8 @@
     "tophash": "http://purl.org/iscc/terms/#tophash",
     "metahash": "http://purl.org/iscc/terms/#metahash",
     "datahash": "http://purl.org/iscc/terms/#datahash",
+    "pubkey": "http://purl.org/iscc/terms/#pubkey",
+    "signature": "http://purl.org/iscc/terms/#signature",
     "original": "http://purl.org/iscc/terms/#original",
     "redirect": "http://purl.org/iscc/terms/#redirect",
     "chain": "http://purl.org/iscc/terms/#chain",

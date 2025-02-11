@@ -135,6 +135,32 @@ class IsccCrypto(BaseModel):
         min_length=40,
         x_iscc_context="http://purl.org/iscc/terms/#datahash",
     )
+    pubkey: Optional[str] = Field(
+        None,
+        description=(
+            "Ed25519 public key encoded as multibase string (z + base58btc(0xED01 + 32-byte public"
+            " key) as specified in [W3C CID spec section 2.2.2"
+            " Multikey](https://www.w3.org/TR/cid/#Multikey)."
+        ),
+        example="z6MkrJVnaZkeFzdQyMZu1cgjg7k1pZZ6pvBQ7XJPt4swbTQ2",
+        max_length=48,
+        min_length=48,
+        regex="^z[1-9A-HJ-NP-Za-km-z]+$",
+        x_iscc_context="http://purl.org/iscc/terms/#pubkey",
+    )
+    signature: Optional[str] = Field(
+        None,
+        description=(
+            "Ed25519 signature encoded according to"
+            " [eddsa-jcs-2022](https://www.w3.org/TR/vc-di-eddsa/#eddsa-jcs-2022) cryptosuite (z +"
+            " base58btc(64-byte signature))."
+        ),
+        example="z2HnFSSPPBzR36zdDgK8PbEHeXbR56YF24jwMpt3R1eHXQzJDMWS93FCzpvJpwTWd3GAVFuUfjoJdcnTMuVor51aX",
+        max_length=89,
+        min_length=89,
+        regex="^z[1-9A-HJ-NP-Za-km-z]+$",
+        x_iscc_context="http://purl.org/iscc/terms/#signature",
+    )
 
 
 class IsccNft(BaseModel):
