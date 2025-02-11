@@ -35,6 +35,11 @@ preview = true
 enable-unstable-feature = ["string_processing"]
 target-version = ['py310']
 
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::UserWarning",
+]
+
 
 [tool.poe.tasks]
 update = { cmd = "poetry update", help = "Update project dependencies"}
