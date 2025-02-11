@@ -71,3 +71,19 @@ class BaseModel(OriginalBaseModel):
         if des != data:
             raise ValueError(f"Not canonicalizable {data} round-trips to {des}")
         return ser
+
+    @property
+    def iscc_obj(self):
+        # type: () -> "iscc_core.Code"
+        """
+        Convenience method that wraps an ISCC string in an iscc_core.Code object
+
+        :return: `iscc_core.Code` object if the iscc-core package is installed
+        :rtype: iscc_core.Code
+        :raise: `ImportError` if iscc-core package is not instlled.
+        """
+        try:
+            from iscc_core import Code
+        except ImportError:
+            raise ImportError("IsccMeta.iscc_obj requires iscc-core package.")
+        return Code(self.iscc)
