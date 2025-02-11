@@ -28,7 +28,7 @@ def build_schema():
         disable_appending_item_suffix=True,
         field_constraints=True,
         field_extra_keys={"x-iscc-context"},
-        target_python_version=PythonVersion.PY_37,
+        target_python_version=PythonVersion.PY_39,
         validation=True,
     )
     # Patch Generated Code
