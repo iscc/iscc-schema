@@ -30,8 +30,20 @@ def test_empty_url_to_none_v1():
     assert empty.dict() == {}
 
 
+def test_empty_url_to_none_v2():
+    empty = IsccMetaV2(license="")
+    assert empty.license is None
+    assert empty.dict() == {}
+
+
 def test_validate_assignment_v1():
     obj = IsccMetaV1()
+    with pytest.raises(ValueError):
+        obj.license = "https://in valid.com"
+
+
+def test_validate_assignment_v2():
+    obj = IsccMetaV2()
     with pytest.raises(ValueError):
         obj.license = "https://in valid.com"
 

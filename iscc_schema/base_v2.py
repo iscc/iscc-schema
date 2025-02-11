@@ -6,6 +6,13 @@ from pydantic import BaseModel as OriginalBaseModel, model_validator
 
 class BaseModel(OriginalBaseModel):
 
+    model_config = {
+        "validate_assignment": True,
+        "extra": "forbid",
+        "use_enum_values": True,
+        "from_attributes": True,
+    }
+
     @model_validator(mode="before")
     @classmethod
     def empty_string_to_none(cls, data):
