@@ -44,8 +44,9 @@ buildterms = { script = "tools.build_terms:build", help = "Build markdown for te
 buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON Schema" }
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
+convert-lf = { script = "tools.convert_lf:convert_lf", help = "Convert line endings to LF"}
 test = { cmd = "pytest", help = "Run tests"}
-all = ["fromatyaml", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
+all = ["fromatyaml", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "convert-lf", "test"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
