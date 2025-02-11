@@ -1,6 +1,7 @@
 ## Changelog
 
 ### [0.5.0] - Unreleased
+- Add pydantic 2.x code generation
 
 ### [0.4.1] - 2024-01-21
 - Added `credentials`-field

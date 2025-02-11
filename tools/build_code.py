@@ -2,7 +2,13 @@
 """Build Pydantic models for Schema definitions"""
 import json
 import pathlib
-from datamodel_code_generator import InputFileType, generate, OpenAPIScope, PythonVersion
+from datamodel_code_generator import (
+    InputFileType,
+    generate,
+    OpenAPIScope,
+    PythonVersion,
+    DataModelType,
+)
 
 ROOT = pathlib.Path(__file__).parent.parent
 CODE = ROOT / "iscc_schema"
@@ -48,6 +54,30 @@ def build_schema():
         patched.write(text)
 
 
+def build_schema_v2():
+    infile = MODELS / "iscc-all.yaml"
+    outfile = CODE / "schema_v2.py"
+    aliases = CODE / "aliases.json"
+    aliases = json.load(aliases.open("rb"))
+    generate(
+        infile,
+        output=outfile,
+        output_model_type=DataModelType.PydanticV2BaseModel,
+        encoding="UTF-8",
+        aliases=aliases,
+        class_name="IsccMeta",
+        disable_timestamp=True,
+        use_schema_description=True,
+        use_annotated=False,
+        reuse_model=True,
+        disable_appending_item_suffix=True,
+        field_constraints=True,
+        field_extra_keys={"x-iscc-context"},
+        target_python_version=PythonVersion.PY_39,
+        validation=True,
+    )
+
+
 def build_apis():
     infile = APIS / "iscc-generator.yaml"
     outfile = CODE / "generator.py"
@@ -83,6 +113,7 @@ def build_apis():
 
 def build():
     build_schema()
+    build_schema_v2()
     build_apis()
 
 
