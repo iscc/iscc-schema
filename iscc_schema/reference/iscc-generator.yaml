@@ -271,7 +271,7 @@ components:
           type: string
           format: uri
           description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
-          default: http://purl.org/iscc/context/0.3.2.jsonld
+          default: http://purl.org/iscc/context/0.5.0.jsonld
           readOnly: true
         '@type':
           type: string
