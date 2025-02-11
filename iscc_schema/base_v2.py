@@ -1,10 +1,17 @@
 import json
 
 import jcs
-from pydantic import BaseModel as OriginalBaseModel
+from pydantic import BaseModel as OriginalBaseModel, model_validator
 
 
 class BaseModel(OriginalBaseModel):
+
+    @model_validator(mode="before")
+    @classmethod
+    def empty_string_to_none(cls, data):
+        if isinstance(data, dict):
+            return {k: v if v != "" else None for k, v in data.items()}
+        return data
 
     def dict(self, *args, exclude_none=True, exclude_unset=True, by_alias=True, **kwargs):
         # type: (...) -> dict

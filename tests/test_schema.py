@@ -8,8 +8,18 @@ def test_empty_v1():
     assert IsccMetaV1().dict() == {}
 
 
+def test_empty_v2():
+    assert IsccMetaV2().dict() == {}
+
+
 def test_empty_str_to_none_v1():
     empty = IsccMetaV1(name="")
+    assert empty.name is None
+    assert empty.dict() == {}
+
+
+def test_empty_str_to_none_v2():
+    empty = IsccMetaV2(name="")
     assert empty.name is None
     assert empty.dict() == {}
 
