@@ -43,7 +43,7 @@ filterwarnings = [
 
 [tool.poe.tasks]
 update = { cmd = "poetry update", help = "Update project dependencies"}
-fromatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
+formatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
 buildcode = { script = "tools.build_code:build", help = "Build code for API models"}
 formatcode = { cmd = "black .", help = "Code style formating with black" }
 buildterms = { script = "tools.build_terms:build", help = "Build markdown for terms" }
@@ -52,7 +52,7 @@ buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate 
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
 convert-lf = { script = "tools.convert_lf:convert_lf", help = "Convert line endings to LF"}
 test = { cmd = "pytest", help = "Run tests"}
-all = ["fromatyaml", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "convert-lf", "test"]
+all = ["formatyaml", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "convert-lf", "test"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
