@@ -1,0 +1,59 @@
+import json
+
+import jcs
+from pydantic import BaseModel as OriginalBaseModel
+
+
+class BaseModel(OriginalBaseModel):
+
+    def dict(self, *args, exclude_none=True, exclude_unset=True, by_alias=True, **kwargs):
+        # type: (...) -> dict
+        """
+        Override defaults to exclude `None` and unset values and translate aliases.
+
+        Maintains backwards compatibility with dict() method name while using
+        Pydantic v2's model_dump() internally.
+
+        !!! note
+            This overrides the default BaseModel.dict()
+        """
+        return self.model_dump(
+            *args,
+            exclude_none=exclude_none,
+            exclude_unset=exclude_unset,
+            by_alias=by_alias,
+            **kwargs,
+        )
+
+    def json(self, *args, exclude_none=True, by_alias=True, **kwargs):
+        # type: (...) -> str
+        """
+        Override defaults to exclude empty fields and use aliases.
+
+        The by_alias=True allows us to generate valid JSON-LD by default. It translates
+        our python "_context" property to @context
+
+        Maintains backwards compatibility with json() method name while using
+        Pydantic v2's model_dump_json() internally.
+
+        !!! note
+            This overrides the default BaseModel.json()
+        """
+        return self.model_dump_json(
+            *args,
+            exclude_none=exclude_none,
+            by_alias=by_alias,
+            **kwargs,
+        )
+
+    def jcs(self):
+        # type: () -> bytes
+        """
+        Create JCS canonicalized JSON bytestring
+        """
+        data = self.dict(exclude_unset=False)
+        ser = jcs.canonicalize(data)
+        des = json.loads(ser)
+        if des != data:
+            raise ValueError(f"Not canonicalizable {data} round-trips to {des}")
+        return ser

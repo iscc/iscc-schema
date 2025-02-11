@@ -7,7 +7,9 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
-from pydantic import AnyUrl, BaseModel, Field
+from pydantic import AnyUrl, Field
+
+from iscc_schema.base_v2 import BaseModel
 
 
 class Chain(Enum):

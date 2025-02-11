@@ -63,6 +63,7 @@ def build_schema_v2():
         infile,
         output=outfile,
         output_model_type=DataModelType.PydanticV2BaseModel,
+        base_class="iscc_schema.base_v2.BaseModel",
         encoding="UTF-8",
         aliases=aliases,
         class_name="IsccMeta",
