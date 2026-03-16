@@ -24,8 +24,8 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
-    "pydantic",
-    "jcs>=0.2,<0.3",
+    "pydantic>=2",
+    "jcs>=0.2",
 ]
 
 [project.urls]

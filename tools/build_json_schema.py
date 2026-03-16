@@ -1,9 +1,9 @@
 """Build JSON Schema file from Pydantic model"""
+
 import json
 import yaml
 from os.path import dirname, abspath, join
 import iscc_schema
-
 
 HERE = dirname(abspath(__file__))
 PATH_YAML = join(HERE, f"../iscc_schema/models/iscc-collection.yaml")

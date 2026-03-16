@@ -2,7 +2,6 @@
 import pathlib
 import yaml
 
-
 ROOT = pathlib.Path(__file__).parent.parent.absolute()
 SCHEMAS = ROOT / "iscc_schema/models"
 MARKDOWN_TERMS_SCHEMA = ROOT / "docs/includes/terms-schema.md"

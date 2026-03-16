@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-
-try:
-    from pydantic.v1 import ValidationError
-except ImportError:
-    from pydantic import ValidationError
+from pydantic import ValidationError
 
 import iscc_schema as iss
 
@@ -27,7 +23,7 @@ def test_empty_url_to_none():
 
 def test_validate_assignment():
     obj = iss.IsccMeta()
-    with pytest.raises(ValueError):
+    with pytest.raises(ValidationError):
         obj.license = "https://in valid.com"
 
 
@@ -38,21 +34,13 @@ def test_validate_uri_ipfs():
 def test_json():
     assert (
         iss.IsccMeta().json()
-        == f"{{"
-        f'"@context": "http://purl.org/iscc/context", "@type": '
-        f'"CreativeWork", "$schema": "http://purl.org/iscc/schema"'
-        f"}}"
+        == '{"@context":"http://purl.org/iscc/context","@type":"CreativeWork","$schema":"http://purl.org/iscc/schema"}'
     )
 
 
 def test_jcs():
     assert iss.IsccMeta().jcs() == bytes(
-        (
-            f"{{"
-            f'"$schema":"http://purl.org/iscc/schema","@context":"http://purl.'
-            f'org/iscc/context","@type":"CreativeWork"'
-            f"}}"
-        ),
+        '{"$schema":"http://purl.org/iscc/schema","@context":"http://purl.org/iscc/context","@type":"CreativeWork"}',
         encoding="utf-8",
     )
 
@@ -73,9 +61,9 @@ def test_iscc_obj_raises():
 def test_schema():
     so = iss.IsccMeta(iscc="ISCC:EIAGUJFCEY")
     assert so.dict(exclude_none=True, by_alias=True, exclude_unset=False) == {
-        "@context": f"http://purl.org/iscc/context",
+        "@context": "http://purl.org/iscc/context",
         "@type": "CreativeWork",
-        "$schema": f"http://purl.org/iscc/schema",
+        "$schema": "http://purl.org/iscc/schema",
         "iscc": "ISCC:EIAGUJFCEY",
     }
 
@@ -86,12 +74,12 @@ def test_pydantic_model_full_iscc():
 
 
 def test_pydantic_model_iscc_to_short_raises():
-    with pytest.raises(ValueError):
+    with pytest.raises(ValidationError):
         iss.IsccMeta(iscc="ISCC:EIAGUJFCE")
 
 
 def test_pydantic_model_iscc_to_long_raises():
-    with pytest.raises(ValueError):
+    with pytest.raises(ValidationError):
         iss.IsccMeta(
             iscc="ISCC:KAD7LOFDIKZG5M426IITP2XOZ2S6YR3C4YNQ25URPKITNUL2NXLHU3SKFW336BFNK6WQ6"
         )

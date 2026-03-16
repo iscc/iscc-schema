@@ -1,4 +1,5 @@
 """Build docs/context/<v>.json JSON-LD file from iscc_core.schema"""
+
 from typing import Dict
 
 import iscc_schema.schema
@@ -31,9 +32,9 @@ def build_context():
         }
     }
     ctx = context["@context"]
-    for prop, fields in iscc_schema.IsccMeta.schema()["properties"].items():
-        if "x_iscc_context" in fields and prop != "iscc":
-            ctx[prop] = fields["x_iscc_context"]
+    for prop, fields in iscc_schema.IsccMeta.model_json_schema()["properties"].items():
+        if "x-iscc-context" in fields and prop != "iscc":
+            ctx[prop] = fields["x-iscc-context"]
     return context
 
 

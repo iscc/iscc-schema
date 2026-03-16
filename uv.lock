@@ -370,8 +370,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "jcs", specifier = ">=0.2,<0.3" },
-    { name = "pydantic" },
+    { name = "jcs", specifier = ">=0.2" },
+    { name = "pydantic", specifier = ">=2" },
 ]
 
 [package.metadata.requires-dev]
