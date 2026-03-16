@@ -2,6 +2,12 @@
 
 ### [0.5.0] - 2026-03-16
 - Added `signature` field to IsccMeta for iscc-crypto compatibility (EdDSA/JCS signing)
+- Added `units` field for individual ISCC-UNITs that make up a composite ISCC-CODE
+- Added `text` field for extracted plaintext of digital content
+- Widened `parts` field to accept both strings and objects
+- Added `minLength: 1` to `name` and `description` fields
+- Fixed `keywords` description typo ("sting" → "string")
+- Synced `iscc-collection.yaml` with individual schema files
 - Exported `Signature` model from package
 - Migrated from Poetry to uv with hatchling build backend
 - Dropped Pydantic v1, migrated to native Pydantic v2 (closes #36)

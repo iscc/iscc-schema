@@ -176,7 +176,7 @@ Extended ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| keywords | `None` | none | Keywords or tags used to describe this content. Either a list of keywords or a sting with comma separated keywords.         |
+| keywords | `None` | none | Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.         |
 
 ### **previous**
 <http://purl.org/iscc/terms/#previous>
@@ -318,12 +318,26 @@ Technical ISCC Metadata automaticaly inferred from the *digital content* by an I
 | ---- | ---- | --------|--------------------------------|
 | features | `array` | none | Granular features of the *digital content*.         |
 
+### **units**
+<http://purl.org/iscc/terms/#units>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| units | `array` | none | Individual ISCC-UNITs that make up a composite ISCC-CODE.         |
+
 ### **generator**
 <http://purl.org/iscc/terms/#generator>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | generator | `string` | none | Name and version of the software that generated the ISCC         |
+
+### **text**
+<http://purl.org/iscc/terms/#text>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| text | `string` | none | Extracted plaintext of the *digital content*.         |
 
 ### **thumbnail**
 <http://schema.org/thumbnailUrl>

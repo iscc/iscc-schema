@@ -148,6 +148,7 @@ properties:
       of the work manifested by the identified digital content.
     example: true
     x-iscc-context: http://purl.org/iscc/terms/#original
+    x-iscc-status: stable
   credentials:
     oneOf:
     - type: string
@@ -155,14 +156,14 @@ properties:
     - type: array
     description: One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/)
       or one ore more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret
-      the value according to the following rules <ul> <li>If the value is a string interpret
-      it as an URI. The expectation is that the URI dereferences to a response with Content-type
-      `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value
-      is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON
-      Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array`
-      and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value
-      is an `array` and an items is a `string` interpret the item as an URI that dereferences
-      to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions)
+      the value according to the following rules <ul> <li>If the value is a JSON `string`
+      interpret it as an URI. The expectation is that the URI dereferences to a response with
+      Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If
+      the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials
+      JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an
+      `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If
+      the value is an `array` and an items is a `string` interpret the item as an URI that
+      dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions)
       matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md)
       representation of the declarers address).</li> </ul>
     example: https://schema.iscc.codes/examples/vc.json
@@ -242,6 +243,7 @@ properties:
     example: https://example.com/land-here-when-resolving-iscc-id
     format: uri
     x-iscc-context: http://purl.org/iscc/terms/#redirect
+    x-iscc-status: stable
   previous:
     description: ISCC of the preceding version of this item.
     type: string
@@ -348,7 +350,9 @@ properties:
       belongs).
     x-iscc-context: http://purl.org/iscc/terms/#parts
     items:
-      type: string
+      oneOf:
+      - type: string
+      - type: object
   part_of:
     type: array
     description: Indicates that this item is part of other items via their Content-Code.
@@ -362,11 +366,23 @@ properties:
     x-iscc-context: http://purl.org/iscc/terms/#features
     items:
       type: object
+  units:
+    readOnly: true
+    type: array
+    description: Individual ISCC-UNITs that make up a composite ISCC-CODE.
+    x-iscc-context: http://purl.org/iscc/terms/#units
+    items:
+      type: string
   generator:
     readOnly: true
     type: string
     description: Name and version of the software that generated the ISCC
     x-iscc-context: http://purl.org/iscc/terms/#generator
+  text:
+    readOnly: true
+    type: string
+    description: Extracted plaintext of the *digital content*.
+    x-iscc-context: http://purl.org/iscc/terms/#text
   external_url:
     description: This is the URL that will appear below the asset's image on some NFT Marketplaces
       and will allow users to leave the site and view the item on your site. **Supports URI

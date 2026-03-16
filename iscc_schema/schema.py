@@ -271,7 +271,7 @@ class IsccTechnical(BaseModel):
         examples=["en-US"],
         json_schema_extra={"x-iscc-context": "http://schema.org/inLanguage"},
     )
-    parts: list[str] | None = Field(
+    parts: list[str | dict[str, Any]] | None = Field(
         None,
         description="Indicates items that are part of this item via Content-Codes (inverse-property belongs).",
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#parts"},
@@ -286,10 +286,20 @@ class IsccTechnical(BaseModel):
         description="Granular features of the *digital content*.",
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#features"},
     )
+    units: list[str] | None = Field(
+        None,
+        description="Individual ISCC-UNITs that make up a composite ISCC-CODE.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#units"},
+    )
     generator: str | None = Field(
         None,
         description="Name and version of the software that generated the ISCC",
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#generator"},
+    )
+    text: str | None = Field(
+        None,
+        description="Extracted plaintext of the *digital content*.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#text"},
     )
     thumbnail: AnyUrl | None = Field(
         None,
@@ -337,7 +347,7 @@ class IsccExtended(BaseModel):
     )
     keywords: str | list[str] | None = Field(
         None,
-        description="Keywords or tags used to describe this content. Either a list of keywords or a sting with comma separated keywords.",
+        description="Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.",
         json_schema_extra={"x-iscc-context": "http://schema.org/keywords"},
     )
     previous: str | None = Field(
@@ -400,6 +410,7 @@ class IsccBasic(BaseModel):
         examples=["The Never Ending Story"],
         json_schema_extra={"x-iscc-context": "http://schema.org/name"},
         max_length=128,
+        min_length=1,
     )
     description: str | None = Field(
         None,
@@ -407,6 +418,7 @@ class IsccBasic(BaseModel):
         examples=["a 1984 fantasy film co-written and directed by *Wolfgang Petersen*"],
         json_schema_extra={"x-iscc-context": "http://schema.org/disambiguatingDescription"},
         max_length=4096,
+        min_length=1,
     )
     meta: str | None = Field(
         None,

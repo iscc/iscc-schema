@@ -27,13 +27,11 @@ properties:
     - ETHEREUM
     - POLYGON
     x-iscc-context: http://purl.org/iscc/terms/#chain
-    x-iscc-status: stable
   wallet:
     type: string
     description: The wallet-address that signs an ISCC declaration.
     example: '0xb794f5ea0ba39494ce839613fffba74279579268'
     x-iscc-context: http://purl.org/iscc/terms/#wallet
-    x-iscc-status: stable
   credentials:
     oneOf:
     - type: string

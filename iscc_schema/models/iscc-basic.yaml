@@ -12,6 +12,7 @@ examples:
 properties:
   name:
     type: string
+    minLength: 1
     maxLength: 128
     example: The Never Ending Story
     description: The title or name of the intangible creation manifested by the identified
@@ -24,6 +25,7 @@ properties:
   description:
     type: string
     example: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
+    minLength: 1
     maxLength: 4096
     description: Description of the *digital content* identified by the **ISCC**. **Used as
       input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown

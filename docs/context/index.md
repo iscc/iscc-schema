@@ -88,7 +88,7 @@
 
 <small><http://schema.org/keywords></small>
 !!! term ""
-    Keywords or tags used to describe this content. Either a list of keywords or a sting with comma separated keywords.
+    Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.
 
 ## previous
 
@@ -186,11 +186,23 @@
 !!! term ""
     Granular features of the *digital content*.
 
+## units
+
+<small><http://purl.org/iscc/terms/#units></small>
+!!! term ""
+    Individual ISCC-UNITs that make up a composite ISCC-CODE.
+
 ## generator
 
 <small><http://purl.org/iscc/terms/#generator></small>
 !!! term ""
     Name and version of the software that generated the ISCC
+
+## text
+
+<small><http://purl.org/iscc/terms/#text></small>
+!!! term ""
+    Extracted plaintext of the *digital content*.
 
 ## thumbnail
 

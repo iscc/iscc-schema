@@ -64,11 +64,23 @@
 
     Granular features of the *digital content*.
 
+### **units**
+
+!!! term "<small><http://purl.org/iscc/terms/#units></small>"
+
+    Individual ISCC-UNITs that make up a composite ISCC-CODE.
+
 ### **generator**
 
 !!! term "<small><http://purl.org/iscc/terms/#generator></small>"
 
     Name and version of the software that generated the ISCC
+
+### **text**
+
+!!! term "<small><http://purl.org/iscc/terms/#text></small>"
+
+    Extracted plaintext of the *digital content*.
 
 ### **external_url**
 

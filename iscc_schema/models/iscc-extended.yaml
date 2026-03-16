@@ -59,7 +59,7 @@ properties:
       items:
       - type: string
     description: Keywords or tags used to describe this content. Either a list of keywords
-      or a sting with comma separated keywords.
+      or a string with comma separated keywords.
     x-iscc-context: http://schema.org/keywords
     x-iscc-schema-doc: Keywords or tags used to describe this content. Multiple entries in
       a keywords list are typically delimited by commas.
