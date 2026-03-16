@@ -7,7 +7,8 @@
 - Widened `parts` field to accept both strings and objects
 - Added `minLength: 1` to `name` and `description` fields
 - Fixed `keywords` description typo ("sting" → "string")
-- Synced `iscc-collection.yaml` with individual schema files
+- Eliminated `iscc-collection.yaml` duplication; JSON Schema is now auto-generated from individual schema files
+- Fixed missing `x-iscc-status` and `x-iscc-context` annotations in JSON Schema output
 - Exported `Signature` model from package
 - Migrated from Poetry to uv with hatchling build backend
 - Dropped Pydantic v1, migrated to native Pydantic v2 (closes #36)
