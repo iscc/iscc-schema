@@ -1,6 +1,6 @@
 [project]
 name = "iscc-schema"
-version = "0.4.1"
+version = "0.5.0"
 description = "ISCC - JSON-LD Metadata and OpenAPI Service Descriptions"
 authors = [{ name = "Titusz", email = "tp@py7.de" }]
 requires-python = ">=3.10,<3.15"
