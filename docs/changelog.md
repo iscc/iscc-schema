@@ -1,5 +1,14 @@
 ## Changelog
 
+### [Unreleased]
+- Migrated from Poetry to uv with hatchling build backend
+- Dropped Pydantic v1, migrated to native Pydantic v2 (closes #36)
+- Require Python >=3.10,<3.15
+- Added Python 3.13 and 3.14 to CI test matrix
+- Switched CI to ubuntu-latest
+- Suppressed datamodel-code-generator warnings and cleaned up build output
+- Updated .gitignore to comprehensive Python template
+
 ### [0.4.1] - 2024-01-21
 - Added `credentials`-field
 - Updated dependencies
