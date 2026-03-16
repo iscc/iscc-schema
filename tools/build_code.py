@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """Build Pydantic models for Schema definitions"""
+
 import json
 import pathlib
 from datamodel_code_generator import InputFileType, generate, OpenAPIScope, PythonVersion
-
 
 ROOT = pathlib.Path(__file__).parent.parent
 CODE = ROOT / "iscc_schema"
@@ -29,7 +29,7 @@ def build_schema():
         disable_appending_item_suffix=True,
         field_constraints=True,
         field_extra_keys={"x-iscc-context"},
-        target_python_version=PythonVersion.PY_37,
+        target_python_version=PythonVersion.PY_310,
         validation=True,
     )
     # Patch Generated Code
@@ -62,7 +62,7 @@ def build_apis():
         openapi_scopes=[OpenAPIScope.Schemas, OpenAPIScope.Paths],
         reuse_model=True,
         disable_appending_item_suffix=True,
-        target_python_version=PythonVersion.PY_37,
+        target_python_version=PythonVersion.PY_310,
         field_constraints=True,  # This does not allow format-uri with maxLength constraint
     )
     # Patch AnyUrl

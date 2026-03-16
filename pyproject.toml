@@ -3,7 +3,7 @@ name = "iscc-schema"
 version = "0.4.1"
 description = "ISCC - JSON-LD Metadata and OpenAPI Service Descriptions"
 authors = [{ name = "Titusz", email = "tp@py7.de" }]
-requires-python = ">=3.7,<4.0.0"
+requires-python = ">=3.10,<3.15"
 readme = "README.md"
 license = "Apache-2.0"
 keywords = [
@@ -17,9 +17,6 @@ keywords = [
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -51,7 +48,7 @@ dev = [
 
 [tool.black]
 line-length = 100
-target-version = ['py37']
+target-version = ['py310']
 preview = true
 
 
