@@ -53,8 +53,7 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
       "$schema": "http://purl.org/iscc/schema",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "name": "The Never Ending Story",
-      "description": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
-      "image": "https://picsum.photos/200/300.jpg"
+      "description": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*"
     }
     ```
 ### **name**
