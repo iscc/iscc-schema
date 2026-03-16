@@ -2,13 +2,19 @@
 
 !!! term "<small><http://purl.org/iscc/terms/#iscc></small>"
 
-    An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.
+    An **ISCC-CODE** in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.
 
 ### **meta**
 
 !!! term "<small><http://purl.org/iscc/terms/#meta></small>"
 
     Subject, industry, or use-case specific metadata encoded as Data-URL.
+
+### **iscc_code**
+
+!!! term "<small><http://purl.org/iscc/terms/#iscc></small>"
+
+    A composite **ISCC-CODE** in canonical representation. Explicit alternative to the more compact `iscc` field. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.
 
 ### **previous**
 
@@ -129,6 +135,12 @@
 !!! term "<small><http://purl.org/iscc/terms/#datahash></small>"
 
     A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
+
+### **nonce**
+
+!!! term "<small><http://purl.org/iscc/terms/#nonce></small>"
+
+    Cryptographic nonce for replay protection. A 128-bit random value encoded as lowercase hexadecimal.
 
 ### **signature**
 

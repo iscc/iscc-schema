@@ -27,6 +27,16 @@ properties:
     description: A [Multihash](https://multiformats.io/multihash/) of the *digital content*
       (default blake3).
     x-iscc-context: http://purl.org/iscc/terms/#datahash
+  nonce:
+    type: string
+    description: Cryptographic nonce for replay protection. A 128-bit random value encoded
+      as lowercase hexadecimal.
+    example: 0013a3c214c05796673503e6e549446d
+    minLength: 32
+    maxLength: 32
+    pattern: ^[0-9a-f]{32}$
+    x-iscc-context: http://purl.org/iscc/terms/#nonce
+    x-iscc-status: draft
   signature:
     type: object
     description: Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto)

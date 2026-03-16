@@ -9,8 +9,8 @@ examples:
 properties:
   iscc:
     type: string
-    description: An **ISCC-CODE** in canonical representation. This is the minimal required
-      field for a valid ISCC Metadata object.
+    description: An **ISCC-CODE** in canonical representation. A valid ISCC Metadata object
+      should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.
     example: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
     minLength: 15
     maxLength: 73

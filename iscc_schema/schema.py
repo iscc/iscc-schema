@@ -124,6 +124,15 @@ class IsccCrypto(BaseModel):
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#datahash"},
         min_length=40,
     )
+    nonce: str | None = Field(
+        None,
+        description="Cryptographic nonce for replay protection. A 128-bit random value encoded as lowercase hexadecimal.",
+        examples=["0013a3c214c05796673503e6e549446d"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#nonce"},
+        max_length=32,
+        min_length=32,
+        pattern="^[0-9a-f]{32}$",
+    )
     signature: Signature | None = Field(
         None,
         description="Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto) signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.",
@@ -322,9 +331,18 @@ class IsccExtended(BaseModel):
     )
     iscc_id: str | None = Field(
         None,
-        description="The **ISCC-ID** of the digital content in canonical representation.",
+        description="The **ISCC-ID** of the digital content in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
         examples=["ISCC:MAACAJINXFXA2SQX"],
         json_schema_extra={"x-iscc-context": "http://schema.org/identifier"},
+        max_length=73,
+        min_length=15,
+        pattern="^ISCC:[A-Z2-7]{10,73}$",
+    )
+    iscc_code: str | None = Field(
+        None,
+        description="A composite **ISCC-CODE** in canonical representation. Explicit alternative to the more compact `iscc` field. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
+        examples=["ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#iscc"},
         max_length=73,
         min_length=15,
         pattern="^ISCC:[A-Z2-7]{10,73}$",
@@ -436,7 +454,7 @@ class IsccMinimal(BaseModel):
 
     iscc: str | None = Field(
         None,
-        description="An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.",
+        description="An **ISCC-CODE** in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
         examples=["ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"],
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#iscc"},
         max_length=73,

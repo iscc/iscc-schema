@@ -39,7 +39,7 @@ Minimal required ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| iscc | `string` | none | An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.<br><br>**Example**: `ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY`         |
+| iscc | `string` | none | An **ISCC-CODE** in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.<br><br>**Example**: `ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY`         |
 
 ## iscc-basic
 Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash generation.
@@ -147,7 +147,14 @@ Extended ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| iscc_id | `string` | none | The **ISCC-ID** of the digital content in canonical representation.<br><br>**Example**: `ISCC:MAACAJINXFXA2SQX`         |
+| iscc_id | `string` | none | The **ISCC-ID** of the digital content in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.<br><br>**Example**: `ISCC:MAACAJINXFXA2SQX`         |
+
+### **iscc_code**
+<http://purl.org/iscc/terms/#iscc>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| iscc_code | `string` | none | A composite **ISCC-CODE** in canonical representation. Explicit alternative to the more compact `iscc` field. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.<br><br>**Example**: `ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY`         |
 
 ### **image**
 <http://schema.org/image>
@@ -404,6 +411,13 @@ Cryptography related ISCC Metadata
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | datahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).<br><br>**Example**: `bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq`         |
+
+### **nonce**
+<http://purl.org/iscc/terms/#nonce>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| nonce | `string` | none | Cryptographic nonce for replay protection. A 128-bit random value encoded as lowercase hexadecimal.<br><br>**Example**: `0013a3c214c05796673503e6e549446d`         |
 
 ### **signature**
 <http://purl.org/iscc/terms/#signature>

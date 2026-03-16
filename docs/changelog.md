@@ -1,6 +1,8 @@
 ## Changelog
 
 ### [0.5.0] - 2026-03-16
+- Added `iscc_code` field as explicit alternative to the compact `iscc` field
+- Added `nonce` field for cryptographic replay protection
 - Added `signature` field to IsccMeta for iscc-crypto compatibility (EdDSA/JCS signing)
 - Added `units` field for individual ISCC-UNITs that make up a composite ISCC-CODE
 - Added `text` field for extracted plaintext of digital content

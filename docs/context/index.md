@@ -4,7 +4,7 @@
 
 <small><http://purl.org/iscc/terms/#iscc></small>
 !!! term ""
-    An **ISCC-CODE** in canonical representation. This is the minimal required field for a valid ISCC Metadata object.
+    An **ISCC-CODE** in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.
 
 ## name
 
@@ -64,7 +64,13 @@
 
 <small><http://schema.org/identifier></small>
 !!! term ""
-    The **ISCC-ID** of the digital content in canonical representation.
+    The **ISCC-ID** of the digital content in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.
+
+## iscc_code
+
+<small><http://purl.org/iscc/terms/#iscc></small>
+!!! term ""
+    A composite **ISCC-CODE** in canonical representation. Explicit alternative to the more compact `iscc` field. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.
 
 ## image
 
@@ -257,6 +263,12 @@
 <small><http://purl.org/iscc/terms/#datahash></small>
 !!! term ""
     A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
+
+## nonce
+
+<small><http://purl.org/iscc/terms/#nonce></small>
+!!! term ""
+    Cryptographic nonce for replay protection. A 128-bit random value encoded as lowercase hexadecimal.
 
 ## signature
 
