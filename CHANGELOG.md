@@ -1,5 +1,8 @@
 ## Changelog
 
+### [Unreleased]
+- Added Python 3.13 and 3.14 to CI test matrix
+
 ### [0.4.1] - 2024-01-21
 - Added `credentials`-field
 - Updated dependencies
