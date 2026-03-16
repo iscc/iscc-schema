@@ -396,7 +396,7 @@ components:
           readOnly: true
         duration:
           type: integer
-          description: Duration of audio-visual media in secondes.
+          description: Duration of audio-visual media in seconds.
           example: 67
           readOnly: true
         generator:

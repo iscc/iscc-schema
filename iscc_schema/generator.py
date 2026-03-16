@@ -168,7 +168,7 @@ class IsccMetadata(BaseModel):
         None, description="Height of visual media in number of pixels.", examples=[480]
     )
     duration: int | None = Field(
-        None, description="Duration of audio-visual media in secondes.", examples=[67]
+        None, description="Duration of audio-visual media in seconds.", examples=[67]
     )
     generator: str | None = Field(
         None, description="Name and version of the software that generated the ISCC"
