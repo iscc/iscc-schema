@@ -246,6 +246,12 @@
 !!! term ""
     A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
 
+## signature
+
+<small><http://purl.org/iscc/terms/#signature></small>
+!!! term ""
+    Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto) signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.
+
 ## original
 
 <small><http://purl.org/iscc/terms/#original></small>

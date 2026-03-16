@@ -392,6 +392,13 @@ Cryptography related ISCC Metadata
 | ---- | ---- | --------|--------------------------------|
 | datahash | `string` | none | A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).<br><br>**Example**: `bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq`         |
 
+### **signature**
+<http://purl.org/iscc/terms/#signature>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| signature | `object` | none | Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto) signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.         |
+
 ## iscc-declaration
 Field relevant in context with public ISCC declerations
 ### **original**

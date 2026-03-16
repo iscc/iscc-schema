@@ -66,6 +66,38 @@ class IsccDeclaration(BaseModel):
     )
 
 
+class Signature(BaseModel):
+    """
+    Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto) signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.
+    """
+
+    version: str = Field(
+        ..., description="Signature suite version identifier.", examples=["ISCC-SIG v1.0"]
+    )
+    controller: AnyUrl | None = Field(
+        None, description="URI identifying the key controller (e.g., DID or CID)."
+    )
+    keyid: str | None = Field(None, description="Key identifier within the controller document.")
+    pubkey: str | None = Field(
+        None,
+        description="Ed25519 public key in multibase format (z + base58btc(0xED01 + 32-byte key)) as specified in [W3C Multikey](https://www.w3.org/TR/cid/#Multikey).",
+        examples=["z6MkrJVnaZkeFzdQyMZu1cgjg7k1pZZ6pvBQ7XJPt4swbTQ2"],
+        max_length=48,
+        min_length=48,
+        pattern="^z[1-9A-HJ-NP-Za-km-z]+$",
+    )
+    proof: str = Field(
+        ...,
+        description="EdDSA signature in multibase format (z + base58btc(64-byte signature)) conforming to [eddsa-jcs-2022](https://www.w3.org/TR/vc-di-eddsa/#eddsa-jcs-2022).",
+        examples=[
+            "z2HnFSSPPBzR36zdDgK8PbEHeXbR56YF24jwMpt3R1eHXQzJDMWS93FCzpvJpwTWd3GAVFuUfjoJdcnTMuVor51aX"
+        ],
+        max_length=89,
+        min_length=89,
+        pattern="^z[1-9A-HJ-NP-Za-km-z]+$",
+    )
+
+
 class IsccCrypto(BaseModel):
     """
     Cryptography related ISCC Metadata
@@ -91,6 +123,11 @@ class IsccCrypto(BaseModel):
         examples=["bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq"],
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#datahash"},
         min_length=40,
+    )
+    signature: Signature | None = Field(
+        None,
+        description="Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto) signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#signature"},
     )
 
 

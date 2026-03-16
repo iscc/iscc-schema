@@ -27,3 +27,39 @@ properties:
     description: A [Multihash](https://multiformats.io/multihash/) of the *digital content*
       (default blake3).
     x-iscc-context: http://purl.org/iscc/terms/#datahash
+  signature:
+    type: object
+    description: Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto)
+      signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.
+    x-iscc-context: http://purl.org/iscc/terms/#signature
+    required:
+    - version
+    - proof
+    properties:
+      version:
+        type: string
+        description: Signature suite version identifier.
+        example: ISCC-SIG v1.0
+      controller:
+        type: string
+        description: URI identifying the key controller (e.g., DID or CID).
+        format: uri
+      keyid:
+        type: string
+        description: Key identifier within the controller document.
+      pubkey:
+        type: string
+        description: Ed25519 public key in multibase format (z + base58btc(0xED01 + 32-byte
+          key)) as specified in [W3C Multikey](https://www.w3.org/TR/cid/#Multikey).
+        pattern: ^z[1-9A-HJ-NP-Za-km-z]+$
+        minLength: 48
+        maxLength: 48
+        example: z6MkrJVnaZkeFzdQyMZu1cgjg7k1pZZ6pvBQ7XJPt4swbTQ2
+      proof:
+        type: string
+        description: EdDSA signature in multibase format (z + base58btc(64-byte signature))
+          conforming to [eddsa-jcs-2022](https://www.w3.org/TR/vc-di-eddsa/#eddsa-jcs-2022).
+        pattern: ^z[1-9A-HJ-NP-Za-km-z]+$
+        minLength: 89
+        maxLength: 89
+        example: z2HnFSSPPBzR36zdDgK8PbEHeXbR56YF24jwMpt3R1eHXQzJDMWS93FCzpvJpwTWd3GAVFuUfjoJdcnTMuVor51aX

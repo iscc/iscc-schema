@@ -1,6 +1,8 @@
 ## Changelog
 
 ### [0.5.0] - 2026-03-16
+- Added `signature` field to IsccMeta for iscc-crypto compatibility (EdDSA/JCS signing)
+- Exported `Signature` model from package
 - Migrated from Poetry to uv with hatchling build backend
 - Dropped Pydantic v1, migrated to native Pydantic v2 (closes #36)
 - Require Python >=3.10,<3.15
