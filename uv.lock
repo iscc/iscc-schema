@@ -378,7 +378,7 @@ requires-dist = [
 dev = [
     { name = "black" },
     { name = "datamodel-code-generator" },
-    { name = "mkdocs-material", specifier = ">=9.0,<10" },
+    { name = "mkdocs-material", specifier = ">=9.0" },
     { name = "poethepoet" },
     { name = "pyld" },
     { name = "pytest" },

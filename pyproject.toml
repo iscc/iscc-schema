@@ -41,7 +41,7 @@ dev = [
     "datamodel-code-generator",
     "poethepoet",
     "black",
-    "mkdocs-material>=9.0,<10",
+    "mkdocs-material>=9.0",
     "PyLD",
     "requests",
 ]
