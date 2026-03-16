@@ -10,6 +10,18 @@
 
     Subject, industry, or use-case specific metadata encoded as Data-URL.
 
+### **media_id**
+
+!!! term "<small><http://purl.org/iscc/terms/#media_id></small>"
+
+    Vendor specific (internal) identifier for the source media file.
+
+### **iscc_id**
+
+!!! term "<small><http://purl.org/iscc/terms/#iscc_id></small>"
+
+    The **ISCC-ID** of the digital content in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.
+
 ### **iscc_code**
 
 !!! term "<small><http://purl.org/iscc/terms/#iscc></small>"
@@ -21,6 +33,12 @@
 !!! term "<small><http://purl.org/iscc/terms/#previous></small>"
 
     ISCC of the preceding version of this item.
+
+### **mode**
+
+!!! term "<small><http://purl.org/iscc/terms/#mode></small>"
+
+    The perceptual mode used to create the ISCC-CODE.
 
 ### **filename**
 

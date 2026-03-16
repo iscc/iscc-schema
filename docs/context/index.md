@@ -56,13 +56,13 @@
 
 ## media_id
 
-<small><http://schema.org/identifier></small>
+<small><http://purl.org/iscc/terms/#media_id></small>
 !!! term ""
     Vendor specific (internal) identifier for the source media file.
 
 ## iscc_id
 
-<small><http://schema.org/identifier></small>
+<small><http://purl.org/iscc/terms/#iscc_id></small>
 !!! term ""
     The **ISCC-ID** of the digital content in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.
 
@@ -107,6 +107,12 @@
 <small><http://schema.org/version></small>
 !!! term ""
     The version of the CreativeWork embodied by a specified resource.
+
+## mode
+
+<small><http://purl.org/iscc/terms/#mode></small>
+!!! term ""
+    The perceptual mode used to create the ISCC-CODE.
 
 ## created
 

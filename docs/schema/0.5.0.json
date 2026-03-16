@@ -53,7 +53,7 @@
       "minLength": 15,
       "maxLength": 73,
       "pattern": "^ISCC:[A-Z2-7]{10,73}$",
-      "x-iscc-context": "http://schema.org/identifier",
+      "x-iscc-context": "http://purl.org/iscc/terms/#iscc_id",
       "x-iscc-schema-doc": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links."
     },
     "iscc_code": {
@@ -107,6 +107,7 @@
       ],
       "example": "video",
       "description": "The perceptual mode used to create the ISCC-CODE.",
+      "x-iscc-context": "http://purl.org/iscc/terms/#mode",
       "x-iscc-status": "stable"
     },
     "creator": {
@@ -208,7 +209,7 @@
       "type": "string",
       "description": "Vendor specific (internal) identifier for the source media file.",
       "example": "05VQ3BGTGFCJA",
-      "x-iscc-context": "http://schema.org/identifier",
+      "x-iscc-context": "http://purl.org/iscc/terms/#media_id",
       "x-iscc-schema-doc": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links."
     },
     "image": {

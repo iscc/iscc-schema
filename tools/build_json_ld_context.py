@@ -34,8 +34,23 @@ def build_context():
     ctx = context["@context"]
     for prop, fields in iscc_schema.IsccMeta.model_json_schema()["properties"].items():
         if "x-iscc-context" in fields and prop != "iscc":
-            ctx[prop] = fields["x-iscc-context"]
+            iri = fields["x-iscc-context"]
+            if _is_uri_field(fields):
+                ctx[prop] = {"@id": iri, "@type": "@id"}
+            else:
+                ctx[prop] = iri
     return context
+
+
+def _is_uri_field(field_schema):
+    # type: (dict) -> bool
+    """Check if a JSON Schema field definition has format 'uri'."""
+    if field_schema.get("format") == "uri":
+        return True
+    for variant in field_schema.get("anyOf", []):
+        if variant.get("format") == "uri":
+            return True
+    return False
 
 
 def build_latest():

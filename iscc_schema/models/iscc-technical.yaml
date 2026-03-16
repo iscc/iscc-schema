@@ -26,6 +26,7 @@ properties:
     - mixed
     example: video
     description: The perceptual mode used to create the ISCC-CODE.
+    x-iscc-context: http://purl.org/iscc/terms/#mode
     x-iscc-status: stable
   created:
     description: Datetime the ISCC was created for the item.

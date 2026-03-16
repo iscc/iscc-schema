@@ -6,24 +6,40 @@
     "ImageObject": "http://schema.org/ImageObject",
     "AudioObject": "http://schema.org/AudioObject",
     "VideoObject": "http://schema.org/VideoObject",
-    "$schema": "http://purl.org/iscc/terms/#$schema",
+    "$schema": {
+      "@id": "http://purl.org/iscc/terms/#$schema",
+      "@type": "@id"
+    },
     "name": "http://schema.org/name",
     "description": "http://schema.org/disambiguatingDescription",
     "meta": "http://purl.org/iscc/terms/#meta",
     "creator": "http://schema.org/creator",
-    "license": "http://schema.org/license",
-    "acquire": "http://schema.org/acquireLicensePage",
+    "license": {
+      "@id": "http://schema.org/license",
+      "@type": "@id"
+    },
+    "acquire": {
+      "@id": "http://schema.org/acquireLicensePage",
+      "@type": "@id"
+    },
     "credit": "http://schema.org/creditText",
     "rights": "http://schema.org/copyrightNotice",
-    "media_id": "http://schema.org/identifier",
-    "iscc_id": "http://schema.org/identifier",
+    "media_id": "http://purl.org/iscc/terms/#media_id",
+    "iscc_id": "http://purl.org/iscc/terms/#iscc_id",
     "iscc_code": "http://purl.org/iscc/terms/#iscc",
-    "image": "http://schema.org/image",
+    "image": {
+      "@id": "http://schema.org/image",
+      "@type": "@id"
+    },
     "identifier": "http://schema.org/identifier",
-    "content": "http://schema.org/contentUrl",
+    "content": {
+      "@id": "http://schema.org/contentUrl",
+      "@type": "@id"
+    },
     "keywords": "http://schema.org/keywords",
     "previous": "http://purl.org/iscc/terms/#previous",
     "version": "http://schema.org/version",
+    "mode": "http://purl.org/iscc/terms/#mode",
     "created": "http://schema.org/dateCreated",
     "filename": "http://purl.org/iscc/terms/#filename",
     "filesize": "http://schema.org/fileSize",
@@ -41,19 +57,34 @@
     "units": "http://purl.org/iscc/terms/#units",
     "generator": "http://purl.org/iscc/terms/#generator",
     "text": "http://purl.org/iscc/terms/#text",
-    "thumbnail": "http://schema.org/thumbnailUrl",
-    "external_url": "http://purl.org/iscc/terms/#external_url",
-    "animation_url": "http://purl.org/iscc/terms/#animation_url",
+    "thumbnail": {
+      "@id": "http://schema.org/thumbnailUrl",
+      "@type": "@id"
+    },
+    "external_url": {
+      "@id": "http://purl.org/iscc/terms/#external_url",
+      "@type": "@id"
+    },
+    "animation_url": {
+      "@id": "http://purl.org/iscc/terms/#animation_url",
+      "@type": "@id"
+    },
     "properties": "http://purl.org/iscc/terms/#properties",
     "attributes": "http://purl.org/iscc/terms/#attributes",
-    "nft": "http://purl.org/iscc/terms/#nft",
+    "nft": {
+      "@id": "http://purl.org/iscc/terms/#nft",
+      "@type": "@id"
+    },
     "tophash": "http://purl.org/iscc/terms/#tophash",
     "metahash": "http://purl.org/iscc/terms/#metahash",
     "datahash": "http://purl.org/iscc/terms/#datahash",
     "nonce": "http://purl.org/iscc/terms/#nonce",
     "signature": "http://purl.org/iscc/terms/#signature",
     "original": "http://purl.org/iscc/terms/#original",
-    "redirect": "http://purl.org/iscc/terms/#redirect",
+    "redirect": {
+      "@id": "http://purl.org/iscc/terms/#redirect",
+      "@type": "@id"
+    },
     "chain": "http://purl.org/iscc/terms/#chain",
     "wallet": "http://purl.org/iscc/terms/#wallet",
     "credentials": "https://www.w3.org/2018/credentials#VerifiableCredential",

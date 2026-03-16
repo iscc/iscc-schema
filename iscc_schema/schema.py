@@ -214,7 +214,10 @@ class IsccTechnical(BaseModel):
     """
 
     mode: Mode | None = Field(
-        None, description="The perceptual mode used to create the ISCC-CODE.", examples=["video"]
+        None,
+        description="The perceptual mode used to create the ISCC-CODE.",
+        examples=["video"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#mode"},
     )
     created: AwareDatetime | None = Field(
         None,
@@ -327,13 +330,13 @@ class IsccExtended(BaseModel):
         None,
         description="Vendor specific (internal) identifier for the source media file.",
         examples=["05VQ3BGTGFCJA"],
-        json_schema_extra={"x-iscc-context": "http://schema.org/identifier"},
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#media_id"},
     )
     iscc_id: str | None = Field(
         None,
         description="The **ISCC-ID** of the digital content in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
         examples=["ISCC:MAACAJINXFXA2SQX"],
-        json_schema_extra={"x-iscc-context": "http://schema.org/identifier"},
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#iscc_id"},
         max_length=73,
         min_length=15,
         pattern="^ISCC:[A-Z2-7]{10,73}$",

@@ -68,22 +68,6 @@
 
     **Embedding**:  Use `Exif.Image.Copyright`, `Iptc.Application2.Copyright` and `Xmp.dc.rights` for embedding.
 
-### **media_id**
-
-!!! term "<small><http://schema.org/identifier></small>"
-
-    The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links.
-
-    **Comment**:  Vendor specific (internal) identifier for the source media file.
-
-### **iscc_id**
-
-!!! term "<small><http://schema.org/identifier></small>"
-
-    The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links.
-
-    **Comment**:  The **ISCC-ID** of the digital content in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.
-
 ### **image**
 
 !!! term "<small><http://schema.org/image></small>"

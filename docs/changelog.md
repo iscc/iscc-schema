@@ -10,6 +10,10 @@
 - Added `minLength: 1` to `name` and `description` fields
 - Fixed `keywords` description typo ("sting" → "string")
 - Eliminated `iscc-collection.yaml` duplication; JSON Schema is now auto-generated from individual schema files
+- Fixed JSON-LD identifier collision: `iscc_id` and `media_id` now have distinct ISCC term mappings
+- Fixed URI-typed fields in JSON-LD context to use `@type: @id` for proper linked data processing
+- Added missing `mode` field to JSON-LD context
+- Fixed stale 0.3.2 version defaults in generator reference schema
 - Fixed missing `x-iscc-status` and `x-iscc-context` annotations in JSON Schema output
 - Exported `Signature` model from package
 - Migrated from Poetry to uv with hatchling build backend

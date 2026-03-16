@@ -136,14 +136,14 @@ Extended ISCC Metadata
     }
     ```
 ### **media_id**
-<http://schema.org/identifier>
+<http://purl.org/iscc/terms/#media_id>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | media_id | `string` | none | Vendor specific (internal) identifier for the source media file.<br><br>**Example**: `05VQ3BGTGFCJA`         |
 
 ### **iscc_id**
-<http://schema.org/identifier>
+<http://purl.org/iscc/terms/#iscc_id>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -221,6 +221,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
     }
     ```
 ### **mode**
+<http://purl.org/iscc/terms/#mode>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
