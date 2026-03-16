@@ -2,13 +2,11 @@
 #   filename:  iscc-all.yaml
 
 from __future__ import annotations
-
 from enum import Enum
-from typing import Any
-
 from pydantic import AwareDatetime, Field
 from iscc_schema.fields import AnyUrl
 from iscc_schema.base import BaseModel
+from typing import Any
 
 
 class Chain(Enum):

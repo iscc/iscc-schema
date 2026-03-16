@@ -3,8 +3,10 @@
 
 import json
 import re
+import subprocess
+import sys
 import pathlib
-from datamodel_code_generator import InputFileType, generate, OpenAPIScope, PythonVersion
+from datamodel_code_generator import Formatter, InputFileType, generate, OpenAPIScope, PythonVersion
 
 ROOT = pathlib.Path(__file__).parent.parent
 CODE = ROOT / "iscc_schema"
@@ -44,6 +46,7 @@ def build_schema():
     aliases = json.load(aliases.open("rb"))
     generate(
         infile,
+        input_file_type=InputFileType.JsonSchema,
         output=outfile,
         encoding="UTF-8",
         aliases=aliases,
@@ -57,6 +60,7 @@ def build_schema():
         field_extra_keys={"x-iscc-context"},
         target_python_version=PythonVersion.PY_310,
         validation=True,
+        formatters=[],
     )
     _patch_imports(outfile)
 
@@ -77,14 +81,25 @@ def build_apis():
         disable_appending_item_suffix=True,
         target_python_version=PythonVersion.PY_310,
         field_constraints=True,
+        formatters=[],
     )
     _patch_imports(outfile)
+
+
+def _format_generated(outfiles):
+    # type: (list[pathlib.Path]) -> None
+    """Format generated files with black using project settings."""
+    subprocess.run(
+        [sys.executable, "-m", "black", "--quiet"] + [str(f) for f in outfiles],
+        check=True,
+    )
 
 
 def build():
     # type: () -> None
     build_schema()
     build_apis()
+    _format_generated([CODE / "schema.py", CODE / "generator.py"])
 
 
 if __name__ == "__main__":

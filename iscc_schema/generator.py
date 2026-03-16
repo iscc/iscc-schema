@@ -2,13 +2,11 @@
 #   filename:  iscc-generator.yaml
 
 from __future__ import annotations
-
-from enum import Enum
-from typing import Any
-
 from pydantic import AwareDatetime, Base64Str, Field, RootModel
 from iscc_schema.fields import AnyUrl
 from iscc_schema.base import BaseModel
+from enum import Enum
+from typing import Any
 
 
 class MediaUpload(BaseModel):
