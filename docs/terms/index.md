@@ -1,3 +1,9 @@
+---
+icon: lucide/book-open
+title: Vocabulary
+description: ISCC metadata vocabulary terms with JSON-LD context mappings.
+---
+
 # ISCC Terms
 
 ## Mapped Terms

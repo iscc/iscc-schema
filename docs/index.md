@@ -1,9 +1,16 @@
-# **ISCC** - Schema
+---
+icon: lucide/house
+description: ISCC JSON-LD Metadata and OpenAPI Service Descriptions.
+---
 
-*ISCC - JSON-LD Metadata and OpenAPI Service Descriptions*
+# iscc-schema
 
-[![Build](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml)
-[![Version](https://img.shields.io/pypi/v/iscc-schema.svg)](https://pypi.python.org/pypi/iscc-schema/)
+[![Tests](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml)
+[![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/iscc/iscc-schema)
+
+**JSON-LD Metadata and OpenAPI Service Descriptions for the International Standard Content Code.**
 
 ## Introduction
 

@@ -25,23 +25,51 @@ CHANGELOG_DST = join(HERE, "../docs/changelog.md")
 # TODO add logging to tool actions
 
 
+INDEX_FRONTMATTER = """\
+---
+icon: lucide/house
+description: ISCC JSON-LD Metadata and OpenAPI Service Descriptions.
+---
+
+"""
+
+CHANGELOG_FRONTMATTER = """\
+---
+icon: lucide/history
+description: Release notes and version history for iscc-schema.
+---
+
+"""
+
+
 def copy_root_files():
-    """Copy README and CHANGELOG to documentation"""
+    """Copy README and CHANGELOG to documentation with frontmatter."""
     with open(SRC, "rt", encoding="utf-8") as infile:
         text = infile.read()
 
+    # Replace README heading with site-name-matching heading for docs
+    text = text.replace("# **ISCC** - Schema", "# iscc-schema", 1)
+
     with open(DST, "wt", encoding="utf-8", newline="\n") as outf:
-        outf.write(text)
+        outf.write(INDEX_FRONTMATTER + text)
 
     with open(CHANGELOG_SRC, "rt", encoding="utf-8") as infile:
         text = infile.read()
 
     with open(CHANGELOG_DST, "wt", encoding="utf-8", newline="\n") as outf:
-        outf.write(text)
+        outf.write(CHANGELOG_FRONTMATTER + text)
 
 
 SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml"]
 SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml"]
+
+# Icons and short nav titles for standalone schema pages
+STANDALONE_META = {
+    "isbn": {"icon": "lucide/book-text", "title": "ISBN Seed"},
+    "isrc": {"icon": "lucide/music", "title": "ISRC Seed"},
+    "tdm": {"icon": "lucide/pickaxe", "title": "TDM Service"},
+    "genai": {"icon": "lucide/sparkles", "title": "GenAI Service"},
+}
 
 
 def _render_schema_sections(schemata):
@@ -102,7 +130,8 @@ def build_json_schema_docs():
         "iscc-crypto.yaml",
         "iscc-declaration.yaml",
     ]
-    content = "# JSON Schema for ISCC Metadata\n\n"
+    content = "---\nicon: lucide/braces\ntitle: ISCC Metadata\ndescription: Complete field reference for ISCC Metadata JSON Schema.\n---\n\n"
+    content += "# ISCC Metadata\n\n"
     content += _render_schema_sections(iscc_schemata)
 
     with open(MARKDOWN_SCHEMA, "wt", encoding="utf-8", newline="\n") as outf:
@@ -118,7 +147,15 @@ def _build_standalone_doc(schema_file, category, extra_text=""):
 
     name = schema_file.replace(".yaml", "")
     title = data["title"]
-    content = f"# {title} {category}\n\n"
+    meta = STANDALONE_META.get(name, {})
+    frontmatter = "---\n"
+    if meta.get("icon"):
+        frontmatter += f"icon: {meta['icon']}\n"
+    if meta.get("title"):
+        frontmatter += f"title: {meta['title']}\n"
+    frontmatter += f"description: {title} {category.lower()}.\n---\n\n"
+    content = frontmatter
+    content += f"# {title} {category}\n\n"
     content += f"{data['description']}"
     if extra_text:
         content += f" {extra_text}"
@@ -210,7 +247,8 @@ def build_json_ld_context_docs():
         "iscc-crypto.yaml",
         "iscc-declaration.yaml",
     ]
-    doc = "# **ISCC** - Metadata Vocabulary\n\n"
+    doc = "---\nicon: lucide/book-open\ntitle: Vocabulary\ndescription: ISCC Metadata Vocabulary with JSON-LD context mappings.\n---\n\n"
+    doc += "# ISCC Metadata Vocabulary\n\n"
     doc += _render_context_terms(iscc_schemata)
     doc += "\n---\n\n"
     doc += "# Seed Metadata Vocabulary\n\n"
@@ -226,7 +264,8 @@ def build_json_ld_context_docs():
 def build_schema_index():
     # type: () -> None
     """Build the schema section landing page with links to all schema pages."""
-    content = "# Schema Documentation\n\n"
+    content = "---\nicon: lucide/file-json\ntitle: Overview\ndescription: Schema definitions for the ISCC.\n---\n\n"
+    content += "# Schema Documentation\n\n"
     content += "Schema definitions for the International Standard Content Code (ISCC).\n\n"
     content += "## ISCC Metadata\n\n"
     content += "- [**ISCC Metadata**](iscc.md) — "

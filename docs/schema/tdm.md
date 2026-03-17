@@ -1,3 +1,9 @@
+---
+icon: lucide/pickaxe
+title: TDM Service
+description: TDM service metadata.
+---
+
 # TDM Service Metadata
 
 Machine-readable TDM reservation signals for AI-related content usage categories. A 'reserved' status indicates an explicit opt-out from TDM exceptions (e.g., EU DSM Directive Art. 4). An 'open' status indicates that no rights are reserved. Omitted fields indicate that the reservation status has not been determined. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.

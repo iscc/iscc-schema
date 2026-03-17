@@ -1,6 +1,16 @@
 ## Changelog
 
 ### [0.5.0] - 2026-03-17
+- Migrated documentation from mkdocs-material to zensical
+- Added ISCC brand theming (header, footer, dark mode, logo)
+- Added copy-page button for LLM-friendly markdown export
+- Added ISCC-AI copilot widget integration
+- Added llms.txt and per-page markdown generation for LLM consumption
+- Added "For Coding Agents" reference page
+- Added GitHub Pages deployment workflow
+- Added navigation icons and short titles to all doc pages
+- Added Open Graph and Twitter Card meta tags
+- Added Plausible analytics via theme override
 - Added `x-iscc-status` (stable/draft) to all fields across YAML schemas
 - Rendered `x-iscc-status` in generated schema docs, vocabulary page, and terms includes
 - Added `datasize` field for data processed size when ISCC is computed over sub-file data (e.g., bioimage planes)

@@ -1,3 +1,9 @@
+---
+icon: lucide/code
+title: Examples
+description: Sample ISCC metadata for different use cases including NFTs and Verifiable Credentials.
+---
+
 # Examples of ISCC Metadata
 
 A collection of samples how you can use ISCC Metadata for different use cases.

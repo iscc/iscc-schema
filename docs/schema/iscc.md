@@ -1,4 +1,10 @@
-# JSON Schema for ISCC Metadata
+---
+icon: lucide/braces
+title: ISCC Metadata
+description: Complete field reference for ISCC Metadata JSON Schema.
+---
+
+# ISCC Metadata
 
 ## iscc-jsonld
 The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-schema.org/) reference

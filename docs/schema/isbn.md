@@ -1,3 +1,9 @@
+---
+icon: lucide/book-text
+title: ISBN Seed
+description: ISBN seed metadata.
+---
+
 # ISBN Seed Metadata
 
 ISBN Seed Metadata for interoperable Meta-Code generation. See [IEP-0002](https://github.com/iscc/iscc-ieps/blob/main/ieps/iep-0002.md) for details on Meta-Code generation.

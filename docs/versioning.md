@@ -1,3 +1,9 @@
+---
+icon: lucide/git-branch
+title: Versioning
+description: Schema versioning strategy, URL patterns, and compatibility guarantees.
+---
+
 # Schema Versioning
 
 ## Version Numbers

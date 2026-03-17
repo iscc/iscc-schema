@@ -1,3 +1,9 @@
+---
+icon: lucide/file-json
+title: Overview
+description: Schema definitions for the ISCC.
+---
+
 # Schema Documentation
 
 Schema definitions for the International Standard Content Code (ISCC).

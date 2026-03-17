@@ -1,3 +1,9 @@
+---
+icon: lucide/sparkles
+title: GenAI Service
+description: GenAI service metadata.
+---
+
 # GenAI Service Metadata
 
 Machine-readable generative AI disclosure signals for content transparency. Designed for AI providers to declare the level of AI involvement in content creation, supporting compliance with transparency regulations (e.g., EU AI Act Art. 50) and enabling end users to verify AI-generated content. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.

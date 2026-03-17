@@ -1,4 +1,10 @@
-# **ISCC** - Metadata Vocabulary
+---
+icon: lucide/book-open
+title: Vocabulary
+description: ISCC Metadata Vocabulary with JSON-LD context mappings.
+---
+
+# ISCC Metadata Vocabulary
 
 ## iscc
 

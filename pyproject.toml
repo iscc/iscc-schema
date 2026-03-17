@@ -41,7 +41,7 @@ dev = [
     "datamodel-code-generator",
     "poethepoet",
     "black",
-    "mkdocs-material>=9.0",
+    "zensical>=0.0.21",
     "PyLD",
     "requests",
 ]
@@ -63,6 +63,12 @@ buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate 
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
 test = { cmd = "pytest", help = "Run tests"}
 all = ["fromatyaml", "buildcode", "buildterms", "buildcontext", "buildschema", "formatcode", "builddocs", "test"]
+docs-serve = { cmd = "zensical serve", help = "Serve documentation locally" }
+docs-build.sequence = [
+    { cmd = "zensical build" },
+    { cmd = "python scripts/gen_llms_full.py" },
+]
+docs-build.help = "Build documentation site"
 
 [build-system]
 requires = ["hatchling"]
