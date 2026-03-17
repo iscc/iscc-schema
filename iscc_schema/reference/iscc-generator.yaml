@@ -22,7 +22,7 @@ info:
   contact:
     name: ISCC Foundation
   x-logo:
-    url: https://schema.iscc.codes/images/iscc-logo-blue.png
+    url: https://schema.iscc.codes/assets/iscc-logo-blue.png
 servers:
 - url: http://localhost:8000
   description: develop
