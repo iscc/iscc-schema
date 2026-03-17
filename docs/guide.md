@@ -25,19 +25,26 @@ The `iscc-schema` package is the canonical source for these definitions. From YA
 
 ## JSON Schema and JSON-LD
 
-ISCC metadata uses two complementary standards:
+ISCC metadata uses two complementary standards that serve different needs:
 
-**JSON Schema** answers: *"Is this metadata well-formed?"*
-It defines which fields exist, their types, constraints, and defaults. Any JSON Schema validator
-in any programming language can check whether a metadata object conforms to the ISCC specification.
+**JSON Schema** is the primary interface for most developers. It defines field types, constraints,
+and defaults for validation — but it also carries human-readable field descriptions, examples, and
+documentation inline. This makes it self-documenting: a developer (or an AI agent) can read the
+schema and understand every field without consulting external resources.
 
-**JSON-LD Context** answers: *"What does each field mean globally?"*
-It maps compact field names like `name` or `creator` to full semantic URIs (e.g.,
-`http://schema.org/name`), so ISCC metadata can participate in the Linked Data web.
+**JSON-LD Context** maps compact field names like `name` or `creator` to global semantic URIs
+(e.g., `http://schema.org/name`), enabling ISCC metadata to participate in the Linked Data web.
+This is valuable for semantic interoperability across systems, though it requires dereferencing
+URIs to access human-readable descriptions.
 
 Both are generated from the same YAML source definitions, so they are always in sync. Since v0.5.0,
-JSON Schema files embed the JSON-LD context directly. One file provides both validation rules
-and semantic mappings.
+JSON Schema files embed the JSON-LD context directly - one file provides validation rules, inline
+documentation, and semantic mappings.
+
+For most use cases, plain JSON with a `$schema` reference is all you need. The schema handles
+validation and documentation. When semantic interoperability matters, the embedded JSON-LD context
+is always available - either carried in the data directly, or recovered from the schema on demand
+(see [Schema-Driven Context Recovery](#schema-driven-context-recovery) below).
 
 ## Schema-Driven Context Recovery
 
