@@ -9,6 +9,7 @@ properties:
     default: http://purl.org/iscc/context
     description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
     readOnly: true
+    x-iscc-standard: ISO 24138:2024
   '@type':
     type: string
     readOnly: true
@@ -21,6 +22,7 @@ properties:
     - VideoObject
     description: The type of digital content according to schema.org classes (TextDigitalDocument,
       ImageObject, AudioObject, VideoObject).
+    x-iscc-standard: ISO 24138:2024
   $schema:
     type: string
     format: uri
@@ -28,3 +30,4 @@ properties:
     description: The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.
     readOnly: true
     x-iscc-context: http://purl.org/iscc/terms/#$schema
+    x-iscc-standard: ISO 24138:2024

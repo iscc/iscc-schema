@@ -45,6 +45,8 @@ def build_terms_schema():
             doc += f"    **Comment**:  {data['description']}\n\n"
             if data.get("x-iscc-embed"):
                 doc += f"    **Embedding**:  {data['x-iscc-embed']}\n\n"
+            if data.get("x-iscc-standard"):
+                doc += f"    **Standard**:  {data['x-iscc-standard']}\n\n"
 
     with open(MARKDOWN_TERMS_SCHEMA, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(doc)
@@ -58,6 +60,8 @@ def build_terms_iscc():
         doc += f"### **{term}**\n\n"
         doc += f'!!! term "<small><{data["x-iscc-context"]}></small>"\n\n'
         doc += f"    {data['description']}\n\n"
+        if data.get("x-iscc-standard"):
+            doc += f"    **Standard**:  {data['x-iscc-standard']}\n\n"
 
     with open(MARKDOWN_TERMS_ISCC, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(doc)

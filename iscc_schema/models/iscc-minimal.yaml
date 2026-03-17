@@ -17,3 +17,4 @@ properties:
     pattern: ^ISCC:[A-Z2-7]{10,73}$
     x-iscc-context: http://purl.org/iscc/terms/#iscc
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024

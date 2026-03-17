@@ -13,7 +13,8 @@
       "format": "uri",
       "default": "http://purl.org/iscc/context/0.5.0.jsonld",
       "description": "The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
-      "readOnly": true
+      "readOnly": true,
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "@type": {
       "type": "string",
@@ -26,7 +27,8 @@
         "AudioObject",
         "VideoObject"
       ],
-      "description": "The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject)."
+      "description": "The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "$schema": {
       "type": "string",
@@ -34,7 +36,8 @@
       "default": "http://purl.org/iscc/schema/0.5.0.json",
       "description": "The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
       "readOnly": true,
-      "x-iscc-context": "http://purl.org/iscc/terms/#$schema"
+      "x-iscc-context": "http://purl.org/iscc/terms/#$schema",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "iscc": {
       "type": "string",
@@ -44,7 +47,8 @@
       "maxLength": 73,
       "pattern": "^ISCC:[A-Z2-7]{10,73}$",
       "x-iscc-context": "http://purl.org/iscc/terms/#iscc",
-      "x-iscc-status": "stable"
+      "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "iscc_id": {
       "type": "string",
@@ -75,7 +79,8 @@
       "x-iscc-context": "http://schema.org/name",
       "x-iscc-schema-doc": "The name of the item.",
       "x-iscc-embed": "Use `Iptc.Application2.Headline` and `Xmp.photoshop.Headline` for image embedding",
-      "x-iscc-status": "stable"
+      "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "description": {
       "type": "string",
@@ -86,7 +91,8 @@
       "x-iscc-context": "http://schema.org/disambiguatingDescription",
       "x-iscc-schema-doc": "A sub property of description. A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
       "x-iscc-embed": "Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description` for image embedding.",
-      "x-iscc-status": "stable"
+      "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "meta": {
       "type": "string",
@@ -94,7 +100,8 @@
       "example": "data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=",
       "description": "Subject, industry, or use-case specific metadata encoded as Data-URL.",
       "x-iscc-context": "http://purl.org/iscc/terms/#meta",
-      "x-iscc-status": "stable"
+      "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "mode": {
       "type": "string",
@@ -236,7 +243,8 @@
         }
       ],
       "x-iscc-context": "http://schema.org/identifier",
-      "x-iscc-schema-doc": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details."
+      "x-iscc-schema-doc": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details.",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "content": {
       "description": "URI of the *digital content* that was used to create this ISCC.",
@@ -261,7 +269,8 @@
       ],
       "description": "Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.",
       "x-iscc-context": "http://schema.org/keywords",
-      "x-iscc-schema-doc": "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas."
+      "x-iscc-schema-doc": "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "redirect": {
       "type": "string",
@@ -298,7 +307,8 @@
       "readOnly": true,
       "description": "Filename of the referenced **digital content** (automatically used as fallback if the `name` field was not specified for ISCC processing)",
       "x-iscc-context": "http://purl.org/iscc/terms/#filename",
-      "x-iscc-status": "stable"
+      "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "filesize": {
       "type": "integer",
@@ -306,7 +316,8 @@
       "description": "File size of media asset in number of bytes.",
       "x-iscc-context": "http://schema.org/fileSize",
       "x-iscc-schema-doc": "Size of the application / package (e.g. 18MB). In the absence of a unit (MB, KB etc.), KB will be assumed.",
-      "x-iscc-status": "stable"
+      "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "mediatype": {
       "type": "string",
@@ -314,6 +325,7 @@
       "description": "An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)",
       "example": "image/png",
       "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024",
       "x-iscc-context": "http://schema.org/encodingFormat",
       "x-iscc-schema-doc": "Media type typically expressed using a MIME format (see IANA site and MDN reference) e.g. application/zip for a SoftwareApplication binary, audio/mpeg for .mp3 etc.). In cases where a CreativeWork has several media type representations, encoding can be used to indicate each MediaObject alongside particular encodingFormat information. Unregistered or niche encoding and file formats can be indicated instead via the most appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry."
     },
@@ -322,6 +334,7 @@
       "readOnly": true,
       "description": "Duration of audio-visual media in seconds.",
       "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024",
       "x-iscc-context": "http://schema.org/duration",
       "x-iscc-schema-doc": "The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 date format](https://en.wikipedia.org/wiki/ISO_8601)."
     },
@@ -332,6 +345,7 @@
       "format": "float",
       "example": 24,
       "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024",
       "x-iscc-context": "http://purl.org/iscc/terms/#fps",
       "minimum": 1
     },
@@ -342,6 +356,7 @@
       "format": "int32",
       "example": 640,
       "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024",
       "x-iscc-context": "http://purl.org/iscc/terms/#width"
     },
     "height": {
@@ -352,6 +367,7 @@
       "example": 480,
       "minimum": 1,
       "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024",
       "x-iscc-context": "http://purl.org/iscc/terms/#height"
     },
     "characters": {
@@ -360,6 +376,7 @@
       "description": "Number of text characters (code points after Unicode normalization)",
       "example": 55689,
       "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024",
       "x-iscc-context": "http://purl.org/iscc/terms/#characters"
     },
     "pages": {
@@ -387,6 +404,7 @@
         }
       ],
       "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024",
       "x-iscc-context": "http://schema.org/inLanguage",
       "x-iscc-schema-doc": "The language of the content or performance or used in an action. Please use one of the language codes from the [IETF BCP 47 standard](https://www.rfc-editor.org/info/bcp47). See also [availableLanguage](https://schema.org/availableLanguage)."
     },
@@ -521,7 +539,8 @@
       "minLength": 40,
       "example": "bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja",
       "description": "A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).",
-      "x-iscc-context": "http://purl.org/iscc/terms/#tophash"
+      "x-iscc-context": "http://purl.org/iscc/terms/#tophash",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "metahash": {
       "type": "string",
@@ -529,7 +548,8 @@
       "example": "f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9",
       "readOnly": true,
       "description": "A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of the supplied metadata. The hash is created from `name` and `description` fields or `meta` if supplied.",
-      "x-iscc-context": "http://purl.org/iscc/terms/#metahash"
+      "x-iscc-context": "http://purl.org/iscc/terms/#metahash",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "datahash": {
       "type": "string",
@@ -537,7 +557,8 @@
       "example": "bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
       "readOnly": true,
       "description": "A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).",
-      "x-iscc-context": "http://purl.org/iscc/terms/#datahash"
+      "x-iscc-context": "http://purl.org/iscc/terms/#datahash",
+      "x-iscc-standard": "ISO 24138:2024"
     },
     "nonce": {
       "type": "string",
@@ -615,7 +636,8 @@
       "example": "https://picsum.photos/200/300.jpg",
       "x-iscc-context": "http://schema.org/thumbnailUrl",
       "x-iscc-schema-doc": "A thumbnail image relevant to the Thing.",
-      "x-iscc-status": "stable"
+      "x-iscc-status": "stable",
+      "x-iscc-standard": "ISO 24138:2024"
     }
   }
 }

@@ -58,6 +58,7 @@ properties:
       of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
       for representing many of these, either as textual strings or as URL (URI) links. See
       background notes for more details.
+    x-iscc-standard: ISO 24138:2024
   content:
     description: URI of the *digital content* that was used to create this ISCC.
     type: string
@@ -76,6 +77,7 @@ properties:
     x-iscc-context: http://schema.org/keywords
     x-iscc-schema-doc: Keywords or tags used to describe this content. Multiple entries in
       a keywords list are typically delimited by commas.
+    x-iscc-standard: ISO 24138:2024
   previous:
     description: ISCC of the preceding version of this item.
     type: string

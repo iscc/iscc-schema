@@ -1,6 +1,8 @@
 ## Changelog
 
 ### [0.5.0] - 2026-03-16
+- Added `x-iscc-standard` extension field to mark ISO 24138:2024 properties in YAML schemas
+- Surfaced ISO 24138:2024 annotations in generated schema docs, vocabulary page, and terms includes
 - Added `iscc_code` field as explicit alternative to the compact `iscc` field
 - Added `nonce` field for cryptographic replay protection
 - Added `signature` field to IsccMeta for iscc-crypto compatibility (EdDSA/JCS signing)

@@ -21,6 +21,7 @@ properties:
     x-iscc-embed: Use `Iptc.Application2.Headline` and `Xmp.photoshop.Headline` for image
       embedding
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
   description:
     type: string
     example: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
@@ -36,6 +37,7 @@ properties:
     x-iscc-embed: Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description`
       for image embedding.
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
   meta:
     type: string
     maxLength: 16384
@@ -43,3 +45,4 @@ properties:
     description: Subject, industry, or use-case specific metadata encoded as Data-URL.
     x-iscc-context: http://purl.org/iscc/terms/#meta
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024

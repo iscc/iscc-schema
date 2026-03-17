@@ -4,11 +4,15 @@
 
     An **ISCC-CODE** in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.
 
+    **Standard**:  ISO 24138:2024
+
 ### **meta**
 
 !!! term "<small><http://purl.org/iscc/terms/#meta></small>"
 
     Subject, industry, or use-case specific metadata encoded as Data-URL.
+
+    **Standard**:  ISO 24138:2024
 
 ### **media_id**
 
@@ -46,11 +50,15 @@
 
     Filename of the referenced **digital content** (automatically used as fallback if the `name` field was not specified for ISCC processing)
 
+    **Standard**:  ISO 24138:2024
+
 ### **fps**
 
 !!! term "<small><http://purl.org/iscc/terms/#fps></small>"
 
     Frames per second of video assets.
+
+    **Standard**:  ISO 24138:2024
 
 ### **width**
 
@@ -58,17 +66,23 @@
 
     Width of visual media in number of pixels.
 
+    **Standard**:  ISO 24138:2024
+
 ### **height**
 
 !!! term "<small><http://purl.org/iscc/terms/#height></small>"
 
     Height of visual media in number of pixels.
 
+    **Standard**:  ISO 24138:2024
+
 ### **characters**
 
 !!! term "<small><http://purl.org/iscc/terms/#characters></small>"
 
     Number of text characters (code points after Unicode normalization)
+
+    **Standard**:  ISO 24138:2024
 
 ### **parts**
 
@@ -142,17 +156,23 @@
 
     A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).
 
+    **Standard**:  ISO 24138:2024
+
 ### **metahash**
 
 !!! term "<small><http://purl.org/iscc/terms/#metahash></small>"
 
     A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of the supplied metadata. The hash is created from `name` and `description` fields or `meta` if supplied.
 
+    **Standard**:  ISO 24138:2024
+
 ### **datahash**
 
 !!! term "<small><http://purl.org/iscc/terms/#datahash></small>"
 
     A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).
+
+    **Standard**:  ISO 24138:2024
 
 ### **nonce**
 

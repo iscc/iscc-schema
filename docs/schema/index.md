@@ -3,12 +3,14 @@
 ## iscc-jsonld
 The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-schema.org/) reference
 ### **@context**
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | @context | `string-uri` | http://purl.org/iscc/context | The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.         |
 
 ### **@type**
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -16,6 +18,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 
 ### **$schema**
 <http://purl.org/iscc/terms/#$schema>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -36,6 +39,7 @@ Minimal required ISCC Metadata
     ```
 ### **iscc**
 <http://purl.org/iscc/terms/#iscc>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -58,6 +62,7 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
     ```
 ### **name**
 <http://schema.org/name>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -65,6 +70,7 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 
 ### **description**
 <http://schema.org/disambiguatingDescription>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -72,6 +78,7 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 
 ### **meta**
 <http://purl.org/iscc/terms/#meta>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -165,6 +172,7 @@ Extended ISCC Metadata
 
 ### **identifier**
 <http://schema.org/identifier>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -179,6 +187,7 @@ Extended ISCC Metadata
 
 ### **keywords**
 <http://schema.org/keywords>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -236,6 +245,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **filename**
 <http://purl.org/iscc/terms/#filename>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -243,6 +253,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **filesize**
 <http://schema.org/fileSize>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -250,6 +261,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **mediatype**
 <http://schema.org/encodingFormat>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -257,6 +269,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **duration**
 <http://schema.org/duration>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -264,6 +277,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **fps**
 <http://purl.org/iscc/terms/#fps>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -271,6 +285,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **width**
 <http://purl.org/iscc/terms/#width>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -278,6 +293,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **height**
 <http://purl.org/iscc/terms/#height>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -285,6 +301,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **characters**
 <http://purl.org/iscc/terms/#characters>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -299,6 +316,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **language**
 <http://schema.org/inLanguage>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -348,6 +366,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **thumbnail**
 <http://schema.org/thumbnailUrl>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -394,6 +413,7 @@ Metadata for NFT Marketplaces
 Cryptography related ISCC Metadata
 ### **tophash**
 <http://purl.org/iscc/terms/#tophash>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -401,6 +421,7 @@ Cryptography related ISCC Metadata
 
 ### **metahash**
 <http://purl.org/iscc/terms/#metahash>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -408,6 +429,7 @@ Cryptography related ISCC Metadata
 
 ### **datahash**
 <http://purl.org/iscc/terms/#datahash>
+<small>ISO 24138:2024</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|

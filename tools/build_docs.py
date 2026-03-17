@@ -77,6 +77,8 @@ def build_json_schema_docs():
             title = f"**{prop}**\n"
             if attrs.get("x-iscc-context"):
                 title += f"<{attrs.get('x-iscc-context')}>\n"
+            if attrs.get("x-iscc-standard"):
+                title += f"<small>{attrs.get('x-iscc-standard')}</small>\n"
             description = attrs.get("description")
             if attrs.get("example"):
                 description += f"<br><br>**Example**: `{attrs['example']}`"
@@ -114,6 +116,8 @@ def build_json_ld_context_docs():
             if fields.get("x-iscc-context"):
                 doc += f"## {prop}\n\n"
                 doc += f"<small><{fields.get('x-iscc-context')}></small>\n"
+                if fields.get("x-iscc-standard"):
+                    doc += f"<small>{fields.get('x-iscc-standard')}</small>\n"
                 doc += '!!! term ""\n'
                 doc += f"    {fields['description']}\n\n"
 

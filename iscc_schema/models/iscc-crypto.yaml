@@ -10,6 +10,7 @@ properties:
     description: A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding)
       of metahash and datahash (default blake3).
     x-iscc-context: http://purl.org/iscc/terms/#tophash
+    x-iscc-standard: ISO 24138:2024
   metahash:
     type: string
     minLength: 40
@@ -19,6 +20,7 @@ properties:
       supplied metadata. The hash is created from `name` and `description` fields or `meta`
       if supplied.
     x-iscc-context: http://purl.org/iscc/terms/#metahash
+    x-iscc-standard: ISO 24138:2024
   datahash:
     type: string
     minLength: 40
@@ -27,6 +29,7 @@ properties:
     description: A [Multihash](https://multiformats.io/multihash/) of the *digital content*
       (default blake3).
     x-iscc-context: http://purl.org/iscc/terms/#datahash
+    x-iscc-standard: ISO 24138:2024
   nonce:
     type: string
     description: Cryptographic nonce for replay protection. A 128-bit random value encoded

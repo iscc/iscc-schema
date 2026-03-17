@@ -43,6 +43,7 @@ properties:
       if the `name` field was not specified for ISCC processing)
     x-iscc-context: http://purl.org/iscc/terms/#filename
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
   filesize:
     type: integer
     readOnly: true
@@ -51,6 +52,7 @@ properties:
     x-iscc-schema-doc: Size of the application / package (e.g. 18MB). In the absence of a
       unit (MB, KB etc.), KB will be assumed.
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
   mediatype:
     type: string
     readOnly: true
@@ -58,6 +60,7 @@ properties:
       (MIME type)
     example: image/png
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://schema.org/encodingFormat
     x-iscc-schema-doc: Media type typically expressed using a MIME format (see IANA site and
       MDN reference) e.g. application/zip for a SoftwareApplication binary, audio/mpeg for
@@ -70,6 +73,7 @@ properties:
     readOnly: true
     description: Duration of audio-visual media in seconds.
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://schema.org/duration
     x-iscc-schema-doc: The duration of the item (movie, audio recording, event, etc.) in [ISO
       8601 date format](https://en.wikipedia.org/wiki/ISO_8601).
@@ -80,6 +84,7 @@ properties:
     format: float
     example: 24
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://purl.org/iscc/terms/#fps
     minimum: 1
   width:
@@ -89,6 +94,7 @@ properties:
     format: int32
     example: 640
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://purl.org/iscc/terms/#width
   height:
     readOnly: true
@@ -98,6 +104,7 @@ properties:
     example: 480
     minimum: 1
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://purl.org/iscc/terms/#height
   characters:
     readOnly: true
@@ -105,6 +112,7 @@ properties:
     description: Number of text characters (code points after Unicode normalization)
     example: 55689
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://purl.org/iscc/terms/#characters
   pages:
     readOnly: true
@@ -122,6 +130,7 @@ properties:
       items:
       - type: string
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://schema.org/inLanguage
     x-iscc-schema-doc: The language of the content or performance or used in an action. Please
       use one of the language codes from the [IETF BCP 47 standard](https://www.rfc-editor.org/info/bcp47).
@@ -174,3 +183,4 @@ properties:
     x-iscc-context: http://schema.org/thumbnailUrl
     x-iscc-schema-doc: A thumbnail image relevant to the Thing.
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
