@@ -42,14 +42,14 @@ def test_iscc_json_context_matches_jsonld():
 
 
 def test_standalone_schemas_have_context():
-    for name in ("isbn.json", "isrc.json", "tdm.json"):
+    for name in ("isbn.json", "isrc.json", "tdm.json", "genai.json"):
         schema = _load_json(name)
         assert "@context" in schema, f"{name} missing @context"
         assert isinstance(schema["@context"], dict), f"{name} @context not a dict"
 
 
 def test_standalone_context_terms_match_properties():
-    for yaml_name in ("isbn.yaml", "isrc.yaml", "tdm.yaml"):
+    for yaml_name in ("isbn.yaml", "isrc.yaml", "tdm.yaml", "genai.yaml"):
         with open(MODELS / yaml_name, encoding="utf-8") as f:
             yaml_schema = yaml.safe_load(f)
         json_name = yaml_name.replace(".yaml", ".json")

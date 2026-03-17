@@ -6,7 +6,7 @@ import re
 import subprocess
 import sys
 import pathlib
-from datamodel_code_generator import Formatter, InputFileType, generate, OpenAPIScope, PythonVersion
+from datamodel_code_generator import InputFileType, generate, OpenAPIScope, PythonVersion
 
 ROOT = pathlib.Path(__file__).parent.parent
 CODE = ROOT / "iscc_schema"
