@@ -1,6 +1,7 @@
 ## Changelog
 
 ### [0.5.0] - 2026-03-17
+- Added `form` field for content-kind classification using Schema.org CreativeWork subtypes
 - Pydantic models now emit versioned `$schema` and `@context` URLs (e.g., `http://purl.org/iscc/schema/0.5.0.json`)
 - Standalone schema models (ISBN, ISRC, TDM) now emit versioned `@context` URLs
 - Added versioning documentation page

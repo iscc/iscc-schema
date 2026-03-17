@@ -34,13 +34,15 @@ def build_context():
         }
     }
     ctx = context["@context"]
-    for prop, fields in iscc_schema.IsccMeta.model_json_schema()["properties"].items():
+    schema = iscc_schema.IsccMeta.model_json_schema()
+    for prop, fields in schema["properties"].items():
         if "x-iscc-context" in fields and prop != "iscc":
             iri = fields["x-iscc-context"]
             if _is_uri_field(fields):
                 ctx[prop] = {"@id": iri, "@type": "@id"}
             else:
                 ctx[prop] = iri
+    _add_enum_iri_mappings(ctx, schema)
     for seed_path in SEED_SCHEMAS:
         _add_schema_terms(ctx, seed_path)
     for service_path in SERVICE_SCHEMAS:
@@ -71,6 +73,15 @@ def _is_uri_field(field_schema):
         if variant.get("format") == "uri":
             return True
     return False
+
+
+def _add_enum_iri_mappings(ctx, schema):
+    # type: (dict, dict) -> None
+    """Add IRI mappings for form enum values so they resolve to Schema.org IRIs."""
+    form_def = schema.get("$defs", {}).get("Form", {})
+    for value in form_def.get("enum", []):
+        if value not in ctx:
+            ctx[value] = f"http://schema.org/{value}"
 
 
 def build_latest():

@@ -321,6 +321,35 @@ class IsccTechnical(BaseModel):
     )
 
 
+class Form(Enum):
+    """
+    The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.
+    """
+
+    Article = "Article"
+    Audiobook = "Audiobook"
+    Book = "Book"
+    CoverArt = "CoverArt"
+    CreativeWork = "CreativeWork"
+    Dataset = "Dataset"
+    DigitalDocument = "DigitalDocument"
+    Episode = "Episode"
+    Movie = "Movie"
+    MusicComposition = "MusicComposition"
+    MusicRecording = "MusicRecording"
+    NewsArticle = "NewsArticle"
+    Painting = "Painting"
+    Periodical = "Periodical"
+    Photograph = "Photograph"
+    PresentationDigitalDocument = "PresentationDigitalDocument"
+    ScholarlyArticle = "ScholarlyArticle"
+    SoftwareApplication = "SoftwareApplication"
+    SoftwareSourceCode = "SoftwareSourceCode"
+    SpreadsheetDigitalDocument = "SpreadsheetDigitalDocument"
+    VisualArtwork = "VisualArtwork"
+    WebPage = "WebPage"
+
+
 class IsccExtended(BaseModel):
     """
     Extended ISCC Metadata
@@ -375,6 +404,12 @@ class IsccExtended(BaseModel):
         None,
         description="ISCC of the preceding version of this item.",
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#previous"},
+    )
+    form: Form | None = Field(
+        None,
+        description="The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.",
+        examples=["ScholarlyArticle"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/additionalType"},
     )
     version: int | str | None = Field(
         None,

@@ -108,6 +108,7 @@ def flatten_schemas():
         "description",
         "meta",
         "mode",
+        "form",
         "creator",
         "license",
         "acquire",

@@ -98,6 +98,33 @@ def test_identifier_list():
     }
 
 
+def test_form_field():
+    """Test that form field accepts valid Schema.org CreativeWork subtypes."""
+    meta = iss.IsccMeta(form="ScholarlyArticle")
+    assert meta.form == "ScholarlyArticle"
+
+
+def test_form_field_optional():
+    """Test that form field is optional and absent by default."""
+    meta = iss.IsccMeta()
+    data = meta.dict()
+    assert "form" not in data
+
+
+def test_form_field_enum_validation():
+    """Test that form field rejects invalid values."""
+    with pytest.raises(ValidationError):
+        iss.IsccMeta(form="InvalidType")
+
+
+def test_form_with_type():
+    """Test form alongside @type — both can coexist."""
+    meta = iss.IsccMeta(type_="TextDigitalDocument", form="ScholarlyArticle")
+    data = meta.dict()
+    assert data["@type"] == "TextDigitalDocument"
+    assert data["form"] == "ScholarlyArticle"
+
+
 def test_forbid_extra_fields():
     with pytest.raises(ValidationError):
         iss.IsccMeta(

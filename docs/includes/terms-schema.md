@@ -108,6 +108,14 @@
 
     **Standard**:  ISO 24138:2024
 
+### **form**
+
+!!! term "<small><http://schema.org/additionalType></small>"
+
+    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in.
+
+    **Comment**:  The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.
+
 ### **version**
 
 !!! term "<small><http://schema.org/version></small>"

@@ -82,6 +82,41 @@ properties:
     description: ISCC of the preceding version of this item.
     type: string
     x-iscc-context: http://purl.org/iscc/terms/#previous
+  form:
+    type: string
+    description: The form or kind of content identified, using a Schema.org CreativeWork subtype.
+      While `@type` provides a coarse modality classification (text, image, audio, video)
+      and `mode`/`mediatype` describe technical aspects, `form` captures what the content
+      *is* — a book, scholarly article, presentation, report, photograph, etc.
+    enum:
+    - Article
+    - Audiobook
+    - Book
+    - CoverArt
+    - CreativeWork
+    - Dataset
+    - DigitalDocument
+    - Episode
+    - Movie
+    - MusicComposition
+    - MusicRecording
+    - NewsArticle
+    - Painting
+    - Periodical
+    - Photograph
+    - PresentationDigitalDocument
+    - ScholarlyArticle
+    - SoftwareApplication
+    - SoftwareSourceCode
+    - SpreadsheetDigitalDocument
+    - VisualArtwork
+    - WebPage
+    example: ScholarlyArticle
+    x-iscc-context: http://schema.org/additionalType
+    x-iscc-schema-doc: An additional type for the item, typically used for adding more specific
+      types from external vocabularies in microdata syntax. This is a relationship between
+      something and a class that the thing is in.
+    x-iscc-status: draft
   version:
     description: The version of the CreativeWork embodied by a specified resource.
     type:
@@ -94,11 +129,12 @@ examples:
   '@type': TextDigitalDocument
   $schema: http://purl.org/iscc/schema
   iscc: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
-  name: The Never Ending Story
-  description: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
+  name: The Neverending Story
+  description: a 1979 fantasy novel by German writer *Michael Ende*
+  form: Book
   image: https://picsum.photos/200/300.jpg
   content: https://example.com/the-asset.epub
   identifier: urn:isbn:3-8273-7019-1
-  creator: Frank Fancy
+  creator: Michael Ende
   license: https://example.com/license.txt
   redirect: https://example.com/about-the-asset

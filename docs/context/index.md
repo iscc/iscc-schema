@@ -114,6 +114,12 @@
 !!! term ""
     ISCC of the preceding version of this item.
 
+## form
+
+<small><http://schema.org/additionalType></small>
+!!! term ""
+    The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.
+
 ## version
 
 <small><http://schema.org/version></small>

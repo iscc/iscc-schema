@@ -139,12 +139,13 @@ Extended ISCC Metadata
       "@type": "TextDigitalDocument",
       "$schema": "http://purl.org/iscc/schema",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
-      "name": "The Never Ending Story",
-      "description": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
+      "name": "The Neverending Story",
+      "description": "a 1979 fantasy novel by German writer *Michael Ende*",
+      "form": "Book",
       "image": "https://picsum.photos/200/300.jpg",
       "content": "https://example.com/the-asset.epub",
       "identifier": "urn:isbn:3-8273-7019-1",
-      "creator": "Frank Fancy",
+      "creator": "Michael Ende",
       "license": "https://example.com/license.txt",
       "redirect": "https://example.com/about-the-asset"
     }
@@ -206,6 +207,13 @@ Extended ISCC Metadata
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | previous | `string` | none | ISCC of the preceding version of this item.         |
+
+### **form**
+<http://schema.org/additionalType>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| form | `string` | none | The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.<br><br>**Example**: `ScholarlyArticle`         |
 
 ### **version**
 <http://schema.org/version>

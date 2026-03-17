@@ -137,6 +137,32 @@ def test_recover_context_versioned_url():
     assert "CreativeWork" in result["@context"]
 
 
+def test_form_in_jsonld_context():
+    """Test that form property mapping appears in generated JSON-LD context."""
+    jsonld = _load_jsonld()
+    ctx = jsonld["@context"]
+    assert "form" in ctx
+    assert ctx["form"] == "http://schema.org/additionalType"
+
+
+def test_form_enum_values_in_jsonld_context():
+    """Test that form enum values have IRI mappings in the JSON-LD context."""
+    jsonld = _load_jsonld()
+    ctx = jsonld["@context"]
+    assert ctx["ScholarlyArticle"] == "http://schema.org/ScholarlyArticle"
+    assert ctx["Book"] == "http://schema.org/Book"
+    assert ctx["Movie"] == "http://schema.org/Movie"
+
+
+def test_form_in_iscc_json_schema():
+    """Test that form field appears in generated JSON Schema with enum constraint."""
+    schema = _load_json("iscc.json")
+    props = schema["properties"]
+    assert "form" in props
+    assert "enum" in props["form"]
+    assert "ScholarlyArticle" in props["form"]["enum"]
+
+
 def test_recover_context_unversioned_url():
     data = {
         "$schema": "http://purl.org/iscc/schema",
