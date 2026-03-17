@@ -66,7 +66,7 @@ all = ["fromatyaml", "buildcode", "buildterms", "buildcontext", "buildschema", "
 docs-serve = { cmd = "zensical serve", help = "Serve documentation locally" }
 docs-build.sequence = [
     { cmd = "zensical build" },
-    { cmd = "python scripts/gen_llms_full.py" },
+    { cmd = "python tools/gen_llms_full.py" },
 ]
 docs-build.help = "Build documentation site"
 
