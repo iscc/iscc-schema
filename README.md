@@ -1,94 +1,74 @@
 # **ISCC** - Schema
 
-*ISCC - JSON-LD Metadata and OpenAPI Service Descriptions*
+[![Tests](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml)
+[![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/iscc/iscc-schema)
 
-[![Build](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml/badge.svg)](https://github.com/iscc/iscc-schema/actions/workflows/tests.yml)
-[![Version](https://img.shields.io/pypi/v/iscc-schema.svg)](https://pypi.python.org/pypi/iscc-schema/)
+**JSON-LD Metadata and OpenAPI Service Descriptions for the International Standard Content Code.**
 
-## Introduction
+## What is iscc-schema?
 
-This repository hosts all schema definitions of the ISCC. Schemas are defined in
-[OpenAPI v3.1.0](https://spec.openapis.org/oas/v3.1.0.html) format and serve as a
-single source of truth for auto-generated [JSON Schema](https://json-schema.org/)
-definitions, [JSON-LD](https://json-ld.org/) contexts, and other schema related
-artifacts.
+`iscc-schema` provides the official schema definitions for the International Standard Content Code
+([ISO 24138:2024](https://www.iso.org/standard/77899.html)). YAML-based OpenAPI 3.1.0 definitions
+are the single source of truth for auto-generated [JSON Schema](https://json-schema.org/),
+[JSON-LD](https://json-ld.org/) contexts, and [Python](https://python.org/) models.
 
-## Metadata for Digital Content
+## Install
 
-Metadata is data about data. For digital content, metadata may describe assets for different
-purposes such as data management, data provenance, allocation of royalties, indexing,
-disambiguation, process automation, etc.
+```bash
+pip install iscc-schema
+```
 
-## ISCC Metadata
+## Quick Start
 
-Calculating ISCC codes requires extensive processing of media assets. As a by-product, an ISCC
-processor can automatically produce and retain metadata that describes the asset and helps with
-comparing and matching digital content. ISCC creation is also an opportunity to embed metadata
-into a digital asset. Once the metadata is embedded, an ISCC processor will automatically
-regenerate the same ISCC Meta-Code without manually supplying custom metadata for processing.
-As the ISCC targets a broad set of use-cases, it comes with a minimal and generic metadata schema.
-This site documents the ISCC metadata model.
+```python
+from iscc_schema import IsccMeta
 
-## Types of Metadata
+meta = IsccMeta(
+    iscc="ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
+    name="The Never Ending Story",
+)
 
-For the identification of digital assets, ISCC distinguishes between two major types of metadata:
+# Serialize as dict (set fields only)
+meta.dict()
+# {'iscc': 'ISCC:KACY...', 'name': 'The Never Ending Story'}
 
-### Implicit Metadata
+# Serialize as JSON (includes schema defaults)
+meta.json()
+# '{"@context":"http://purl.org/iscc/context","@type":"CreativeWork",...}'
+```
 
-Implicit metadata is data that can be measured by analyzing a media asset. For example, an ISCC
-processor can infer pixel width and height from an image or duration from an audio file. The use
-of implicit metadata is very efficient and robust. It does not require a human to verify the
-correctness of the data because it can be measured and verified automatically.
+## Schema Categories
 
-### Explicit Metadata
+- **ISCC Metadata.** Core vocabulary for digital content identified by the ISCC. All fields
+  are optional, covering content description, rights, technical properties, and cryptographic
+  declarations.
+- **Seed Metadata.** Industry-specific input for Meta-Code generation (`ISBN`, `ISRC`).
+  Required fields ensure interoperable content fingerprinting across platforms.
+- **Service Metadata.** Use-case-specific schemas for ISCC registries (`TDM`, `GenAI`).
+  Machine-readable signals for text and data mining rights and generative AI disclosure.
 
-Explicit metadata is data about media assets assembled and curated by people. It is often stored
-separately from the files in databases but may also be embedded into media assets. In contrast to
-implicit metadata, human-curated metadata is prone to errors, laborious to manage, and often not
-up to date. Platforms also tend to remove embedded metadata from the files they are hosting.
+## Published Artifacts
+
+| Artifact | URL |
+|----------|-----|
+| JSON Schema | [`http://purl.org/iscc/schema`](http://purl.org/iscc/schema) |
+| JSON-LD Context | [`http://purl.org/iscc/context`](http://purl.org/iscc/context) |
+| Vocabulary | [`http://purl.org/iscc/terms`](http://purl.org/iscc/terms) |
+| Python Package | [`https://pypi.org/project/iscc-schema`](https://pypi.org/project/iscc-schema) |
 
 ## Documentation
 
 Documentation is hosted at [schema.iscc.codes](https://schema.iscc.codes)
 
+## Development
+
+```bash
+uv sync              # Install dependencies
+uv run poe all       # Full build pipeline (codegen, tests, docs)
+```
+
 ## Status
 
 Under development. Expect breaking changes until we reach a version 1.0 release.
-
-## Generated files
-
-The source of code generation are the files at `iscc_schema/models/*`.
-The outputs produced when running `poe build` are:
-
-- [`docs/schema/iscc.json`](https://github.com/iscc/iscc-schema/blob/main/docs/schema/iscc.json) - JSON Schema for ISCC Metadata
-- [`docs/schema/index.md`](https://github.com/iscc/iscc-schema/blob/main/docs/schema/index.md) - JSON Schema Markdown documentation
-- [`docs/context/iscc.jsonld`](https://github.com/iscc/iscc-schema/blob/main/docs/context/iscc.jsonld) - JSON-LD context for ISCC Metadata
-- [`docs/terms/index.md`](https://github.com/iscc/iscc-schema/blob/main/docs/context/index.md) - ISCC Metadata Vocabulary documentation
-- [`iscc_schema/schema.py`](https://github.com/iscc/iscc-schema/blob/main/iscc_schema/schema.py) - Pydantic models for ISCC Metadata
-- [`iscc_schema/generator.py`](https://github.com/iscc/iscc-schema/blob/main/iscc_schema/generator.py) - Pydantic models for Generator Service API
-
-
-## Published files
-
-The generated files are published under the following canonical URLs:
-
-- [`http://purl.org/iscc/schema`](http://purl.org/iscc/schema) - JSON Schema latest version
-- [`http://purl.org/iscc/context`](http://purl.org/iscc/context) - JSON-LD Context latest version
-- [`http://purl.org/iscc/terms`](http://purl.org/iscc/terms) - ISCC Metadata Vocabulary latest version
-- [`http://pypi.org/project/iscc-schema`](http://pypi.org/project/iscc-schema) - Python package with pydantic models
-
-## OpenAPI Docs
-
-- [ISCC Generator Service](https://schema.iscc.codes/api)
-
-## OpenAPI Extensions
-
-The OpenAPI Specification allows for
-[extending](https://spec.openapis.org/oas/latest.html#specification-extensions) the
-specification with custom fields. Extensions must start with `x-`.
-All ISCC extensions start with `x-iscc-`:
-
-- `x-iscc-context` - for documenting JSON-LD contexts.
-- `x-iscc-schema-doc` - for original descriptions from [schema.org](https://schema.org).
-- `x-iscc-embed` - for information on how to embed fields into media assets.
-- `x-iscc-status` - for information about status of the field

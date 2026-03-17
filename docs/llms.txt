@@ -1,0 +1,34 @@
+# ISCC - Schema
+
+> JSON-LD Metadata and OpenAPI Service Descriptions for the International Standard Content Code (ISO 24138:2024).
+
+iscc-schema is a Python package that defines all schemas for the ISCC. YAML-based OpenAPI 3.1.0
+schema definitions serve as a single source of truth for auto-generating JSON Schema, JSON-LD
+contexts, Pydantic models, and vocabulary documentation.
+
+Install: `pip install iscc-schema`
+
+- [Source code](https://github.com/iscc/iscc-schema)
+- [PyPI](https://pypi.org/project/iscc-schema/)
+- [Full documentation](https://schema.iscc.codes/llms-full.txt)
+
+## Vocabulary
+
+- [ISCC Metadata Vocabulary](https://schema.iscc.codes/terms/index.md): Complete vocabulary of ISCC metadata terms with JSON-LD context mappings
+
+## Schema
+
+- [Schema Documentation](https://schema.iscc.codes/schema/index.md): Overview of all schema definitions
+- [ISCC Metadata](https://schema.iscc.codes/schema/iscc.md): Core JSON Schema for ISCC metadata
+- [ISBN Seed Metadata](https://schema.iscc.codes/schema/isbn.md): ISBN-based seed metadata for Meta-Code generation
+- [ISRC Seed Metadata](https://schema.iscc.codes/schema/isrc.md): ISRC-based seed metadata for Meta-Code generation
+- [TDM Service Metadata](https://schema.iscc.codes/schema/tdm.md): Text and Data Mining reservation signals
+- [GenAI Service Metadata](https://schema.iscc.codes/schema/genai.md): Generative AI disclosure signals
+
+## Examples
+
+- [Examples](https://schema.iscc.codes/examples/index.md): Sample ISCC metadata for different use cases
+
+## Reference
+
+- [For Coding Agents](https://schema.iscc.codes/reference/for-coding-agents.md): Prescriptive reference for AI coding agents

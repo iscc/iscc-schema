@@ -1,0 +1,78 @@
+{
+  "@context": {
+    "GenAI": "http://purl.org/iscc/terms/#GenAI",
+    "involvement": "http://purl.org/iscc/terms/#involvement",
+    "ai_system": "http://purl.org/iscc/terms/#ai_system",
+    "digital_source_type": {
+      "@id": "http://purl.org/iscc/terms/#digital_source_type",
+      "@type": "@id"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "http://purl.org/iscc/schema/genai.json",
+  "title": "GenAI",
+  "type": "object",
+  "description": "Machine-readable generative AI disclosure signals for content transparency. Designed for AI providers to declare the level of AI involvement in content creation, supporting compliance with transparency regulations (e.g., EU AI Act Art. 50) and enabling end users to verify AI-generated content. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.",
+  "properties": {
+    "@context": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "The JSON-LD Context URI for ISCC metadata."
+    },
+    "@type": {
+      "type": "string",
+      "const": "GenAI",
+      "description": "The type of service metadata."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "http://purl.org/iscc/schema/genai.json",
+      "description": "The JSON Schema URI for GenAI service metadata."
+    },
+    "involvement": {
+      "type": "string",
+      "description": "Level of generative AI involvement in content creation. 'human' indicates content created purely by human effort without generative AI. 'ai_assisted' indicates content created by human effort with support from generative AI. 'human_supervised' indicates content created by generative AI but supervised or reviewed by humans. 'ai_generated' indicates content created by generative AI without human supervision.",
+      "enum": [
+        "human",
+        "ai_assisted",
+        "human_supervised",
+        "ai_generated"
+      ],
+      "example": "ai_generated",
+      "x-iscc-context": "http://purl.org/iscc/terms/#involvement"
+    },
+    "ai_system": {
+      "type": "string",
+      "description": "Name or identifier of the generative AI system used for content creation. Aligns with IPTC Photo Metadata 2025.1 'AI System Used' property.",
+      "example": "DALL-E 3",
+      "maxLength": 256,
+      "x-iscc-context": "http://purl.org/iscc/terms/#ai_system"
+    },
+    "digital_source_type": {
+      "type": "string",
+      "format": "uri",
+      "description": "IPTC Digital Source Type URI for granular content source classification. This optional field bridges to the IPTC controlled vocabulary, an external evolving standard that offers finer-grained source type distinctions than the 'involvement' field. Also used by C2PA Content Credentials. See https://cv.iptc.org/newscodes/digitalsourcetype/",
+      "example": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
+      "x-iscc-context": "http://purl.org/iscc/terms/#digital_source_type"
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "@context": "http://purl.org/iscc/context",
+      "@type": "GenAI",
+      "$schema": "http://purl.org/iscc/schema/genai.json",
+      "involvement": "ai_generated",
+      "ai_system": "DALL-E 3",
+      "digital_source_type": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia"
+    }
+  ]
+}

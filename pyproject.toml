@@ -1,43 +1,60 @@
-[tool.poetry]
+[project]
 name = "iscc-schema"
-version = "0.4.1"
+version = "0.5.0"
 description = "ISCC - JSON-LD Metadata and OpenAPI Service Descriptions"
-authors = ["Titusz <tp@py7.de>"]
-license = "Apache-2.0"
+authors = [{ name = "Titusz", email = "tp@py7.de" }]
+requires-python = ">=3.10,<3.15"
 readme = "README.md"
-homepage = "https://iscc.codes"
-repository = "https://github.com/iscc/iscc-schema"
-documentation = "https://schema.iscc.codes/"
-keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "similarity"]
+license = "Apache-2.0"
+keywords = [
+    "iscc",
+    "identifier",
+    "media",
+    "content",
+    "hash",
+    "blockchain",
+    "similarity",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+    "pydantic>=2",
+    "jcs>=0.2",
+]
 
-[tool.poetry.urls]
-"Changelog" = "https://schema.iscc.codes/changelog"
+[project.urls]
+Homepage = "https://iscc.codes"
+Repository = "https://github.com/iscc/iscc-schema"
+Documentation = "https://schema.iscc.codes/"
+Changelog = "https://schema.iscc.codes/changelog"
 "Bug Tracker" = "https://github.com/iscc/iscc-schema/issues"
 
-
-[tool.poetry.dependencies]
-python = ">=3.7,<4.0.0"
-pydantic = "*"
-jcs = "^0.2"
-
-[tool.poetry.dev-dependencies]
-pytest = "*"
-datamodel-code-generator = "*"
-poethepoet = "*"
-black = "*"
-mkdocs-material = "^9.0"
-PyLD = "*"
-requests = "*"
+[dependency-groups]
+dev = [
+    "pytest",
+    "datamodel-code-generator",
+    "poethepoet",
+    "black",
+    "zensical>=0.0.21",
+    "PyLD",
+    "requests",
+]
 
 [tool.black]
 line-length = 100
-target-version = ['py37']
+target-version = ['py310']
 preview = true
 
 
 [tool.poe.tasks]
-update = { cmd = "poetry update", help = "Update project dependencies"}
-fromatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
+update = { cmd = "uv sync --upgrade", help = "Update project dependencies"}
+formatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
 buildcode = { script = "tools.build_code:build", help = "Build code for API models"}
 formatcode = { cmd = "black .", help = "Code style formating with black" }
 buildterms = { script = "tools.build_terms:build", help = "Build markdown for terms" }
@@ -45,8 +62,14 @@ buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON 
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
 test = { cmd = "pytest", help = "Run tests"}
-all = ["fromatyaml", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
+all = ["formatyaml", "buildcode", "buildterms", "buildcontext", "buildschema", "formatcode", "builddocs", "test"]
+docs-serve = { cmd = "zensical serve", help = "Serve documentation locally" }
+docs-build.sequence = [
+    { cmd = "zensical build" },
+    { cmd = "python tools/gen_llms_full.py" },
+]
+docs-build.help = "Build documentation site"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

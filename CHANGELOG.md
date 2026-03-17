@@ -1,5 +1,68 @@
 ## Changelog
 
+### [0.5.0] - 2026-03-17
+- Migrated documentation from mkdocs-material to zensical
+- Added ISCC brand theming (header, footer, dark mode, logo)
+- Added copy-page button for LLM-friendly markdown export
+- Added ISCC-AI copilot widget integration
+- Added llms.txt and per-page markdown generation for LLM consumption
+- Added "For Coding Agents" reference page
+- Added GitHub Pages deployment workflow
+- Added navigation icons and short titles to all doc pages
+- Added Open Graph and Twitter Card meta tags
+- Added Plausible analytics via theme override
+- Added `x-iscc-status` (stable/draft) to all fields across YAML schemas
+- Rendered `x-iscc-status` in generated schema docs, vocabulary page, and terms includes
+- Added `datasize` field for data processed size when ISCC is computed over sub-file data (e.g., bioimage planes)
+- Added GenAI Service Metadata schema for generative AI disclosure signals (involvement, ai_system, digital_source_type)
+- Added `genai` field to IsccMeta for embedding AI transparency signals in content metadata
+- Moved `tdm` field from iscc-embeddable to iscc-extended (structured objects don't belong in media-embeddable metadata)
+- Added `form` field for content-kind classification using Schema.org CreativeWork subtypes
+- Pydantic models now emit versioned `$schema` and `@context` URLs (e.g., `http://purl.org/iscc/schema/0.5.0.json`)
+- Standalone schema models (ISBN, ISRC, TDM) now emit versioned `@context` URLs
+- Added versioning documentation page
+- Embedded JSON-LD `@context` directly into JSON Schema files for self-contained validation and semantic mapping
+- Added schema-specific `@context` to standalone schemas (isbn, isrc, tdm) with only their relevant terms
+- Patched `@context` property in JSON Schemas to accept both URI string and inline object per JSON-LD spec
+- Added `recover_context()` function for schema-driven JSON-LD context recovery from plain JSON data
+- Added generated `contexts.py` module with bundled context data and type-to-schema mappings
+- Reordered build pipeline so `buildcontext` runs before `buildschema`
+- Added ISBN and ISRC Seed Metadata schemas for interoperable Meta-Code generation (IEP-0002)
+- Added TDM Service Metadata schema for machine-readable TDM reservation signals (train, inference, derive, search, analyze)
+- Added `tdm` field to IsccMeta for embedding TDM reservation metadata in content descriptions
+- Reframed TDM schema as reservation policy signals aligned with EU DSM Directive Art. 4 opt-out
+- Made TDM fields optional (omitted field = reservation status not determined)
+- Added `additionalProperties: false` to TDM schema for strict validation
+- Replaced legally loaded terminology in TDM field descriptions (e.g., "derivative works" → "content transformation")
+- Introduced three-category schema framework: ISCC Metadata, Seed Metadata, Service Metadata
+- Added per-schema documentation pages with JSON Schema links and field reference tables
+- Added Seed and Service Metadata terms to JSON-LD context and vocabulary documentation
+- Fixed misleading ISCC Metadata description (content vocabulary, not declaration schema)
+- Added `x-iscc-standard` extension field to mark ISO 24138:2024 properties in YAML schemas
+- Surfaced ISO 24138:2024 annotations in generated schema docs, vocabulary page, and terms includes
+- Added `iscc_code` field as explicit alternative to the compact `iscc` field
+- Added `nonce` field for cryptographic replay protection
+- Added `signature` field to IsccMeta for iscc-crypto compatibility (EdDSA/JCS signing)
+- Added `units` field for individual ISCC-UNITs that make up a composite ISCC-CODE
+- Added `text` field for extracted plaintext of digital content
+- Widened `parts` field to accept both strings and objects
+- Added `minLength: 1` to `name` and `description` fields
+- Fixed `keywords` description typo ("sting" → "string")
+- Eliminated `iscc-collection.yaml` duplication; JSON Schema is now auto-generated from individual schema files
+- Fixed JSON-LD identifier collision: `iscc_id` and `media_id` now have distinct ISCC term mappings
+- Fixed URI-typed fields in JSON-LD context to use `@type: @id` for proper linked data processing
+- Added missing `mode` field to JSON-LD context
+- Fixed stale 0.3.2 version defaults in generator reference schema
+- Fixed missing `x-iscc-status` and `x-iscc-context` annotations in JSON Schema output
+- Exported `Signature` model from package
+- Migrated from Poetry to uv with hatchling build backend
+- Dropped Pydantic v1, migrated to native Pydantic v2 (closes #36)
+- Require Python >=3.10,<3.15
+- Added Python 3.13 and 3.14 to CI test matrix
+- Switched CI to ubuntu-latest
+- Suppressed datamodel-code-generator warnings and cleaned up build output
+- Updated .gitignore to comprehensive Python template
+
 ### [0.4.1] - 2024-01-21
 - Added `credentials`-field
 - Updated dependencies

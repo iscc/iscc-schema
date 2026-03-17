@@ -1,0 +1,102 @@
+{
+  "@context": {
+    "TDM": "http://purl.org/iscc/terms/#TDM",
+    "train": "http://purl.org/iscc/terms/#train",
+    "inference": "http://purl.org/iscc/terms/#inference",
+    "derive": "http://purl.org/iscc/terms/#derive",
+    "search": "http://purl.org/iscc/terms/#search",
+    "analyze": "http://purl.org/iscc/terms/#analyze"
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "http://purl.org/iscc/schema/tdm.json",
+  "title": "TDM",
+  "type": "object",
+  "description": "Machine-readable TDM reservation signals for AI-related content usage categories. A 'reserved' status indicates an explicit opt-out from TDM exceptions (e.g., EU DSM Directive Art. 4). An 'open' status indicates that no rights are reserved. Omitted fields indicate that the reservation status has not been determined. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.",
+  "properties": {
+    "@context": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "description": "The JSON-LD Context URI for ISCC metadata."
+    },
+    "@type": {
+      "type": "string",
+      "const": "TDM",
+      "description": "The type of service metadata."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "http://purl.org/iscc/schema/tdm.json",
+      "description": "The JSON Schema URI for TDM service metadata."
+    },
+    "train": {
+      "type": "string",
+      "description": "TDM reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.",
+      "enum": [
+        "reserved",
+        "open"
+      ],
+      "example": "reserved",
+      "x-iscc-context": "http://purl.org/iscc/terms/#train"
+    },
+    "inference": {
+      "type": "string",
+      "description": "TDM reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.",
+      "enum": [
+        "reserved",
+        "open"
+      ],
+      "example": "open",
+      "x-iscc-context": "http://purl.org/iscc/terms/#inference"
+    },
+    "derive": {
+      "type": "string",
+      "description": "TDM reservation status for AI-assisted content transformation. Covers summarization, translation, format adaptation, and content reformulation.",
+      "enum": [
+        "reserved",
+        "open"
+      ],
+      "example": "reserved",
+      "x-iscc-context": "http://purl.org/iscc/terms/#derive"
+    },
+    "search": {
+      "type": "string",
+      "description": "TDM reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.",
+      "enum": [
+        "reserved",
+        "open"
+      ],
+      "example": "open",
+      "x-iscc-context": "http://purl.org/iscc/terms/#search"
+    },
+    "analyze": {
+      "type": "string",
+      "description": "TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.",
+      "enum": [
+        "reserved",
+        "open"
+      ],
+      "example": "open",
+      "x-iscc-context": "http://purl.org/iscc/terms/#analyze"
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "@context": "http://purl.org/iscc/context",
+      "@type": "TDM",
+      "$schema": "http://purl.org/iscc/schema/tdm.json",
+      "train": "reserved",
+      "inference": "open",
+      "derive": "reserved",
+      "search": "open"
+    }
+  ]
+}

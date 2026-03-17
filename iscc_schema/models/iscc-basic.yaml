@@ -8,10 +8,10 @@ examples:
   iscc: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
   name: The Never Ending Story
   description: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
-  image: https://picsum.photos/200/300.jpg
 properties:
   name:
     type: string
+    minLength: 1
     maxLength: 128
     example: The Never Ending Story
     description: The title or name of the intangible creation manifested by the identified
@@ -21,9 +21,11 @@ properties:
     x-iscc-embed: Use `Iptc.Application2.Headline` and `Xmp.photoshop.Headline` for image
       embedding
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
   description:
     type: string
     example: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
+    minLength: 1
     maxLength: 4096
     description: Description of the *digital content* identified by the **ISCC**. **Used as
       input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown
@@ -35,6 +37,7 @@ properties:
     x-iscc-embed: Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description`
       for image embedding.
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
   meta:
     type: string
     maxLength: 16384
@@ -42,3 +45,4 @@ properties:
     description: Subject, industry, or use-case specific metadata encoded as Data-URL.
     x-iscc-context: http://purl.org/iscc/terms/#meta
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024

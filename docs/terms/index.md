@@ -1,3 +1,9 @@
+---
+icon: lucide/book-open
+title: Vocabulary
+description: ISCC metadata vocabulary terms with JSON-LD context mappings.
+---
+
 # ISCC Terms
 
 ## Mapped Terms
@@ -14,3 +20,17 @@ The ISCC metadata introduces the following additional properties specific to ISC
 use-cases.
 
 --8<-- "terms-iscc.md"
+
+## Seed Metadata Terms
+
+Terms used in industry-specific seed metadata schemas for interoperable Meta-Code
+generation. See [IEP-0002](https://github.com/iscc/iscc-ieps/blob/main/ieps/iep-0002.md)
+for details.
+
+--8<-- "terms-seed.md"
+
+## Service Metadata Terms
+
+Terms used in use-case-specific service metadata schemas served by ISCC registries.
+
+--8<-- "terms-service.md"

@@ -6,21 +6,36 @@ properties:
     type: string
     description: Vendor specific (internal) identifier for the source media file.
     example: 05VQ3BGTGFCJA
-    x-iscc-context: http://schema.org/identifier
+    x-iscc-context: http://purl.org/iscc/terms/#media_id
+    x-iscc-status: draft
     x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
       of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
       for representing many of these, either as textual strings or as URL (URI) links.
   iscc_id:
     type: string
-    description: The **ISCC-ID** of the digital content in canonical representation.
+    description: The **ISCC-ID** of the digital content in canonical representation. A valid
+      ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code`
+      fields.
     example: ISCC:MAACAJINXFXA2SQX
     minLength: 15
     maxLength: 73
     pattern: ^ISCC:[A-Z2-7]{10,73}$
-    x-iscc-context: http://schema.org/identifier
+    x-iscc-context: http://purl.org/iscc/terms/#iscc_id
+    x-iscc-status: stable
     x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
       of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
       for representing many of these, either as textual strings or as URL (URI) links.
+  iscc_code:
+    type: string
+    description: A composite **ISCC-CODE** in canonical representation. Explicit alternative
+      to the more compact `iscc` field. A valid ISCC Metadata object should include at least
+      one of the `iscc`, `iscc_id`, or `iscc_code` fields.
+    example: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
+    minLength: 15
+    maxLength: 73
+    pattern: ^ISCC:[A-Z2-7]{10,73}$
+    x-iscc-context: http://purl.org/iscc/terms/#iscc
+    x-iscc-status: stable
   image:
     type: string
     format: uri
@@ -31,6 +46,7 @@ properties:
       URI should reference the actual digital content represented by the NFT.
     example: https://picsum.photos/200/300.jpg
     x-iscc-context: http://schema.org/image
+    x-iscc-status: draft
     x-iscc-schema-doc: An image of the item. This can be a URL or a fully described ImageObject.
   identifier:
     description: Other identifier(s) referencing the work, product or other abstraction of
@@ -41,15 +57,18 @@ properties:
       items:
       - type: string
     x-iscc-context: http://schema.org/identifier
+    x-iscc-status: draft
     x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
       of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
       for representing many of these, either as textual strings or as URL (URI) links. See
       background notes for more details.
+    x-iscc-standard: ISO 24138:2024
   content:
     description: URI of the *digital content* that was used to create this ISCC.
     type: string
     format: uri
     x-iscc-context: http://schema.org/contentUrl
+    x-iscc-status: draft
     x-iscc-schema-doc: Actual bytes of the media object, for example the image file or video
       file.
   keywords:
@@ -59,31 +78,133 @@ properties:
       items:
       - type: string
     description: Keywords or tags used to describe this content. Either a list of keywords
-      or a sting with comma separated keywords.
+      or a string with comma separated keywords.
     x-iscc-context: http://schema.org/keywords
+    x-iscc-status: stable
     x-iscc-schema-doc: Keywords or tags used to describe this content. Multiple entries in
       a keywords list are typically delimited by commas.
+    x-iscc-standard: ISO 24138:2024
   previous:
     description: ISCC of the preceding version of this item.
     type: string
     x-iscc-context: http://purl.org/iscc/terms/#previous
+    x-iscc-status: draft
+  form:
+    type: string
+    description: The form or kind of content identified, using a Schema.org CreativeWork subtype.
+      While `@type` provides a coarse modality classification (text, image, audio, video)
+      and `mode`/`mediatype` describe technical aspects, `form` captures what the content
+      *is* — a book, scholarly article, presentation, report, photograph, etc.
+    enum:
+    - Article
+    - Audiobook
+    - Book
+    - CoverArt
+    - CreativeWork
+    - Dataset
+    - DigitalDocument
+    - Episode
+    - Movie
+    - MusicComposition
+    - MusicRecording
+    - NewsArticle
+    - Painting
+    - Periodical
+    - Photograph
+    - PresentationDigitalDocument
+    - ScholarlyArticle
+    - SoftwareApplication
+    - SoftwareSourceCode
+    - SpreadsheetDigitalDocument
+    - VisualArtwork
+    - WebPage
+    example: ScholarlyArticle
+    x-iscc-context: http://schema.org/additionalType
+    x-iscc-schema-doc: An additional type for the item, typically used for adding more specific
+      types from external vocabularies in microdata syntax. This is a relationship between
+      something and a class that the thing is in.
+    x-iscc-status: draft
   version:
     description: The version of the CreativeWork embodied by a specified resource.
     type:
     - integer
     - string
     x-iscc-context: http://schema.org/version
+    x-iscc-status: draft
     x-iscc-schema-doc: The version of the *digital content* identified by the ISCC.
+  tdm:
+    type: object
+    description: Machine-readable TDM reservation signals for AI-related content usage categories.
+      Omitted fields indicate that the reservation status has not been determined.
+    x-iscc-context: http://purl.org/iscc/terms/#tdm
+    x-iscc-status: draft
+    additionalProperties: false
+    properties:
+      train:
+        type: string
+        description: TDM reservation status for AI model training.
+        enum:
+        - reserved
+        - open
+      inference:
+        type: string
+        description: TDM reservation status for inference-time content retrieval.
+        enum:
+        - reserved
+        - open
+      derive:
+        type: string
+        description: TDM reservation status for AI-assisted content transformation.
+        enum:
+        - reserved
+        - open
+      search:
+        type: string
+        description: TDM reservation status for search and discovery indexing.
+        enum:
+        - reserved
+        - open
+      analyze:
+        type: string
+        description: TDM reservation status for automated content analysis.
+        enum:
+        - reserved
+        - open
+  genai:
+    type: object
+    description: Machine-readable generative AI disclosure signals for content transparency.
+      Omitted fields indicate that the disclosure status has not been determined.
+    x-iscc-context: http://purl.org/iscc/terms/#genai
+    x-iscc-status: draft
+    additionalProperties: false
+    properties:
+      involvement:
+        type: string
+        description: Level of generative AI involvement in content creation.
+        enum:
+        - human
+        - ai_assisted
+        - human_supervised
+        - ai_generated
+      ai_system:
+        type: string
+        description: Name or identifier of the generative AI system used.
+        maxLength: 256
+      digital_source_type:
+        type: string
+        format: uri
+        description: IPTC Digital Source Type URI for granular content source classification.
 examples:
 - '@context': http://purl.org/iscc/context
   '@type': TextDigitalDocument
   $schema: http://purl.org/iscc/schema
   iscc: ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY
-  name: The Never Ending Story
-  description: a 1984 fantasy film co-written and directed by *Wolfgang Petersen*
+  name: The Neverending Story
+  description: a 1979 fantasy novel by German writer *Michael Ende*
+  form: Book
   image: https://picsum.photos/200/300.jpg
   content: https://example.com/the-asset.epub
   identifier: urn:isbn:3-8273-7019-1
-  creator: Frank Fancy
+  creator: Michael Ende
   license: https://example.com/license.txt
   redirect: https://example.com/about-the-asset

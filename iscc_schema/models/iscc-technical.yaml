@@ -1,7 +1,7 @@
 title: iscc-technical
 type: object
-description: Technical ISCC Metadata automaticaly inferred from the *digital content* by an
-  ISCC Processor
+description: Technical ISCC Metadata automatically inferred from the *digital content* by
+  an ISCC Processor
 examples:
 - '@context': http://purl.org/iscc/context
   '@type': ImageObject
@@ -26,6 +26,7 @@ properties:
     - mixed
     example: video
     description: The perceptual mode used to create the ISCC-CODE.
+    x-iscc-context: http://purl.org/iscc/terms/#mode
     x-iscc-status: stable
   created:
     description: Datetime the ISCC was created for the item.
@@ -42,6 +43,7 @@ properties:
       if the `name` field was not specified for ISCC processing)
     x-iscc-context: http://purl.org/iscc/terms/#filename
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
   filesize:
     type: integer
     readOnly: true
@@ -50,6 +52,16 @@ properties:
     x-iscc-schema-doc: Size of the application / package (e.g. 18MB). In the absence of a
       unit (MB, KB etc.), KB will be assumed.
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
+  datasize:
+    type: integer
+    readOnly: true
+    description: Size of the data processed for ISCC generation in number of bytes. Use this
+      field when the ISCC is computed over data that is not a standalone file, such as an
+      individual plane within a bioimage, a scene within a multi-scene container, or a data
+      stream extracted from a composite format.
+    x-iscc-context: http://purl.org/iscc/terms/#datasize
+    x-iscc-status: draft
   mediatype:
     type: string
     readOnly: true
@@ -57,6 +69,7 @@ properties:
       (MIME type)
     example: image/png
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://schema.org/encodingFormat
     x-iscc-schema-doc: Media type typically expressed using a MIME format (see IANA site and
       MDN reference) e.g. application/zip for a SoftwareApplication binary, audio/mpeg for
@@ -67,8 +80,9 @@ properties:
   duration:
     type: integer
     readOnly: true
-    description: Duration of audio-visual media in secondes.
+    description: Duration of audio-visual media in seconds.
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://schema.org/duration
     x-iscc-schema-doc: The duration of the item (movie, audio recording, event, etc.) in [ISO
       8601 date format](https://en.wikipedia.org/wiki/ISO_8601).
@@ -79,6 +93,7 @@ properties:
     format: float
     example: 24
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://purl.org/iscc/terms/#fps
     minimum: 1
   width:
@@ -88,6 +103,7 @@ properties:
     format: int32
     example: 640
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://purl.org/iscc/terms/#width
   height:
     readOnly: true
@@ -97,6 +113,7 @@ properties:
     example: 480
     minimum: 1
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://purl.org/iscc/terms/#height
   characters:
     readOnly: true
@@ -104,6 +121,7 @@ properties:
     description: Number of text characters (code points after Unicode normalization)
     example: 55689
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://purl.org/iscc/terms/#characters
   pages:
     readOnly: true
@@ -111,6 +129,7 @@ properties:
     description: Number of pages (for paged documents only)
     example: 77
     x-iscc-context: http://schema.org/numberOfPages
+    x-iscc-status: draft
     x-iscc-schema-doc: The number of pages in the book.
   language:
     description: Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).
@@ -121,6 +140,7 @@ properties:
       items:
       - type: string
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024
     x-iscc-context: http://schema.org/inLanguage
     x-iscc-schema-doc: The language of the content or performance or used in an action. Please
       use one of the language codes from the [IETF BCP 47 standard](https://www.rfc-editor.org/info/bcp47).
@@ -130,12 +150,16 @@ properties:
     description: Indicates items that are part of this item via Content-Codes (inverse-property
       belongs).
     x-iscc-context: http://purl.org/iscc/terms/#parts
+    x-iscc-status: draft
     items:
-      type: string
+      oneOf:
+      - type: string
+      - type: object
   part_of:
     type: array
     description: Indicates that this item is part of other items via their Content-Code.
     x-iscc-context: http://purl.org/iscc/terms/#part_of
+    x-iscc-status: draft
     items:
       type: string
   features:
@@ -143,19 +167,36 @@ properties:
     type: array
     description: Granular features of the *digital content*.
     x-iscc-context: http://purl.org/iscc/terms/#features
+    x-iscc-status: draft
     items:
       type: object
+  units:
+    readOnly: true
+    type: array
+    description: Individual ISCC-UNITs that make up a composite ISCC-CODE.
+    x-iscc-context: http://purl.org/iscc/terms/#units
+    x-iscc-status: draft
+    items:
+      type: string
   generator:
     readOnly: true
     type: string
     description: Name and version of the software that generated the ISCC
     x-iscc-context: http://purl.org/iscc/terms/#generator
+    x-iscc-status: draft
+  text:
+    readOnly: true
+    type: string
+    description: Extracted plaintext of the *digital content*.
+    x-iscc-context: http://purl.org/iscc/terms/#text
+    x-iscc-status: draft
   thumbnail:
     type: string
-    description: URI an autogenerated user-presentable thumbnail-image that serves as a preview
-      of the digital content. The URI may be a Data-URL RFC2397.
+    description: URI of an autogenerated user-presentable thumbnail-image that serves as a
+      preview of the digital content. The URI may be a Data-URL RFC2397.
     format: uri
     example: https://picsum.photos/200/300.jpg
     x-iscc-context: http://schema.org/thumbnailUrl
     x-iscc-schema-doc: A thumbnail image relevant to the Thing.
     x-iscc-status: stable
+    x-iscc-standard: ISO 24138:2024

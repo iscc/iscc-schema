@@ -22,7 +22,7 @@ info:
   contact:
     name: ISCC Foundation
   x-logo:
-    url: https://schema.iscc.codes/images/iscc-logo-blue.png
+    url: https://schema.iscc.codes/assets/iscc-logo-blue.png
 servers:
 - url: http://localhost:8000
   description: develop
@@ -271,7 +271,7 @@ components:
           type: string
           format: uri
           description: The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.
-          default: http://purl.org/iscc/context/0.3.2.jsonld
+          default: http://purl.org/iscc/context
           readOnly: true
         '@type':
           type: string
@@ -289,7 +289,7 @@ components:
           format: uri
           description: The [JSON Schema](https://json-schema.org/) URI of the ISCC metadata
             schema.
-          default: http://purl.org/iscc/schema/0.3.2.json
+          default: http://purl.org/iscc/schema
           readOnly: true
         iscc:
           type: string
@@ -396,7 +396,7 @@ components:
           readOnly: true
         duration:
           type: integer
-          description: Duration of audio-visual media in secondes.
+          description: Duration of audio-visual media in seconds.
           example: 67
           readOnly: true
         generator:

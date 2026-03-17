@@ -1,19 +1,23 @@
 # -*- coding: utf-8 -*-
+import iscc_schema
 from iscc_schema import IsccMeta
+
+V = iscc_schema.__version__
+SCHEMA_URL = f"http://purl.org/iscc/schema/{V}.json"
+CONTEXT_URL = f"http://purl.org/iscc/context/{V}.jsonld"
 
 
 def test_iscc_meta_empty():
     m = IsccMeta()
     assert m.iscc is None
-    assert m == {}
     assert m.dict() == {}
     assert (
         m.json()
-        == '{"@context": "http://purl.org/iscc/context", "@type": '
-        '"CreativeWork", "$schema": "http://purl.org/iscc/schema"}'
+        == f'{{"@context":"{CONTEXT_URL}","@type":"CreativeWork","$schema":"{SCHEMA_URL}"}}'
     )
     assert (
         m.jcs()
-        == b'{"$schema":"http://purl.org/iscc/schema","@context":"http://purl.'
-        b'org/iscc/context","@type":"CreativeWork"}'
+        == f'{{"$schema":"{SCHEMA_URL}","@context":"{CONTEXT_URL}","@type":"CreativeWork"}}'.encode(
+            "utf-8"
+        )
     )

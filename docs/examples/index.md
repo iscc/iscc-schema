@@ -1,58 +1,201 @@
-# Examples of ISCC Metadata
+---
+icon: lucide/code
+title: Examples
+description: Sample ISCC metadata for different use cases and schema categories.
+---
 
-A collection of samples how you can use ISCC Metadata for different use cases.
+# Examples
 
-## ISCC-NFT Metadata
+A collection of ISCC metadata samples for different use cases.
 
-ISCC metadata is a superset of NFT metadata as defined
-by [ERC-721](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md#specification)
-and [ERC-1155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1155.md#metadata). The  NFT
-metadata fields `name`, `description` and `image`, `properties` are the same in the ISCC metadata
-schema.  ISCC metadata also specifically supports the commonly used fields like `attributes`,
-`animation_url`, and `external_url`  (See: https://schema.iscc.codes/schema/#iscc-nft).
+## Minimal ISCC Metadata
 
-### ISCC-NFT Examples
+The simplest valid ISCC metadata, just an `iscc` field with the `$schema` reference:
 
-Basic NFT metadata extended with an ISCC:
-
-``` json linenums="1"
+```json
 {
-    "@context": "http://purl.org/iscc/context/0.3.6.jsonld",
-    "$schema": "http://purl.org/iscc/schema/0.3.6.json",
-    "@type": "ImageObject",
-    "iscc": "ISCC:KMD5MO6ZVATK7EOBJY2ED5CVIEZ4IW2ATWZ6SX2VQLROZORS5W5TR6A",
-    "name": "LIQUID SILVER",
-    "description": "Liquid Metal by TRIPLE SIX. Holders will have exclusive access to events, giveaways and more.",
-    "image": "ipfs://QmWguwGk5DvfuY9a7eVrkgjYgu66eCLsku2NPtbKhddz2C/1.mp4",
-    "attributes": [
-        {
-            "trait_type": "METAL",
-            "value": "SILVER"
-        },
-        {
-            "display_type": "number",
-            "trait_type": "GENERATION",
-            "value": 1
-        }
-    ]
+  "$schema": "http://purl.org/iscc/schema",
+  "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
 }
 ```
 
+## Content Description
 
+ISCC metadata with descriptive fields for a video:
 
+```json
+{
+  "@context": "http://purl.org/iscc/context",
+  "@type": "VideoObject",
+  "$schema": "http://purl.org/iscc/schema",
+  "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
+  "name": "The Never Ending Story",
+  "description": "a 1984 fantasy film co-written and directed by Wolfgang Petersen",
+  "creator": "Wolfgang Petersen"
+}
+```
 
+## Content with TDM Rights
 
+ISCC metadata with embedded TDM (text and data mining) reservation signals:
 
+```json
+{
+  "@context": "http://purl.org/iscc/context",
+  "@type": "CreativeWork",
+  "$schema": "http://purl.org/iscc/schema",
+  "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
+  "name": "The Never Ending Story",
+  "tdm": {
+    "train": "reserved",
+    "inference": "open",
+    "derive": "reserved",
+    "search": "open"
+  }
+}
+```
 
+## ISBN Seed Metadata
 
+Seed metadata for interoperable Meta-Code generation from book industry data:
 
+```json
+{
+  "@context": "http://purl.org/iscc/context",
+  "@type": "ISBN",
+  "$schema": "http://purl.org/iscc/schema/isbn.json",
+  "isbn": "9789295055124",
+  "productform": "EA",
+  "title": "The Never Ending Story",
+  "language": "eng",
+  "imprint": "Penguin Classics",
+  "publisher": "Penguin Random House",
+  "country": "US",
+  "pubdate": "20240214"
+}
+```
 
+## ISRC Seed Metadata
 
+Seed metadata for interoperable Meta-Code generation from sound recording data:
 
+```json
+{
+  "@context": "http://purl.org/iscc/context",
+  "@type": "ISRC",
+  "$schema": "http://purl.org/iscc/schema/isrc.json",
+  "isrc": "AA6Q72000047",
+  "main_artist": "The Beatles",
+  "track_title": "Yesterday",
+  "version_title": "Remastered 2009",
+  "duration": 125,
+  "content_type": "sound",
+  "pubdate": "20090909"
+}
+```
 
+## TDM Service Metadata
 
+Standalone TDM reservation signals served by an ISCC registry:
 
+```json
+{
+  "@context": "http://purl.org/iscc/context",
+  "@type": "TDM",
+  "$schema": "http://purl.org/iscc/schema/tdm.json",
+  "train": "reserved",
+  "inference": "open",
+  "derive": "reserved",
+  "search": "open"
+}
+```
 
+## GenAI Service Metadata
 
+Standalone generative AI disclosure signals for content transparency:
 
+```json
+{
+  "@context": "http://purl.org/iscc/context",
+  "@type": "GenAI",
+  "$schema": "http://purl.org/iscc/schema/genai.json",
+  "involvement": "ai_generated",
+  "ai_system": "DALL-E 3",
+  "digital_source_type": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia"
+}
+```
 
+## Schema-Driven Context Recovery
+
+Plain JSON data can be upgraded to JSON-LD using `recover_context()`. The function reads the
+`$schema` reference and injects the matching `@context`:
+
+```python
+from iscc_schema import recover_context
+
+# Plain JSON without @context
+data = {
+    "$schema": "http://purl.org/iscc/schema",
+    "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
+    "name": "The Never Ending Story",
+}
+
+# Recover JSON-LD context from the schema reference
+result = recover_context(data)
+
+# Result is now valid JSON-LD
+assert "@context" in result
+```
+
+When `$schema` is absent, context can be recovered from `@type`:
+
+```python
+from iscc_schema import recover_context
+
+data = {"@type": "ISBN", "isbn": "9789295055124"}
+result = recover_context(data)
+assert "@context" in result
+```
+
+## Python Usage
+
+Creating and serializing ISCC metadata objects:
+
+```python
+from iscc_schema import IsccMeta
+
+meta = IsccMeta(
+    iscc="ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
+    name="The Never Ending Story",
+)
+
+# Dict serialization (set fields only)
+meta.dict()
+# {'iscc': 'ISCC:KACY...', 'name': 'The Never Ending Story'}
+
+# JSON serialization (includes schema defaults)
+meta.json()
+# '{"@context":"http://purl.org/iscc/context","@type":"CreativeWork",...}'
+
+# JCS canonical bytes (deterministic, for hashing)
+meta.jcs()
+# b'{"$schema":"http://purl.org/iscc/schema","@context":...}'
+```
+
+Working with seed and service metadata:
+
+```python
+from iscc_schema import ISBN, TDM, GenAI
+
+# Create seed metadata
+seed = ISBN(
+    isbn="9789295055124",
+    title="The Never Ending Story",
+    language="eng",
+    publisher="Penguin Random House",
+)
+
+# Create service metadata
+tdm = TDM(train="reserved", inference="open")
+genai = GenAI(involvement="ai_generated", ai_system="DALL-E 3")
+```

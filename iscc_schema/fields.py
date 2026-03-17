@@ -1,4 +1,4 @@
-"""Custom AnyUrl Field.
+"""Custom AnyUrl Field with RFC 3986 URI validation.
 
 Source: https://gist.github.com/yu-ichiro/ded4d704316a3b986b006467557850a4
 License:
@@ -6,16 +6,14 @@ License:
     https://gist.github.com/yu-ichiro/87c29b96cbddb44bdd8fc50b68de5a77
 
 """
+
 import re
 from re import Pattern
-from typing import Dict, Any, cast
+from typing import Any
 
-try:
-    from pydantic.v1.utils import update_not_none
-    from pydantic.v1.validators import constr_length_validator
-except ImportError:
-    from pydantic.utils import update_not_none
-    from pydantic.validators import constr_length_validator
+from pydantic import GetCoreSchemaHandler, GetJsonSchemaHandler
+from pydantic.json_schema import JsonSchemaValue
+from pydantic_core import CoreSchema, core_schema
 
 
 class RFC3986Regex:
@@ -77,7 +75,9 @@ class RFC3986Regex:
     PATH_NO_SCHEME: Pattern = rf"{SEGMENT_NZ_NC}(/{SEGMENT})*"
     PATH_ABSOLUTE: Pattern = rf"/({SEGMENT_NZ}(/{SEGMENT})*)?"
     PATH_ABSOLUTE_EMPTY: Pattern = rf"(/{SEGMENT})*"
-    PATH: Pattern = rf"(?P<path>{PATH_ABSOLUTE_EMPTY}|{PATH_ABSOLUTE}|{PATH_NO_SCHEME}|{PATH_ROOTLESS}|{PATH_EMPTY})"
+    PATH: Pattern = (
+        rf"(?P<path>{PATH_ABSOLUTE_EMPTY}|{PATH_ABSOLUTE}|{PATH_NO_SCHEME}|{PATH_ROOTLESS}|{PATH_EMPTY})"
+    )
 
     QUERY: Pattern = rf"({PATH_CHAR}|[/\?])*"
     FRAGMENT: Pattern = rf"({PATH_CHAR}|[/\?])*"
@@ -89,7 +89,9 @@ class RFC3986Regex:
         rf"(?P<path_rootless>{PATH_ROOTLESS})|"
         rf"{PATH_EMPTY})"
     )
-    URI: Pattern = rf"{SCHEME}:{HIERARCHY_PART}(?P<query_full>\?(?P<query>{QUERY}))?(?P<fragment_full>#(?P<fragment>{FRAGMENT}))?"
+    URI: Pattern = (
+        rf"{SCHEME}:{HIERARCHY_PART}(?P<query_full>\?(?P<query>{QUERY}))?(?P<fragment_full>#(?P<fragment>{FRAGMENT}))?"
+    )
 
     RELATIVE_PART: Pattern = (
         rf"(?P<relative_part>"
@@ -98,7 +100,9 @@ class RFC3986Regex:
         rf"(?P<path_no_scheme>{PATH_NO_SCHEME})|"
         rf"{PATH_EMPTY})"
     )
-    RELATIVE_REFERENCE: Pattern = rf"{RELATIVE_PART}(?P<query_full>\?(?P<query>{QUERY}))?(?P<fragment_full>#(?P<fragment>{FRAGMENT}))?"
+    RELATIVE_REFERENCE: Pattern = (
+        rf"{RELATIVE_PART}(?P<query_full>\?(?P<query>{QUERY}))?(?P<fragment_full>#(?P<fragment>{FRAGMENT}))?"
+    )
 
     def __init__(self):
         self._cache = {}
@@ -112,45 +116,48 @@ class RFC3986Regex:
         return self._cache[item]
 
 
-class _RegexGroupStr(str):
-    _parts: Dict[str, str]
-    _pattern: Pattern
-    _error_msg: str = "doesn't match {pattern}"
+class AnyUrl(str):
+    """RFC 3986 compliant URL type for Pydantic v2."""
+
+    _rfc3986 = RFC3986Regex()
+    _pattern = _rfc3986.URI
     min_length = None
     max_length = None
 
-    def __init__(self, some_str):
-        super().__init__()
-        res = self._pattern.fullmatch(some_str)
+    def __new__(cls, url):
+        # type: (str) -> "AnyUrl"
+        instance = str.__new__(cls, url)
+        res = cls._pattern.fullmatch(url)
         if not res:
-            raise ValueError(self._error_msg.format(pattern=repr(self._pattern)))
-        self._parts = res.groupdict()
+            raise ValueError("invalid uri or missing scheme")
+        instance._parts = res.groupdict()
+        return instance
 
     def _get(self, key):
+        # type: (str) -> str | None
         return self._parts.get(key)
 
     @classmethod
-    def __modify_schema__(cls, field_schema: Dict[str, Any]) -> None:
-        update_not_none(field_schema, minLength=cls.min_length, maxLength=cls.max_length)
+    def __get_pydantic_core_schema__(cls, source_type, handler):
+        # type: (Any, GetCoreSchemaHandler) -> CoreSchema
+        return core_schema.no_info_plain_validator_function(
+            cls._validate,
+            serialization=core_schema.to_string_ser_schema(),
+        )
 
     @classmethod
-    def __get_validators__(cls):
-        yield cls.validate
+    def __get_pydantic_json_schema__(cls, schema, handler):
+        # type: (CoreSchema, GetJsonSchemaHandler) -> JsonSchemaValue
+        return {"type": "string", "format": "uri"}
 
     @classmethod
-    def validate(cls, value: Any, field: "ModelField", config: "BaseConfig"):
+    def _validate(cls, value):
+        # type: (Any) -> "AnyUrl"
         if isinstance(value, cls):
             return value
-        return cls(cast(str, constr_length_validator(value, field, config)))
-
-
-class AnyUrl(_RegexGroupStr):
-    _rfc3986 = RFC3986Regex()
-    _pattern = _rfc3986.URI
-    _error_msg = "invalid uri or missing scheme"
-
-    def __init__(self, url):
-        super().__init__(url)
+        if not isinstance(value, str):
+            raise ValueError(f"string required, got {type(value)}")
+        return cls(value)
 
     @property
     def scheme(self):
@@ -197,7 +204,8 @@ class AnyUrl(_RegexGroupStr):
         return self._get("port")
 
     @property
-    def path(self) -> str:
+    def path(self):
+        # type: () -> str
         return (
             self._parts.get("path_host")
             or self._parts.get("path_abs")

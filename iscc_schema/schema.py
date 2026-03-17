@@ -2,17 +2,11 @@
 #   filename:  iscc-all.yaml
 
 from __future__ import annotations
-
-from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional, Union
-
-try:
-    from pydantic.v1 import Field
-except ImportError:
-    from pydantic import Field
+from pydantic import AwareDatetime, ConfigDict, Field
 from iscc_schema.fields import AnyUrl
 from iscc_schema.base import BaseModel
+from typing import Any
 
 
 class Chain(Enum):
@@ -28,74 +22,79 @@ class Chain(Enum):
 
 class IsccDeclaration(BaseModel):
     """
-    Field relevant in context with public ISCC declerations
+    Fields relevant in context with public ISCC declarations
     """
 
-    original: Optional[bool] = Field(
+    original: bool | None = Field(
         None,
-        description=(
-            "The signee of the declaring transaction claims to be the original creator of the work"
-            " manifested by the identified digital content."
-        ),
-        example=True,
-        x_iscc_context="http://purl.org/iscc/terms/#original",
+        description="The signee of the declaring transaction claims to be the original creator of the work manifested by the identified digital content.",
+        examples=[True],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#original"},
     )
-    redirect: Optional[AnyUrl] = Field(
+    redirect: AnyUrl | None = Field(
         None,
-        description=(
-            "URL to which an ISCC resolver should redirect the ISCC-ID. **Supports URI template"
-            " `(iscc-id)`**"
-        ),
-        example="https://example.com/land-here-when-resolving-iscc-id",
-        x_iscc_context="http://purl.org/iscc/terms/#redirect",
+        description="URL to which an ISCC resolver should redirect the ISCC-ID. **Supports URI template `(iscc-id)`**",
+        examples=["https://example.com/land-here-when-resolving-iscc-id"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#redirect"},
     )
-    chain: Optional[Chain] = Field(
+    chain: Chain | None = Field(
         None,
         description="The blockchain on which an ISCC-CODE is declared.",
-        example="ETHEREUM",
-        x_iscc_context="http://purl.org/iscc/terms/#chain",
+        examples=["ETHEREUM"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#chain"},
     )
-    wallet: Optional[str] = Field(
+    wallet: str | None = Field(
         None,
         description="The wallet-address that signs an ISCC declaration.",
-        example="0xb794f5ea0ba39494ce839613fffba74279579268",
-        x_iscc_context="http://purl.org/iscc/terms/#wallet",
+        examples=["0xb794f5ea0ba39494ce839613fffba74279579268"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#wallet"},
     )
-    credentials: Optional[Union[str, Dict[str, Any], List]] = Field(
+    credentials: str | dict[str, Any] | list[Any] | None = Field(
         None,
-        description=(
-            "One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one ore"
-            " more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the"
-            " value according to the following rules <ul> <li>If the value is a JSON `string`"
-            " interpret it as an URI. The expectation is that the URI dereferences to a response"
-            " with Content-type `application/json` where the data is a VC or an `array` of"
-            " VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the"
-            " [Verifiable Credentials JSON"
-            " Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an"
-            " `array` and an item in the `array` is a JSON `object` interpret it as a"
-            " VC.</li><li>If the value is an `array` and an items is a `string` interpret the item"
-            " as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into"
-            " account if the"
-            " [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions)"
-            " matches with the declarer (e.g."
-            " [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md)"
-            " representation of the declarers address).</li> </ul>"
-        ),
-        example="https://schema.iscc.codes/examples/vc.json",
-        x_iscc_context="https://www.w3.org/2018/credentials#VerifiableCredential",
+        description="One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one or more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul>",
+        examples=["https://schema.iscc.codes/examples/vc.json"],
+        json_schema_extra={
+            "x-iscc-context": "https://www.w3.org/2018/credentials#VerifiableCredential"
+        },
     )
-    verifications: Optional[List[Dict[str, Any]]] = Field(
+    verifications: list[dict[str, Any]] | None = Field(
         None,
-        description=(
-            "A list of self-verifications. Self-verifications are public URLs under the"
-            " account/authority of the signee. The verification URL must respond to a GET request"
-            " with text that contains a multihash of the ISCC declaration signees wallet address in"
-            " the format of `verify:<multihash-of-wallet-address>:verify`."
-        ),
-        example=[{"url": "https://twitter.com/titusz/status/1490104312051257347"}],
-        max_items=128,
-        unique_items=True,
-        x_iscc_context="http://purl.org/iscc/terms/#verifications",
+        description="A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verify:<multihash-of-wallet-address>:verify`.",
+        examples=[[{"url": "https://twitter.com/titusz/status/1490104312051257347"}]],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#verifications"},
+        max_length=128,
+    )
+
+
+class Signature(BaseModel):
+    """
+    Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto) signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.
+    """
+
+    version: str = Field(
+        ..., description="Signature suite version identifier.", examples=["ISCC-SIG v1.0"]
+    )
+    controller: AnyUrl | None = Field(
+        None, description="URI identifying the key controller (e.g., DID or CID)."
+    )
+    keyid: str | None = Field(None, description="Key identifier within the controller document.")
+    pubkey: str | None = Field(
+        None,
+        description="Ed25519 public key in multibase format (z + base58btc(0xED01 + 32-byte key)) as specified in [W3C Multikey](https://www.w3.org/TR/cid/#Multikey).",
+        examples=["z6MkrJVnaZkeFzdQyMZu1cgjg7k1pZZ6pvBQ7XJPt4swbTQ2"],
+        max_length=48,
+        min_length=48,
+        pattern="^z[1-9A-HJ-NP-Za-km-z]+$",
+    )
+    proof: str = Field(
+        ...,
+        description="EdDSA signature in multibase format (z + base58btc(64-byte signature)) conforming to [eddsa-jcs-2022](https://www.w3.org/TR/vc-di-eddsa/#eddsa-jcs-2022).",
+        examples=[
+            "z2HnFSSPPBzR36zdDgK8PbEHeXbR56YF24jwMpt3R1eHXQzJDMWS93FCzpvJpwTWd3GAVFuUfjoJdcnTMuVor51aX"
+        ],
+        max_length=89,
+        min_length=89,
+        pattern="^z[1-9A-HJ-NP-Za-km-z]+$",
     )
 
 
@@ -104,36 +103,40 @@ class IsccCrypto(BaseModel):
     Cryptography related ISCC Metadata
     """
 
-    tophash: Optional[str] = Field(
+    tophash: str | None = Field(
         None,
-        description=(
-            "A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of"
-            " metahash and datahash (default blake3)."
-        ),
-        example="bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja",
+        description="A [Multihash](https://multiformats.io/multihash/) of the concatenation (binding) of metahash and datahash (default blake3).",
+        examples=["bdyqnosmb56tqudeibogyygmf2b25xs7wpg4zux4zcts2v6llqmnj4ja"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#tophash"},
         min_length=40,
-        x_iscc_context="http://purl.org/iscc/terms/#tophash",
     )
-    metahash: Optional[str] = Field(
+    metahash: str | None = Field(
         None,
-        description=(
-            "A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of the supplied"
-            " metadata. The hash is created from `name` and `description` fields or `meta` if"
-            " supplied."
-        ),
-        example="f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9",
+        description="A [Multiformats](https://multiformats.io) multihash or IPFS CIDv1 of the supplied metadata. The hash is created from `name` and `description` fields or `meta` if supplied.",
+        examples=["f01551220b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#metahash"},
         min_length=40,
-        x_iscc_context="http://purl.org/iscc/terms/#metahash",
     )
-    datahash: Optional[str] = Field(
+    datahash: str | None = Field(
         None,
-        description=(
-            "A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default"
-            " blake3)."
-        ),
-        example="bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq",
+        description="A [Multihash](https://multiformats.io/multihash/) of the *digital content* (default blake3).",
+        examples=["bdyqk6e2jxh27tingubae32rw3teutg6lexe23qisw7gjve6k4qpteyq"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#datahash"},
         min_length=40,
-        x_iscc_context="http://purl.org/iscc/terms/#datahash",
+    )
+    nonce: str | None = Field(
+        None,
+        description="Cryptographic nonce for replay protection. A 128-bit random value encoded as lowercase hexadecimal.",
+        examples=["0013a3c214c05796673503e6e549446d"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#nonce"},
+        max_length=32,
+        min_length=32,
+        pattern="^[0-9a-f]{32}$",
+    )
+    signature: Signature | None = Field(
+        None,
+        description="Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto) signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#signature"},
     )
 
 
@@ -142,62 +145,54 @@ class IsccNft(BaseModel):
     Metadata for NFT Marketplaces
     """
 
-    external_url: Optional[AnyUrl] = Field(
+    external_url: AnyUrl | None = Field(
         None,
-        description=(
-            "This is the URL that will appear below the asset's image on some NFT Marketplaces and"
-            " will allow users to leave the site and view the item on your site. **Supports URI"
-            " template `(iscc-id)`**."
-        ),
-        x_iscc_context="http://purl.org/iscc/terms/#external_url",
+        description="This is the URL that will appear below the asset's image on some NFT Marketplaces and will allow users to leave the site and view the item on your site. **Supports URI template `(iscc-id)`**.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#external_url"},
     )
-    animation_url: Optional[AnyUrl] = Field(
+    animation_url: AnyUrl | None = Field(
         None,
         description="A URL to a multi-media attachment for the item.",
-        x_iscc_context="http://purl.org/iscc/terms/#animation_url",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#animation_url"},
     )
-    properties: Optional[Dict[str, Any]] = Field(
+    properties: dict[str, Any] | None = Field(
         None,
-        description=(
-            "Arbitrary properties. Values may be strings, numbers, object or arrays. Properties"
-            " defined here may show up on NFT marketplaces. See"
-            " [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)"
-        ),
-        example={
-            "simple_property": "example value",
-            "rich_property": {
-                "name": "Name",
-                "value": "123",
-                "display_value": "123 Example Value",
-                "class": "emphasis",
-                "css": {"color": "#ffffff", "font-weight": "bold", "text-decoration": "underline"},
-            },
-            "array_property": {"name": "Name", "value": [1, 2, 3, 4], "class": "emphasis"},
-        },
-        x_iscc_context="http://purl.org/iscc/terms/#properties",
-    )
-    attributes: Optional[List[Dict[str, Any]]] = Field(
-        None,
-        description=(
-            "Similar to `properties` but as an array of objects. These attributes will show up on"
-            " some NFT marketplaces."
-        ),
-        example=[
-            {"trait_type": "METAL", "value": "SILVER"},
-            {"display_type": "number", "trait_type": "GENERATION", "value": 1},
+        description="Arbitrary properties. Values may be strings, numbers, object or arrays. Properties defined here may show up on NFT marketplaces. See [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155#metadata)",
+        examples=[
+            {
+                "simple_property": "example value",
+                "rich_property": {
+                    "name": "Name",
+                    "value": "123",
+                    "display_value": "123 Example Value",
+                    "class": "emphasis",
+                    "css": {
+                        "color": "#ffffff",
+                        "font-weight": "bold",
+                        "text-decoration": "underline",
+                    },
+                },
+                "array_property": {"name": "Name", "value": [1, 2, 3, 4], "class": "emphasis"},
+            }
         ],
-        x_iscc_context="http://purl.org/iscc/terms/#attributes",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#properties"},
     )
-    nft: Optional[AnyUrl] = Field(
+    attributes: list[dict[str, Any]] | None = Field(
         None,
-        description=(
-            "A unique URI for a non-fungible token of the identified content. The URI must contain"
-            " references to the blockchain, smart-contract and token. The recommended schemes are"
-            " [CAIP-22](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-22.md) and"
-            " [CAIP-29](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-29.md)."
-        ),
-        example="eip155:1/erc721:0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/771769",
-        x_iscc_context="http://purl.org/iscc/terms/#nft",
+        description="Similar to `properties` but as an array of objects. These attributes will show up on some NFT marketplaces.",
+        examples=[
+            [
+                {"trait_type": "METAL", "value": "SILVER"},
+                {"display_type": "number", "trait_type": "GENERATION", "value": 1},
+            ]
+        ],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#attributes"},
+    )
+    nft: AnyUrl | None = Field(
+        None,
+        description="A unique URI for a non-fungible token of the identified content. The URI must contain references to the blockchain, smart-contract and token. The recommended schemes are [CAIP-22](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-22.md) and [CAIP-29](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-29.md).",
+        examples=["eip155:1/erc721:0x06012c8cf97BEaD5deAe237070F9587f8E7A266d/771769"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#nft"},
     )
 
 
@@ -215,113 +210,246 @@ class Mode(Enum):
 
 class IsccTechnical(BaseModel):
     """
-    Technical ISCC Metadata automaticaly inferred from the *digital content* by an ISCC Processor
+    Technical ISCC Metadata automatically inferred from the *digital content* by an ISCC Processor
     """
 
-    mode: Optional[Mode] = Field(
-        None, description="The perceptual mode used to create the ISCC-CODE.", example="video"
+    mode: Mode | None = Field(
+        None,
+        description="The perceptual mode used to create the ISCC-CODE.",
+        examples=["video"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#mode"},
     )
-    created: Optional[datetime] = Field(
+    created: AwareDatetime | None = Field(
         None,
         description="Datetime the ISCC was created for the item.",
-        x_iscc_context="http://schema.org/dateCreated",
+        json_schema_extra={"x-iscc-context": "http://schema.org/dateCreated"},
     )
-    filename: Optional[str] = Field(
+    filename: str | None = Field(
         None,
-        description=(
-            "Filename of the referenced **digital content** (automatically used as fallback if the"
-            " `name` field was not specified for ISCC processing)"
-        ),
-        x_iscc_context="http://purl.org/iscc/terms/#filename",
+        description="Filename of the referenced **digital content** (automatically used as fallback if the `name` field was not specified for ISCC processing)",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#filename"},
     )
-    filesize: Optional[int] = Field(
+    filesize: int | None = Field(
         None,
         description="File size of media asset in number of bytes.",
-        x_iscc_context="http://schema.org/fileSize",
+        json_schema_extra={"x-iscc-context": "http://schema.org/fileSize"},
     )
-    mediatype: Optional[str] = Field(
+    datasize: int | None = Field(
         None,
-        description=(
-            "An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml)"
-            " (MIME type)"
-        ),
-        example="image/png",
-        x_iscc_context="http://schema.org/encodingFormat",
+        description="Size of the data processed for ISCC generation in number of bytes. Use this field when the ISCC is computed over data that is not a standalone file, such as an individual plane within a bioimage, a scene within a multi-scene container, or a data stream extracted from a composite format.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#datasize"},
     )
-    duration: Optional[int] = Field(
+    mediatype: str | None = Field(
         None,
-        description="Duration of audio-visual media in secondes.",
-        x_iscc_context="http://schema.org/duration",
+        description="An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)",
+        examples=["image/png"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/encodingFormat"},
     )
-    fps: Optional[float] = Field(
+    duration: int | None = Field(
+        None,
+        description="Duration of audio-visual media in seconds.",
+        json_schema_extra={"x-iscc-context": "http://schema.org/duration"},
+    )
+    fps: float | None = Field(
         None,
         description="Frames per second of video assets.",
-        example=24,
+        examples=[24],
         ge=1.0,
-        x_iscc_context="http://purl.org/iscc/terms/#fps",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#fps"},
     )
-    width: Optional[int] = Field(
+    width: int | None = Field(
         None,
         description="Width of visual media in number of pixels.",
-        example=640,
-        x_iscc_context="http://purl.org/iscc/terms/#width",
+        examples=[640],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#width"},
     )
-    height: Optional[int] = Field(
+    height: int | None = Field(
         None,
         description="Height of visual media in number of pixels.",
-        example=480,
+        examples=[480],
         ge=1,
-        x_iscc_context="http://purl.org/iscc/terms/#height",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#height"},
     )
-    characters: Optional[int] = Field(
+    characters: int | None = Field(
         None,
         description="Number of text characters (code points after Unicode normalization)",
-        example=55689,
-        x_iscc_context="http://purl.org/iscc/terms/#characters",
+        examples=[55689],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#characters"},
     )
-    pages: Optional[int] = Field(
+    pages: int | None = Field(
         None,
         description="Number of pages (for paged documents only)",
-        example=77,
-        x_iscc_context="http://schema.org/numberOfPages",
+        examples=[77],
+        json_schema_extra={"x-iscc-context": "http://schema.org/numberOfPages"},
     )
-    language: Optional[Union[str, List[str]]] = Field(
+    language: str | list[str] | None = Field(
         None,
         description="Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).",
-        example="en-US",
-        x_iscc_context="http://schema.org/inLanguage",
+        examples=["en-US"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/inLanguage"},
     )
-    parts: Optional[List[str]] = Field(
+    parts: list[str | dict[str, Any]] | None = Field(
         None,
-        description=(
-            "Indicates items that are part of this item via Content-Codes (inverse-property"
-            " belongs)."
-        ),
-        x_iscc_context="http://purl.org/iscc/terms/#parts",
+        description="Indicates items that are part of this item via Content-Codes (inverse-property belongs).",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#parts"},
     )
-    part_of: Optional[List[str]] = Field(
+    part_of: list[str] | None = Field(
         None,
         description="Indicates that this item is part of other items via their Content-Code.",
-        x_iscc_context="http://purl.org/iscc/terms/#part_of",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#part_of"},
     )
-    features: Optional[List[Dict[str, Any]]] = Field(
+    features: list[dict[str, Any]] | None = Field(
         None,
         description="Granular features of the *digital content*.",
-        x_iscc_context="http://purl.org/iscc/terms/#features",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#features"},
     )
-    generator: Optional[str] = Field(
+    units: list[str] | None = Field(
+        None,
+        description="Individual ISCC-UNITs that make up a composite ISCC-CODE.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#units"},
+    )
+    generator: str | None = Field(
         None,
         description="Name and version of the software that generated the ISCC",
-        x_iscc_context="http://purl.org/iscc/terms/#generator",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#generator"},
     )
-    thumbnail: Optional[AnyUrl] = Field(
+    text: str | None = Field(
         None,
-        description=(
-            "URI an autogenerated user-presentable thumbnail-image that serves as a preview of the"
-            " digital content. The URI may be a Data-URL RFC2397."
-        ),
-        example="https://picsum.photos/200/300.jpg",
-        x_iscc_context="http://schema.org/thumbnailUrl",
+        description="Extracted plaintext of the *digital content*.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#text"},
+    )
+    thumbnail: AnyUrl | None = Field(
+        None,
+        description="URI of an autogenerated user-presentable thumbnail-image that serves as a preview of the digital content. The URI may be a Data-URL RFC2397.",
+        examples=["https://picsum.photos/200/300.jpg"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/thumbnailUrl"},
+    )
+
+
+class Form(Enum):
+    """
+    The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.
+    """
+
+    Article = "Article"
+    Audiobook = "Audiobook"
+    Book = "Book"
+    CoverArt = "CoverArt"
+    CreativeWork = "CreativeWork"
+    Dataset = "Dataset"
+    DigitalDocument = "DigitalDocument"
+    Episode = "Episode"
+    Movie = "Movie"
+    MusicComposition = "MusicComposition"
+    MusicRecording = "MusicRecording"
+    NewsArticle = "NewsArticle"
+    Painting = "Painting"
+    Periodical = "Periodical"
+    Photograph = "Photograph"
+    PresentationDigitalDocument = "PresentationDigitalDocument"
+    ScholarlyArticle = "ScholarlyArticle"
+    SoftwareApplication = "SoftwareApplication"
+    SoftwareSourceCode = "SoftwareSourceCode"
+    SpreadsheetDigitalDocument = "SpreadsheetDigitalDocument"
+    VisualArtwork = "VisualArtwork"
+    WebPage = "WebPage"
+
+
+class Train(Enum):
+    """
+    TDM reservation status for AI model training.
+    """
+
+    reserved = "reserved"
+    open = "open"
+
+
+class Inference(Enum):
+    """
+    TDM reservation status for inference-time content retrieval.
+    """
+
+    reserved = "reserved"
+    open = "open"
+
+
+class Derive(Enum):
+    """
+    TDM reservation status for AI-assisted content transformation.
+    """
+
+    reserved = "reserved"
+    open = "open"
+
+
+class Search(Enum):
+    """
+    TDM reservation status for search and discovery indexing.
+    """
+
+    reserved = "reserved"
+    open = "open"
+
+
+class Analyze(Enum):
+    """
+    TDM reservation status for automated content analysis.
+    """
+
+    reserved = "reserved"
+    open = "open"
+
+
+class Tdm(BaseModel):
+    """
+    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
+    """
+
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    train: Train | None = Field(None, description="TDM reservation status for AI model training.")
+    inference: Inference | None = Field(
+        None, description="TDM reservation status for inference-time content retrieval."
+    )
+    derive: Derive | None = Field(
+        None, description="TDM reservation status for AI-assisted content transformation."
+    )
+    search: Search | None = Field(
+        None, description="TDM reservation status for search and discovery indexing."
+    )
+    analyze: Analyze | None = Field(
+        None, description="TDM reservation status for automated content analysis."
+    )
+
+
+class Involvement(Enum):
+    """
+    Level of generative AI involvement in content creation.
+    """
+
+    human = "human"
+    ai_assisted = "ai_assisted"
+    human_supervised = "human_supervised"
+    ai_generated = "ai_generated"
+
+
+class Genai(BaseModel):
+    """
+    Machine-readable generative AI disclosure signals for content transparency. Omitted fields indicate that the disclosure status has not been determined.
+    """
+
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    involvement: Involvement | None = Field(
+        None, description="Level of generative AI involvement in content creation."
+    )
+    ai_system: str | None = Field(
+        None, description="Name or identifier of the generative AI system used.", max_length=256
+    )
+    digital_source_type: AnyUrl | None = Field(
+        None, description="IPTC Digital Source Type URI for granular content source classification."
     )
 
 
@@ -330,64 +458,76 @@ class IsccExtended(BaseModel):
     Extended ISCC Metadata
     """
 
-    media_id: Optional[str] = Field(
+    media_id: str | None = Field(
         None,
         description="Vendor specific (internal) identifier for the source media file.",
-        example="05VQ3BGTGFCJA",
-        x_iscc_context="http://schema.org/identifier",
+        examples=["05VQ3BGTGFCJA"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#media_id"},
     )
-    iscc_id: Optional[str] = Field(
+    iscc_id: str | None = Field(
         None,
-        description="The **ISCC-ID** of the digital content in canonical representation.",
-        example="ISCC:MAACAJINXFXA2SQX",
+        description="The **ISCC-ID** of the digital content in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
+        examples=["ISCC:MAACAJINXFXA2SQX"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#iscc_id"},
         max_length=73,
         min_length=15,
-        regex="^ISCC:[A-Z2-7]{10,73}$",
-        x_iscc_context="http://schema.org/identifier",
+        pattern="^ISCC:[A-Z2-7]{10,73}$",
     )
-    image: Optional[AnyUrl] = Field(
+    iscc_code: str | None = Field(
         None,
-        description=(
-            "URI for a user-presentable image that serves as a preview of the *digital content*."
-            " The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397)."
-            " If **ISCC** metadata is used as NFT metadata according to"
-            " [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or"
-            " [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the"
-            " URI should reference the actual digital content represented by the NFT."
-        ),
-        example="https://picsum.photos/200/300.jpg",
-        x_iscc_context="http://schema.org/image",
+        description="A composite **ISCC-CODE** in canonical representation. Explicit alternative to the more compact `iscc` field. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
+        examples=["ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#iscc"},
+        max_length=73,
+        min_length=15,
+        pattern="^ISCC:[A-Z2-7]{10,73}$",
     )
-    identifier: Optional[Union[str, List[str]]] = Field(
+    image: AnyUrl | None = Field(
         None,
-        description=(
-            "Other identifier(s) referencing the work, product or other abstraction of which the"
-            " referenced **digital content** is a full or partial manifestation."
-        ),
-        x_iscc_context="http://schema.org/identifier",
+        description="URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.",
+        examples=["https://picsum.photos/200/300.jpg"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/image"},
     )
-    content: Optional[AnyUrl] = Field(
+    identifier: str | list[str] | None = Field(
+        None,
+        description="Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.",
+        json_schema_extra={"x-iscc-context": "http://schema.org/identifier"},
+    )
+    content: AnyUrl | None = Field(
         None,
         description="URI of the *digital content* that was used to create this ISCC.",
-        x_iscc_context="http://schema.org/contentUrl",
+        json_schema_extra={"x-iscc-context": "http://schema.org/contentUrl"},
     )
-    keywords: Optional[Union[str, List[str]]] = Field(
+    keywords: str | list[str] | None = Field(
         None,
-        description=(
-            "Keywords or tags used to describe this content. Either a list of keywords or a sting"
-            " with comma separated keywords."
-        ),
-        x_iscc_context="http://schema.org/keywords",
+        description="Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.",
+        json_schema_extra={"x-iscc-context": "http://schema.org/keywords"},
     )
-    previous: Optional[str] = Field(
+    previous: str | None = Field(
         None,
         description="ISCC of the preceding version of this item.",
-        x_iscc_context="http://purl.org/iscc/terms/#previous",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#previous"},
     )
-    version: Optional[Union[int, str]] = Field(
+    form: Form | None = Field(
+        None,
+        description="The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.",
+        examples=["ScholarlyArticle"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/additionalType"},
+    )
+    version: int | str | None = Field(
         None,
         description="The version of the CreativeWork embodied by a specified resource.",
-        x_iscc_context="http://schema.org/version",
+        json_schema_extra={"x-iscc-context": "http://schema.org/version"},
+    )
+    tdm: Tdm | None = Field(
+        None,
+        description="Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#tdm"},
+    )
+    genai: Genai | None = Field(
+        None,
+        description="Machine-readable generative AI disclosure signals for content transparency. Omitted fields indicate that the disclosure status has not been determined.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#genai"},
     )
 
 
@@ -396,45 +536,35 @@ class IsccEmbeddable(BaseModel):
     Metadata intended to be embedded into the media asset.
     """
 
-    creator: Optional[Union[str, List[str]]] = Field(
+    creator: str | list[str] | None = Field(
         None,
         description="An entity primarily responsible for making the resource.",
-        example="Agatha Christie",
-        x_iscc_context="http://schema.org/creator",
+        examples=["Agatha Christie"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/creator"},
     )
-    license: Optional[AnyUrl] = Field(
+    license: AnyUrl | None = Field(
         None,
         description="URI of license for the identified *digital content*.",
-        example="https://example.com/license-terms-for-this-item",
-        x_iscc_context="http://schema.org/license",
+        examples=["https://example.com/license-terms-for-this-item"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/license"},
     )
-    acquire: Optional[AnyUrl] = Field(
+    acquire: AnyUrl | None = Field(
         None,
-        description=(
-            "This field must contain a valid URL referring to a page showing information about how"
-            " one can acquire a license for the item. This may be a page of a web shop or NFT"
-            " marketplace ready for providing a license."
-        ),
-        example="https://example.com/buy-license-for-item-here",
-        x_iscc_context="http://schema.org/acquireLicensePage",
+        description="This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.",
+        examples=["https://example.com/buy-license-for-item-here"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/acquireLicensePage"},
     )
-    credit: Optional[str] = Field(
+    credit: str | None = Field(
         None,
-        description=(
-            "A line of text that you expect users of the image (such as Google Images) to display"
-            " alongside the image."
-        ),
-        example="Frank Farian - Getty Images",
-        x_iscc_context="http://schema.org/creditText",
+        description="A line of text that you expect users of the image (such as Google Images) to display alongside the image.",
+        examples=["Frank Farian - Getty Images"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/creditText"},
     )
-    rights: Optional[str] = Field(
+    rights: str | None = Field(
         None,
-        description=(
-            "Contains any necessary copyright notice and should identify the current owner of the"
-            " copyright of this work with associated intellectual property rights."
-        ),
-        example="© Copyright 2022 ISCC Foundation - www.iscc.codes",
-        x_iscc_context="http://schema.org/copyrightNotice",
+        description="Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.",
+        examples=["© Copyright 2022 ISCC Foundation - www.iscc.codes"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/copyrightNotice"},
     )
 
 
@@ -443,33 +573,28 @@ class IsccBasic(BaseModel):
     Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash generation.
     """
 
-    name: Optional[str] = Field(
+    name: str | None = Field(
         None,
-        description=(
-            "The title or name of the intangible creation manifested by the identified *digital"
-            " content*. **Used as input for ISCC Meta-Code generation**."
-        ),
-        example="The Never Ending Story",
+        description="The title or name of the intangible creation manifested by the identified *digital content*. **Used as input for ISCC Meta-Code generation**.",
+        examples=["The Never Ending Story"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/name"},
         max_length=128,
-        x_iscc_context="http://schema.org/name",
+        min_length=1,
     )
-    description: Optional[str] = Field(
+    description: str | None = Field(
         None,
-        description=(
-            "Description of the *digital content* identified by the **ISCC**. **Used as input for"
-            " ISCC Meta-Code generation**. Any user presentable text string (including Markdown"
-            " text) indicative of the identity  of the referent may be used."
-        ),
-        example="a 1984 fantasy film co-written and directed by *Wolfgang Petersen*",
+        description="Description of the *digital content* identified by the **ISCC**. **Used as input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.",
+        examples=["a 1984 fantasy film co-written and directed by *Wolfgang Petersen*"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/disambiguatingDescription"},
         max_length=4096,
-        x_iscc_context="http://schema.org/disambiguatingDescription",
+        min_length=1,
     )
-    meta: Optional[str] = Field(
+    meta: str | None = Field(
         None,
         description="Subject, industry, or use-case specific metadata encoded as Data-URL.",
-        example="data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0=",
+        examples=["data:application/json;charset=utf-8;base64,eyJleHRlbmRlZCI6Im1ldGFkYXRhIn0="],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#meta"},
         max_length=16384,
-        x_iscc_context="http://purl.org/iscc/terms/#meta",
     )
 
 
@@ -478,17 +603,14 @@ class IsccMinimal(BaseModel):
     Minimal required ISCC Metadata
     """
 
-    iscc: Optional[str] = Field(
+    iscc: str | None = Field(
         None,
-        description=(
-            "An **ISCC-CODE** in canonical representation. This is the minimal required field for a"
-            " valid ISCC Metadata object."
-        ),
-        example="ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
+        description="An **ISCC-CODE** in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
+        examples=["ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#iscc"},
         max_length=73,
         min_length=15,
-        regex="^ISCC:[A-Z2-7]{10,73}$",
-        x_iscc_context="http://purl.org/iscc/terms/#iscc",
+        pattern="^ISCC:[A-Z2-7]{10,73}$",
     )
 
 
@@ -509,24 +631,21 @@ class IsccJsonld(BaseModel):
     The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-schema.org/) reference
     """
 
-    context_: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/context",
+    context_: AnyUrl | None = Field(
+        "http://purl.org/iscc/context/0.5.0.jsonld",
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
     )
-    type_: Optional[Type] = Field(
+    type_: Type | None = Field(
         "CreativeWork",
         alias="@type",
-        description=(
-            "The type of digital content according to schema.org classes (TextDigitalDocument,"
-            " ImageObject, AudioObject, VideoObject)."
-        ),
+        description="The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).",
     )
-    schema_: Optional[AnyUrl] = Field(
-        "http://purl.org/iscc/schema",
+    schema_: AnyUrl | None = Field(
+        "http://purl.org/iscc/schema/0.5.0.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
-        x_iscc_context="http://purl.org/iscc/terms/#$schema",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#$schema"},
     )
 
 

@@ -8,6 +8,10 @@
 
     **Embedding**:  Use `Iptc.Application2.Headline` and `Xmp.photoshop.Headline` for image embedding
 
+    **Standard**:  ISO 24138:2024
+
+    **Status**:  stable
+
 ### **description**
 
 !!! term "<small><http://schema.org/disambiguatingDescription></small>"
@@ -17,6 +21,10 @@
     **Comment**:  Description of the *digital content* identified by the **ISCC**. **Used as input for ISCC Meta-Code generation**. Any user presentable text string (including Markdown text) indicative of the identity  of the referent may be used.
 
     **Embedding**:  Use `Exif.Image.ImageDescription`, `Iptc.Application2.Caption` and `Xmp.dc.description` for image embedding.
+
+    **Standard**:  ISO 24138:2024
+
+    **Status**:  stable
 
 ### **creator**
 
@@ -28,6 +36,8 @@
 
     **Embedding**:  Use `Exif.Image.Artist`, `Iptc.Application2.Byline` and `Xmp.dc.creator` for emedding this field into image metadata.
 
+    **Status**:  draft
+
 ### **license**
 
 !!! term "<small><http://schema.org/license></small>"
@@ -37,6 +47,8 @@
     **Comment**:  URI of license for the identified *digital content*.
 
     **Embedding**:  Use `Xmp.xmpRights.WebStatement` for embedding as image metadata.
+
+    **Status**:  stable
 
 ### **acquire**
 
@@ -48,6 +60,8 @@
 
     **Embedding**:  Use `Xmp.plus.Licensor[1]/plus:LicensorURL` for embedding in images.
 
+    **Status**:  stable
+
 ### **credit**
 
 !!! term "<small><http://schema.org/creditText></small>"
@@ -57,6 +71,8 @@
     **Comment**:  A line of text that you expect users of the image (such as Google Images) to display alongside the image.
 
     **Embedding**:  Use `Iptc.Application2.Credit` and `Xmp.photoshop.Credit` for metadata embedding.
+
+    **Status**:  draft
 
 ### **rights**
 
@@ -68,21 +84,7 @@
 
     **Embedding**:  Use `Exif.Image.Copyright`, `Iptc.Application2.Copyright` and `Xmp.dc.rights` for embedding.
 
-### **media_id**
-
-!!! term "<small><http://schema.org/identifier></small>"
-
-    The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links.
-
-    **Comment**:  Vendor specific (internal) identifier for the source media file.
-
-### **iscc_id**
-
-!!! term "<small><http://schema.org/identifier></small>"
-
-    The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links.
-
-    **Comment**:  The **ISCC-ID** of the digital content in canonical representation.
+    **Status**:  draft
 
 ### **image**
 
@@ -92,6 +94,8 @@
 
     **Comment**:  URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.
 
+    **Status**:  draft
+
 ### **identifier**
 
 !!! term "<small><http://schema.org/identifier></small>"
@@ -99,6 +103,10 @@
     The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details.
 
     **Comment**:  Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
+
+    **Standard**:  ISO 24138:2024
+
+    **Status**:  draft
 
 ### **content**
 
@@ -108,13 +116,29 @@
 
     **Comment**:  URI of the *digital content* that was used to create this ISCC.
 
+    **Status**:  draft
+
 ### **keywords**
 
 !!! term "<small><http://schema.org/keywords></small>"
 
     Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.
 
-    **Comment**:  Keywords or tags used to describe this content. Either a list of keywords or a sting with comma separated keywords.
+    **Comment**:  Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.
+
+    **Standard**:  ISO 24138:2024
+
+    **Status**:  stable
+
+### **form**
+
+!!! term "<small><http://schema.org/additionalType></small>"
+
+    An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in.
+
+    **Comment**:  The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.
+
+    **Status**:  draft
 
 ### **version**
 
@@ -123,6 +147,8 @@
     The version of the *digital content* identified by the ISCC.
 
     **Comment**:  The version of the CreativeWork embodied by a specified resource.
+
+    **Status**:  draft
 
 ### **created**
 
@@ -140,6 +166,10 @@
 
     **Comment**:  File size of media asset in number of bytes.
 
+    **Standard**:  ISO 24138:2024
+
+    **Status**:  stable
+
 ### **mediatype**
 
 !!! term "<small><http://schema.org/encodingFormat></small>"
@@ -148,13 +178,21 @@
 
     **Comment**:  An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)
 
+    **Standard**:  ISO 24138:2024
+
+    **Status**:  stable
+
 ### **duration**
 
 !!! term "<small><http://schema.org/duration></small>"
 
     The duration of the item (movie, audio recording, event, etc.) in [ISO 8601 date format](https://en.wikipedia.org/wiki/ISO_8601).
 
-    **Comment**:  Duration of audio-visual media in secondes.
+    **Comment**:  Duration of audio-visual media in seconds.
+
+    **Standard**:  ISO 24138:2024
+
+    **Status**:  stable
 
 ### **pages**
 
@@ -164,6 +202,8 @@
 
     **Comment**:  Number of pages (for paged documents only)
 
+    **Status**:  draft
+
 ### **language**
 
 !!! term "<small><http://schema.org/inLanguage></small>"
@@ -172,13 +212,21 @@
 
     **Comment**:  Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).
 
+    **Standard**:  ISO 24138:2024
+
+    **Status**:  stable
+
 ### **thumbnail**
 
 !!! term "<small><http://schema.org/thumbnailUrl></small>"
 
     A thumbnail image relevant to the Thing.
 
-    **Comment**:  URI an autogenerated user-presentable thumbnail-image that serves as a preview of the digital content. The URI may be a Data-URL RFC2397.
+    **Comment**:  URI of an autogenerated user-presentable thumbnail-image that serves as a preview of the digital content. The URI may be a Data-URL RFC2397.
+
+    **Standard**:  ISO 24138:2024
+
+    **Status**:  stable
 
 ### **credentials**
 
@@ -186,5 +234,7 @@
 
     A credential is a set of one or more claims made by an issuer. A verifiable credential is a tamper-evident credential that has authorship that can be cryptographically verified. Verifiable credentials can be used to build verifiable presentations, which can also be cryptographically verified. The claims in a credential can be about different subjects.
 
-    **Comment**:  One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one ore more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul>
+    **Comment**:  One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one or more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul>
+
+    **Status**:  draft
 
