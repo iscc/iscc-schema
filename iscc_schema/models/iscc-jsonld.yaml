@@ -30,4 +30,5 @@ properties:
     description: The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.
     readOnly: true
     x-iscc-context: http://purl.org/iscc/terms/#$schema
+    x-iscc-status: draft
     x-iscc-standard: ISO 24138:2024

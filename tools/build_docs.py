@@ -75,6 +75,9 @@ def _render_schema_sections(schemata):
                 title += f"<{attrs.get('x-iscc-context')}>\n"
             if attrs.get("x-iscc-standard"):
                 title += f"<small>{attrs.get('x-iscc-standard')}</small>\n"
+            status = attrs.get("x-iscc-status")
+            if status:
+                title += f"<small>Status: **{status}**</small>\n"
             description = attrs.get("description")
             if attrs.get("example"):
                 description += f"<br><br>**Example**: `{attrs['example']}`"
@@ -136,6 +139,9 @@ def _build_standalone_doc(schema_file, category, extra_text=""):
         heading = f"**{prop}**\n"
         if attrs.get("x-iscc-context"):
             heading += f"<{attrs.get('x-iscc-context')}>\n"
+        status = attrs.get("x-iscc-status")
+        if status:
+            heading += f"<small>Status: **{status}**</small>\n"
         description = attrs.get("description")
         if attrs.get("example"):
             description += f"<br><br>**Example**: `{attrs['example']}`"
@@ -182,6 +188,9 @@ def _render_context_terms(schemata):
                 doc += f"<small><{fields.get('x-iscc-context')}></small>\n"
                 if fields.get("x-iscc-standard"):
                     doc += f"<small>{fields.get('x-iscc-standard')}</small>\n"
+                status = fields.get("x-iscc-status")
+                if status:
+                    doc += f"<small>Status: **{status}**</small>\n"
                 doc += '!!! term ""\n'
                 doc += f"    {fields['description']}\n\n"
     return doc

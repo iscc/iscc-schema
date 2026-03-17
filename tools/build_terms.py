@@ -54,6 +54,8 @@ def build_terms_schema():
                 doc += f"    **Embedding**:  {data['x-iscc-embed']}\n\n"
             if data.get("x-iscc-standard"):
                 doc += f"    **Standard**:  {data['x-iscc-standard']}\n\n"
+            if data.get("x-iscc-status"):
+                doc += f"    **Status**:  {data['x-iscc-status']}\n\n"
 
     with open(MARKDOWN_TERMS_SCHEMA, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(doc)
@@ -69,6 +71,8 @@ def build_terms_iscc():
         doc += f"    {data['description']}\n\n"
         if data.get("x-iscc-standard"):
             doc += f"    **Standard**:  {data['x-iscc-standard']}\n\n"
+        if data.get("x-iscc-status"):
+            doc += f"    **Status**:  {data['x-iscc-status']}\n\n"
 
     with open(MARKDOWN_TERMS_ISCC, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(doc)
@@ -92,6 +96,8 @@ def _build_terms_for_schemas(schemata, outpath):
             doc += f"### **{term}**\n\n"
             doc += f'!!! term "<small><{fields["x-iscc-context"]}></small>"\n\n'
             doc += f"    {fields['description']}\n\n"
+            if fields.get("x-iscc-status"):
+                doc += f"    **Status**:  {fields['x-iscc-status']}\n\n"
 
     with open(outpath, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(doc)

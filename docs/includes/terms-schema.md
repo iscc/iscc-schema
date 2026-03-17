@@ -10,6 +10,8 @@
 
     **Standard**:  ISO 24138:2024
 
+    **Status**:  stable
+
 ### **description**
 
 !!! term "<small><http://schema.org/disambiguatingDescription></small>"
@@ -22,6 +24,8 @@
 
     **Standard**:  ISO 24138:2024
 
+    **Status**:  stable
+
 ### **creator**
 
 !!! term "<small><http://schema.org/creator></small>"
@@ -31,6 +35,8 @@
     **Comment**:  An entity primarily responsible for making the resource.
 
     **Embedding**:  Use `Exif.Image.Artist`, `Iptc.Application2.Byline` and `Xmp.dc.creator` for emedding this field into image metadata.
+
+    **Status**:  draft
 
 ### **license**
 
@@ -42,6 +48,8 @@
 
     **Embedding**:  Use `Xmp.xmpRights.WebStatement` for embedding as image metadata.
 
+    **Status**:  stable
+
 ### **acquire**
 
 !!! term "<small><http://schema.org/acquireLicensePage></small>"
@@ -51,6 +59,8 @@
     **Comment**:  This field must contain a valid URL referring to a page showing information about how one can acquire a license for the item. This may be a page of a web shop or NFT marketplace ready for providing a license.
 
     **Embedding**:  Use `Xmp.plus.Licensor[1]/plus:LicensorURL` for embedding in images.
+
+    **Status**:  stable
 
 ### **credit**
 
@@ -62,6 +72,8 @@
 
     **Embedding**:  Use `Iptc.Application2.Credit` and `Xmp.photoshop.Credit` for metadata embedding.
 
+    **Status**:  draft
+
 ### **rights**
 
 !!! term "<small><http://schema.org/copyrightNotice></small>"
@@ -72,6 +84,8 @@
 
     **Embedding**:  Use `Exif.Image.Copyright`, `Iptc.Application2.Copyright` and `Xmp.dc.rights` for embedding.
 
+    **Status**:  draft
+
 ### **image**
 
 !!! term "<small><http://schema.org/image></small>"
@@ -79,6 +93,8 @@
     An image of the item. This can be a URL or a fully described ImageObject.
 
     **Comment**:  URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.
+
+    **Status**:  draft
 
 ### **identifier**
 
@@ -90,6 +106,8 @@
 
     **Standard**:  ISO 24138:2024
 
+    **Status**:  draft
+
 ### **content**
 
 !!! term "<small><http://schema.org/contentUrl></small>"
@@ -97,6 +115,8 @@
     Actual bytes of the media object, for example the image file or video file.
 
     **Comment**:  URI of the *digital content* that was used to create this ISCC.
+
+    **Status**:  draft
 
 ### **keywords**
 
@@ -108,6 +128,8 @@
 
     **Standard**:  ISO 24138:2024
 
+    **Status**:  stable
+
 ### **form**
 
 !!! term "<small><http://schema.org/additionalType></small>"
@@ -116,6 +138,8 @@
 
     **Comment**:  The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.
 
+    **Status**:  draft
+
 ### **version**
 
 !!! term "<small><http://schema.org/version></small>"
@@ -123,6 +147,8 @@
     The version of the *digital content* identified by the ISCC.
 
     **Comment**:  The version of the CreativeWork embodied by a specified resource.
+
+    **Status**:  draft
 
 ### **created**
 
@@ -142,6 +168,8 @@
 
     **Standard**:  ISO 24138:2024
 
+    **Status**:  stable
+
 ### **mediatype**
 
 !!! term "<small><http://schema.org/encodingFormat></small>"
@@ -151,6 +179,8 @@
     **Comment**:  An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)
 
     **Standard**:  ISO 24138:2024
+
+    **Status**:  stable
 
 ### **duration**
 
@@ -162,6 +192,8 @@
 
     **Standard**:  ISO 24138:2024
 
+    **Status**:  stable
+
 ### **pages**
 
 !!! term "<small><http://schema.org/numberOfPages></small>"
@@ -169,6 +201,8 @@
     The number of pages in the book.
 
     **Comment**:  Number of pages (for paged documents only)
+
+    **Status**:  draft
 
 ### **language**
 
@@ -180,6 +214,8 @@
 
     **Standard**:  ISO 24138:2024
 
+    **Status**:  stable
+
 ### **thumbnail**
 
 !!! term "<small><http://schema.org/thumbnailUrl></small>"
@@ -190,6 +226,8 @@
 
     **Standard**:  ISO 24138:2024
 
+    **Status**:  stable
+
 ### **credentials**
 
 !!! term "<small><https://www.w3.org/2018/credentials#VerifiableCredential></small>"
@@ -197,4 +235,6 @@
     A credential is a set of one or more claims made by an issuer. A verifiable credential is a tamper-evident credential that has authorship that can be cryptographically verified. Verifiable credentials can be used to build verifiable presentations, which can also be cryptographically verified. The claims in a credential can be about different subjects.
 
     **Comment**:  One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one or more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul>
+
+    **Status**:  draft
 

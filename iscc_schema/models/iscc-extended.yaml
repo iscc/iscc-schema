@@ -7,6 +7,7 @@ properties:
     description: Vendor specific (internal) identifier for the source media file.
     example: 05VQ3BGTGFCJA
     x-iscc-context: http://purl.org/iscc/terms/#media_id
+    x-iscc-status: draft
     x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
       of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
       for representing many of these, either as textual strings or as URL (URI) links.
@@ -20,6 +21,7 @@ properties:
     maxLength: 73
     pattern: ^ISCC:[A-Z2-7]{10,73}$
     x-iscc-context: http://purl.org/iscc/terms/#iscc_id
+    x-iscc-status: stable
     x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
       of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
       for representing many of these, either as textual strings or as URL (URI) links.
@@ -33,7 +35,7 @@ properties:
     maxLength: 73
     pattern: ^ISCC:[A-Z2-7]{10,73}$
     x-iscc-context: http://purl.org/iscc/terms/#iscc
-    x-iscc-status: draft
+    x-iscc-status: stable
   image:
     type: string
     format: uri
@@ -44,6 +46,7 @@ properties:
       URI should reference the actual digital content represented by the NFT.
     example: https://picsum.photos/200/300.jpg
     x-iscc-context: http://schema.org/image
+    x-iscc-status: draft
     x-iscc-schema-doc: An image of the item. This can be a URL or a fully described ImageObject.
   identifier:
     description: Other identifier(s) referencing the work, product or other abstraction of
@@ -54,6 +57,7 @@ properties:
       items:
       - type: string
     x-iscc-context: http://schema.org/identifier
+    x-iscc-status: draft
     x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
       of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties
       for representing many of these, either as textual strings or as URL (URI) links. See
@@ -64,6 +68,7 @@ properties:
     type: string
     format: uri
     x-iscc-context: http://schema.org/contentUrl
+    x-iscc-status: draft
     x-iscc-schema-doc: Actual bytes of the media object, for example the image file or video
       file.
   keywords:
@@ -75,6 +80,7 @@ properties:
     description: Keywords or tags used to describe this content. Either a list of keywords
       or a string with comma separated keywords.
     x-iscc-context: http://schema.org/keywords
+    x-iscc-status: stable
     x-iscc-schema-doc: Keywords or tags used to describe this content. Multiple entries in
       a keywords list are typically delimited by commas.
     x-iscc-standard: ISO 24138:2024
@@ -82,6 +88,7 @@ properties:
     description: ISCC of the preceding version of this item.
     type: string
     x-iscc-context: http://purl.org/iscc/terms/#previous
+    x-iscc-status: draft
   form:
     type: string
     description: The form or kind of content identified, using a Schema.org CreativeWork subtype.
@@ -123,12 +130,14 @@ properties:
     - integer
     - string
     x-iscc-context: http://schema.org/version
+    x-iscc-status: draft
     x-iscc-schema-doc: The version of the *digital content* identified by the ISCC.
   tdm:
     type: object
     description: Machine-readable TDM reservation signals for AI-related content usage categories.
       Omitted fields indicate that the reservation status has not been determined.
     x-iscc-context: http://purl.org/iscc/terms/#tdm
+    x-iscc-status: draft
     additionalProperties: false
     properties:
       train:
@@ -166,6 +175,7 @@ properties:
     description: Machine-readable generative AI disclosure signals for content transparency.
       Omitted fields indicate that the disclosure status has not been determined.
     x-iscc-context: http://purl.org/iscc/terms/#genai
+    x-iscc-status: draft
     additionalProperties: false
     properties:
       involvement:

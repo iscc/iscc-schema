@@ -1,6 +1,8 @@
 ## Changelog
 
 ### [0.5.0] - 2026-03-17
+- Added `x-iscc-status` (stable/draft) to all fields across YAML schemas
+- Rendered `x-iscc-status` in generated schema docs, vocabulary page, and terms includes
 - Added `datasize` field for data processed size when ISCC is computed over sub-file data (e.g., bioimage planes)
 - Added GenAI Service Metadata schema for generative AI disclosure signals (involvement, ai_system, digital_source_type)
 - Added `genai` field to IsccMeta for embedding AI transparency signals in content metadata

@@ -13,6 +13,7 @@ properties:
     x-iscc-context: http://schema.org/creator
     x-iscc-schema-doc: The creator/author of this CreativeWork. This is the same as the Author
       property for CreativeWork.
+    x-iscc-status: draft
     x-iscc-embed: Use `Exif.Image.Artist`, `Iptc.Application2.Byline` and `Xmp.dc.creator`
       for emedding this field into image metadata.
   license:
@@ -46,6 +47,7 @@ properties:
     x-iscc-schema-doc: Text that can be used to credit person(s) and/or organization(s) associated
       with a published Creative Work.
     x-iscc-embed: Use `Iptc.Application2.Credit` and `Xmp.photoshop.Credit` for metadata embedding.
+    x-iscc-status: draft
   rights:
     type: string
     description: Contains any necessary copyright notice and should identify the current owner
@@ -56,3 +58,4 @@ properties:
       this Creative Work, ideally indicating the owner of the copyright for the Work.
     x-iscc-embed: Use `Exif.Image.Copyright`, `Iptc.Application2.Copyright` and `Xmp.dc.rights`
       for embedding.
+    x-iscc-status: draft

@@ -19,6 +19,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 ### **$schema**
 <http://purl.org/iscc/terms/#$schema>
 <small>ISO 24138:2024</small>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -40,6 +41,7 @@ Minimal required ISCC Metadata
 ### **iscc**
 <http://purl.org/iscc/terms/#iscc>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -63,6 +65,7 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 ### **name**
 <http://schema.org/name>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -71,6 +74,7 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 ### **description**
 <http://schema.org/disambiguatingDescription>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -79,6 +83,7 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 ### **meta**
 <http://purl.org/iscc/terms/#meta>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -88,6 +93,7 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 Metadata intended to be embedded into the media asset.
 ### **creator**
 <http://schema.org/creator>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -95,6 +101,7 @@ Metadata intended to be embedded into the media asset.
 
 ### **license**
 <http://schema.org/license>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -102,6 +109,7 @@ Metadata intended to be embedded into the media asset.
 
 ### **acquire**
 <http://schema.org/acquireLicensePage>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -109,6 +117,7 @@ Metadata intended to be embedded into the media asset.
 
 ### **credit**
 <http://schema.org/creditText>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -116,6 +125,7 @@ Metadata intended to be embedded into the media asset.
 
 ### **rights**
 <http://schema.org/copyrightNotice>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -145,6 +155,7 @@ Extended ISCC Metadata
     ```
 ### **media_id**
 <http://purl.org/iscc/terms/#media_id>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -152,6 +163,7 @@ Extended ISCC Metadata
 
 ### **iscc_id**
 <http://purl.org/iscc/terms/#iscc_id>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -159,6 +171,7 @@ Extended ISCC Metadata
 
 ### **iscc_code**
 <http://purl.org/iscc/terms/#iscc>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -166,6 +179,7 @@ Extended ISCC Metadata
 
 ### **image**
 <http://schema.org/image>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -174,6 +188,7 @@ Extended ISCC Metadata
 ### **identifier**
 <http://schema.org/identifier>
 <small>ISO 24138:2024</small>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -181,6 +196,7 @@ Extended ISCC Metadata
 
 ### **content**
 <http://schema.org/contentUrl>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -189,6 +205,7 @@ Extended ISCC Metadata
 ### **keywords**
 <http://schema.org/keywords>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -196,6 +213,7 @@ Extended ISCC Metadata
 
 ### **previous**
 <http://purl.org/iscc/terms/#previous>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -203,6 +221,7 @@ Extended ISCC Metadata
 
 ### **form**
 <http://schema.org/additionalType>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -210,6 +229,7 @@ Extended ISCC Metadata
 
 ### **version**
 <http://schema.org/version>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -217,6 +237,7 @@ Extended ISCC Metadata
 
 ### **tdm**
 <http://purl.org/iscc/terms/#tdm>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -224,6 +245,7 @@ Extended ISCC Metadata
 
 ### **genai**
 <http://purl.org/iscc/terms/#genai>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -253,6 +275,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
     ```
 ### **mode**
 <http://purl.org/iscc/terms/#mode>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -268,6 +291,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 ### **filename**
 <http://purl.org/iscc/terms/#filename>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -276,6 +300,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 ### **filesize**
 <http://schema.org/fileSize>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -283,6 +308,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **datasize**
 <http://purl.org/iscc/terms/#datasize>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -291,6 +317,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 ### **mediatype**
 <http://schema.org/encodingFormat>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -299,6 +326,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 ### **duration**
 <http://schema.org/duration>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -307,6 +335,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 ### **fps**
 <http://purl.org/iscc/terms/#fps>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -315,6 +344,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 ### **width**
 <http://purl.org/iscc/terms/#width>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -323,6 +353,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 ### **height**
 <http://purl.org/iscc/terms/#height>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -331,6 +362,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 ### **characters**
 <http://purl.org/iscc/terms/#characters>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -338,6 +370,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **pages**
 <http://schema.org/numberOfPages>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -346,6 +379,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 ### **language**
 <http://schema.org/inLanguage>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -353,6 +387,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **parts**
 <http://purl.org/iscc/terms/#parts>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -360,6 +395,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **part_of**
 <http://purl.org/iscc/terms/#part_of>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -367,6 +403,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **features**
 <http://purl.org/iscc/terms/#features>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -374,6 +411,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **units**
 <http://purl.org/iscc/terms/#units>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -381,6 +419,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **generator**
 <http://purl.org/iscc/terms/#generator>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -388,6 +427,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **text**
 <http://purl.org/iscc/terms/#text>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -396,6 +436,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 ### **thumbnail**
 <http://schema.org/thumbnailUrl>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -405,6 +446,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 Metadata for NFT Marketplaces
 ### **external_url**
 <http://purl.org/iscc/terms/#external_url>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -412,6 +454,7 @@ Metadata for NFT Marketplaces
 
 ### **animation_url**
 <http://purl.org/iscc/terms/#animation_url>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -419,6 +462,7 @@ Metadata for NFT Marketplaces
 
 ### **properties**
 <http://purl.org/iscc/terms/#properties>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -426,6 +470,7 @@ Metadata for NFT Marketplaces
 
 ### **attributes**
 <http://purl.org/iscc/terms/#attributes>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -433,6 +478,7 @@ Metadata for NFT Marketplaces
 
 ### **nft**
 <http://purl.org/iscc/terms/#nft>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -443,6 +489,7 @@ Cryptography related ISCC Metadata
 ### **tophash**
 <http://purl.org/iscc/terms/#tophash>
 <small>ISO 24138:2024</small>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -451,6 +498,7 @@ Cryptography related ISCC Metadata
 ### **metahash**
 <http://purl.org/iscc/terms/#metahash>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -459,6 +507,7 @@ Cryptography related ISCC Metadata
 ### **datahash**
 <http://purl.org/iscc/terms/#datahash>
 <small>ISO 24138:2024</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -466,6 +515,7 @@ Cryptography related ISCC Metadata
 
 ### **nonce**
 <http://purl.org/iscc/terms/#nonce>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -473,6 +523,7 @@ Cryptography related ISCC Metadata
 
 ### **signature**
 <http://purl.org/iscc/terms/#signature>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -482,6 +533,7 @@ Cryptography related ISCC Metadata
 Fields relevant in context with public ISCC declarations
 ### **original**
 <http://purl.org/iscc/terms/#original>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -489,6 +541,7 @@ Fields relevant in context with public ISCC declarations
 
 ### **redirect**
 <http://purl.org/iscc/terms/#redirect>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -496,6 +549,7 @@ Fields relevant in context with public ISCC declarations
 
 ### **chain**
 <http://purl.org/iscc/terms/#chain>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -503,6 +557,7 @@ Fields relevant in context with public ISCC declarations
 
 ### **wallet**
 <http://purl.org/iscc/terms/#wallet>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -510,6 +565,7 @@ Fields relevant in context with public ISCC declarations
 
 ### **credentials**
 <https://www.w3.org/2018/credentials#VerifiableCredential>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -517,6 +573,7 @@ Fields relevant in context with public ISCC declarations
 
 ### **verifications**
 <http://purl.org/iscc/terms/#verifications>
+<small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|

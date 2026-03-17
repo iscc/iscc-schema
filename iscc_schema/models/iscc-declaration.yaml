@@ -27,11 +27,13 @@ properties:
     - ETHEREUM
     - POLYGON
     x-iscc-context: http://purl.org/iscc/terms/#chain
+    x-iscc-status: draft
   wallet:
     type: string
     description: The wallet-address that signs an ISCC declaration.
     example: '0xb794f5ea0ba39494ce839613fffba74279579268'
     x-iscc-context: http://purl.org/iscc/terms/#wallet
+    x-iscc-status: draft
   credentials:
     oneOf:
     - type: string
@@ -51,6 +53,7 @@ properties:
       representation of the declarers address).</li> </ul>
     example: https://schema.iscc.codes/examples/vc.json
     x-iscc-context: https://www.w3.org/2018/credentials#VerifiableCredential
+    x-iscc-status: draft
     x-iscc-schema-doc: A credential is a set of one or more claims made by an issuer. A verifiable
       credential is a tamper-evident credential that has authorship that can be cryptographically
       verified. Verifiable credentials can be used to build verifiable presentations, which
@@ -69,3 +72,4 @@ properties:
     maxItems: 128
     uniqueItems: true
     x-iscc-context: http://purl.org/iscc/terms/#verifications
+    x-iscc-status: draft
