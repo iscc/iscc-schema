@@ -1,6 +1,9 @@
 ## Changelog
 
 ### [0.5.0] - 2026-03-17
+- Pydantic models now emit versioned `$schema` and `@context` URLs (e.g., `http://purl.org/iscc/schema/0.5.0.json`)
+- Standalone schema models (ISBN, ISRC, TDM) now emit versioned `@context` URLs
+- Added versioning documentation page
 - Embedded JSON-LD `@context` directly into JSON Schema files for self-contained validation and semantic mapping
 - Added schema-specific `@context` to standalone schemas (isbn, isrc, tdm) with only their relevant terms
 - Patched `@context` property in JSON Schemas to accept both URI string and inline object per JSON-LD spec

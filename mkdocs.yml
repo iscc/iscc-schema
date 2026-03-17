@@ -87,4 +87,5 @@ nav:
     - ISRC Seed Metadata: schema/isrc.md
     - TDM Service Metadata: schema/tdm.md
   - Examples: examples/index.md
+  - Versioning: versioning.md
   - Changelog: changelog.md

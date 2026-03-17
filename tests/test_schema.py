@@ -4,6 +4,10 @@ from pydantic import ValidationError
 
 import iscc_schema as iss
 
+V = iss.__version__
+SCHEMA_URL = f"http://purl.org/iscc/schema/{V}.json"
+CONTEXT_URL = f"http://purl.org/iscc/context/{V}.jsonld"
+
 
 def test_empty():
     assert iss.IsccMeta().dict() == {}
@@ -34,15 +38,14 @@ def test_validate_uri_ipfs():
 def test_json():
     assert (
         iss.IsccMeta().json()
-        == '{"@context":"http://purl.org/iscc/context","@type":"CreativeWork","$schema":"http://purl.org/iscc/schema"}'
+        == f'{{"@context":"{CONTEXT_URL}","@type":"CreativeWork","$schema":"{SCHEMA_URL}"}}'
     )
 
 
 def test_jcs():
-    assert iss.IsccMeta().jcs() == bytes(
-        '{"$schema":"http://purl.org/iscc/schema","@context":"http://purl.org/iscc/context","@type":"CreativeWork"}',
-        encoding="utf-8",
-    )
+    assert iss.IsccMeta().jcs() == (
+        f'{{"$schema":"{SCHEMA_URL}","@context":"{CONTEXT_URL}","@type":"CreativeWork"}}'
+    ).encode("utf-8")
 
 
 def test_jcs_big_int_raises():
@@ -61,9 +64,9 @@ def test_iscc_obj_raises():
 def test_schema():
     so = iss.IsccMeta(iscc="ISCC:EIAGUJFCEY")
     assert so.dict(exclude_none=True, by_alias=True, exclude_unset=False) == {
-        "@context": "http://purl.org/iscc/context",
+        "@context": CONTEXT_URL,
         "@type": "CreativeWork",
-        "$schema": "http://purl.org/iscc/schema",
+        "$schema": SCHEMA_URL,
         "iscc": "ISCC:EIAGUJFCEY",
     }
 

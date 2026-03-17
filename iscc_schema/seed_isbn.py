@@ -12,8 +12,8 @@ class ISBN(BaseModel):
     ISBN Seed Metadata for interoperable Meta-Code generation.
     """
 
-    context_: Literal["http://purl.org/iscc/context"] = Field(
-        "http://purl.org/iscc/context",
+    context_: Literal["http://purl.org/iscc/context/0.5.0.jsonld"] = Field(
+        "http://purl.org/iscc/context/0.5.0.jsonld",
         alias="@context",
         description="The JSON-LD Context URI for ISCC metadata.",
     )

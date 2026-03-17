@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import pytest
 from pydantic import ValidationError
+import iscc_schema
 from iscc_schema.seed_isbn import ISBN
+
+CONTEXT_URL = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
 
 VALID_ISBN_DATA = {
     "isbn": "9789295055124",
@@ -25,7 +28,7 @@ def test_valid_construction():
 
 def test_defaults():
     obj = ISBN(**VALID_ISBN_DATA)
-    assert obj.context_ == "http://purl.org/iscc/context"
+    assert obj.context_ == CONTEXT_URL
     assert obj.type_ == "ISBN"
     assert obj.schema_ == "http://purl.org/iscc/schema/isbn.json"
 
@@ -40,7 +43,7 @@ def test_dict():
 def test_dict_with_defaults():
     obj = ISBN(**VALID_ISBN_DATA)
     d = obj.dict(exclude_unset=False)
-    assert d["@context"] == "http://purl.org/iscc/context"
+    assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "ISBN"
     assert d["$schema"] == "http://purl.org/iscc/schema/isbn.json"
     assert d["isbn"] == "9789295055124"
@@ -50,7 +53,7 @@ def test_dict_with_defaults():
 def test_json():
     obj = ISBN(**VALID_ISBN_DATA)
     j = obj.json()
-    assert '"@context":"http://purl.org/iscc/context"' in j
+    assert f'"@context":"{CONTEXT_URL}"' in j
     assert '"@type":"ISBN"' in j
     assert '"isbn":"9789295055124"' in j
 

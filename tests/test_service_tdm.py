@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import pytest
 from pydantic import ValidationError
+import iscc_schema
 from iscc_schema.service_tdm import TDM
+
+CONTEXT_URL = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
 
 VALID_TDM_DATA = {
     "train": "reserved",
@@ -23,7 +26,7 @@ def test_valid_construction():
 
 def test_defaults():
     obj = TDM(**VALID_TDM_DATA)
-    assert obj.context_ == "http://purl.org/iscc/context"
+    assert obj.context_ == CONTEXT_URL
     assert obj.type_ == "TDM"
     assert obj.schema_ == "http://purl.org/iscc/schema/tdm.json"
 
@@ -41,7 +44,7 @@ def test_dict():
 def test_dict_with_defaults():
     obj = TDM(**VALID_TDM_DATA)
     d = obj.dict(exclude_unset=False)
-    assert d["@context"] == "http://purl.org/iscc/context"
+    assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "TDM"
     assert d["$schema"] == "http://purl.org/iscc/schema/tdm.json"
     assert d["train"] == "reserved"
@@ -51,7 +54,7 @@ def test_dict_with_defaults():
 def test_json():
     obj = TDM(**VALID_TDM_DATA)
     j = obj.json()
-    assert '"@context":"http://purl.org/iscc/context"' in j
+    assert f'"@context":"{CONTEXT_URL}"' in j
     assert '"@type":"TDM"' in j
     assert '"train":"reserved"' in j
     assert '"inference":"open"' in j

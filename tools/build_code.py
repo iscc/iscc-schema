@@ -14,6 +14,15 @@ APIS = CODE / "reference"
 MODELS = CODE / "models"
 
 
+def _get_version():
+    # type: () -> str
+    """Read the package version from __init__.py without importing the module."""
+    init_file = CODE / "__init__.py"
+    text = init_file.read_text(encoding="utf-8")
+    match = re.search(r'^__version__\s*=\s*["\']([^"\']+)["\']', text, re.MULTILINE)
+    return match.group(1)
+
+
 def _patch_imports(outfile):
     # type: (pathlib.Path) -> None
     """Replace generated Pydantic imports with custom BaseModel and AnyUrl."""
@@ -35,6 +44,26 @@ def _patch_imports(outfile):
         return "\n".join(lines)
 
     text = re.sub(r"^from pydantic import (.+)$", replace_import, text, count=1, flags=re.MULTILINE)
+    with outfile.open("wt", encoding="utf-8", newline="\n") as f:
+        f.write(text)
+
+
+def _patch_versioned_urls(outfile, patch_schema=True):
+    # type: (pathlib.Path, bool) -> None
+    """Replace unversioned ISCC URLs with versioned ones in generated models."""
+    version = _get_version()
+    with outfile.open("rt", encoding="utf-8") as f:
+        text = f.read()
+    for q in ('"', "'"):
+        text = text.replace(
+            f"{q}http://purl.org/iscc/context{q}",
+            f"{q}http://purl.org/iscc/context/{version}.jsonld{q}",
+        )
+        if patch_schema:
+            text = text.replace(
+                f"{q}http://purl.org/iscc/schema{q}",
+                f"{q}http://purl.org/iscc/schema/{version}.json{q}",
+            )
     with outfile.open("wt", encoding="utf-8", newline="\n") as f:
         f.write(text)
 
@@ -64,6 +93,7 @@ def build_schema():
         formatters=[],
     )
     _patch_imports(outfile)
+    _patch_versioned_urls(outfile)
 
 
 def build_apis():
@@ -124,6 +154,7 @@ def _build_standalone_models(schemas):
             formatters=[],
         )
         _patch_imports(outfile)
+        _patch_versioned_urls(outfile, patch_schema=False)
 
 
 def build_seed_metadata():

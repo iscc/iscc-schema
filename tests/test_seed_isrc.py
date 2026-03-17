@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import pytest
 from pydantic import ValidationError
+import iscc_schema
 from iscc_schema.seed_isrc import ISRC
+
+CONTEXT_URL = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
 
 VALID_ISRC_DATA = {
     "isrc": "AA6Q72000047",
@@ -24,7 +27,7 @@ def test_valid_construction():
 
 def test_defaults():
     obj = ISRC(**VALID_ISRC_DATA)
-    assert obj.context_ == "http://purl.org/iscc/context"
+    assert obj.context_ == CONTEXT_URL
     assert obj.type_ == "ISRC"
     assert obj.schema_ == "http://purl.org/iscc/schema/isrc.json"
 
@@ -55,7 +58,7 @@ def test_dict():
 def test_dict_with_defaults():
     obj = ISRC(**VALID_ISRC_DATA)
     d = obj.dict(exclude_unset=False)
-    assert d["@context"] == "http://purl.org/iscc/context"
+    assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "ISRC"
     assert d["$schema"] == "http://purl.org/iscc/schema/isrc.json"
     assert d["isrc"] == "AA6Q72000047"
