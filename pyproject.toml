@@ -62,7 +62,7 @@ buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON 
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
 test = { cmd = "pytest", help = "Run tests"}
-all = ["fromatyaml", "buildcode", "formatcode", "buildterms", "buildschema", "buildcontext", "builddocs", "test"]
+all = ["fromatyaml", "buildcode", "buildterms", "buildcontext", "buildschema", "formatcode", "builddocs", "test"]
 
 [build-system]
 requires = ["hatchling"]

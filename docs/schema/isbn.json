@@ -1,4 +1,15 @@
 {
+  "@context": {
+    "ISBN": "http://purl.org/iscc/terms/#ISBN",
+    "isbn": "http://schema.org/isbn",
+    "productform": "http://purl.org/iscc/terms/#productform",
+    "title": "http://schema.org/name",
+    "language": "http://schema.org/inLanguage",
+    "imprint": "http://schema.org/publisherImprint",
+    "publisher": "http://schema.org/publisher",
+    "country": "http://schema.org/countryOfOrigin",
+    "pubdate": "http://schema.org/datePublished"
+  },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "http://purl.org/iscc/schema/isbn.json",
   "title": "ISBN",
@@ -6,9 +17,15 @@
   "description": "ISBN Seed Metadata for interoperable Meta-Code generation.",
   "properties": {
     "@context": {
-      "type": "string",
-      "format": "uri",
-      "const": "http://purl.org/iscc/context",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "object"
+        }
+      ],
       "description": "The JSON-LD Context URI for ISCC metadata."
     },
     "@type": {

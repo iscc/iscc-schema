@@ -1,6 +1,12 @@
 ## Changelog
 
 ### [0.5.0] - 2026-03-17
+- Embedded JSON-LD `@context` directly into JSON Schema files for self-contained validation and semantic mapping
+- Added schema-specific `@context` to standalone schemas (isbn, isrc, tdm) with only their relevant terms
+- Patched `@context` property in JSON Schemas to accept both URI string and inline object per JSON-LD spec
+- Added `recover_context()` function for schema-driven JSON-LD context recovery from plain JSON data
+- Added generated `contexts.py` module with bundled context data and type-to-schema mappings
+- Reordered build pipeline so `buildcontext` runs before `buildschema`
 - Added ISBN and ISRC Seed Metadata schemas for interoperable Meta-Code generation (IEP-0002)
 - Added TDM Service Metadata schema for machine-readable TDM reservation signals (train, inference, derive, search, analyze)
 - Added `tdm` field to IsccMeta for embedding TDM reservation metadata in content descriptions

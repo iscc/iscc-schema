@@ -1,4 +1,12 @@
 {
+  "@context": {
+    "TDM": "http://purl.org/iscc/terms/#TDM",
+    "train": "http://purl.org/iscc/terms/#train",
+    "inference": "http://purl.org/iscc/terms/#inference",
+    "derive": "http://purl.org/iscc/terms/#derive",
+    "search": "http://purl.org/iscc/terms/#search",
+    "analyze": "http://purl.org/iscc/terms/#analyze"
+  },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "http://purl.org/iscc/schema/tdm.json",
   "title": "TDM",
@@ -6,9 +14,15 @@
   "description": "Machine-readable TDM reservation signals for AI-related content usage categories. A 'reserved' status indicates an explicit opt-out from TDM exceptions (e.g., EU DSM Directive Art. 4). An 'open' status indicates that no rights are reserved. Omitted fields indicate that the reservation status has not been determined. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.",
   "properties": {
     "@context": {
-      "type": "string",
-      "format": "uri",
-      "const": "http://purl.org/iscc/context",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "object"
+        }
+      ],
       "description": "The JSON-LD Context URI for ISCC metadata."
     },
     "@type": {

@@ -1,4 +1,115 @@
 {
+  "@context": {
+    "iscc": "@id",
+    "CreativeWork": "http://schema.org/CreativeWork",
+    "TextDigitalDocument": "http://schema.org/TextDigitalDocument",
+    "ImageObject": "http://schema.org/ImageObject",
+    "AudioObject": "http://schema.org/AudioObject",
+    "VideoObject": "http://schema.org/VideoObject",
+    "ISBN": "http://purl.org/iscc/terms/#ISBN",
+    "ISRC": "http://purl.org/iscc/terms/#ISRC",
+    "TDM": "http://purl.org/iscc/terms/#TDM",
+    "$schema": {
+      "@id": "http://purl.org/iscc/terms/#$schema",
+      "@type": "@id"
+    },
+    "name": "http://schema.org/name",
+    "description": "http://schema.org/disambiguatingDescription",
+    "meta": "http://purl.org/iscc/terms/#meta",
+    "creator": "http://schema.org/creator",
+    "license": {
+      "@id": "http://schema.org/license",
+      "@type": "@id"
+    },
+    "acquire": {
+      "@id": "http://schema.org/acquireLicensePage",
+      "@type": "@id"
+    },
+    "credit": "http://schema.org/creditText",
+    "rights": "http://schema.org/copyrightNotice",
+    "tdm": "http://purl.org/iscc/terms/#tdm",
+    "media_id": "http://purl.org/iscc/terms/#media_id",
+    "iscc_id": "http://purl.org/iscc/terms/#iscc_id",
+    "iscc_code": "http://purl.org/iscc/terms/#iscc",
+    "image": {
+      "@id": "http://schema.org/image",
+      "@type": "@id"
+    },
+    "identifier": "http://schema.org/identifier",
+    "content": {
+      "@id": "http://schema.org/contentUrl",
+      "@type": "@id"
+    },
+    "keywords": "http://schema.org/keywords",
+    "previous": "http://purl.org/iscc/terms/#previous",
+    "version": "http://schema.org/version",
+    "mode": "http://purl.org/iscc/terms/#mode",
+    "created": "http://schema.org/dateCreated",
+    "filename": "http://purl.org/iscc/terms/#filename",
+    "filesize": "http://schema.org/fileSize",
+    "mediatype": "http://schema.org/encodingFormat",
+    "duration": "http://schema.org/duration",
+    "fps": "http://purl.org/iscc/terms/#fps",
+    "width": "http://purl.org/iscc/terms/#width",
+    "height": "http://purl.org/iscc/terms/#height",
+    "characters": "http://purl.org/iscc/terms/#characters",
+    "pages": "http://schema.org/numberOfPages",
+    "language": "http://schema.org/inLanguage",
+    "parts": "http://purl.org/iscc/terms/#parts",
+    "part_of": "http://purl.org/iscc/terms/#part_of",
+    "features": "http://purl.org/iscc/terms/#features",
+    "units": "http://purl.org/iscc/terms/#units",
+    "generator": "http://purl.org/iscc/terms/#generator",
+    "text": "http://purl.org/iscc/terms/#text",
+    "thumbnail": {
+      "@id": "http://schema.org/thumbnailUrl",
+      "@type": "@id"
+    },
+    "external_url": {
+      "@id": "http://purl.org/iscc/terms/#external_url",
+      "@type": "@id"
+    },
+    "animation_url": {
+      "@id": "http://purl.org/iscc/terms/#animation_url",
+      "@type": "@id"
+    },
+    "properties": "http://purl.org/iscc/terms/#properties",
+    "attributes": "http://purl.org/iscc/terms/#attributes",
+    "nft": {
+      "@id": "http://purl.org/iscc/terms/#nft",
+      "@type": "@id"
+    },
+    "tophash": "http://purl.org/iscc/terms/#tophash",
+    "metahash": "http://purl.org/iscc/terms/#metahash",
+    "datahash": "http://purl.org/iscc/terms/#datahash",
+    "nonce": "http://purl.org/iscc/terms/#nonce",
+    "signature": "http://purl.org/iscc/terms/#signature",
+    "original": "http://purl.org/iscc/terms/#original",
+    "redirect": {
+      "@id": "http://purl.org/iscc/terms/#redirect",
+      "@type": "@id"
+    },
+    "chain": "http://purl.org/iscc/terms/#chain",
+    "wallet": "http://purl.org/iscc/terms/#wallet",
+    "credentials": "https://www.w3.org/2018/credentials#VerifiableCredential",
+    "verifications": "http://purl.org/iscc/terms/#verifications",
+    "isbn": "http://schema.org/isbn",
+    "productform": "http://purl.org/iscc/terms/#productform",
+    "title": "http://schema.org/name",
+    "imprint": "http://schema.org/publisherImprint",
+    "publisher": "http://schema.org/publisher",
+    "country": "http://schema.org/countryOfOrigin",
+    "pubdate": "http://schema.org/datePublished",
+    "isrc": "http://schema.org/isrcCode",
+    "main_artist": "http://schema.org/byArtist",
+    "track_title": "http://schema.org/name",
+    "version_title": "http://schema.org/alternativeHeadline",
+    "train": "http://purl.org/iscc/terms/#train",
+    "inference": "http://purl.org/iscc/terms/#inference",
+    "derive": "http://purl.org/iscc/terms/#derive",
+    "search": "http://purl.org/iscc/terms/#search",
+    "analyze": "http://purl.org/iscc/terms/#analyze"
+  },
   "title": "iscc-collection",
   "type": "object",
   "description": "Collection of all ISCC Metadata fields",
@@ -9,12 +120,18 @@
   ],
   "properties": {
     "@context": {
-      "type": "string",
-      "format": "uri",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "object"
+        }
+      ],
       "default": "http://purl.org/iscc/context/0.5.0.jsonld",
       "description": "The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
-      "readOnly": true,
-      "x-iscc-standard": "ISO 24138:2024"
+      "readOnly": true
     },
     "@type": {
       "type": "string",
