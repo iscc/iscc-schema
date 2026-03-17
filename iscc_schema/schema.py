@@ -234,6 +234,11 @@ class IsccTechnical(BaseModel):
         description="File size of media asset in number of bytes.",
         json_schema_extra={"x-iscc-context": "http://schema.org/fileSize"},
     )
+    datasize: int | None = Field(
+        None,
+        description="Size of the data processed for ISCC generation in number of bytes. Use this field when the ISCC is computed over data that is not a standalone file, such as an individual plane within a bioimage, a scene within a multi-scene container, or a data stream extracted from a composite format.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#datasize"},
+    )
     mediatype: str | None = Field(
         None,
         description="An [IANA Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) (MIME type)",

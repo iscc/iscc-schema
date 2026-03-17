@@ -130,6 +130,7 @@ def flatten_schemas():
         "created",
         "filename",
         "filesize",
+        "datasize",
         "mediatype",
         "duration",
         "fps",

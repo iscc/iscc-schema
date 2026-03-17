@@ -50,6 +50,7 @@
     "created": "http://schema.org/dateCreated",
     "filename": "http://purl.org/iscc/terms/#filename",
     "filesize": "http://schema.org/fileSize",
+    "datasize": "http://purl.org/iscc/terms/#datasize",
     "mediatype": "http://schema.org/encodingFormat",
     "duration": "http://schema.org/duration",
     "fps": "http://purl.org/iscc/terms/#fps",
@@ -573,6 +574,12 @@
       "x-iscc-schema-doc": "Size of the application / package (e.g. 18MB). In the absence of a unit (MB, KB etc.), KB will be assumed.",
       "x-iscc-status": "stable",
       "x-iscc-standard": "ISO 24138:2024"
+    },
+    "datasize": {
+      "type": "integer",
+      "readOnly": true,
+      "description": "Size of the data processed for ISCC generation in number of bytes. Use this field when the ISCC is computed over data that is not a standalone file, such as an individual plane within a bioimage, a scene within a multi-scene container, or a data stream extracted from a composite format.",
+      "x-iscc-context": "http://purl.org/iscc/terms/#datasize"
     },
     "mediatype": {
       "type": "string",

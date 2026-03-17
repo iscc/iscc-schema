@@ -45,6 +45,7 @@ SCHEMA_CONTEXTS = {
         "created": "http://schema.org/dateCreated",
         "filename": "http://purl.org/iscc/terms/#filename",
         "filesize": "http://schema.org/fileSize",
+        "datasize": "http://purl.org/iscc/terms/#datasize",
         "mediatype": "http://schema.org/encodingFormat",
         "duration": "http://schema.org/duration",
         "fps": "http://purl.org/iscc/terms/#fps",

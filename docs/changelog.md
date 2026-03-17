@@ -1,6 +1,7 @@
 ## Changelog
 
 ### [0.5.0] - 2026-03-17
+- Added `datasize` field for data processed size when ISCC is computed over sub-file data (e.g., bioimage planes)
 - Added GenAI Service Metadata schema for generative AI disclosure signals (involvement, ai_system, digital_source_type)
 - Added `genai` field to IsccMeta for embedding AI transparency signals in content metadata
 - Moved `tdm` field from iscc-embeddable to iscc-extended (structured objects don't belong in media-embeddable metadata)

@@ -281,6 +281,13 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 | ---- | ---- | --------|--------------------------------|
 | filesize | `integer` | none | File size of media asset in number of bytes.         |
 
+### **datasize**
+<http://purl.org/iscc/terms/#datasize>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| datasize | `integer` | none | Size of the data processed for ISCC generation in number of bytes. Use this field when the ISCC is computed over data that is not a standalone file, such as an individual plane within a bioimage, a scene within a multi-scene container, or a data stream extracted from a composite format.         |
+
 ### **mediatype**
 <http://schema.org/encodingFormat>
 <small>ISO 24138:2024</small>
