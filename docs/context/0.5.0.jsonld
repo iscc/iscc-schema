@@ -27,6 +27,7 @@
     },
     "credit": "http://schema.org/creditText",
     "rights": "http://schema.org/copyrightNotice",
+    "tdm": "http://purl.org/iscc/terms/#tdm",
     "media_id": "http://purl.org/iscc/terms/#media_id",
     "iscc_id": "http://purl.org/iscc/terms/#iscc_id",
     "iscc_code": "http://purl.org/iscc/terms/#iscc",

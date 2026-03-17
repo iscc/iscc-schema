@@ -14,6 +14,12 @@
 
     **Standard**:  ISO 24138:2024
 
+### **tdm**
+
+!!! term "<small><http://purl.org/iscc/terms/#tdm></small>"
+
+    Text and Data Mining reservation metadata for AI content usage rights.
+
 ### **media_id**
 
 !!! term "<small><http://purl.org/iscc/terms/#media_id></small>"

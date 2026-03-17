@@ -121,6 +121,13 @@ Metadata intended to be embedded into the media asset.
 | ---- | ---- | --------|--------------------------------|
 | rights | `string` | none | Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.<br><br>**Example**: `© Copyright 2022 ISCC Foundation - www.iscc.codes`         |
 
+### **tdm**
+<http://purl.org/iscc/terms/#tdm>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| tdm | `object` | none | Text and Data Mining reservation metadata for AI content usage rights.         |
+
 ## iscc-extended
 Extended ISCC Metadata
 

@@ -58,6 +58,12 @@
 !!! term ""
     Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.
 
+## tdm
+
+<small><http://purl.org/iscc/terms/#tdm></small>
+!!! term ""
+    Text and Data Mining reservation metadata for AI content usage rights.
+
 ## media_id
 
 <small><http://purl.org/iscc/terms/#media_id></small>

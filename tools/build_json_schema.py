@@ -54,6 +54,7 @@ def flatten_schemas():
         "acquire",
         "credit",
         "rights",
+        "tdm",
         "original",
         "credentials",
         "verifications",

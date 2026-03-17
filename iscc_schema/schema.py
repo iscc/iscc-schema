@@ -383,6 +383,65 @@ class IsccExtended(BaseModel):
     )
 
 
+class Train(Enum):
+    """
+    Reservation status for AI model training.
+    """
+
+    reserved = "reserved"
+    open = "open"
+
+
+class Inference(Enum):
+    """
+    Reservation status for inference-time content retrieval.
+    """
+
+    reserved = "reserved"
+    open = "open"
+
+
+class Derive(Enum):
+    """
+    Reservation status for AI-generated derivative works.
+    """
+
+    reserved = "reserved"
+    open = "open"
+
+
+class Search(Enum):
+    """
+    Reservation status for search and discovery indexing.
+    """
+
+    reserved = "reserved"
+    open = "open"
+
+
+class Analyze(Enum):
+    """
+    Reservation status for automated content analysis.
+    """
+
+    reserved = "reserved"
+    open = "open"
+
+
+class Tdm(BaseModel):
+    """
+    Text and Data Mining reservation metadata for AI content usage rights.
+    """
+
+    train: Train = Field(..., description="Reservation status for AI model training.")
+    inference: Inference = Field(
+        ..., description="Reservation status for inference-time content retrieval."
+    )
+    derive: Derive = Field(..., description="Reservation status for AI-generated derivative works.")
+    search: Search = Field(..., description="Reservation status for search and discovery indexing.")
+    analyze: Analyze = Field(..., description="Reservation status for automated content analysis.")
+
+
 class IsccEmbeddable(BaseModel):
     """
     Metadata intended to be embedded into the media asset.
@@ -417,6 +476,11 @@ class IsccEmbeddable(BaseModel):
         description="Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.",
         examples=["© Copyright 2022 ISCC Foundation - www.iscc.codes"],
         json_schema_extra={"x-iscc-context": "http://schema.org/copyrightNotice"},
+    )
+    tdm: Tdm | None = Field(
+        None,
+        description="Text and Data Mining reservation metadata for AI content usage rights.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#tdm"},
     )
 
 
