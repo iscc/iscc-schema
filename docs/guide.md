@@ -51,16 +51,11 @@ is always available - either carried in the data directly, or recovered from the
 iscc-schema v0.5.0 introduced **schema-driven context recovery**: reconstructing full JSON-LD
 from compact, plain JSON data.
 
-### The Problem
-
-Plain JSON is compact and easy to work with, but it lacks semantic context. A field called `name`
-could mean anything. JSON-LD solves this by adding an `@context` that maps fields to global
-identifiers, but carrying the full context in every data object adds verbosity.
-
-### The Insight
-
-The `$schema` field already points to the JSON Schema that describes the data. If the schema
-embeds the `@context`, any consumer can recover the full JSON-LD context from the schema alone.
+Plain JSON is compact and easy to work with, but a field called `name` could mean anything without
+semantic context. JSON-LD fixes this with an `@context` that maps fields to global identifiers -
+but carrying the full context in every object adds bulk. Since the `$schema` field already points
+to the JSON Schema describing the data, the schema can embed the `@context` too. Any consumer can
+then recover the full JSON-LD context from the schema reference alone.
 
 ### How It Works
 
