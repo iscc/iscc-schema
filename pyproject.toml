@@ -54,7 +54,7 @@ preview = true
 
 [tool.poe.tasks]
 update = { cmd = "uv sync --upgrade", help = "Update project dependencies"}
-fromatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
+formatyaml = { script = "tools.format_yaml:reformat", help = "Reformat yaml files"}
 buildcode = { script = "tools.build_code:build", help = "Build code for API models"}
 formatcode = { cmd = "black .", help = "Code style formating with black" }
 buildterms = { script = "tools.build_terms:build", help = "Build markdown for terms" }
@@ -62,7 +62,7 @@ buildschema = { script = "tools.build_json_schema:build", help = "Generate JSON 
 buildcontext = { script = "tools.build_json_ld_context:build", help = "Generate JSON-LD Context" }
 builddocs = { script = "tools.build_docs:build", help = "Copy README.md to docs/index.md" }
 test = { cmd = "pytest", help = "Run tests"}
-all = ["fromatyaml", "buildcode", "buildterms", "buildcontext", "buildschema", "formatcode", "builddocs", "test"]
+all = ["formatyaml", "buildcode", "buildterms", "buildcontext", "buildschema", "formatcode", "builddocs", "test"]
 docs-serve = { cmd = "zensical serve", help = "Serve documentation locally" }
 docs-build.sequence = [
     { cmd = "zensical build" },

@@ -31,6 +31,7 @@ nav = [
     ]},
     "examples/index.md",
     "versioning.md",
+    "contributing.md",
     { "Reference" = [
         "reference/for-coding-agents.md",
     ]},
