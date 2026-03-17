@@ -337,3 +337,121 @@
 !!! term ""
     A list of self-verifications. Self-verifications are public URLs under the account/authority of the signee. The verification URL must respond to a GET request with text that contains a multihash of the ISCC declaration signees wallet address in the format of `verify:<multihash-of-wallet-address>:verify`.
 
+
+---
+
+# Seed Metadata Vocabulary
+
+## isbn
+
+<small><http://schema.org/isbn></small>
+!!! term ""
+    International Standard Book Number in 13-digit format, without spaces or hyphens.
+
+## productform
+
+<small><http://purl.org/iscc/terms/#productform></small>
+!!! term ""
+    Product form code indicating the medium and format of the publication (ONIX codelist 150).
+
+## title
+
+<small><http://schema.org/name></small>
+!!! term ""
+    The title of the publication.
+
+## language
+
+<small><http://schema.org/inLanguage></small>
+!!! term ""
+    ISO 639-2/B three-letter language code.
+
+## imprint
+
+<small><http://schema.org/publisherImprint></small>
+!!! term ""
+    The brand name under which the publication is published.
+
+## publisher
+
+<small><http://schema.org/publisher></small>
+!!! term ""
+    The person or organization that owns the imprint at the date of publication.
+
+## country
+
+<small><http://schema.org/countryOfOrigin></small>
+!!! term ""
+    Country of publication in accordance with ISO 3166-1 alpha-2 country codes.
+
+## pubdate
+
+<small><http://schema.org/datePublished></small>
+!!! term ""
+    The date of first publication under this ISBN in ISO 8601 basic format (YYYYMMDD).
+
+## isrc
+
+<small><http://schema.org/isrcCode></small>
+!!! term ""
+    The International Standard Recording Code assigned to this recording.
+
+## main_artist
+
+<small><http://schema.org/byArtist></small>
+!!! term ""
+    The name of the featured artist or band.
+
+## track_title
+
+<small><http://schema.org/name></small>
+!!! term ""
+    The title of the recording.
+
+## version_title
+
+<small><http://schema.org/alternativeHeadline></small>
+!!! term ""
+    Additional information about the recording, such as 'live' or 'remastered'.
+
+## duration
+
+<small><http://schema.org/duration></small>
+!!! term ""
+    The elapsed playing time of the recording in seconds.
+
+
+---
+
+# Service Metadata Vocabulary
+
+## train
+
+<small><http://purl.org/iscc/terms/#train></small>
+!!! term ""
+    Reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.
+
+## inference
+
+<small><http://purl.org/iscc/terms/#inference></small>
+!!! term ""
+    Reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.
+
+## derive
+
+<small><http://purl.org/iscc/terms/#derive></small>
+!!! term ""
+    Reservation status for AI-generated derivative works. Covers summarization, translation, format adaptation, and content reformulation.
+
+## search
+
+<small><http://purl.org/iscc/terms/#search></small>
+!!! term ""
+    Reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.
+
+## analyze
+
+<small><http://purl.org/iscc/terms/#analyze></small>
+!!! term ""
+    Reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.
+

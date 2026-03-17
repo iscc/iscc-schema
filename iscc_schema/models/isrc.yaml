@@ -1,0 +1,79 @@
+title: ISRC
+type: object
+description: ISRC Seed Metadata for interoperable Meta-Code generation.
+required:
+- isrc
+- main_artist
+- track_title
+- version_title
+- duration
+- content_type
+- pubdate
+examples:
+- '@context': http://purl.org/iscc/context
+  '@type': ISRC
+  $schema: http://purl.org/iscc/schema/isrc.json
+  isrc: AA6Q72000047
+  main_artist: The Beatles
+  track_title: Yesterday
+  version_title: Remastered 2009
+  duration: 125
+  content_type: sound
+  pubdate: '20090909'
+properties:
+  '@context':
+    type: string
+    format: uri
+    const: http://purl.org/iscc/context
+    description: The JSON-LD Context URI for ISCC metadata.
+  '@type':
+    type: string
+    const: ISRC
+    description: The type of seed metadata.
+  $schema:
+    type: string
+    format: uri
+    const: http://purl.org/iscc/schema/isrc.json
+    description: The JSON Schema URI for ISRC seed metadata.
+  isrc:
+    type: string
+    description: The International Standard Recording Code assigned to this recording.
+    pattern: ^[A-Z]{2}-?\w{3}-?\d{2}-?\d{5}$
+    example: AA6Q72000047
+    x-iscc-context: http://schema.org/isrcCode
+  main_artist:
+    type: string
+    description: The name of the featured artist or band.
+    maxLength: 100
+    example: The Beatles
+    x-iscc-context: http://schema.org/byArtist
+  track_title:
+    type: string
+    description: The title of the recording.
+    maxLength: 100
+    example: Yesterday
+    x-iscc-context: http://schema.org/name
+  version_title:
+    type: string
+    description: Additional information about the recording, such as 'live' or 'remastered'.
+    maxLength: 100
+    example: Remastered 2009
+    x-iscc-context: http://schema.org/alternativeHeadline
+  duration:
+    type: integer
+    description: The elapsed playing time of the recording in seconds.
+    example: 125
+    x-iscc-context: http://schema.org/duration
+  content_type:
+    type: string
+    description: Indicates whether the recording is a sound recording or music video recording.
+    enum:
+    - sound
+    - video
+    example: sound
+  pubdate:
+    type: string
+    description: The date of first publication of the recording in ISO 8601 basic format (YYYYMMDD).
+    pattern: ^\d{8}$
+    example: '20090909'
+    x-iscc-context: http://schema.org/datePublished

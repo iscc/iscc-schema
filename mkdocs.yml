@@ -80,6 +80,11 @@ markdown_extensions:
 nav:
   - Overview: index.md
   - Terms: terms/index.md
-  - Schema: schema/index.md
+  - Schema:
+    - schema/index.md
+    - ISCC Metadata: schema/iscc.md
+    - ISBN Seed Metadata: schema/isbn.md
+    - ISRC Seed Metadata: schema/isrc.md
+    - TDM Service Metadata: schema/tdm.md
   - Examples: examples/index.md
   - Changelog: changelog.md

@@ -110,13 +110,44 @@ def flatten_schemas():
     }
 
 
+SEED_SCHEMAS = ["isbn.yaml", "isrc.yaml"]
+SERVICE_SCHEMAS = ["tdm.yaml"]
+
+
+def build_seed_schema(yaml_file):
+    # type: (str) -> None
+    """Build a standalone JSON Schema file for a seed metadata definition."""
+    path = MODELS / yaml_file
+    with open(path, encoding="utf-8") as f:
+        schema = yaml.safe_load(f)
+
+    name = yaml_file.replace(".yaml", "")
+    output = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": f"http://purl.org/iscc/schema/{name}.json",
+        "title": schema["title"],
+        "type": "object",
+        "description": schema["description"],
+        "required": schema.get("required", []),
+        "properties": schema.get("properties", {}),
+    }
+    if schema.get("examples"):
+        output["examples"] = schema["examples"]
+
+    outpath = ROOT / "docs" / "schema" / f"{name}.json"
+    with open(outpath, "wt", encoding="utf-8", newline="\n") as outf:
+        outf.write(json.dumps(output, indent=2, ensure_ascii=False))
+
+
 def build():
     # type: () -> None
-    """Build `iscc.json` & `<version>.json` schema."""
+    """Build `iscc.json` & `<version>.json` schema, plus seed metadata schemas."""
     data = flatten_schemas()
     for path in (PATH_LATEST, PATH_VERSION):
         with open(path, "wt", encoding="utf-8", newline="\n") as outf:
             outf.write(json.dumps(data, indent=2, ensure_ascii=False))
+    for yaml_file in SEED_SCHEMAS + SERVICE_SCHEMAS:
+        build_seed_schema(yaml_file)
 
 
 if __name__ == "__main__":

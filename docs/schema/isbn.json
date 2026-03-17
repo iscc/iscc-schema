@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "http://purl.org/iscc/schema/isbn.json",
+  "title": "ISBN",
+  "type": "object",
+  "description": "ISBN Seed Metadata for interoperable Meta-Code generation.",
+  "required": [
+    "isbn",
+    "productform",
+    "title",
+    "language",
+    "imprint",
+    "publisher",
+    "country",
+    "pubdate"
+  ],
+  "properties": {
+    "@context": {
+      "type": "string",
+      "format": "uri",
+      "const": "http://purl.org/iscc/context",
+      "description": "The JSON-LD Context URI for ISCC metadata."
+    },
+    "@type": {
+      "type": "string",
+      "const": "ISBN",
+      "description": "The type of seed metadata."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "http://purl.org/iscc/schema/isbn.json",
+      "description": "The JSON Schema URI for ISBN seed metadata."
+    },
+    "isbn": {
+      "type": "string",
+      "description": "International Standard Book Number in 13-digit format, without spaces or hyphens.",
+      "pattern": "^\\d{13}$",
+      "example": "9789295055124",
+      "x-iscc-context": "http://schema.org/isbn"
+    },
+    "productform": {
+      "type": "string",
+      "description": "Product form code indicating the medium and format of the publication (ONIX codelist 150).",
+      "minLength": 2,
+      "maxLength": 2,
+      "example": "EA",
+      "x-iscc-context": "http://purl.org/iscc/terms/#productform"
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the publication.",
+      "maxLength": 128,
+      "example": "The Never Ending Story",
+      "x-iscc-context": "http://schema.org/name"
+    },
+    "language": {
+      "type": "string",
+      "description": "ISO 639-2/B three-letter language code.",
+      "pattern": "^[a-z]{3}$",
+      "example": "eng",
+      "x-iscc-context": "http://schema.org/inLanguage"
+    },
+    "imprint": {
+      "type": "string",
+      "description": "The brand name under which the publication is published.",
+      "maxLength": 100,
+      "example": "Penguin Classics",
+      "x-iscc-context": "http://schema.org/publisherImprint"
+    },
+    "publisher": {
+      "type": "string",
+      "description": "The person or organization that owns the imprint at the date of publication.",
+      "maxLength": 100,
+      "example": "Penguin Random House",
+      "x-iscc-context": "http://schema.org/publisher"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country of publication in accordance with ISO 3166-1 alpha-2 country codes.",
+      "pattern": "^[A-Z]{2}$",
+      "example": "US",
+      "x-iscc-context": "http://schema.org/countryOfOrigin"
+    },
+    "pubdate": {
+      "type": "string",
+      "description": "The date of first publication under this ISBN in ISO 8601 basic format (YYYYMMDD).",
+      "pattern": "^\\d{8}$",
+      "example": "20240214",
+      "x-iscc-context": "http://schema.org/datePublished"
+    }
+  },
+  "examples": [
+    {
+      "@context": "http://purl.org/iscc/context",
+      "@type": "ISBN",
+      "$schema": "http://purl.org/iscc/schema/isbn.json",
+      "isbn": "9789295055124",
+      "productform": "EA",
+      "title": "The Never Ending Story",
+      "language": "eng",
+      "imprint": "Penguin Classics",
+      "publisher": "Penguin Random House",
+      "country": "US",
+      "pubdate": "20240214"
+    }
+  ]
+}

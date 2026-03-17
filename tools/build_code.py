@@ -24,12 +24,13 @@ def _patch_imports(outfile):
     def replace_import(match):
         # type: (re.Match) -> str
         names = [n.strip() for n in match.group(1).split(",")]
-        # Remove AnyUrl and BaseModel from pydantic imports
+        had_anyurl = "AnyUrl" in names
         remaining = [n for n in names if n not in ("AnyUrl", "BaseModel")]
         lines = []
         if remaining:
             lines.append(f"from pydantic import {', '.join(remaining)}")
-        lines.append("from iscc_schema.fields import AnyUrl")
+        if had_anyurl:
+            lines.append("from iscc_schema.fields import AnyUrl")
         lines.append("from iscc_schema.base import BaseModel")
         return "\n".join(lines)
 
@@ -86,6 +87,57 @@ def build_apis():
     _patch_imports(outfile)
 
 
+SEED_SCHEMAS = {
+    "isbn": ("isbn.yaml", "seed_isbn.py", "ISBN"),
+    "isrc": ("isrc.yaml", "seed_isrc.py", "ISRC"),
+}
+
+SERVICE_SCHEMAS = {
+    "tdm": ("tdm.yaml", "service_tdm.py", "TDM"),
+}
+
+
+def _build_standalone_models(schemas):
+    # type: (dict) -> None
+    """Generate Pydantic v2 models from standalone YAML schema definitions."""
+    aliases = CODE / "aliases.json"
+    aliases_data = json.load(aliases.open("rb"))
+    for yaml_file, py_file, class_name in schemas.values():
+        infile = MODELS / yaml_file
+        outfile = CODE / py_file
+        generate(
+            infile,
+            input_file_type=InputFileType.JsonSchema,
+            output=outfile,
+            encoding="UTF-8",
+            aliases=aliases_data,
+            class_name=class_name,
+            disable_timestamp=True,
+            use_schema_description=True,
+            use_annotated=False,
+            reuse_model=True,
+            disable_appending_item_suffix=True,
+            field_constraints=True,
+            field_extra_keys={"x-iscc-context"},
+            target_python_version=PythonVersion.PY_310,
+            validation=True,
+            formatters=[],
+        )
+        _patch_imports(outfile)
+
+
+def build_seed_metadata():
+    # type: () -> None
+    """Generate Pydantic v2 models for industry-specific seed metadata schemas."""
+    _build_standalone_models(SEED_SCHEMAS)
+
+
+def build_service_metadata():
+    # type: () -> None
+    """Generate Pydantic v2 models for use-case-specific service metadata schemas."""
+    _build_standalone_models(SERVICE_SCHEMAS)
+
+
 def _format_generated(outfiles):
     # type: (list[pathlib.Path]) -> None
     """Format generated files with black using project settings."""
@@ -99,7 +151,17 @@ def build():
     # type: () -> None
     build_schema()
     build_apis()
-    _format_generated([CODE / "schema.py", CODE / "generator.py"])
+    build_seed_metadata()
+    build_service_metadata()
+    _format_generated(
+        [
+            CODE / "schema.py",
+            CODE / "generator.py",
+            CODE / "seed_isbn.py",
+            CODE / "seed_isrc.py",
+            CODE / "service_tdm.py",
+        ]
+    )
 
 
 if __name__ == "__main__":

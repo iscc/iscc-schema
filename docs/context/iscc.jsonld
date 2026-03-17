@@ -6,6 +6,9 @@
     "ImageObject": "http://schema.org/ImageObject",
     "AudioObject": "http://schema.org/AudioObject",
     "VideoObject": "http://schema.org/VideoObject",
+    "ISBN": "http://purl.org/iscc/terms/#ISBN",
+    "ISRC": "http://purl.org/iscc/terms/#ISRC",
+    "TDM": "http://purl.org/iscc/terms/#TDM",
     "$schema": {
       "@id": "http://purl.org/iscc/terms/#$schema",
       "@type": "@id"
@@ -88,6 +91,22 @@
     "chain": "http://purl.org/iscc/terms/#chain",
     "wallet": "http://purl.org/iscc/terms/#wallet",
     "credentials": "https://www.w3.org/2018/credentials#VerifiableCredential",
-    "verifications": "http://purl.org/iscc/terms/#verifications"
+    "verifications": "http://purl.org/iscc/terms/#verifications",
+    "isbn": "http://schema.org/isbn",
+    "productform": "http://purl.org/iscc/terms/#productform",
+    "title": "http://schema.org/name",
+    "imprint": "http://schema.org/publisherImprint",
+    "publisher": "http://schema.org/publisher",
+    "country": "http://schema.org/countryOfOrigin",
+    "pubdate": "http://schema.org/datePublished",
+    "isrc": "http://schema.org/isrcCode",
+    "main_artist": "http://schema.org/byArtist",
+    "track_title": "http://schema.org/name",
+    "version_title": "http://schema.org/alternativeHeadline",
+    "train": "http://purl.org/iscc/terms/#train",
+    "inference": "http://purl.org/iscc/terms/#inference",
+    "derive": "http://purl.org/iscc/terms/#derive",
+    "search": "http://purl.org/iscc/terms/#search",
+    "analyze": "http://purl.org/iscc/terms/#analyze"
   }
 }

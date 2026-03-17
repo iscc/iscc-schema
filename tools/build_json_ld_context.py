@@ -1,26 +1,25 @@
-"""Build docs/context/<v>.json JSON-LD file from iscc_core.schema"""
+"""Build docs/context/<v>.json JSON-LD file from ISCC schemas."""
 
 from typing import Dict
+import pathlib
 
+import yaml
 import iscc_schema.schema
 from os.path import dirname, abspath, join
 import json
 
 HERE = dirname(abspath(__file__))
+ROOT = pathlib.Path(__file__).parent.parent
+MODELS = ROOT / "iscc_schema" / "models"
+SEED_SCHEMAS = [MODELS / "isbn.yaml", MODELS / "isrc.yaml"]
+SERVICE_SCHEMAS = [MODELS / "tdm.yaml"]
 PATH_LATEST = join(HERE, f"../docs/context/iscc.jsonld")
 PATH_VERSION = join(HERE, f"../docs/context/{iscc_schema.__version__}.jsonld")
 
 
 def build_context():
     # type: () -> Dict
-    """
-    Build JSON-LD context from ISCC pydantic model for publishing
-
-    TODO: build directly from OpenAPI definitions instead of pydantic schema.
-
-    :return: Serialized JSON-LD context for publishing.
-    :rtype: Dict
-    """
+    """Build JSON-LD context from ISCC schemas including seed metadata."""
     context = {
         "@context": {
             "iscc": "@id",
@@ -29,6 +28,9 @@ def build_context():
             "ImageObject": "http://schema.org/ImageObject",
             "AudioObject": "http://schema.org/AudioObject",
             "VideoObject": "http://schema.org/VideoObject",
+            "ISBN": "http://purl.org/iscc/terms/#ISBN",
+            "ISRC": "http://purl.org/iscc/terms/#ISRC",
+            "TDM": "http://purl.org/iscc/terms/#TDM",
         }
     }
     ctx = context["@context"]
@@ -39,7 +41,25 @@ def build_context():
                 ctx[prop] = {"@id": iri, "@type": "@id"}
             else:
                 ctx[prop] = iri
+    for seed_path in SEED_SCHEMAS:
+        _add_schema_terms(ctx, seed_path)
+    for service_path in SERVICE_SCHEMAS:
+        _add_schema_terms(ctx, service_path)
     return context
+
+
+def _add_schema_terms(ctx, yaml_path):
+    # type: (dict, pathlib.Path) -> None
+    """Add terms from a standalone YAML schema to the JSON-LD context."""
+    with open(yaml_path, encoding="utf-8") as f:
+        schema = yaml.safe_load(f)
+    for prop, fields in schema.get("properties", {}).items():
+        if "x-iscc-context" in fields and prop not in ctx:
+            iri = fields["x-iscc-context"]
+            if _is_uri_field(fields):
+                ctx[prop] = {"@id": iri, "@type": "@id"}
+            else:
+                ctx[prop] = iri
 
 
 def _is_uri_field(field_schema):

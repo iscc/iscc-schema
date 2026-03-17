@@ -1,6 +1,12 @@
 ## Changelog
 
-### [0.5.0] - 2026-03-16
+### [0.5.0] - 2026-03-17
+- Added ISBN and ISRC Seed Metadata schemas for interoperable Meta-Code generation (IEP-0002)
+- Added TDM Service Metadata schema for AI content usage rights (train, inference, derive, search, analyze)
+- Introduced three-category schema framework: ISCC Metadata, Seed Metadata, Service Metadata
+- Added per-schema documentation pages with JSON Schema links and field reference tables
+- Added Seed and Service Metadata terms to JSON-LD context and vocabulary documentation
+- Fixed misleading ISCC Metadata description (content vocabulary, not declaration schema)
 - Added `x-iscc-standard` extension field to mark ISO 24138:2024 properties in YAML schemas
 - Surfaced ISO 24138:2024 annotations in generated schema docs, vocabulary page, and terms includes
 - Added `iscc_code` field as explicit alternative to the compact `iscc` field
