@@ -124,6 +124,7 @@ SEED_SCHEMAS = {
 
 SERVICE_SCHEMAS = {
     "tdm": ("tdm.yaml", "service_tdm.py", "TDM"),
+    "genai": ("genai.yaml", "service_genai.py", "GenAI"),
 }
 
 
@@ -191,6 +192,7 @@ def build():
             CODE / "seed_isbn.py",
             CODE / "seed_isrc.py",
             CODE / "service_tdm.py",
+            CODE / "service_genai.py",
         ]
     )
 

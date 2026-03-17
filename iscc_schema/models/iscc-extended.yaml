@@ -124,6 +124,66 @@ properties:
     - string
     x-iscc-context: http://schema.org/version
     x-iscc-schema-doc: The version of the *digital content* identified by the ISCC.
+  tdm:
+    type: object
+    description: Machine-readable TDM reservation signals for AI-related content usage categories.
+      Omitted fields indicate that the reservation status has not been determined.
+    x-iscc-context: http://purl.org/iscc/terms/#tdm
+    additionalProperties: false
+    properties:
+      train:
+        type: string
+        description: TDM reservation status for AI model training.
+        enum:
+        - reserved
+        - open
+      inference:
+        type: string
+        description: TDM reservation status for inference-time content retrieval.
+        enum:
+        - reserved
+        - open
+      derive:
+        type: string
+        description: TDM reservation status for AI-assisted content transformation.
+        enum:
+        - reserved
+        - open
+      search:
+        type: string
+        description: TDM reservation status for search and discovery indexing.
+        enum:
+        - reserved
+        - open
+      analyze:
+        type: string
+        description: TDM reservation status for automated content analysis.
+        enum:
+        - reserved
+        - open
+  genai:
+    type: object
+    description: Machine-readable generative AI disclosure signals for content transparency.
+      Omitted fields indicate that the disclosure status has not been determined.
+    x-iscc-context: http://purl.org/iscc/terms/#genai
+    additionalProperties: false
+    properties:
+      involvement:
+        type: string
+        description: Level of generative AI involvement in content creation.
+        enum:
+        - human
+        - ai_assisted
+        - human_supervised
+        - ai_generated
+      ai_system:
+        type: string
+        description: Name or identifier of the generative AI system used.
+        maxLength: 256
+      digital_source_type:
+        type: string
+        format: uri
+        description: IPTC Digital Source Type URI for granular content source classification.
 examples:
 - '@context': http://purl.org/iscc/context
   '@type': TextDigitalDocument

@@ -1,6 +1,9 @@
 ## Changelog
 
 ### [0.5.0] - 2026-03-17
+- Added GenAI Service Metadata schema for generative AI disclosure signals (involvement, ai_system, digital_source_type)
+- Added `genai` field to IsccMeta for embedding AI transparency signals in content metadata
+- Moved `tdm` field from iscc-embeddable to iscc-extended (structured objects don't belong in media-embeddable metadata)
 - Added `form` field for content-kind classification using Schema.org CreativeWork subtypes
 - Pydantic models now emit versioned `$schema` and `@context` URLs (e.g., `http://purl.org/iscc/schema/0.5.0.json`)
 - Standalone schema models (ISBN, ISRC, TDM) now emit versioned `@context` URLs

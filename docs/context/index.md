@@ -58,12 +58,6 @@
 !!! term ""
     Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.
 
-## tdm
-
-<small><http://purl.org/iscc/terms/#tdm></small>
-!!! term ""
-    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
-
 ## media_id
 
 <small><http://purl.org/iscc/terms/#media_id></small>
@@ -125,6 +119,18 @@
 <small><http://schema.org/version></small>
 !!! term ""
     The version of the CreativeWork embodied by a specified resource.
+
+## tdm
+
+<small><http://purl.org/iscc/terms/#tdm></small>
+!!! term ""
+    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
+
+## genai
+
+<small><http://purl.org/iscc/terms/#genai></small>
+!!! term ""
+    Machine-readable generative AI disclosure signals for content transparency. Omitted fields indicate that the disclosure status has not been determined.
 
 ## mode
 
@@ -466,4 +472,22 @@
 <small><http://purl.org/iscc/terms/#analyze></small>
 !!! term ""
     TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.
+
+## involvement
+
+<small><http://purl.org/iscc/terms/#involvement></small>
+!!! term ""
+    Level of generative AI involvement in content creation. 'human' indicates content created purely by human effort without generative AI. 'ai_assisted' indicates content created by human effort with support from generative AI. 'human_supervised' indicates content created by generative AI but supervised or reviewed by humans. 'ai_generated' indicates content created by generative AI without human supervision.
+
+## ai_system
+
+<small><http://purl.org/iscc/terms/#ai_system></small>
+!!! term ""
+    Name or identifier of the generative AI system used for content creation. Aligns with IPTC Photo Metadata 2025.1 'AI System Used' property.
+
+## digital_source_type
+
+<small><http://purl.org/iscc/terms/#digital_source_type></small>
+!!! term ""
+    IPTC Digital Source Type URI for granular content source classification. This optional field bridges to the IPTC controlled vocabulary, an external evolving standard that offers finer-grained source type distinctions than the 'involvement' field. Also used by C2PA Content Credentials. See https://cv.iptc.org/newscodes/digitalsourcetype/
 

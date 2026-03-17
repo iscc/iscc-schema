@@ -9,6 +9,7 @@
     "ISBN": "http://purl.org/iscc/terms/#ISBN",
     "ISRC": "http://purl.org/iscc/terms/#ISRC",
     "TDM": "http://purl.org/iscc/terms/#TDM",
+    "GenAI": "http://purl.org/iscc/terms/#GenAI",
     "$schema": {
       "@id": "http://purl.org/iscc/terms/#$schema",
       "@type": "@id"
@@ -27,7 +28,6 @@
     },
     "credit": "http://schema.org/creditText",
     "rights": "http://schema.org/copyrightNotice",
-    "tdm": "http://purl.org/iscc/terms/#tdm",
     "media_id": "http://purl.org/iscc/terms/#media_id",
     "iscc_id": "http://purl.org/iscc/terms/#iscc_id",
     "iscc_code": "http://purl.org/iscc/terms/#iscc",
@@ -44,6 +44,8 @@
     "previous": "http://purl.org/iscc/terms/#previous",
     "form": "http://schema.org/additionalType",
     "version": "http://schema.org/version",
+    "tdm": "http://purl.org/iscc/terms/#tdm",
+    "genai": "http://purl.org/iscc/terms/#genai",
     "mode": "http://purl.org/iscc/terms/#mode",
     "created": "http://schema.org/dateCreated",
     "filename": "http://purl.org/iscc/terms/#filename",
@@ -130,6 +132,12 @@
     "inference": "http://purl.org/iscc/terms/#inference",
     "derive": "http://purl.org/iscc/terms/#derive",
     "search": "http://purl.org/iscc/terms/#search",
-    "analyze": "http://purl.org/iscc/terms/#analyze"
+    "analyze": "http://purl.org/iscc/terms/#analyze",
+    "involvement": "http://purl.org/iscc/terms/#involvement",
+    "ai_system": "http://purl.org/iscc/terms/#ai_system",
+    "digital_source_type": {
+      "@id": "http://purl.org/iscc/terms/#digital_source_type",
+      "@type": "@id"
+    }
   }
 }

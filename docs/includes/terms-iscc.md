@@ -14,12 +14,6 @@
 
     **Standard**:  ISO 24138:2024
 
-### **tdm**
-
-!!! term "<small><http://purl.org/iscc/terms/#tdm></small>"
-
-    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
-
 ### **media_id**
 
 !!! term "<small><http://purl.org/iscc/terms/#media_id></small>"
@@ -43,6 +37,18 @@
 !!! term "<small><http://purl.org/iscc/terms/#previous></small>"
 
     ISCC of the preceding version of this item.
+
+### **tdm**
+
+!!! term "<small><http://purl.org/iscc/terms/#tdm></small>"
+
+    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
+
+### **genai**
+
+!!! term "<small><http://purl.org/iscc/terms/#genai></small>"
+
+    Machine-readable generative AI disclosure signals for content transparency. Omitted fields indicate that the disclosure status has not been determined.
 
 ### **mode**
 

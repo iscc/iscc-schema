@@ -12,7 +12,7 @@ HERE = dirname(abspath(__file__))
 ROOT = pathlib.Path(__file__).parent.parent
 MODELS = ROOT / "iscc_schema" / "models"
 SEED_SCHEMAS = [MODELS / "isbn.yaml", MODELS / "isrc.yaml"]
-SERVICE_SCHEMAS = [MODELS / "tdm.yaml"]
+SERVICE_SCHEMAS = [MODELS / "tdm.yaml", MODELS / "genai.yaml"]
 PATH_LATEST = join(HERE, f"../docs/context/iscc.jsonld")
 PATH_VERSION = join(HERE, f"../docs/context/{iscc_schema.__version__}.jsonld")
 
@@ -31,6 +31,7 @@ def build_context():
             "ISBN": "http://purl.org/iscc/terms/#ISBN",
             "ISRC": "http://purl.org/iscc/terms/#ISRC",
             "TDM": "http://purl.org/iscc/terms/#TDM",
+            "GenAI": "http://purl.org/iscc/terms/#GenAI",
         }
     }
     ctx = context["@context"]

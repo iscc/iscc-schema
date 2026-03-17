@@ -41,7 +41,7 @@ def copy_root_files():
 
 
 SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml"]
-SERVICE_SCHEMATA = ["tdm.yaml"]
+SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml"]
 
 
 def _render_schema_sections(schemata):

@@ -350,74 +350,6 @@ class Form(Enum):
     WebPage = "WebPage"
 
 
-class IsccExtended(BaseModel):
-    """
-    Extended ISCC Metadata
-    """
-
-    media_id: str | None = Field(
-        None,
-        description="Vendor specific (internal) identifier for the source media file.",
-        examples=["05VQ3BGTGFCJA"],
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#media_id"},
-    )
-    iscc_id: str | None = Field(
-        None,
-        description="The **ISCC-ID** of the digital content in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
-        examples=["ISCC:MAACAJINXFXA2SQX"],
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#iscc_id"},
-        max_length=73,
-        min_length=15,
-        pattern="^ISCC:[A-Z2-7]{10,73}$",
-    )
-    iscc_code: str | None = Field(
-        None,
-        description="A composite **ISCC-CODE** in canonical representation. Explicit alternative to the more compact `iscc` field. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
-        examples=["ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"],
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#iscc"},
-        max_length=73,
-        min_length=15,
-        pattern="^ISCC:[A-Z2-7]{10,73}$",
-    )
-    image: AnyUrl | None = Field(
-        None,
-        description="URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.",
-        examples=["https://picsum.photos/200/300.jpg"],
-        json_schema_extra={"x-iscc-context": "http://schema.org/image"},
-    )
-    identifier: str | list[str] | None = Field(
-        None,
-        description="Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.",
-        json_schema_extra={"x-iscc-context": "http://schema.org/identifier"},
-    )
-    content: AnyUrl | None = Field(
-        None,
-        description="URI of the *digital content* that was used to create this ISCC.",
-        json_schema_extra={"x-iscc-context": "http://schema.org/contentUrl"},
-    )
-    keywords: str | list[str] | None = Field(
-        None,
-        description="Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.",
-        json_schema_extra={"x-iscc-context": "http://schema.org/keywords"},
-    )
-    previous: str | None = Field(
-        None,
-        description="ISCC of the preceding version of this item.",
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#previous"},
-    )
-    form: Form | None = Field(
-        None,
-        description="The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.",
-        examples=["ScholarlyArticle"],
-        json_schema_extra={"x-iscc-context": "http://schema.org/additionalType"},
-    )
-    version: int | str | None = Field(
-        None,
-        description="The version of the CreativeWork embodied by a specified resource.",
-        json_schema_extra={"x-iscc-context": "http://schema.org/version"},
-    )
-
-
 class Train(Enum):
     """
     TDM reservation status for AI model training.
@@ -486,6 +418,114 @@ class Tdm(BaseModel):
     )
 
 
+class Involvement(Enum):
+    """
+    Level of generative AI involvement in content creation.
+    """
+
+    human = "human"
+    ai_assisted = "ai_assisted"
+    human_supervised = "human_supervised"
+    ai_generated = "ai_generated"
+
+
+class Genai(BaseModel):
+    """
+    Machine-readable generative AI disclosure signals for content transparency. Omitted fields indicate that the disclosure status has not been determined.
+    """
+
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    involvement: Involvement | None = Field(
+        None, description="Level of generative AI involvement in content creation."
+    )
+    ai_system: str | None = Field(
+        None, description="Name or identifier of the generative AI system used.", max_length=256
+    )
+    digital_source_type: AnyUrl | None = Field(
+        None, description="IPTC Digital Source Type URI for granular content source classification."
+    )
+
+
+class IsccExtended(BaseModel):
+    """
+    Extended ISCC Metadata
+    """
+
+    media_id: str | None = Field(
+        None,
+        description="Vendor specific (internal) identifier for the source media file.",
+        examples=["05VQ3BGTGFCJA"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#media_id"},
+    )
+    iscc_id: str | None = Field(
+        None,
+        description="The **ISCC-ID** of the digital content in canonical representation. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
+        examples=["ISCC:MAACAJINXFXA2SQX"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#iscc_id"},
+        max_length=73,
+        min_length=15,
+        pattern="^ISCC:[A-Z2-7]{10,73}$",
+    )
+    iscc_code: str | None = Field(
+        None,
+        description="A composite **ISCC-CODE** in canonical representation. Explicit alternative to the more compact `iscc` field. A valid ISCC Metadata object should include at least one of the `iscc`, `iscc_id`, or `iscc_code` fields.",
+        examples=["ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"],
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#iscc"},
+        max_length=73,
+        min_length=15,
+        pattern="^ISCC:[A-Z2-7]{10,73}$",
+    )
+    image: AnyUrl | None = Field(
+        None,
+        description="URI for a user-presentable image that serves as a preview of the *digital content*. The URI may be a Data-URL [RFC2397](https://datatracker.ietf.org/doc/html/rfc2397). If **ISCC** metadata is used as NFT metadata according to [ERC-721](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/) or [ERC-1155](https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/) the URI should reference the actual digital content represented by the NFT.",
+        examples=["https://picsum.photos/200/300.jpg"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/image"},
+    )
+    identifier: str | list[str] | None = Field(
+        None,
+        description="Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.",
+        json_schema_extra={"x-iscc-context": "http://schema.org/identifier"},
+    )
+    content: AnyUrl | None = Field(
+        None,
+        description="URI of the *digital content* that was used to create this ISCC.",
+        json_schema_extra={"x-iscc-context": "http://schema.org/contentUrl"},
+    )
+    keywords: str | list[str] | None = Field(
+        None,
+        description="Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.",
+        json_schema_extra={"x-iscc-context": "http://schema.org/keywords"},
+    )
+    previous: str | None = Field(
+        None,
+        description="ISCC of the preceding version of this item.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#previous"},
+    )
+    form: Form | None = Field(
+        None,
+        description="The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.",
+        examples=["ScholarlyArticle"],
+        json_schema_extra={"x-iscc-context": "http://schema.org/additionalType"},
+    )
+    version: int | str | None = Field(
+        None,
+        description="The version of the CreativeWork embodied by a specified resource.",
+        json_schema_extra={"x-iscc-context": "http://schema.org/version"},
+    )
+    tdm: Tdm | None = Field(
+        None,
+        description="Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#tdm"},
+    )
+    genai: Genai | None = Field(
+        None,
+        description="Machine-readable generative AI disclosure signals for content transparency. Omitted fields indicate that the disclosure status has not been determined.",
+        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#genai"},
+    )
+
+
 class IsccEmbeddable(BaseModel):
     """
     Metadata intended to be embedded into the media asset.
@@ -520,11 +560,6 @@ class IsccEmbeddable(BaseModel):
         description="Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.",
         examples=["© Copyright 2022 ISCC Foundation - www.iscc.codes"],
         json_schema_extra={"x-iscc-context": "http://schema.org/copyrightNotice"},
-    )
-    tdm: Tdm | None = Field(
-        None,
-        description="Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.",
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#tdm"},
     )
 
 

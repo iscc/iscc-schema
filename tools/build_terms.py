@@ -12,7 +12,7 @@ MARKDOWN_TERMS_SEED = ROOT / "docs/includes/terms-seed.md"
 MARKDOWN_TERMS_SERVICE = ROOT / "docs/includes/terms-service.md"
 
 SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml"]
-SERVICE_SCHEMATA = ["tdm.yaml"]
+SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml"]
 
 
 def terms(context):

@@ -115,6 +115,7 @@ def flatten_schemas():
         "credit",
         "rights",
         "tdm",
+        "genai",
         "original",
         "credentials",
         "verifications",
@@ -175,7 +176,7 @@ def flatten_schemas():
 
 
 SEED_SCHEMAS = ["isbn.yaml", "isrc.yaml"]
-SERVICE_SCHEMAS = ["tdm.yaml"]
+SERVICE_SCHEMAS = ["tdm.yaml", "genai.yaml"]
 
 
 def build_seed_schema(yaml_file, full_context):

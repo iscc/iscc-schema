@@ -121,13 +121,6 @@ Metadata intended to be embedded into the media asset.
 | ---- | ---- | --------|--------------------------------|
 | rights | `string` | none | Contains any necessary copyright notice and should identify the current owner of the copyright of this work with associated intellectual property rights.<br><br>**Example**: `© Copyright 2022 ISCC Foundation - www.iscc.codes`         |
 
-### **tdm**
-<http://purl.org/iscc/terms/#tdm>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| tdm | `object` | none | Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.         |
-
 ## iscc-extended
 Extended ISCC Metadata
 
@@ -221,6 +214,20 @@ Extended ISCC Metadata
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | version | `['integer', 'string']` | none | The version of the CreativeWork embodied by a specified resource.         |
+
+### **tdm**
+<http://purl.org/iscc/terms/#tdm>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| tdm | `object` | none | Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.         |
+
+### **genai**
+<http://purl.org/iscc/terms/#genai>
+
+| Name | Type | Default | Definition                     |
+| ---- | ---- | --------|--------------------------------|
+| genai | `object` | none | Machine-readable generative AI disclosure signals for content transparency. Omitted fields indicate that the disclosure status has not been determined.         |
 
 ## iscc-technical
 Technical ISCC Metadata automatically inferred from the *digital content* by an ISCC Processor
