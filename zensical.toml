@@ -19,6 +19,7 @@ extra_javascript = [
 
 nav = [
     "index.md",
+    "guide.md",
     "terms/index.md",
     { "Schema" = [
         "schema/index.md",
