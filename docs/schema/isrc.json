@@ -4,15 +4,6 @@
   "title": "ISRC",
   "type": "object",
   "description": "ISRC Seed Metadata for interoperable Meta-Code generation.",
-  "required": [
-    "isrc",
-    "main_artist",
-    "track_title",
-    "version_title",
-    "duration",
-    "content_type",
-    "pubdate"
-  ],
   "properties": {
     "@context": {
       "type": "string",
@@ -82,6 +73,15 @@
       "x-iscc-context": "http://schema.org/datePublished"
     }
   },
+  "required": [
+    "isrc",
+    "main_artist",
+    "track_title",
+    "version_title",
+    "duration",
+    "content_type",
+    "pubdate"
+  ],
   "examples": [
     {
       "@context": "http://purl.org/iscc/context",

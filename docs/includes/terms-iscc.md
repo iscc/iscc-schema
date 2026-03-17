@@ -18,7 +18,7 @@
 
 !!! term "<small><http://purl.org/iscc/terms/#tdm></small>"
 
-    Text and Data Mining reservation metadata for AI content usage rights.
+    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
 
 ### **media_id**
 

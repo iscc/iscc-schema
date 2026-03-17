@@ -62,7 +62,7 @@
 
 <small><http://purl.org/iscc/terms/#tdm></small>
 !!! term ""
-    Text and Data Mining reservation metadata for AI content usage rights.
+    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
 
 ## media_id
 
@@ -435,29 +435,29 @@
 
 <small><http://purl.org/iscc/terms/#train></small>
 !!! term ""
-    Reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.
+    TDM reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.
 
 ## inference
 
 <small><http://purl.org/iscc/terms/#inference></small>
 !!! term ""
-    Reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.
+    TDM reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.
 
 ## derive
 
 <small><http://purl.org/iscc/terms/#derive></small>
 !!! term ""
-    Reservation status for AI-generated derivative works. Covers summarization, translation, format adaptation, and content reformulation.
+    TDM reservation status for AI-assisted content transformation. Covers summarization, translation, format adaptation, and content reformulation.
 
 ## search
 
 <small><http://purl.org/iscc/terms/#search></small>
 !!! term ""
-    Reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.
+    TDM reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.
 
 ## analyze
 
 <small><http://purl.org/iscc/terms/#analyze></small>
 !!! term ""
-    Reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.
+    TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.
 

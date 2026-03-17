@@ -4,13 +4,13 @@
 from __future__ import annotations
 from enum import Enum
 from typing import Literal
-from pydantic import Field
+from pydantic import ConfigDict, Field
 from iscc_schema.base import BaseModel
 
 
 class Train(Enum):
     """
-    Reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.
+    TDM reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.
     """
 
     reserved = "reserved"
@@ -19,7 +19,7 @@ class Train(Enum):
 
 class Inference(Enum):
     """
-    Reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.
+    TDM reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.
     """
 
     reserved = "reserved"
@@ -28,7 +28,7 @@ class Inference(Enum):
 
 class Derive(Enum):
     """
-    Reservation status for AI-generated derivative works. Covers summarization, translation, format adaptation, and content reformulation.
+    TDM reservation status for AI-assisted content transformation. Covers summarization, translation, format adaptation, and content reformulation.
     """
 
     reserved = "reserved"
@@ -37,7 +37,7 @@ class Derive(Enum):
 
 class Search(Enum):
     """
-    Reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.
+    TDM reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.
     """
 
     reserved = "reserved"
@@ -46,7 +46,7 @@ class Search(Enum):
 
 class Analyze(Enum):
     """
-    Reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.
+    TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.
     """
 
     reserved = "reserved"
@@ -55,9 +55,12 @@ class Analyze(Enum):
 
 class TDM(BaseModel):
     """
-    Text and Data Mining reservation metadata for AI content usage rights.
+    Machine-readable TDM reservation signals for AI-related content usage categories. A 'reserved' status indicates an explicit opt-out from TDM exceptions (e.g., EU DSM Directive Art. 4). An 'open' status indicates that no rights are reserved. Omitted fields indicate that the reservation status has not been determined. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.
     """
 
+    model_config = ConfigDict(
+        extra="forbid",
+    )
     context_: Literal["http://purl.org/iscc/context"] = Field(
         "http://purl.org/iscc/context",
         alias="@context",
@@ -69,33 +72,33 @@ class TDM(BaseModel):
         alias="$schema",
         description="The JSON Schema URI for TDM service metadata.",
     )
-    train: Train = Field(
-        ...,
-        description="Reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.",
+    train: Train | None = Field(
+        None,
+        description="TDM reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.",
         examples=["reserved"],
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#train"},
     )
-    inference: Inference = Field(
-        ...,
-        description="Reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.",
+    inference: Inference | None = Field(
+        None,
+        description="TDM reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.",
         examples=["open"],
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#inference"},
     )
-    derive: Derive = Field(
-        ...,
-        description="Reservation status for AI-generated derivative works. Covers summarization, translation, format adaptation, and content reformulation.",
+    derive: Derive | None = Field(
+        None,
+        description="TDM reservation status for AI-assisted content transformation. Covers summarization, translation, format adaptation, and content reformulation.",
         examples=["reserved"],
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#derive"},
     )
-    search: Search = Field(
-        ...,
-        description="Reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.",
+    search: Search | None = Field(
+        None,
+        description="TDM reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.",
         examples=["open"],
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#search"},
     )
-    analyze: Analyze = Field(
-        ...,
-        description="Reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.",
+    analyze: Analyze | None = Field(
+        None,
+        description="TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.",
         examples=["open"],
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#analyze"},
     )

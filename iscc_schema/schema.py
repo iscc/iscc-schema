@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 from enum import Enum
-from pydantic import AwareDatetime, Field
+from pydantic import AwareDatetime, ConfigDict, Field
 from iscc_schema.fields import AnyUrl
 from iscc_schema.base import BaseModel
 from typing import Any
@@ -385,7 +385,7 @@ class IsccExtended(BaseModel):
 
 class Train(Enum):
     """
-    Reservation status for AI model training.
+    TDM reservation status for AI model training.
     """
 
     reserved = "reserved"
@@ -394,7 +394,7 @@ class Train(Enum):
 
 class Inference(Enum):
     """
-    Reservation status for inference-time content retrieval.
+    TDM reservation status for inference-time content retrieval.
     """
 
     reserved = "reserved"
@@ -403,7 +403,7 @@ class Inference(Enum):
 
 class Derive(Enum):
     """
-    Reservation status for AI-generated derivative works.
+    TDM reservation status for AI-assisted content transformation.
     """
 
     reserved = "reserved"
@@ -412,7 +412,7 @@ class Derive(Enum):
 
 class Search(Enum):
     """
-    Reservation status for search and discovery indexing.
+    TDM reservation status for search and discovery indexing.
     """
 
     reserved = "reserved"
@@ -421,7 +421,7 @@ class Search(Enum):
 
 class Analyze(Enum):
     """
-    Reservation status for automated content analysis.
+    TDM reservation status for automated content analysis.
     """
 
     reserved = "reserved"
@@ -430,16 +430,25 @@ class Analyze(Enum):
 
 class Tdm(BaseModel):
     """
-    Text and Data Mining reservation metadata for AI content usage rights.
+    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
     """
 
-    train: Train = Field(..., description="Reservation status for AI model training.")
-    inference: Inference = Field(
-        ..., description="Reservation status for inference-time content retrieval."
+    model_config = ConfigDict(
+        extra="forbid",
     )
-    derive: Derive = Field(..., description="Reservation status for AI-generated derivative works.")
-    search: Search = Field(..., description="Reservation status for search and discovery indexing.")
-    analyze: Analyze = Field(..., description="Reservation status for automated content analysis.")
+    train: Train | None = Field(None, description="TDM reservation status for AI model training.")
+    inference: Inference | None = Field(
+        None, description="TDM reservation status for inference-time content retrieval."
+    )
+    derive: Derive | None = Field(
+        None, description="TDM reservation status for AI-assisted content transformation."
+    )
+    search: Search | None = Field(
+        None, description="TDM reservation status for search and discovery indexing."
+    )
+    analyze: Analyze | None = Field(
+        None, description="TDM reservation status for automated content analysis."
+    )
 
 
 class IsccEmbeddable(BaseModel):
@@ -479,7 +488,7 @@ class IsccEmbeddable(BaseModel):
     )
     tdm: Tdm | None = Field(
         None,
-        description="Text and Data Mining reservation metadata for AI content usage rights.",
+        description="Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.",
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#tdm"},
     )
 

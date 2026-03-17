@@ -2,8 +2,12 @@
 
 ### [0.5.0] - 2026-03-17
 - Added ISBN and ISRC Seed Metadata schemas for interoperable Meta-Code generation (IEP-0002)
-- Added TDM Service Metadata schema for AI content usage rights (train, inference, derive, search, analyze)
+- Added TDM Service Metadata schema for machine-readable TDM reservation signals (train, inference, derive, search, analyze)
 - Added `tdm` field to IsccMeta for embedding TDM reservation metadata in content descriptions
+- Reframed TDM schema as reservation policy signals aligned with EU DSM Directive Art. 4 opt-out
+- Made TDM fields optional (omitted field = reservation status not determined)
+- Added `additionalProperties: false` to TDM schema for strict validation
+- Replaced legally loaded terminology in TDM field descriptions (e.g., "derivative works" → "content transformation")
 - Introduced three-category schema framework: ISCC Metadata, Seed Metadata, Service Metadata
 - Added per-schema documentation pages with JSON Schema links and field reference tables
 - Added Seed and Service Metadata terms to JSON-LD context and vocabulary documentation

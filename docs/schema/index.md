@@ -17,4 +17,4 @@ Industry-specific seed metadata schemas for interoperable Meta-Code generation. 
 
 Use-case-specific metadata schemas served by ISCC registries and discoverable through ISCC gateways.
 
-- [**TDM Service Metadata**](tdm.md) — Text and Data Mining reservation metadata for AI content usage rights.
+- [**TDM Service Metadata**](tdm.md) — Machine-readable TDM reservation signals for AI-related content usage categories. A 'reserved' status indicates an explicit opt-out from TDM exceptions (e.g., EU DSM Directive Art. 4). An 'open' status indicates that no rights are reserved. Omitted fields indicate that the reservation status has not been determined. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.

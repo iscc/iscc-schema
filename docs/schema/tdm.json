@@ -3,14 +3,7 @@
   "$id": "http://purl.org/iscc/schema/tdm.json",
   "title": "TDM",
   "type": "object",
-  "description": "Text and Data Mining reservation metadata for AI content usage rights.",
-  "required": [
-    "train",
-    "inference",
-    "derive",
-    "search",
-    "analyze"
-  ],
+  "description": "Machine-readable TDM reservation signals for AI-related content usage categories. A 'reserved' status indicates an explicit opt-out from TDM exceptions (e.g., EU DSM Directive Art. 4). An 'open' status indicates that no rights are reserved. Omitted fields indicate that the reservation status has not been determined. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.",
   "properties": {
     "@context": {
       "type": "string",
@@ -31,7 +24,7 @@
     },
     "train": {
       "type": "string",
-      "description": "Reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.",
+      "description": "TDM reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.",
       "enum": [
         "reserved",
         "open"
@@ -41,7 +34,7 @@
     },
     "inference": {
       "type": "string",
-      "description": "Reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.",
+      "description": "TDM reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.",
       "enum": [
         "reserved",
         "open"
@@ -51,7 +44,7 @@
     },
     "derive": {
       "type": "string",
-      "description": "Reservation status for AI-generated derivative works. Covers summarization, translation, format adaptation, and content reformulation.",
+      "description": "TDM reservation status for AI-assisted content transformation. Covers summarization, translation, format adaptation, and content reformulation.",
       "enum": [
         "reserved",
         "open"
@@ -61,7 +54,7 @@
     },
     "search": {
       "type": "string",
-      "description": "Reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.",
+      "description": "TDM reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.",
       "enum": [
         "reserved",
         "open"
@@ -71,7 +64,7 @@
     },
     "analyze": {
       "type": "string",
-      "description": "Reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.",
+      "description": "TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.",
       "enum": [
         "reserved",
         "open"
@@ -80,6 +73,7 @@
       "x-iscc-context": "http://purl.org/iscc/terms/#analyze"
     }
   },
+  "additionalProperties": false,
   "examples": [
     {
       "@context": "http://purl.org/iscc/context",
@@ -88,8 +82,7 @@
       "train": "reserved",
       "inference": "open",
       "derive": "reserved",
-      "search": "open",
-      "analyze": "open"
+      "search": "open"
     }
   ]
 }

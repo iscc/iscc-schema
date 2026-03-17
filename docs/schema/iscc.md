@@ -126,7 +126,7 @@ Metadata intended to be embedded into the media asset.
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| tdm | `object` | none | Text and Data Mining reservation metadata for AI content usage rights.         |
+| tdm | `object` | none | Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.         |
 
 ## iscc-extended
 Extended ISCC Metadata

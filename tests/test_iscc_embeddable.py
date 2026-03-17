@@ -55,10 +55,12 @@ def test_tdm_field_invalid_value():
         iss.IsccMeta(tdm=tdm_data)
 
 
-def test_tdm_field_missing_required():
+def test_tdm_field_partial():
     tdm_data = {"train": "reserved"}
-    with pytest.raises(ValidationError):
-        iss.IsccMeta(tdm=tdm_data)
+    m = iss.IsccMeta(tdm=tdm_data)
+    d = m.dict()
+    assert d["tdm"]["train"] == "reserved"
+    assert "inference" not in d["tdm"]
 
 
 def test_tdm_field_optional():

@@ -4,16 +4,6 @@
   "title": "ISBN",
   "type": "object",
   "description": "ISBN Seed Metadata for interoperable Meta-Code generation.",
-  "required": [
-    "isbn",
-    "productform",
-    "title",
-    "language",
-    "imprint",
-    "publisher",
-    "country",
-    "pubdate"
-  ],
   "properties": {
     "@context": {
       "type": "string",
@@ -90,6 +80,16 @@
       "x-iscc-context": "http://schema.org/datePublished"
     }
   },
+  "required": [
+    "isbn",
+    "productform",
+    "title",
+    "language",
+    "imprint",
+    "publisher",
+    "country",
+    "pubdate"
+  ],
   "examples": [
     {
       "@context": "http://purl.org/iscc/context",

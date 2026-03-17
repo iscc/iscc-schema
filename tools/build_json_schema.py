@@ -129,9 +129,12 @@ def build_seed_schema(yaml_file):
         "title": schema["title"],
         "type": "object",
         "description": schema["description"],
-        "required": schema.get("required", []),
         "properties": schema.get("properties", {}),
     }
+    if schema.get("required"):
+        output["required"] = schema["required"]
+    if "additionalProperties" in schema:
+        output["additionalProperties"] = schema["additionalProperties"]
     if schema.get("examples"):
         output["examples"] = schema["examples"]
 

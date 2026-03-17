@@ -93,16 +93,31 @@ def test_invalid_enum_value_inference():
         TDM(**data)
 
 
-def test_missing_required_train():
-    data = {k: v for k, v in VALID_TDM_DATA.items() if k != "train"}
-    with pytest.raises(ValidationError):
-        TDM(**data)
+def test_partial_fields():
+    obj = TDM(train="reserved")
+    d = obj.dict()
+    assert d["train"] == "reserved"
+    assert "inference" not in d
+    assert "derive" not in d
+    assert "search" not in d
+    assert "analyze" not in d
 
 
-def test_missing_required_analyze():
-    data = {k: v for k, v in VALID_TDM_DATA.items() if k != "analyze"}
-    with pytest.raises(ValidationError):
-        TDM(**data)
+def test_empty_construction():
+    obj = TDM()
+    d = obj.dict()
+    assert "train" not in d
+    assert "inference" not in d
+
+
+def test_omitted_means_undetermined():
+    obj = TDM(train="reserved", search="open")
+    d = obj.dict()
+    assert d["train"] == "reserved"
+    assert d["search"] == "open"
+    assert "inference" not in d
+    assert "derive" not in d
+    assert "analyze" not in d
 
 
 def test_extra_fields_forbidden():
