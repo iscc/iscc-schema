@@ -19,23 +19,25 @@ extra_javascript = [
 
 nav = [
     "index.md",
-    "guide.md",
-    "terms/index.md",
-    { "Schema" = [
+    { "Getting Started" = [
+        "guide.md",
+        "examples/index.md",
+    ]},
+    { "Reference" = [
         "schema/index.md",
         "schema/iscc.md",
         "schema/isbn.md",
         "schema/isrc.md",
         "schema/tdm.md",
         "schema/genai.md",
+        "terms/index.md",
+        "versioning.md",
     ]},
-    "examples/index.md",
-    "versioning.md",
-    "contributing.md",
-    { "Reference" = [
+    { "Project" = [
+        "contributing.md",
         "reference/for-coding-agents.md",
+        "changelog.md",
     ]},
-    "changelog.md",
 ]
 
 [project.theme]
