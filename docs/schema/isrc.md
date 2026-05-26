@@ -29,6 +29,8 @@ ISRC Seed Metadata for interoperable Meta-Code generation. See [IEP-0002](https:
 
 **Required fields**: `isrc`, `main_artist`, `track_title`, `version_title`, `duration`, `content_type`, `pubdate`
 
+## Field Reference
+
 ## **@context**
 
 | Name | Type | Default | Definition                     |

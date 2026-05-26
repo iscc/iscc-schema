@@ -67,7 +67,11 @@ SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml"]
 STANDALONE_META = {
     "isbn": {"icon": "lucide/book-text", "title": "ISBN Seed"},
     "isrc": {"icon": "lucide/music", "title": "ISRC Seed"},
-    "tdm": {"icon": "lucide/pickaxe", "title": "TDM Service"},
+    "tdm": {
+        "icon": "lucide/pickaxe",
+        "title": "TDM Service",
+        "description": "W3C TDMRep-conformant rights signals via content-addressed discovery",
+    },
     "genai": {"icon": "lucide/sparkles", "title": "GenAI Service"},
 }
 
@@ -153,7 +157,8 @@ def _build_standalone_doc(schema_file, category, extra_text=""):
         frontmatter += f"icon: {meta['icon']}\n"
     if meta.get("title"):
         frontmatter += f"title: {meta['title']}\n"
-    frontmatter += f"description: {title} {category.lower()}.\n---\n\n"
+    desc = meta.get("description", f"{title} {category.lower()}")
+    frontmatter += f"description: {desc}.\n---\n\n"
     content = frontmatter
     content += f"# {title} {category}\n\n"
     content += f"{data['description']}"
@@ -166,8 +171,15 @@ def _build_standalone_doc(schema_file, category, extra_text=""):
         pretty = json.dumps(data["examples"][0], indent=2)
         content += f"!!! example\n\n    ```json\n{indent(pretty, prefix='    ')}\n    ```\n\n"
 
+    intro_path = ROOT / "tools" / f"_{name}_intro.md"
+    if intro_path.exists():
+        with open(intro_path, "rt", encoding="utf-8") as f:
+            content += f.read().rstrip() + "\n\n"
+
     if data.get("required"):
         content += f"**Required fields**: `{'`, `'.join(data['required'])}`\n\n"
+
+    content += "## Field Reference\n\n"
 
     for prop, attrs in data["properties"].items():
         type_ = attrs.get("type")

@@ -30,6 +30,8 @@ ISBN Seed Metadata for interoperable Meta-Code generation. See [IEP-0002](https:
 
 **Required fields**: `isbn`, `productform`, `title`, `language`, `imprint`, `publisher`, `country`, `pubdate`
 
+## Field Reference
+
 ## **@context**
 
 | Name | Type | Default | Definition                     |

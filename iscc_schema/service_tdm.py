@@ -20,7 +20,7 @@ class TdmReservation(IntEnum):
 
 class TDM(BaseModel):
     """
-    Machine-readable TDM rights signals conformant with W3C TDMRep. The tdm_reservation field is semantically equivalent to TDMRep's tdm-reservation property, and tdm_policy links to an ODRL policy document. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.
+    Machine-readable TDM rights signals conformant with W3C TDMRep, providing content-addressed delivery of tdm-reservation and tdm-policy properties via ISCC. Designed for content identification and discovery where identity, provenance, and trust context complement the reservation signal.
     """
 
     model_config = ConfigDict(
@@ -39,7 +39,7 @@ class TDM(BaseModel):
     )
     iscc: str | None = Field(
         None,
-        description="An ISCC-CODE or ISCC-ID identifying the digital content this TDM declaration applies to.",
+        description="An ISCC-CODE or ISCC-ID identifying the digital content this TDM declaration applies to. Mapped to JSON-LD @id, making it the RDF subject of the declaration.",
         examples=["ISCC:MAACAJINXFXA2SQX"],
         max_length=73,
         min_length=15,

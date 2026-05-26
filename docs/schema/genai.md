@@ -23,6 +23,8 @@ Machine-readable generative AI disclosure signals for content transparency. Desi
     }
     ```
 
+## Field Reference
+
 ## **@context**
 
 | Name | Type | Default | Definition                     |
