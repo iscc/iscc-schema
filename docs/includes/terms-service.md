@@ -1,32 +1,14 @@
-### **train**
+### **tdm_reservation**
 
-!!! term "<small><http://purl.org/iscc/terms/#train></small>"
+!!! term "<small><http://www.w3.org/ns/tdmrep#reservation></small>"
 
-    TDM reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.
+    Blanket TDM reservation flag, semantically equivalent to W3C TDMRep tdm-reservation. 1 = rights reserved (EU DSM Art. 4 opt-out), 0 = not reserved, absent = undeclared.
 
-### **inference**
+### **tdm_policy**
 
-!!! term "<small><http://purl.org/iscc/terms/#inference></small>"
+!!! term "<small><http://www.w3.org/ns/tdmrep#policy></small>"
 
-    TDM reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.
-
-### **derive**
-
-!!! term "<small><http://purl.org/iscc/terms/#derive></small>"
-
-    TDM reservation status for AI-assisted content transformation. Covers summarization, translation, format adaptation, and content reformulation.
-
-### **search**
-
-!!! term "<small><http://purl.org/iscc/terms/#search></small>"
-
-    TDM reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.
-
-### **analyze**
-
-!!! term "<small><http://purl.org/iscc/terms/#analyze></small>"
-
-    TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.
+    URL of a TDM Policy document (typically a JSON-LD ODRL Offer profiling TDMRep). Semantically equivalent to W3C TDMRep tdm-policy.
 
 ### **involvement**
 

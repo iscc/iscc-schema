@@ -7,21 +7,17 @@ from iscc_schema.service_tdm import TDM
 CONTEXT_URL = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
 
 VALID_TDM_DATA = {
-    "train": "reserved",
-    "inference": "open",
-    "derive": "reserved",
-    "search": "open",
-    "analyze": "open",
+    "iscc": "ISCC:MAACAJINXFXA2SQX",
+    "tdm_reservation": 1,
+    "tdm_policy": "https://example.com/policy.json",
 }
 
 
 def test_valid_construction():
     obj = TDM(**VALID_TDM_DATA)
-    assert obj.train == "reserved"
-    assert obj.inference == "open"
-    assert obj.derive == "reserved"
-    assert obj.search == "open"
-    assert obj.analyze == "open"
+    assert obj.iscc == "ISCC:MAACAJINXFXA2SQX"
+    assert obj.tdm_reservation == 1
+    assert str(obj.tdm_policy) == "https://example.com/policy.json"
 
 
 def test_defaults():
@@ -34,11 +30,9 @@ def test_defaults():
 def test_dict():
     obj = TDM(**VALID_TDM_DATA)
     d = obj.dict()
-    assert d["train"] == "reserved"
-    assert d["inference"] == "open"
-    assert d["derive"] == "reserved"
-    assert d["search"] == "open"
-    assert d["analyze"] == "open"
+    assert d["iscc"] == "ISCC:MAACAJINXFXA2SQX"
+    assert d["tdm_reservation"] == 1
+    assert d["tdm_policy"] == "https://example.com/policy.json"
 
 
 def test_dict_with_defaults():
@@ -47,8 +41,7 @@ def test_dict_with_defaults():
     assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "TDM"
     assert d["$schema"] == "http://purl.org/iscc/schema/tdm.json"
-    assert d["train"] == "reserved"
-    assert d["inference"] == "open"
+    assert d["tdm_reservation"] == 1
 
 
 def test_json():
@@ -56,81 +49,61 @@ def test_json():
     j = obj.json()
     assert f'"@context":"{CONTEXT_URL}"' in j
     assert '"@type":"TDM"' in j
-    assert '"train":"reserved"' in j
-    assert '"inference":"open"' in j
+    assert '"tdm_reservation":1' in j
+    assert '"tdm_policy":"https://example.com/policy.json"' in j
+    assert '"iscc":"ISCC:MAACAJINXFXA2SQX"' in j
 
 
 def test_jcs():
     obj = TDM(**VALID_TDM_DATA)
     result = obj.jcs()
     assert isinstance(result, bytes)
-    assert b'"train":"reserved"' in result
+    assert b'"tdm_reservation":1' in result
     assert b'"$schema"' in result
 
 
-def test_all_reserved():
-    data = {k: "reserved" for k in VALID_TDM_DATA}
-    obj = TDM(**data)
-    d = obj.dict()
-    for field in ("train", "inference", "derive", "search", "analyze"):
-        assert d[field] == "reserved"
+def test_reservation_values():
+    obj0 = TDM(tdm_reservation=0)
+    assert obj0.tdm_reservation == 0
+    obj1 = TDM(tdm_reservation=1)
+    assert obj1.tdm_reservation == 1
 
 
-def test_all_open():
-    data = {k: "open" for k in VALID_TDM_DATA}
-    obj = TDM(**data)
-    d = obj.dict()
-    for field in ("train", "inference", "derive", "search", "analyze"):
-        assert d[field] == "open"
-
-
-def test_invalid_enum_value():
-    data = {**VALID_TDM_DATA, "train": "blocked"}
+def test_invalid_reservation_value():
     with pytest.raises(ValidationError):
-        TDM(**data)
+        TDM(tdm_reservation=2)
 
 
-def test_invalid_enum_value_inference():
-    data = {**VALID_TDM_DATA, "inference": "yes"}
+def test_invalid_policy_not_uri():
     with pytest.raises(ValidationError):
-        TDM(**data)
+        TDM(tdm_policy="not-a-url")
 
 
 def test_partial_fields():
-    obj = TDM(train="reserved")
+    obj = TDM(tdm_reservation=1)
     d = obj.dict()
-    assert d["train"] == "reserved"
-    assert "inference" not in d
-    assert "derive" not in d
-    assert "search" not in d
-    assert "analyze" not in d
+    assert d["tdm_reservation"] == 1
+    assert "tdm_policy" not in d
+    assert "iscc" not in d
 
 
 def test_empty_construction():
     obj = TDM()
     d = obj.dict()
-    assert "train" not in d
-    assert "inference" not in d
+    assert "tdm_reservation" not in d
+    assert "tdm_policy" not in d
+    assert "iscc" not in d
 
 
-def test_omitted_means_undetermined():
-    obj = TDM(train="reserved", search="open")
+def test_backward_compat_v050():
+    obj = TDM(train="reserved", inference="open")
     d = obj.dict()
     assert d["train"] == "reserved"
-    assert d["search"] == "open"
-    assert "inference" not in d
-    assert "derive" not in d
-    assert "analyze" not in d
-
-
-def test_extra_fields_forbidden():
-    data = {**VALID_TDM_DATA, "extra": "value"}
-    with pytest.raises(ValidationError):
-        TDM(**data)
+    assert d["inference"] == "open"
 
 
 def test_import_from_package():
     from iscc_schema import TDM as TDMFromPkg
 
     obj = TDMFromPkg(**VALID_TDM_DATA)
-    assert obj.train == "reserved"
+    assert obj.tdm_reservation == 1

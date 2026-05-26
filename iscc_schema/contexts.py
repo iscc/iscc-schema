@@ -39,7 +39,7 @@ SCHEMA_CONTEXTS = {
         "previous": "http://purl.org/iscc/terms/#previous",
         "form": "http://schema.org/additionalType",
         "version": "http://schema.org/version",
-        "tdm": "http://purl.org/iscc/terms/#tdm",
+        "tdm": "@nest",
         "genai": "http://purl.org/iscc/terms/#genai",
         "mode": "http://purl.org/iscc/terms/#mode",
         "created": "http://schema.org/dateCreated",
@@ -109,11 +109,8 @@ SCHEMA_CONTEXTS = {
         "main_artist": "http://schema.org/byArtist",
         "track_title": "http://schema.org/name",
         "version_title": "http://schema.org/alternativeHeadline",
-        "train": "http://purl.org/iscc/terms/#train",
-        "inference": "http://purl.org/iscc/terms/#inference",
-        "derive": "http://purl.org/iscc/terms/#derive",
-        "search": "http://purl.org/iscc/terms/#search",
-        "analyze": "http://purl.org/iscc/terms/#analyze",
+        "tdm_reservation": "http://www.w3.org/ns/tdmrep#reservation",
+        "tdm_policy": {"@id": "http://www.w3.org/ns/tdmrep#policy", "@type": "@id"},
         "involvement": "http://purl.org/iscc/terms/#involvement",
         "ai_system": "http://purl.org/iscc/terms/#ai_system",
         "digital_source_type": {
@@ -152,11 +149,9 @@ SCHEMA_CONTEXTS = {
     },
     SCHEMA_TDM: {
         "TDM": "http://purl.org/iscc/terms/#TDM",
-        "train": "http://purl.org/iscc/terms/#train",
-        "inference": "http://purl.org/iscc/terms/#inference",
-        "derive": "http://purl.org/iscc/terms/#derive",
-        "search": "http://purl.org/iscc/terms/#search",
-        "analyze": "http://purl.org/iscc/terms/#analyze",
+        "iscc": "@id",
+        "tdm_reservation": "http://www.w3.org/ns/tdmrep#reservation",
+        "tdm_policy": {"@id": "http://www.w3.org/ns/tdmrep#policy", "@type": "@id"},
     },
 }
 

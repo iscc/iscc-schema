@@ -2,7 +2,7 @@
 #   filename:  iscc-all.yaml
 
 from __future__ import annotations
-from enum import Enum
+from enum import Enum, IntEnum
 from pydantic import AwareDatetime, ConfigDict, Field
 from iscc_schema.fields import AnyUrl
 from iscc_schema.base import BaseModel
@@ -355,72 +355,27 @@ class Form(Enum):
     WebPage = "WebPage"
 
 
-class Train(Enum):
+class TdmReservation(IntEnum):
     """
-    TDM reservation status for AI model training.
-    """
-
-    reserved = "reserved"
-    open = "open"
-
-
-class Inference(Enum):
-    """
-    TDM reservation status for inference-time content retrieval.
+    Blanket TDM reservation flag (1 = rights reserved, 0 = not reserved).
     """
 
-    reserved = "reserved"
-    open = "open"
-
-
-class Derive(Enum):
-    """
-    TDM reservation status for AI-assisted content transformation.
-    """
-
-    reserved = "reserved"
-    open = "open"
-
-
-class Search(Enum):
-    """
-    TDM reservation status for search and discovery indexing.
-    """
-
-    reserved = "reserved"
-    open = "open"
-
-
-class Analyze(Enum):
-    """
-    TDM reservation status for automated content analysis.
-    """
-
-    reserved = "reserved"
-    open = "open"
+    integer_0 = 0
+    integer_1 = 1
 
 
 class Tdm(BaseModel):
     """
-    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
+    Machine-readable TDM rights signals conformant with W3C TDMRep.
     """
 
     model_config = ConfigDict(
-        extra="forbid",
+        extra="allow",
     )
-    train: Train | None = Field(None, description="TDM reservation status for AI model training.")
-    inference: Inference | None = Field(
-        None, description="TDM reservation status for inference-time content retrieval."
+    tdm_reservation: TdmReservation | None = Field(
+        None, description="Blanket TDM reservation flag (1 = rights reserved, 0 = not reserved)."
     )
-    derive: Derive | None = Field(
-        None, description="TDM reservation status for AI-assisted content transformation."
-    )
-    search: Search | None = Field(
-        None, description="TDM reservation status for search and discovery indexing."
-    )
-    analyze: Analyze | None = Field(
-        None, description="TDM reservation status for automated content analysis."
-    )
+    tdm_policy: AnyUrl | None = Field(None, description="URL of a TDM Policy document.")
 
 
 class Involvement(Enum):
@@ -521,8 +476,8 @@ class IsccExtended(BaseModel):
     )
     tdm: Tdm | None = Field(
         None,
-        description="Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.",
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#tdm"},
+        description="Machine-readable TDM rights signals conformant with W3C TDMRep.",
+        json_schema_extra={"x-iscc-context": "@nest"},
     )
     genai: Genai | None = Field(
         None,
@@ -632,7 +587,7 @@ class IsccJsonld(BaseModel):
     """
 
     context_: AnyUrl | None = Field(
-        "http://purl.org/iscc/context/0.5.0.jsonld",
+        "http://purl.org/iscc/context/0.6.0.jsonld",
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
     )
@@ -642,7 +597,7 @@ class IsccJsonld(BaseModel):
         description="The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).",
     )
     schema_: AnyUrl | None = Field(
-        "http://purl.org/iscc/schema/0.5.0.json",
+        "http://purl.org/iscc/schema/0.6.0.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#$schema"},

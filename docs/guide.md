@@ -180,7 +180,7 @@ from iscc_schema import IsccMeta
 meta = IsccMeta(
     iscc="ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
     name="The Never Ending Story",
-    tdm={"train": "reserved", "inference": "open"},
+    tdm={"tdm_reservation": 1, "tdm_policy": "https://example.com/tdmrep-policy.json"},
 )
 ```
 

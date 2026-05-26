@@ -47,10 +47,8 @@ ISCC metadata with embedded TDM (text and data mining) reservation signals:
   "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
   "name": "The Never Ending Story",
   "tdm": {
-    "train": "reserved",
-    "inference": "open",
-    "derive": "reserved",
-    "search": "open"
+    "tdm_reservation": 1,
+    "tdm_policy": "https://example.com/tdmrep-policy.json"
   }
 }
 ```
@@ -103,10 +101,9 @@ Standalone TDM reservation signals served by an ISCC registry:
   "@context": "http://purl.org/iscc/context",
   "@type": "TDM",
   "$schema": "http://purl.org/iscc/schema/tdm.json",
-  "train": "reserved",
-  "inference": "open",
-  "derive": "reserved",
-  "search": "open"
+  "iscc": "ISCC:MAACAJINXFXA2SQX",
+  "tdm_reservation": 1,
+  "tdm_policy": "https://example.com/tdmrep-policy.json"
 }
 ```
 
@@ -196,6 +193,6 @@ seed = ISBN(
 )
 
 # Create service metadata
-tdm = TDM(train="reserved", inference="open")
+tdm = TDM(iscc="ISCC:MAACAJINXFXA2SQX", tdm_reservation=1, tdm_policy="https://example.com/tdmrep-policy.json")
 genai = GenAI(involvement="ai_generated", ai_system="DALL-E 3")
 ```

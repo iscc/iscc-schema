@@ -1,20 +1,17 @@
 title: TDM
 type: object
-description: Machine-readable TDM reservation signals for AI-related content usage categories.
-  A 'reserved' status indicates an explicit opt-out from TDM exceptions (e.g., EU DSM Directive
-  Art. 4). An 'open' status indicates that no rights are reserved. Omitted fields indicate
-  that the reservation status has not been determined. These signals are designed for use
-  within content identification and discovery protocols that provide additional identity,
-  provenance, and trust context.
-additionalProperties: false
+description: Machine-readable TDM rights signals conformant with W3C TDMRep. The tdm_reservation
+  field is semantically equivalent to TDMRep's tdm-reservation property, and tdm_policy links
+  to an ODRL policy document. These signals are designed for use within content identification
+  and discovery protocols that provide additional identity, provenance, and trust context.
+additionalProperties: true
 examples:
 - '@context': http://purl.org/iscc/context
   '@type': TDM
   $schema: http://purl.org/iscc/schema/tdm.json
-  train: reserved
-  inference: open
-  derive: reserved
-  search: open
+  iscc: ISCC:MAACAJINXFXA2SQX
+  tdm_reservation: 1
+  tdm_policy: https://example.com/tdmrep-policy.json
 properties:
   '@context':
     type: string
@@ -30,48 +27,27 @@ properties:
     format: uri
     const: http://purl.org/iscc/schema/tdm.json
     description: The JSON Schema URI for TDM service metadata.
-  train:
+  iscc:
     type: string
-    description: TDM reservation status for AI model training. Covers pre-training, fine-tuning,
-      RLHF, distillation, and embedding training.
+    description: An ISCC-CODE or ISCC-ID identifying the digital content this TDM declaration
+      applies to.
+    example: ISCC:MAACAJINXFXA2SQX
+    minLength: 15
+    maxLength: 73
+    pattern: ^ISCC:[A-Z2-7]{10,73}$
+  tdm_reservation:
+    type: integer
+    description: Blanket TDM reservation flag, semantically equivalent to W3C TDMRep tdm-reservation.
+      1 = rights reserved (EU DSM Art. 4 opt-out), 0 = not reserved, absent = undeclared.
     enum:
-    - reserved
-    - open
-    example: reserved
-    x-iscc-context: http://purl.org/iscc/terms/#train
-  inference:
+    - 0
+    - 1
+    example: 1
+    x-iscc-context: http://www.w3.org/ns/tdmrep#reservation
+  tdm_policy:
     type: string
-    description: TDM reservation status for inference-time content retrieval. Covers RAG,
-      grounding, fact-checking, and context augmentation.
-    enum:
-    - reserved
-    - open
-    example: open
-    x-iscc-context: http://purl.org/iscc/terms/#inference
-  derive:
-    type: string
-    description: TDM reservation status for AI-assisted content transformation. Covers summarization,
-      translation, format adaptation, and content reformulation.
-    enum:
-    - reserved
-    - open
-    example: reserved
-    x-iscc-context: http://purl.org/iscc/terms/#derive
-  search:
-    type: string
-    description: TDM reservation status for search and discovery indexing. Covers content
-      indexing with title, snippet, and source attribution.
-    enum:
-    - reserved
-    - open
-    example: open
-    x-iscc-context: http://purl.org/iscc/terms/#search
-  analyze:
-    type: string
-    description: TDM reservation status for automated content analysis. Covers classification,
-      sentiment analysis, topic modeling, and metadata extraction.
-    enum:
-    - reserved
-    - open
-    example: open
-    x-iscc-context: http://purl.org/iscc/terms/#analyze
+    format: uri
+    description: URL of a TDM Policy document (typically a JSON-LD ODRL Offer profiling TDMRep).
+      Semantically equivalent to W3C TDMRep tdm-policy.
+    example: https://example.com/tdmrep-policy.json
+    x-iscc-context: http://www.w3.org/ns/tdmrep#policy

@@ -2,67 +2,32 @@
 #   filename:  tdm.yaml
 
 from __future__ import annotations
-from enum import Enum
+from enum import IntEnum
 from typing import Literal
 from pydantic import ConfigDict, Field
+from iscc_schema.fields import AnyUrl
 from iscc_schema.base import BaseModel
 
 
-class Train(Enum):
+class TdmReservation(IntEnum):
     """
-    TDM reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.
-    """
-
-    reserved = "reserved"
-    open = "open"
-
-
-class Inference(Enum):
-    """
-    TDM reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.
+    Blanket TDM reservation flag, semantically equivalent to W3C TDMRep tdm-reservation. 1 = rights reserved (EU DSM Art. 4 opt-out), 0 = not reserved, absent = undeclared.
     """
 
-    reserved = "reserved"
-    open = "open"
-
-
-class Derive(Enum):
-    """
-    TDM reservation status for AI-assisted content transformation. Covers summarization, translation, format adaptation, and content reformulation.
-    """
-
-    reserved = "reserved"
-    open = "open"
-
-
-class Search(Enum):
-    """
-    TDM reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.
-    """
-
-    reserved = "reserved"
-    open = "open"
-
-
-class Analyze(Enum):
-    """
-    TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.
-    """
-
-    reserved = "reserved"
-    open = "open"
+    integer_0 = 0
+    integer_1 = 1
 
 
 class TDM(BaseModel):
     """
-    Machine-readable TDM reservation signals for AI-related content usage categories. A 'reserved' status indicates an explicit opt-out from TDM exceptions (e.g., EU DSM Directive Art. 4). An 'open' status indicates that no rights are reserved. Omitted fields indicate that the reservation status has not been determined. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.
+    Machine-readable TDM rights signals conformant with W3C TDMRep. The tdm_reservation field is semantically equivalent to TDMRep's tdm-reservation property, and tdm_policy links to an ODRL policy document. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.
     """
 
     model_config = ConfigDict(
-        extra="forbid",
+        extra="allow",
     )
-    context_: Literal["http://purl.org/iscc/context/0.5.0.jsonld"] = Field(
-        "http://purl.org/iscc/context/0.5.0.jsonld",
+    context_: Literal["http://purl.org/iscc/context/0.6.0.jsonld"] = Field(
+        "http://purl.org/iscc/context/0.6.0.jsonld",
         alias="@context",
         description="The JSON-LD Context URI for ISCC metadata.",
     )
@@ -72,33 +37,23 @@ class TDM(BaseModel):
         alias="$schema",
         description="The JSON Schema URI for TDM service metadata.",
     )
-    train: Train | None = Field(
+    iscc: str | None = Field(
         None,
-        description="TDM reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.",
-        examples=["reserved"],
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#train"},
+        description="An ISCC-CODE or ISCC-ID identifying the digital content this TDM declaration applies to.",
+        examples=["ISCC:MAACAJINXFXA2SQX"],
+        max_length=73,
+        min_length=15,
+        pattern="^ISCC:[A-Z2-7]{10,73}$",
     )
-    inference: Inference | None = Field(
+    tdm_reservation: TdmReservation | None = Field(
         None,
-        description="TDM reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.",
-        examples=["open"],
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#inference"},
+        description="Blanket TDM reservation flag, semantically equivalent to W3C TDMRep tdm-reservation. 1 = rights reserved (EU DSM Art. 4 opt-out), 0 = not reserved, absent = undeclared.",
+        examples=[1],
+        json_schema_extra={"x-iscc-context": "http://www.w3.org/ns/tdmrep#reservation"},
     )
-    derive: Derive | None = Field(
+    tdm_policy: AnyUrl | None = Field(
         None,
-        description="TDM reservation status for AI-assisted content transformation. Covers summarization, translation, format adaptation, and content reformulation.",
-        examples=["reserved"],
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#derive"},
-    )
-    search: Search | None = Field(
-        None,
-        description="TDM reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.",
-        examples=["open"],
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#search"},
-    )
-    analyze: Analyze | None = Field(
-        None,
-        description="TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.",
-        examples=["open"],
-        json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#analyze"},
+        description="URL of a TDM Policy document (typically a JSON-LD ODRL Offer profiling TDMRep). Semantically equivalent to W3C TDMRep tdm-policy.",
+        examples=["https://example.com/tdmrep-policy.json"],
+        json_schema_extra={"x-iscc-context": "http://www.w3.org/ns/tdmrep#policy"},
     )

@@ -50,14 +50,6 @@
 
     **Status**:  draft
 
-### **tdm**
-
-!!! term "<small><http://purl.org/iscc/terms/#tdm></small>"
-
-    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
-
-    **Status**:  draft
-
 ### **genai**
 
 !!! term "<small><http://purl.org/iscc/terms/#genai></small>"

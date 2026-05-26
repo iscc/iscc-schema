@@ -24,7 +24,10 @@ class BaseModel(PydanticBaseModel):
         """Convert empty string values to None."""
         if not isinstance(values, dict):
             return values
-        return {k: v if v else None for k, v in values.items()}
+        return {
+            k: v if v or (isinstance(v, int) and not isinstance(v, bool)) else None
+            for k, v in values.items()
+        }
 
     def dict(self, *args, exclude_none=True, exclude_unset=True, by_alias=True, **kwargs):
         # type: (...) -> dict

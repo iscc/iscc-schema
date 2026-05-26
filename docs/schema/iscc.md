@@ -242,12 +242,12 @@ Extended ISCC Metadata
 | version | `['integer', 'string']` | none | The version of the CreativeWork embodied by a specified resource.         |
 
 ### **tdm**
-<http://purl.org/iscc/terms/#tdm>
+<@nest>
 <small>Status: **draft**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| tdm | `object` | none | Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.         |
+| tdm | `object` | none | Machine-readable TDM rights signals conformant with W3C TDMRep.         |
 
 ### **genai**
 <http://purl.org/iscc/terms/#genai>

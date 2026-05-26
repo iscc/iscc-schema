@@ -171,3 +171,16 @@ def test_recover_context_unversioned_url():
     result = iss.recover_context(data)
     assert "@context" in result
     assert "CreativeWork" in result["@context"]
+
+
+def test_tdm_context_uses_nest():
+    schema = _load_json("iscc.json")
+    assert schema["@context"]["tdm"] == "@nest"
+
+
+def test_tdm_context_has_w3c_terms():
+    jsonld = _load_jsonld()
+    ctx = jsonld["@context"]
+    assert ctx["tdm_reservation"] == "http://www.w3.org/ns/tdmrep#reservation"
+    assert ctx["tdm_policy"]["@id"] == "http://www.w3.org/ns/tdmrep#policy"
+    assert ctx["tdm_policy"]["@type"] == "@id"

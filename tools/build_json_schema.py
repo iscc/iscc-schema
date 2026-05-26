@@ -48,6 +48,8 @@ def _build_standalone_context(schema, full_context):
         if prop_name in ("@context", "@type", "$schema"):
             continue
         if "x-iscc-context" not in prop_def:
+            if prop_name in full_context:
+                ctx[prop_name] = full_context[prop_name]
             continue
         iri = prop_def["x-iscc-context"]
         if _is_uri_field(prop_def):

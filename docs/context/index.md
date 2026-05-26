@@ -147,10 +147,10 @@ description: ISCC Metadata Vocabulary with JSON-LD context mappings.
 
 ## tdm
 
-<small><http://purl.org/iscc/terms/#tdm></small>
+<small><@nest></small>
 <small>Status: **draft**</small>
 !!! term ""
-    Machine-readable TDM reservation signals for AI-related content usage categories. Omitted fields indicate that the reservation status has not been determined.
+    Machine-readable TDM rights signals conformant with W3C TDMRep.
 
 ## genai
 
@@ -511,35 +511,17 @@ description: ISCC Metadata Vocabulary with JSON-LD context mappings.
 
 # Service Metadata Vocabulary
 
-## train
+## tdm_reservation
 
-<small><http://purl.org/iscc/terms/#train></small>
+<small><http://www.w3.org/ns/tdmrep#reservation></small>
 !!! term ""
-    TDM reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.
+    Blanket TDM reservation flag, semantically equivalent to W3C TDMRep tdm-reservation. 1 = rights reserved (EU DSM Art. 4 opt-out), 0 = not reserved, absent = undeclared.
 
-## inference
+## tdm_policy
 
-<small><http://purl.org/iscc/terms/#inference></small>
+<small><http://www.w3.org/ns/tdmrep#policy></small>
 !!! term ""
-    TDM reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.
-
-## derive
-
-<small><http://purl.org/iscc/terms/#derive></small>
-!!! term ""
-    TDM reservation status for AI-assisted content transformation. Covers summarization, translation, format adaptation, and content reformulation.
-
-## search
-
-<small><http://purl.org/iscc/terms/#search></small>
-!!! term ""
-    TDM reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.
-
-## analyze
-
-<small><http://purl.org/iscc/terms/#analyze></small>
-!!! term ""
-    TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.
+    URL of a TDM Policy document (typically a JSON-LD ODRL Offer profiling TDMRep). Semantically equivalent to W3C TDMRep tdm-policy.
 
 ## involvement
 

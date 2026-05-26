@@ -6,7 +6,7 @@ description: TDM service metadata.
 
 # TDM Service Metadata
 
-Machine-readable TDM reservation signals for AI-related content usage categories. A 'reserved' status indicates an explicit opt-out from TDM exceptions (e.g., EU DSM Directive Art. 4). An 'open' status indicates that no rights are reserved. Omitted fields indicate that the reservation status has not been determined. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.
+Machine-readable TDM rights signals conformant with W3C TDMRep. The tdm_reservation field is semantically equivalent to TDMRep's tdm-reservation property, and tdm_policy links to an ODRL policy document. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.
 
 **JSON Schema**: [`tdm.json`](tdm.json)
 
@@ -17,10 +17,9 @@ Machine-readable TDM reservation signals for AI-related content usage categories
       "@context": "http://purl.org/iscc/context",
       "@type": "TDM",
       "$schema": "http://purl.org/iscc/schema/tdm.json",
-      "train": "reserved",
-      "inference": "open",
-      "derive": "reserved",
-      "search": "open"
+      "iscc": "ISCC:MAACAJINXFXA2SQX",
+      "tdm_reservation": 1,
+      "tdm_policy": "https://example.com/tdmrep-policy.json"
     }
     ```
 
@@ -42,38 +41,23 @@ Machine-readable TDM reservation signals for AI-related content usage categories
 | ---- | ---- | --------|--------------------------------|
 | $schema | `string-uri` | http://purl.org/iscc/schema/tdm.json | The JSON Schema URI for TDM service metadata.         |
 
-## **train**
-<http://purl.org/iscc/terms/#train>
+## **iscc**
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| train | `string` | none | TDM reservation status for AI model training. Covers pre-training, fine-tuning, RLHF, distillation, and embedding training.<br><br>**Example**: `reserved`         |
+| iscc | `string` | none | An ISCC-CODE or ISCC-ID identifying the digital content this TDM declaration applies to.<br><br>**Example**: `ISCC:MAACAJINXFXA2SQX`         |
 
-## **inference**
-<http://purl.org/iscc/terms/#inference>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| inference | `string` | none | TDM reservation status for inference-time content retrieval. Covers RAG, grounding, fact-checking, and context augmentation.<br><br>**Example**: `open`         |
-
-## **derive**
-<http://purl.org/iscc/terms/#derive>
+## **tdm_reservation**
+<http://www.w3.org/ns/tdmrep#reservation>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| derive | `string` | none | TDM reservation status for AI-assisted content transformation. Covers summarization, translation, format adaptation, and content reformulation.<br><br>**Example**: `reserved`         |
+| tdm_reservation | `integer` | none | Blanket TDM reservation flag, semantically equivalent to W3C TDMRep tdm-reservation. 1 = rights reserved (EU DSM Art. 4 opt-out), 0 = not reserved, absent = undeclared.<br><br>**Example**: `1`         |
 
-## **search**
-<http://purl.org/iscc/terms/#search>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| search | `string` | none | TDM reservation status for search and discovery indexing. Covers content indexing with title, snippet, and source attribution.<br><br>**Example**: `open`         |
-
-## **analyze**
-<http://purl.org/iscc/terms/#analyze>
+## **tdm_policy**
+<http://www.w3.org/ns/tdmrep#policy>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| analyze | `string` | none | TDM reservation status for automated content analysis. Covers classification, sentiment analysis, topic modeling, and metadata extraction.<br><br>**Example**: `open`         |
+| tdm_policy | `string-uri` | none | URL of a TDM Policy document (typically a JSON-LD ODRL Offer profiling TDMRep). Semantically equivalent to W3C TDMRep tdm-policy.<br><br>**Example**: `https://example.com/tdmrep-policy.json`         |
 
