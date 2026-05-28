@@ -6,9 +6,18 @@ description: Release notes and version history for iscc-schema.
 ## Changelog
 
 ### 0.6.1 - 2026-05-28
-- Changed seed metadata examples (ISBN, ISRC) to compact recoverable JSON format
-- Seed examples now use only `$schema` instead of full JSON-LD (`@context` + `@type` + `$schema`)
-- JSON-LD context can be recovered from the `$schema` reference on demand (IEP-0002 conformant)
+
+Seed and service metadata now default to compact, self-describing JSON instead of full JSON-LD.
+The `$schema` reference makes data recoverable to JSON-LD on demand, conformant with IEP-0002
+which accepts both `application/json` and `application/ld+json` as meta element formats.
+
+- Added `ld` parameter to `.dict()`, `.json()`, `.jcs()` for controlling JSON-LD output
+- Standalone models (ISBN, ISRC, TDM, GenAI) default to `ld=False` (compact JSON with `$schema` only)
+- IsccMeta defaults to `ld=True` (full JSON-LD, backward compatible)
+- Made `$schema` a required field in ISBN and ISRC seed schemas
+- Changed seed metadata examples to compact recoverable JSON format (no `@context`/`@type`)
+- Added "Recommended Format" documentation to ISBN and ISRC schema pages
+- Added code-gen post-processing for const field defaults and `_default_ld` class attribute
 
 ### 0.6.0 - 2026-05-26
 - Replaced five per-category TDM fields (train, inference, derive, search, analyze) with two W3C TDMRep-conformant fields (tdm_reservation, tdm_policy)
