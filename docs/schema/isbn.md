@@ -37,7 +37,7 @@ This is fully conformant with IEP-0002, which accepts both `application/json` an
 `application/ld+json` as meta element formats. The compact form keeps data lean while remaining
 self-describing through the `$schema` link.
 
-**Required fields**: `isbn`, `productform`, `title`, `language`, `imprint`, `publisher`, `country`, `pubdate`
+**Required fields**: `$schema`, `isbn`, `productform`, `title`, `language`, `imprint`, `publisher`, `country`, `pubdate`
 
 ## Field Reference
 

@@ -5,6 +5,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Literal
 from pydantic import Field
+from typing import ClassVar
 from iscc_schema.base import BaseModel
 
 
@@ -22,6 +23,7 @@ class ISRC(BaseModel):
     ISRC Seed Metadata for interoperable Meta-Code generation.
     """
 
+    _default_ld: ClassVar[bool] = False
     context_: Literal["http://purl.org/iscc/context/0.6.0.jsonld"] = Field(
         "http://purl.org/iscc/context/0.6.0.jsonld",
         alias="@context",

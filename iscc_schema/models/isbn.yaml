@@ -2,6 +2,7 @@ title: ISBN
 type: object
 description: ISBN Seed Metadata for interoperable Meta-Code generation.
 required:
+- $schema
 - isbn
 - productform
 - title

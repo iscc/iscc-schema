@@ -6,6 +6,7 @@ from enum import IntEnum
 from typing import Literal
 from pydantic import ConfigDict, Field
 from iscc_schema.fields import AnyUrl
+from typing import ClassVar
 from iscc_schema.base import BaseModel
 
 
@@ -23,6 +24,7 @@ class TDM(BaseModel):
     Machine-readable TDM rights signals conformant with W3C TDMRep, providing content-addressed delivery of tdm-reservation and tdm-policy properties via ISCC. Designed for content identification and discovery where identity, provenance, and trust context complement the reservation signal.
     """
 
+    _default_ld: ClassVar[bool] = False
     model_config = ConfigDict(
         extra="allow",
     )

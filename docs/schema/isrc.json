@@ -89,6 +89,7 @@
     }
   },
   "required": [
+    "$schema",
     "isrc",
     "main_artist",
     "track_title",

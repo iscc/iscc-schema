@@ -2,6 +2,7 @@ title: ISRC
 type: object
 description: ISRC Seed Metadata for interoperable Meta-Code generation.
 required:
+- $schema
 - isrc
 - main_artist
 - track_title
