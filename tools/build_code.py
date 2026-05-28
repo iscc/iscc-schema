@@ -165,8 +165,8 @@ SERVICE_SCHEMAS = {
 }
 
 
-def _build_standalone_models(schemas):
-    # type: (dict) -> None
+def _build_standalone_models(schemas, compact=False):
+    # type: (dict, bool) -> None
     """Generate Pydantic v2 models from standalone YAML schema definitions."""
     aliases = CODE / "aliases.json"
     aliases_data = json.load(aliases.open("rb"))
@@ -193,14 +193,15 @@ def _build_standalone_models(schemas):
         )
         _patch_imports(outfile)
         _patch_const_defaults(outfile)
-        _patch_default_ld(outfile)
+        if compact:
+            _patch_default_ld(outfile)
         _patch_versioned_urls(outfile, patch_schema=False)
 
 
 def build_seed_metadata():
     # type: () -> None
     """Generate Pydantic v2 models for industry-specific seed metadata schemas."""
-    _build_standalone_models(SEED_SCHEMAS)
+    _build_standalone_models(SEED_SCHEMAS, compact=True)
 
 
 def build_service_metadata():

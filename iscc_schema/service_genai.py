@@ -6,7 +6,6 @@ from enum import Enum
 from typing import Literal
 from pydantic import ConfigDict, Field
 from iscc_schema.fields import AnyUrl
-from typing import ClassVar
 from iscc_schema.base import BaseModel
 
 
@@ -26,7 +25,6 @@ class GenAI(BaseModel):
     Machine-readable generative AI disclosure signals for content transparency. Designed for AI providers to declare the level of AI involvement in content creation, supporting compliance with transparency regulations (e.g., EU AI Act Art. 50) and enabling end users to verify AI-generated content. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.
     """
 
-    _default_ld: ClassVar[bool] = False
     model_config = ConfigDict(
         extra="forbid",
     )

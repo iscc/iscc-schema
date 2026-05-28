@@ -35,39 +35,31 @@ def test_dict():
     assert d["tdm_policy"] == "https://example.com/policy.json"
 
 
-def test_dict_compact():
+def test_dict_with_defaults():
     obj = TDM(**VALID_TDM_DATA)
-    d = obj.dict()
-    assert "$schema" in d
-    assert "@context" not in d
-    assert "@type" not in d
-
-
-def test_dict_ld():
-    obj = TDM(**VALID_TDM_DATA)
-    d = obj.dict(exclude_unset=False, ld=True)
+    d = obj.dict(exclude_unset=False)
     assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "TDM"
     assert d["$schema"] == "http://purl.org/iscc/schema/tdm.json"
     assert d["tdm_reservation"] == 1
 
 
-def test_json_compact():
+def test_json():
     obj = TDM(**VALID_TDM_DATA)
     j = obj.json()
-    assert '"$schema"' in j
-    assert '"@context"' not in j
-    assert '"@type"' not in j
+    assert f'"@context":"{CONTEXT_URL}"' in j
+    assert '"@type":"TDM"' in j
     assert '"tdm_reservation":1' in j
     assert '"tdm_policy":"https://example.com/policy.json"' in j
     assert '"iscc":"ISCC:MAACAJINXFXA2SQX"' in j
 
 
-def test_json_ld():
+def test_json_compact():
     obj = TDM(**VALID_TDM_DATA)
-    j = obj.json(ld=True)
-    assert f'"@context":"{CONTEXT_URL}"' in j
-    assert '"@type":"TDM"' in j
+    j = obj.json(ld=False)
+    assert '"$schema"' in j
+    assert '"@context"' not in j
+    assert '"@type"' not in j
     assert '"tdm_reservation":1' in j
 
 
