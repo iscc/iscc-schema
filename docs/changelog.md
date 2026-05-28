@@ -12,7 +12,8 @@ The `$schema` reference makes data recoverable to JSON-LD on demand, conformant 
 which accepts both `application/json` and `application/ld+json` as meta element formats.
 
 - Added `ld` parameter to `.dict()`, `.json()`, `.jcs()` for controlling JSON-LD output
-- Standalone models (ISBN, ISRC, TDM, GenAI) default to `ld=False` (compact JSON with `$schema` only)
+- Seed models (ISBN, ISRC) default to `ld=False` (compact JSON with `$schema` only)
+- Service models (TDM, GenAI) default to `ld=True` (full JSON-LD for registry/gateway interop)
 - IsccMeta defaults to `ld=True` (full JSON-LD, backward compatible)
 - Made `$schema` a required field in ISBN and ISRC seed schemas
 - Changed seed metadata examples to compact recoverable JSON format (no `@context`/`@type`)
