@@ -207,7 +207,8 @@ except Exception as e:
 
 ### Serialization Formats
 
-The models support three serialization methods:
+All models support `.dict()`, `.json()`, and `.jcs()` serialization. Each method accepts an `ld`
+parameter that controls whether JSON-LD fields (`@context`, `@type`) are included:
 
 ```python
 from iscc_schema import IsccMeta
@@ -228,10 +229,47 @@ meta.json()
 # JCS canonical bytes, deterministic serialization for hashing
 meta.jcs()
 # b'{"$schema":"http://purl.org/iscc/schema","@context":...}'
+
+# Compact JSON without JSON-LD fields
+meta.json(ld=False)
+# '{"$schema":"http://purl.org/iscc/schema","iscc":"ISCC:KACY...","name":"The Never Ending Story"}'
 ```
 
 Field names are automatically translated to their JSON-LD aliases in all serialization formats
 (`context_` → `@context`, `type_` → `@type`, `schema_` → `$schema`).
+
+### Serialization Defaults by Model Type
+
+Different model types have different `ld` defaults to match their intended use:
+
+| Model | Default `ld` | Rationale |
+|-------|-------------|-----------|
+| `IsccMeta` | `True` | Core metadata, full JSON-LD for semantic interoperability |
+| `ISBN`, `ISRC` | `False` | Seed input for Meta-Code generation (IEP-0002), compact JSON with `$schema` |
+| `TDM`, `GenAI` | `True` | Service metadata served by registries, full JSON-LD for discovery |
+
+Seed metadata defaults to compact JSON because IEP-0002 accepts plain `application/json` and
+the `$schema` reference makes data self-describing - any consumer can recover the full JSON-LD
+context on demand:
+
+```python
+from iscc_schema import ISBN
+
+seed = ISBN(
+    isbn="9789295055124",
+    title="The Never Ending Story",
+    language="eng",
+    publisher="Penguin Random House",
+)
+
+# Compact by default (ld=False)
+seed.json()
+# '{"$schema":"http://purl.org/iscc/schema/isbn.json","isbn":"9789295055124",...}'
+
+# Full JSON-LD when needed
+seed.json(ld=True)
+# '{"@context":"http://purl.org/iscc/context","@type":"ISBN","$schema":...}'
+```
 
 ### Strict Validation
 

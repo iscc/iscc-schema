@@ -95,12 +95,23 @@ from iscc_schema import recover_context  # JSON-LD context recovery
 
 ### Which serialization method?
 
+All methods accept an `ld` parameter (bool) to control JSON-LD field inclusion.
+
 | Need | Method | Behavior |
 |------|--------|----------|
-| JSON-LD output | `meta.json()` | `by_alias=True` → `@context`, `@type`, `$schema` |
-| Dict for processing | `meta.dict()` | `exclude_none=True`, `exclude_unset=True`, `by_alias=True` |
-| Canonical bytes for signing | `meta.jcs()` | JCS-canonicalized JSON bytes |
-| Pydantic v2 native | `meta.model_dump()` / `meta.model_dump_json()` | Used internally by `dict()` / `json()` |
+| JSON-LD output | `obj.json()` or `obj.json(ld=True)` | Includes `@context`, `@type`, `$schema` |
+| Compact JSON | `obj.json(ld=False)` | Only `$schema` + data fields |
+| Dict for processing | `obj.dict()` | `exclude_none=True`, `exclude_unset=True`, `by_alias=True` |
+| Canonical bytes for signing | `obj.jcs()` | JCS-canonicalized JSON bytes |
+| Pydantic v2 native | `obj.model_dump()` / `obj.model_dump_json()` | Used internally by `dict()` / `json()` |
+
+Default `ld` value depends on model type:
+
+| Model | Default `ld` | Why |
+|-------|-------------|-----|
+| `IsccMeta` | `True` | Core metadata, full JSON-LD |
+| `ISBN`, `ISRC` | `False` | Seed input for Meta-Code generation |
+| `TDM`, `GenAI` | `True` | Service metadata for registry discovery |
 
 ### Which build command?
 
