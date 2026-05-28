@@ -179,12 +179,12 @@ meta.jcs()
 # b'{"$schema":"http://purl.org/iscc/schema","@context":...}'
 ```
 
-Working with seed and service metadata:
+Seed metadata defaults to compact JSON (`ld=False`), service metadata to full JSON-LD
+(`ld=True`). All methods accept an `ld` parameter to override:
 
 ```python
-from iscc_schema import ISBN, TDM, GenAI
+from iscc_schema import ISBN, TDM
 
-# Create seed metadata
 seed = ISBN(
     isbn="9789295055124",
     title="The Never Ending Story",
@@ -192,7 +192,16 @@ seed = ISBN(
     publisher="Penguin Random House",
 )
 
-# Create service metadata
-tdm = TDM(iscc="ISCC:MAACAJINXFXA2SQX", tdm_reservation=1, tdm_policy="https://example.com/tdmrep-policy.json")
-genai = GenAI(involvement="ai_generated", ai_system="DALL-E 3")
+# Compact by default for seed metadata
+seed.json()
+# '{"$schema":"http://purl.org/iscc/schema/isbn.json","isbn":"9789295055124",...}'
+
+# Full JSON-LD when needed
+seed.json(ld=True)
+# '{"@context":"http://purl.org/iscc/context","@type":"ISBN","$schema":...}'
+
+# Service metadata defaults to full JSON-LD
+tdm = TDM(iscc="ISCC:MAACAJINXFXA2SQX", tdm_reservation=1)
+tdm.json()
+# '{"@context":"http://purl.org/iscc/context","@type":"TDM",...}'
 ```
