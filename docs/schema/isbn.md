@@ -14,8 +14,6 @@ ISBN Seed Metadata for interoperable Meta-Code generation. See [IEP-0002](https:
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context",
-      "@type": "ISBN",
       "$schema": "http://purl.org/iscc/schema/isbn.json",
       "isbn": "9789295055124",
       "productform": "EA",

@@ -55,12 +55,12 @@ ISCC metadata with embedded TDM (text and data mining) reservation signals:
 
 ## ISBN Seed Metadata
 
-Seed metadata for interoperable Meta-Code generation from book industry data:
+Seed metadata for interoperable Meta-Code generation from book industry data. The `$schema`
+reference makes the data self-describing - any consumer can recover the full JSON-LD context from
+the schema on demand (see [Schema-Driven Context Recovery](#schema-driven-context-recovery)):
 
 ```json
 {
-  "@context": "http://purl.org/iscc/context",
-  "@type": "ISBN",
   "$schema": "http://purl.org/iscc/schema/isbn.json",
   "isbn": "9789295055124",
   "productform": "EA",
@@ -75,12 +75,12 @@ Seed metadata for interoperable Meta-Code generation from book industry data:
 
 ## ISRC Seed Metadata
 
-Seed metadata for interoperable Meta-Code generation from sound recording data:
+Seed metadata for interoperable Meta-Code generation from sound recording data. Like ISBN seed
+metadata, the `$schema` reference enables JSON-LD context recovery without carrying the full
+context in every object:
 
 ```json
 {
-  "@context": "http://purl.org/iscc/context",
-  "@type": "ISRC",
   "$schema": "http://purl.org/iscc/schema/isrc.json",
   "isrc": "AA6Q72000047",
   "main_artist": "The Beatles",
