@@ -1,4 +1,4 @@
-__version__ = "0.6.0"
+__version__ = "0.7.0"
 from iscc_schema.schema import IsccMeta, Signature
 from iscc_schema.seed_isbn import ISBN
 from iscc_schema.seed_isrc import ISRC
