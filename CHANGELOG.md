@@ -1,5 +1,10 @@
 ## Changelog
 
+### 0.6.1 - 2026-05-28
+- Changed seed metadata examples (ISBN, ISRC) to compact recoverable JSON format
+- Seed examples now use only `$schema` instead of full JSON-LD (`@context` + `@type` + `$schema`)
+- JSON-LD context can be recovered from the `$schema` reference on demand (IEP-0002 conformant)
+
 ### 0.6.0 - 2026-05-26
 - Replaced five per-category TDM fields (train, inference, derive, search, analyze) with two W3C TDMRep-conformant fields (tdm_reservation, tdm_policy)
 - Added `tdm_reservation` integer field (0/1) bound to `http://www.w3.org/ns/tdmrep#reservation`

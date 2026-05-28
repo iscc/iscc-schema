@@ -99,8 +99,6 @@
   ],
   "examples": [
     {
-      "@context": "http://purl.org/iscc/context",
-      "@type": "ISRC",
       "$schema": "http://purl.org/iscc/schema/isrc.json",
       "isrc": "AA6Q72000047",
       "main_artist": "The Beatles",

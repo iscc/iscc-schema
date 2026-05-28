@@ -11,9 +11,7 @@ required:
 - country
 - pubdate
 examples:
-- '@context': http://purl.org/iscc/context
-  '@type': ISBN
-  $schema: http://purl.org/iscc/schema/isbn.json
+- $schema: http://purl.org/iscc/schema/isbn.json
   isbn: '9789295055124'
   productform: EA
   title: The Never Ending Story

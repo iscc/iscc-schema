@@ -14,8 +14,6 @@ ISRC Seed Metadata for interoperable Meta-Code generation. See [IEP-0002](https:
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context",
-      "@type": "ISRC",
       "$schema": "http://purl.org/iscc/schema/isrc.json",
       "isrc": "AA6Q72000047",
       "main_artist": "The Beatles",
