@@ -40,9 +40,17 @@ def test_dict():
     assert d["title"] == "The Never Ending Story"
 
 
-def test_dict_with_defaults():
+def test_dict_compact():
     obj = ISBN(**VALID_ISBN_DATA)
-    d = obj.dict(exclude_unset=False)
+    d = obj.dict()
+    assert "$schema" in d
+    assert "@context" not in d
+    assert "@type" not in d
+
+
+def test_dict_ld():
+    obj = ISBN(**VALID_ISBN_DATA)
+    d = obj.dict(exclude_unset=False, ld=True)
     assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "ISBN"
     assert d["$schema"] == "http://purl.org/iscc/schema/isbn.json"
@@ -50,9 +58,18 @@ def test_dict_with_defaults():
     assert d["title"] == "The Never Ending Story"
 
 
-def test_json():
+def test_json_compact():
     obj = ISBN(**VALID_ISBN_DATA)
     j = obj.json()
+    assert '"$schema"' in j
+    assert '"@context"' not in j
+    assert '"@type"' not in j
+    assert '"isbn":"9789295055124"' in j
+
+
+def test_json_ld():
+    obj = ISBN(**VALID_ISBN_DATA)
+    j = obj.json(ld=True)
     assert f'"@context":"{CONTEXT_URL}"' in j
     assert '"@type":"ISBN"' in j
     assert '"isbn":"9789295055124"' in j

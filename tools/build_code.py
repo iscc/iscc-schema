@@ -48,6 +48,43 @@ def _patch_imports(outfile):
         f.write(text)
 
 
+def _patch_const_defaults(outfile):
+    # type: (pathlib.Path) -> None
+    """Give const Literal fields a default value when code-gen marks them required."""
+    with outfile.open("rt", encoding="utf-8") as f:
+        text = f.read()
+
+    def _use_const_as_default(m):
+        # type: (re.Match) -> str
+        return m.group(0).replace("...,", f"{m.group(1)},", 1)
+
+    text = re.sub(
+        r""": Literal\[(['"][^'"]+?['"])\] = Field\(\s*\.\.\.,""",
+        _use_const_as_default,
+        text,
+    )
+    with outfile.open("wt", encoding="utf-8", newline="\n") as f:
+        f.write(text)
+
+
+def _patch_default_ld(outfile):
+    # type: (pathlib.Path) -> None
+    """Set _default_ld = False on standalone models for compact JSON serialization."""
+    with outfile.open("rt", encoding="utf-8") as f:
+        text = f.read()
+    text = text.replace(
+        "from iscc_schema.base import BaseModel\n",
+        "from typing import ClassVar\nfrom iscc_schema.base import BaseModel\n",
+    )
+    text = re.sub(
+        r'(class \w+\(BaseModel\):\n    """[^"]*""")\n',
+        r"\1\n\n    _default_ld: ClassVar[bool] = False\n",
+        text,
+    )
+    with outfile.open("wt", encoding="utf-8", newline="\n") as f:
+        f.write(text)
+
+
 def _patch_versioned_urls(outfile, patch_schema=True):
     # type: (pathlib.Path, bool) -> None
     """Replace unversioned ISCC URLs with versioned ones in generated models."""
@@ -155,6 +192,8 @@ def _build_standalone_models(schemas):
             formatters=[],
         )
         _patch_imports(outfile)
+        _patch_const_defaults(outfile)
+        _patch_default_ld(outfile)
         _patch_versioned_urls(outfile, patch_schema=False)
 
 

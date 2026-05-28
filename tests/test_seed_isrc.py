@@ -55,9 +55,17 @@ def test_dict():
     assert d["content_type"] == "sound"
 
 
-def test_dict_with_defaults():
+def test_dict_compact():
     obj = ISRC(**VALID_ISRC_DATA)
-    d = obj.dict(exclude_unset=False)
+    d = obj.dict()
+    assert "$schema" in d
+    assert "@context" not in d
+    assert "@type" not in d
+
+
+def test_dict_ld():
+    obj = ISRC(**VALID_ISRC_DATA)
+    d = obj.dict(exclude_unset=False, ld=True)
     assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "ISRC"
     assert d["$schema"] == "http://purl.org/iscc/schema/isrc.json"
@@ -66,9 +74,19 @@ def test_dict_with_defaults():
     assert d["content_type"] == "sound"
 
 
-def test_json():
+def test_json_compact():
     obj = ISRC(**VALID_ISRC_DATA)
     j = obj.json()
+    assert '"$schema"' in j
+    assert '"@context"' not in j
+    assert '"@type"' not in j
+    assert '"isrc":"AA6Q72000047"' in j
+    assert '"duration":125' in j
+
+
+def test_json_ld():
+    obj = ISRC(**VALID_ISRC_DATA)
+    j = obj.json(ld=True)
     assert '"@type":"ISRC"' in j
     assert '"isrc":"AA6Q72000047"' in j
     assert '"duration":125' in j
