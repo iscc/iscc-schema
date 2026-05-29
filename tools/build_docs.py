@@ -239,8 +239,12 @@ def _build_standalone_doc(schema_file, category, extra_text=""):
     content += f"**JSON Schema**: [`{name}.json`]({name}.json)\n\n"
 
     if data.get("examples"):
-        pretty = json.dumps(data["examples"][0], indent=2)
-        content += f"!!! example\n\n    ```json\n{indent(pretty, prefix='    ')}\n    ```\n\n"
+        titles = data.get("x-iscc-example-titles") or []
+        for idx, example in enumerate(data["examples"]):
+            pretty = json.dumps(example, indent=2)
+            title = titles[idx] if idx < len(titles) else ""
+            admonition = f'!!! example "{title}"' if title else "!!! example"
+            content += f"{admonition}\n\n    ```json\n{indent(pretty, prefix='    ')}\n    ```\n\n"
 
     intro_path = ROOT / "tools" / f"_{name}_intro.md"
     if intro_path.exists():
