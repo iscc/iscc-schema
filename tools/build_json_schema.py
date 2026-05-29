@@ -57,7 +57,14 @@ def _build_standalone_context(schema, full_context):
                 ctx[prop_name] = full_context[prop_name]
             continue
         iri = prop_def["x-iscc-context"]
-        if _is_uri_field(prop_def):
+        enum_ctx = prop_def.get("x-iscc-enum-context")
+        if enum_ctx:
+            # Enum-valued field: coerce values to IRIs and map each token to its class IRI
+            # (e.g. resource_type tokens -> schema.org/FaBiO classes).
+            ctx[prop_name] = {"@id": iri, "@type": "@id"}
+            for token, token_iri in enum_ctx.items():
+                ctx.setdefault(token, token_iri)
+        elif _is_uri_field(prop_def):
             ctx[prop_name] = {"@id": iri, "@type": "@id"}
         else:
             ctx[prop_name] = iri
@@ -205,7 +212,7 @@ def flatten_schemas():
     }
 
 
-SEED_SCHEMAS = ["isbn.yaml", "isrc.yaml"]
+SEED_SCHEMAS = ["isbn.yaml", "isrc.yaml", "stm.yaml"]
 SERVICE_SCHEMAS = ["tdm.yaml", "genai.yaml"]
 PROTOCOL_SCHEMAS = ["iscc-note.yaml"]
 

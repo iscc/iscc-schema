@@ -11,7 +11,7 @@ import json
 HERE = dirname(abspath(__file__))
 ROOT = pathlib.Path(__file__).parent.parent
 MODELS = ROOT / "iscc_schema" / "models"
-SEED_SCHEMAS = [MODELS / "isbn.yaml", MODELS / "isrc.yaml"]
+SEED_SCHEMAS = [MODELS / "isbn.yaml", MODELS / "isrc.yaml", MODELS / "stm.yaml"]
 SERVICE_SCHEMAS = [MODELS / "tdm.yaml", MODELS / "genai.yaml"]
 PROTOCOL_SCHEMAS = [MODELS / "iscc-note.yaml"]
 PATH_LATEST = join(HERE, f"../docs/context/iscc.jsonld")
@@ -31,6 +31,7 @@ def build_context():
             "VideoObject": "http://schema.org/VideoObject",
             "ISBN": "http://purl.org/iscc/terms/#ISBN",
             "ISRC": "http://purl.org/iscc/terms/#ISRC",
+            "STM": "http://purl.org/iscc/terms/#STM",
             "TDM": "http://purl.org/iscc/terms/#TDM",
             "GenAI": "http://purl.org/iscc/terms/#GenAI",
             "IsccNote": "http://purl.org/iscc/terms/#IsccNote",
@@ -61,8 +62,18 @@ def _add_schema_terms(ctx, yaml_path):
     with open(yaml_path, encoding="utf-8") as f:
         schema = yaml.safe_load(f)
     for prop, fields in schema.get("properties", {}).items():
-        if "x-iscc-context" in fields and prop not in ctx:
-            iri = fields["x-iscc-context"]
+        if "x-iscc-context" not in fields:
+            continue
+        iri = fields["x-iscc-context"]
+        enum_ctx = fields.get("x-iscc-enum-context")
+        if enum_ctx:
+            # Enum-valued field: coerce values to IRIs and map each token to its class IRI.
+            # setdefault keeps any existing mapping (shared tokens reuse the schema.org IRI).
+            if prop not in ctx:
+                ctx[prop] = {"@id": iri, "@type": "@id"}
+            for token, token_iri in enum_ctx.items():
+                ctx.setdefault(token, token_iri)
+        elif prop not in ctx:
             if _is_uri_field(fields):
                 ctx[prop] = {"@id": iri, "@type": "@id"}
             else:

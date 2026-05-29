@@ -12,7 +12,7 @@ MARKDOWN_TERMS_SEED = ROOT / "docs/includes/terms-seed.md"
 MARKDOWN_TERMS_SERVICE = ROOT / "docs/includes/terms-service.md"
 MARKDOWN_TERMS_PROTOCOL = ROOT / "docs/includes/terms-protocol.md"
 
-SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml"]
+SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml", "stm.yaml"]
 SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml"]
 PROTOCOL_SCHEMATA = ["iscc-note.yaml"]
 

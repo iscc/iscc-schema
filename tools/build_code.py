@@ -178,6 +178,7 @@ def build_apis():
 SEED_SCHEMAS = {
     "isbn": ("isbn.yaml", "seed_isbn.py", "ISBN"),
     "isrc": ("isrc.yaml", "seed_isrc.py", "ISRC"),
+    "stm": ("stm.yaml", "seed_stm.py", "STM"),
 }
 
 SERVICE_SCHEMAS = {
@@ -276,6 +277,7 @@ def build():
             CODE / "generator.py",
             CODE / "seed_isbn.py",
             CODE / "seed_isrc.py",
+            CODE / "seed_stm.py",
             CODE / "service_tdm.py",
             CODE / "service_genai.py",
             CODE / "protocol_iscc_note.py",
