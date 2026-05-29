@@ -36,8 +36,8 @@ class GenAI(BaseModel):
     type_: Literal["GenAI"] = Field(
         "GenAI", alias="@type", description="The type of service metadata."
     )
-    schema_: Literal["http://purl.org/iscc/schema/genai.json"] = Field(
-        "http://purl.org/iscc/schema/genai.json",
+    schema_: Literal["http://purl.org/iscc/schema/genai-0.7.0.json"] = Field(
+        "http://purl.org/iscc/schema/genai-0.7.0.json",
         alias="$schema",
         description="The JSON Schema URI for GenAI service metadata.",
     )

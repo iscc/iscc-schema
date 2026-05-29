@@ -14,7 +14,7 @@ ISRC Seed Metadata for interoperable Meta-Code generation. See [IEP-0002](https:
 
     ```json
     {
-      "$schema": "http://purl.org/iscc/schema/isrc.json",
+      "$schema": "http://purl.org/iscc/schema/isrc-0.7.0.json",
       "isrc": "AA6Q72000047",
       "main_artist": "The Beatles",
       "track_title": "Yesterday",
@@ -56,7 +56,7 @@ self-describing through the `$schema` link.
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| $schema | `string-uri` | http://purl.org/iscc/schema/isrc.json | The JSON Schema URI for ISRC seed metadata.         |
+| $schema | `string-uri` | http://purl.org/iscc/schema/isrc-0.7.0.json | The JSON Schema URI for ISRC seed metadata.         |
 
 ## **isrc**
 <http://schema.org/isrcCode>

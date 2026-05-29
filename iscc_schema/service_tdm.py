@@ -32,8 +32,8 @@ class TDM(BaseModel):
         description="The JSON-LD Context URI for ISCC metadata.",
     )
     type_: Literal["TDM"] = Field("TDM", alias="@type", description="The type of service metadata.")
-    schema_: Literal["http://purl.org/iscc/schema/tdm.json"] = Field(
-        "http://purl.org/iscc/schema/tdm.json",
+    schema_: Literal["http://purl.org/iscc/schema/tdm-0.7.0.json"] = Field(
+        "http://purl.org/iscc/schema/tdm-0.7.0.json",
         alias="$schema",
         description="The JSON Schema URI for TDM service metadata.",
     )

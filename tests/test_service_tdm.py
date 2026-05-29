@@ -9,6 +9,7 @@ from iscc_schema.service_tdm import TDM
 
 ROOT = pathlib.Path(__file__).parent.parent
 CONTEXT_URL = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
+SCHEMA_URL = f"http://purl.org/iscc/schema/tdm-{iscc_schema.__version__}.json"
 
 VALID_TDM_DATA = {
     "iscc": "ISCC:MAACAJINXFXA2SQX",
@@ -28,7 +29,7 @@ def test_defaults():
     obj = TDM(**VALID_TDM_DATA)
     assert obj.context_ == CONTEXT_URL
     assert obj.type_ == "TDM"
-    assert obj.schema_ == "http://purl.org/iscc/schema/tdm.json"
+    assert obj.schema_ == SCHEMA_URL
 
 
 def test_dict():
@@ -44,7 +45,7 @@ def test_dict_with_defaults():
     d = obj.dict(exclude_unset=False)
     assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "TDM"
-    assert d["$schema"] == "http://purl.org/iscc/schema/tdm.json"
+    assert d["$schema"] == SCHEMA_URL
     assert d["tdm_reservation"] == 1
 
 
@@ -140,18 +141,28 @@ def test_schema_context_default_is_versioned():
     assert TDM(**VALID_TDM_DATA).context_ == CONTEXT_URL
 
 
-def test_schema_example_context_is_versioned():
-    """TDM defaults to JSON-LD, so its published example carries the versioned @context URL the
-    model emits, not the unversioned base from the YAML source."""
+def test_schema_example_anchors_are_versioned():
+    """TDM defaults to JSON-LD, so its published example carries the versioned @context and
+    $schema URLs the model emits, not the unversioned bases from the YAML source."""
     schema = json.loads((ROOT / "docs" / "schema" / "tdm.json").read_text(encoding="utf-8"))
-    assert schema["examples"][0]["@context"] == CONTEXT_URL
+    example = schema["examples"][0]
+    assert example["@context"] == CONTEXT_URL
+    assert example["$schema"] == SCHEMA_URL
+
+
+def test_latest_schema_const_is_versioned():
+    """The latest schema file pins a version-specific $schema const while keeping an unversioned
+    $id: records identify the exact schema version; the file is served at the 'latest' URL."""
+    schema = json.loads((ROOT / "docs" / "schema" / "tdm.json").read_text(encoding="utf-8"))
+    assert schema["properties"]["$schema"]["const"] == SCHEMA_URL
+    assert schema["$id"] == "http://purl.org/iscc/schema/tdm.json"
 
 
 def test_versioned_archive_exists():
-    """A version-pinned archive copy is written alongside the latest schema; service records keep
-    an unversioned $schema, so only the archive's $id carries the version."""
+    """A version-pinned archive is written alongside the latest schema; its $id and its $schema
+    const both carry the version, so records validated against it pin the exact schema version."""
     archive = ROOT / "docs" / "schema" / f"tdm-{iscc_schema.__version__}.json"
     assert archive.exists()
     data = json.loads(archive.read_text(encoding="utf-8"))
-    assert data["$id"] == f"http://purl.org/iscc/schema/tdm-{iscc_schema.__version__}.json"
-    assert data["properties"]["$schema"]["const"] == "http://purl.org/iscc/schema/tdm.json"
+    assert data["$id"] == SCHEMA_URL
+    assert data["properties"]["$schema"]["const"] == SCHEMA_URL

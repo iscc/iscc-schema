@@ -40,7 +40,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "http://purl.org/iscc/schema/genai.json",
+      "const": "http://purl.org/iscc/schema/genai-0.7.0.json",
       "description": "The JSON Schema URI for GenAI service metadata. See the top-level `x-iscc-jsonld` extension for the JSON-LD upgrade path."
     },
     "involvement": {
@@ -75,7 +75,7 @@
     {
       "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
       "@type": "GenAI",
-      "$schema": "http://purl.org/iscc/schema/genai.json",
+      "$schema": "http://purl.org/iscc/schema/genai-0.7.0.json",
       "involvement": "ai_generated",
       "ai_system": "DALL-E 3",
       "digital_source_type": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia"

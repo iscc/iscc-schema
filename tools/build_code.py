@@ -109,9 +109,10 @@ def _patch_versioned_schema(outfile, name):
     # type: (pathlib.Path, str) -> None
     """Pin a standalone model's $schema literal to the version-specific archive URL.
 
-    Protocol schemas serialize to compact JSON by default, dropping @context/@type, so
-    the version-specific $schema is the only field pinning the record to a schema
-    version. It is part of the JCS bytes the signature proof is computed over.
+    Every standalone schema (seed, service, protocol) version-pins its $schema so serialized
+    records identify the exact schema version, consistent with the versioned @context. For
+    compact protocol records (which drop @context/@type) the versioned $schema is the sole
+    version anchor, and it is part of the JCS bytes the signature proof is computed over.
     """
     version = _get_version()
     with outfile.open("rt", encoding="utf-8") as f:
@@ -185,16 +186,21 @@ SERVICE_SCHEMAS = {
 }
 
 # Protocol schemas are ISCC Discovery Protocol records (e.g. declaration notes). Unlike
-# service metadata, they default to compact JSON and pin a version-specific $schema URL,
-# which becomes their sole version anchor once @context/@type are dropped.
+# service metadata, they default to compact JSON, so their version-specific $schema (which
+# all standalone schemas now carry) becomes their sole version anchor once @context/@type are
+# dropped - and it is signed as part of the record.
 PROTOCOL_SCHEMAS = {
     "iscc-note": ("iscc-note.yaml", "protocol_iscc_note.py", "IsccNote"),
 }
 
 
-def _build_standalone_models(schemas, compact=False, version_schema=False):
-    # type: (dict, bool, bool) -> None
-    """Generate Pydantic v2 models from standalone YAML schema definitions."""
+def _build_standalone_models(schemas, compact=False):
+    # type: (dict, bool) -> None
+    """Generate Pydantic v2 models from standalone YAML schema definitions.
+
+    All standalone models version-pin their $schema literal (consistent with the versioned
+    @context); `compact` additionally drops @context/@type from the default serialization.
+    """
     aliases = CODE / "aliases.json"
     aliases_data = json.load(aliases.open("rb"))
     for yaml_file, py_file, class_name in schemas.values():
@@ -223,8 +229,7 @@ def _build_standalone_models(schemas, compact=False, version_schema=False):
         if compact:
             _patch_default_ld(outfile)
         _patch_versioned_urls(outfile, patch_schema=False)
-        if version_schema:
-            _patch_versioned_schema(outfile, yaml_file.replace(".yaml", ""))
+        _patch_versioned_schema(outfile, yaml_file.replace(".yaml", ""))
 
 
 def build_seed_metadata():
@@ -243,10 +248,10 @@ def build_protocol_metadata():
     # type: () -> None
     """Generate Pydantic v2 models for ISCC Discovery Protocol schemas.
 
-    Protocol schemas default to compact JSON (`compact=True`) and pin a version-specific
-    $schema URL (`version_schema=True`).
+    Protocol schemas default to compact JSON (`compact=True`); like all standalone schemas
+    they version-pin their $schema, which for compact records is the sole version anchor.
     """
-    _build_standalone_models(PROTOCOL_SCHEMAS, compact=True, version_schema=True)
+    _build_standalone_models(PROTOCOL_SCHEMAS, compact=True)
 
 
 def _format_generated(outfiles):

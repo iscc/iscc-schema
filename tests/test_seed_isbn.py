@@ -9,6 +9,7 @@ from iscc_schema.seed_isbn import ISBN
 
 ROOT = pathlib.Path(__file__).parent.parent
 CONTEXT_URL = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
+SCHEMA_URL = f"http://purl.org/iscc/schema/isbn-{iscc_schema.__version__}.json"
 
 VALID_ISBN_DATA = {
     "isbn": "9789295055124",
@@ -34,7 +35,7 @@ def test_defaults():
     obj = ISBN(**VALID_ISBN_DATA)
     assert obj.context_ == CONTEXT_URL
     assert obj.type_ == "ISBN"
-    assert obj.schema_ == "http://purl.org/iscc/schema/isbn.json"
+    assert obj.schema_ == SCHEMA_URL
 
 
 def test_dict():
@@ -57,7 +58,7 @@ def test_dict_ld():
     d = obj.dict(exclude_unset=False, ld=True)
     assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "ISBN"
-    assert d["$schema"] == "http://purl.org/iscc/schema/isbn.json"
+    assert d["$schema"] == SCHEMA_URL
     assert d["isbn"] == "9789295055124"
     assert d["title"] == "The Never Ending Story"
 
@@ -160,11 +161,19 @@ def test_schema_context_default_is_versioned():
     assert ISBN(**VALID_ISBN_DATA).context_ == CONTEXT_URL
 
 
+def test_latest_schema_const_is_versioned():
+    """The latest schema file pins a version-specific $schema const while keeping an unversioned
+    $id: records identify the exact schema version; the file is served at the 'latest' URL."""
+    schema = json.loads((ROOT / "docs" / "schema" / "isbn.json").read_text(encoding="utf-8"))
+    assert schema["properties"]["$schema"]["const"] == SCHEMA_URL
+    assert schema["$id"] == "http://purl.org/iscc/schema/isbn.json"
+
+
 def test_versioned_archive_exists():
-    """A version-pinned archive copy is written alongside the latest schema; seed records keep
-    an unversioned $schema, so only the archive's $id carries the version."""
+    """A version-pinned archive is written alongside the latest schema; its $id and its $schema
+    const both carry the version, so records validated against it pin the exact schema version."""
     archive = ROOT / "docs" / "schema" / f"isbn-{iscc_schema.__version__}.json"
     assert archive.exists()
     data = json.loads(archive.read_text(encoding="utf-8"))
-    assert data["$id"] == f"http://purl.org/iscc/schema/isbn-{iscc_schema.__version__}.json"
-    assert data["properties"]["$schema"]["const"] == "http://purl.org/iscc/schema/isbn.json"
+    assert data["$id"] == SCHEMA_URL
+    assert data["properties"]["$schema"]["const"] == SCHEMA_URL

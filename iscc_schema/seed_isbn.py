@@ -20,8 +20,8 @@ class ISBN(BaseModel):
         description="The JSON-LD Context URI for ISCC metadata.",
     )
     type_: Literal["ISBN"] = Field("ISBN", alias="@type", description="The type of seed metadata.")
-    schema_: Literal["http://purl.org/iscc/schema/isbn.json"] = Field(
-        "http://purl.org/iscc/schema/isbn.json",
+    schema_: Literal["http://purl.org/iscc/schema/isbn-0.7.0.json"] = Field(
+        "http://purl.org/iscc/schema/isbn-0.7.0.json",
         alias="$schema",
         description="The JSON Schema URI for ISBN seed metadata.",
     )
