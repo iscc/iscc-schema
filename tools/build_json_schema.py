@@ -64,6 +64,28 @@ def _build_standalone_context(schema, full_context):
     return ctx
 
 
+def _build_jsonld_extension(schema):
+    # type: (dict) -> dict
+    """Document the JSON-LD upgrade path for a standalone record.
+
+    Standalone records may serialize compact (dropping @context/@type), in which case the
+    schema itself must carry the recipe for reconstructing JSON-LD. The term map is already
+    embedded as this schema's top-level @context; this extension names the versioned context
+    URL and the @type to set, so an agent reading a compact record's $schema can recover full
+    JSON-LD. The context URL matches the @context the generated model emits with ld=True.
+    """
+    ext = {"context": f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"}
+    type_name = schema.get("properties", {}).get("@type", {}).get("const")
+    if type_name:
+        ext["type"] = type_name
+    ext["upgrade"] = (
+        "Compact records omit @context and @type. To obtain JSON-LD, set @context to this"
+        " schema's top-level @context term map (or to the versioned context URL in this"
+        " extension's `context` field) and set @type to this extension's `type` value."
+    )
+    return ext
+
+
 def _patch_context_property(properties):
     # type: (dict) -> None
     """Patch @context property to accept both URI string and inline object (JSON-LD spec)."""
@@ -207,10 +229,18 @@ def build_seed_schema(yaml_file, full_context, versioned_schema=False):
 
     schema_id = f"http://purl.org/iscc/schema/{name}.json"
     versioned_id = f"http://purl.org/iscc/schema/{name}-{iscc_schema.__version__}.json"
-    if versioned_schema and "$schema" in properties:
-        properties["$schema"] = {**properties["$schema"], "const": versioned_id}
+    if "$schema" in properties:
+        schema_prop = dict(properties["$schema"])
+        if versioned_schema:
+            schema_prop["const"] = versioned_id
+        if "description" in schema_prop:
+            schema_prop[
+                "description"
+            ] += " See the top-level `x-iscc-jsonld` extension for the JSON-LD upgrade path."
+        properties["$schema"] = schema_prop
 
     output = {"@context": standalone_context}
+    output["x-iscc-jsonld"] = _build_jsonld_extension(schema)
     output["$schema"] = "https://json-schema.org/draft/2020-12/schema"
     output["$id"] = schema_id
     output["title"] = schema["title"]

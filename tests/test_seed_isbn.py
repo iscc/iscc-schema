@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+import json
+import pathlib
+
 import pytest
 from pydantic import ValidationError
 import iscc_schema
 from iscc_schema.seed_isbn import ISBN
 
+ROOT = pathlib.Path(__file__).parent.parent
 CONTEXT_URL = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
 
 VALID_ISBN_DATA = {
@@ -136,3 +140,13 @@ def test_import_from_package():
 
     obj = ISBNFromPkg(**VALID_ISBN_DATA)
     assert obj.isbn == "9789295055124"
+
+
+def test_schema_has_jsonld_extension():
+    """ISBN serializes compact by default, so its schema documents the JSON-LD upgrade
+    path via a top-level x-iscc-jsonld extension pointing at the versioned context."""
+    schema = json.loads((ROOT / "docs" / "schema" / "isbn.json").read_text(encoding="utf-8"))
+    ext = schema["x-iscc-jsonld"]
+    assert ext["context"] == CONTEXT_URL
+    assert ext["type"] == "ISBN"
+    assert "x-iscc-jsonld" in schema["properties"]["$schema"]["description"]

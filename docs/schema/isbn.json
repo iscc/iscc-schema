@@ -10,6 +10,11 @@
     "country": "http://schema.org/countryOfOrigin",
     "pubdate": "http://schema.org/datePublished"
   },
+  "x-iscc-jsonld": {
+    "context": "http://purl.org/iscc/context/0.7.0.jsonld",
+    "type": "ISBN",
+    "upgrade": "Compact records omit @context and @type. To obtain JSON-LD, set @context to this schema's top-level @context term map (or to the versioned context URL in this extension's `context` field) and set @type to this extension's `type` value."
+  },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "http://purl.org/iscc/schema/isbn.json",
   "title": "ISBN",
@@ -37,7 +42,7 @@
       "type": "string",
       "format": "uri",
       "const": "http://purl.org/iscc/schema/isbn.json",
-      "description": "The JSON Schema URI for ISBN seed metadata."
+      "description": "The JSON Schema URI for ISBN seed metadata. See the top-level `x-iscc-jsonld` extension for the JSON-LD upgrade path."
     },
     "isbn": {
       "type": "string",
