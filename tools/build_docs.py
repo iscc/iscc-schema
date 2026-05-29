@@ -7,6 +7,8 @@ import yaml
 import pathlib
 import json
 
+import iscc_schema
+
 ROOT = pathlib.Path(__file__).parent.parent
 SCHEMAS = ROOT / "iscc_schema/models"
 MARKDOWN_SCHEMA = ROOT / "docs/schema/iscc.md"
@@ -62,6 +64,7 @@ def copy_root_files():
 
 SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml"]
 SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml"]
+PROTOCOL_SCHEMATA = ["iscc-note.yaml"]
 
 # Icons and short nav titles for standalone schema pages
 STANDALONE_META = {
@@ -73,6 +76,13 @@ STANDALONE_META = {
         "description": "W3C TDMRep-conformant rights signals via content-addressed discovery",
     },
     "genai": {"icon": "lucide/sparkles", "title": "GenAI Service"},
+    "iscc-note": {
+        "icon": "lucide/file-check",
+        "title": "ISCC Declaration",
+        "description": (
+            "Permanent ISCC Declaration log record for HUB timestamping and registration"
+        ),
+    },
 }
 
 
@@ -142,14 +152,26 @@ def build_json_schema_docs():
         outf.write(content)
 
 
-def _build_standalone_doc(schema_file, category, extra_text=""):
-    # type: (str, str, str) -> None
-    """Build a markdown documentation page for a standalone schema."""
+def _build_standalone_doc(schema_file, category, extra_text="", versioned_schema=False):
+    # type: (str, str, str, bool) -> None
+    """Build a markdown documentation page for a standalone schema.
+
+    Protocol schemas (versioned_schema=True) render their version-specific $schema URL in
+    both the example and the field reference, matching the published JSON Schema.
+    """
     path = SCHEMAS / schema_file
     with open(path, "rt", encoding="utf-8") as infile:
         data = yaml.safe_load(infile)
 
     name = schema_file.replace(".yaml", "")
+    if versioned_schema:
+        versioned_id = f"http://purl.org/iscc/schema/{name}-{iscc_schema.__version__}.json"
+        if "$schema" in data.get("properties", {}):
+            schema_prop = {**data["properties"]["$schema"], "const": versioned_id}
+            data["properties"]["$schema"] = schema_prop
+        for ex in data.get("examples", []):
+            if "$schema" in ex:
+                ex["$schema"] = versioned_id
     title = data["title"]
     meta = STANDALONE_META.get(name, {})
     frontmatter = "---\n"
@@ -221,6 +243,12 @@ def build_service_schema_docs():
         _build_standalone_doc(schema_file, "Service Metadata")
 
 
+def build_protocol_schema_docs():
+    """Build a separate markdown page for each protocol schema."""
+    for schema_file in PROTOCOL_SCHEMATA:
+        _build_standalone_doc(schema_file, "Protocol Schema", versioned_schema=True)
+
+
 def _render_context_terms(schemata):
     # type: (list[str]) -> str
     """Render vocabulary terms from a list of YAML schema files."""
@@ -268,6 +296,9 @@ def build_json_ld_context_docs():
     doc += "\n---\n\n"
     doc += "# Service Metadata Vocabulary\n\n"
     doc += _render_context_terms(SERVICE_SCHEMATA)
+    doc += "\n---\n\n"
+    doc += "# Protocol Schema Vocabulary\n\n"
+    doc += _render_context_terms(PROTOCOL_SCHEMATA)
 
     with open(MARKDOWN_CONTEXT, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(doc)
@@ -304,6 +335,17 @@ def build_schema_index():
             data = yaml.safe_load(infile)
         name = schema_file.replace(".yaml", "")
         content += f"- [**{data['title']} Service Metadata**]({name}.md) — {data['description']}\n"
+    content += "\n"
+    content += "## Protocol Schemas\n\n"
+    content += "ISCC Discovery Protocol records exchanged with ISCC-HUBs and registries. "
+    content += "These default to compact JSON with a version-specific `$schema` and recover "
+    content += "JSON-LD on demand.\n\n"
+    for schema_file in PROTOCOL_SCHEMATA:
+        path = SCHEMAS / schema_file
+        with open(path, "rt", encoding="utf-8") as infile:
+            data = yaml.safe_load(infile)
+        name = schema_file.replace(".yaml", "")
+        content += f"- [**{data['title']}**]({name}.md) — {data['description']}\n"
 
     with open(MARKDOWN_SCHEMA_INDEX, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(content)
@@ -316,6 +358,7 @@ def build():
     build_json_schema_docs()
     build_seed_schema_docs()
     build_service_schema_docs()
+    build_protocol_schema_docs()
     build_schema_index()
     build_json_ld_context_docs()
 

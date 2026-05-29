@@ -13,6 +13,7 @@ ROOT = pathlib.Path(__file__).parent.parent
 MODELS = ROOT / "iscc_schema" / "models"
 SEED_SCHEMAS = [MODELS / "isbn.yaml", MODELS / "isrc.yaml"]
 SERVICE_SCHEMAS = [MODELS / "tdm.yaml", MODELS / "genai.yaml"]
+PROTOCOL_SCHEMAS = [MODELS / "iscc-note.yaml"]
 PATH_LATEST = join(HERE, f"../docs/context/iscc.jsonld")
 PATH_VERSION = join(HERE, f"../docs/context/{iscc_schema.__version__}.jsonld")
 
@@ -32,6 +33,7 @@ def build_context():
             "ISRC": "http://purl.org/iscc/terms/#ISRC",
             "TDM": "http://purl.org/iscc/terms/#TDM",
             "GenAI": "http://purl.org/iscc/terms/#GenAI",
+            "IsccNote": "http://purl.org/iscc/terms/#IsccNote",
         }
     }
     ctx = context["@context"]
@@ -48,6 +50,8 @@ def build_context():
         _add_schema_terms(ctx, seed_path)
     for service_path in SERVICE_SCHEMAS:
         _add_schema_terms(ctx, service_path)
+    for protocol_path in PROTOCOL_SCHEMAS:
+        _add_schema_terms(ctx, protocol_path)
     return context
 
 

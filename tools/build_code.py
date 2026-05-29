@@ -105,6 +105,26 @@ def _patch_versioned_urls(outfile, patch_schema=True):
         f.write(text)
 
 
+def _patch_versioned_schema(outfile, name):
+    # type: (pathlib.Path, str) -> None
+    """Pin a standalone model's $schema literal to the version-specific archive URL.
+
+    Protocol schemas serialize to compact JSON by default, dropping @context/@type, so
+    the version-specific $schema is the only field pinning the record to a schema
+    version. It is part of the JCS bytes the signature proof is computed over.
+    """
+    version = _get_version()
+    with outfile.open("rt", encoding="utf-8") as f:
+        text = f.read()
+    for q in ('"', "'"):
+        text = text.replace(
+            f"{q}http://purl.org/iscc/schema/{name}.json{q}",
+            f"{q}http://purl.org/iscc/schema/{name}-{version}.json{q}",
+        )
+    with outfile.open("wt", encoding="utf-8", newline="\n") as f:
+        f.write(text)
+
+
 def build_schema():
     # type: () -> None
     infile = MODELS / "iscc-all.yaml"
@@ -164,9 +184,16 @@ SERVICE_SCHEMAS = {
     "genai": ("genai.yaml", "service_genai.py", "GenAI"),
 }
 
+# Protocol schemas are ISCC Discovery Protocol records (e.g. declaration notes). Unlike
+# service metadata, they default to compact JSON and pin a version-specific $schema URL,
+# which becomes their sole version anchor once @context/@type are dropped.
+PROTOCOL_SCHEMAS = {
+    "iscc-note": ("iscc-note.yaml", "protocol_iscc_note.py", "IsccNote"),
+}
 
-def _build_standalone_models(schemas, compact=False):
-    # type: (dict, bool) -> None
+
+def _build_standalone_models(schemas, compact=False, version_schema=False):
+    # type: (dict, bool, bool) -> None
     """Generate Pydantic v2 models from standalone YAML schema definitions."""
     aliases = CODE / "aliases.json"
     aliases_data = json.load(aliases.open("rb"))
@@ -196,6 +223,8 @@ def _build_standalone_models(schemas, compact=False):
         if compact:
             _patch_default_ld(outfile)
         _patch_versioned_urls(outfile, patch_schema=False)
+        if version_schema:
+            _patch_versioned_schema(outfile, yaml_file.replace(".yaml", ""))
 
 
 def build_seed_metadata():
@@ -208,6 +237,16 @@ def build_service_metadata():
     # type: () -> None
     """Generate Pydantic v2 models for use-case-specific service metadata schemas."""
     _build_standalone_models(SERVICE_SCHEMAS)
+
+
+def build_protocol_metadata():
+    # type: () -> None
+    """Generate Pydantic v2 models for ISCC Discovery Protocol schemas.
+
+    Protocol schemas default to compact JSON (`compact=True`) and pin a version-specific
+    $schema URL (`version_schema=True`).
+    """
+    _build_standalone_models(PROTOCOL_SCHEMAS, compact=True, version_schema=True)
 
 
 def _format_generated(outfiles):
@@ -225,6 +264,7 @@ def build():
     build_apis()
     build_seed_metadata()
     build_service_metadata()
+    build_protocol_metadata()
     _format_generated(
         [
             CODE / "schema.py",
@@ -233,6 +273,7 @@ def build():
             CODE / "seed_isrc.py",
             CODE / "service_tdm.py",
             CODE / "service_genai.py",
+            CODE / "protocol_iscc_note.py",
         ]
     )
 

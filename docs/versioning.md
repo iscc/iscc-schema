@@ -49,6 +49,18 @@ cases.
 
 ## Standalone Schemas
 
-Standalone schemas (ISBN, ISRC, TDM) use schema-specific `$schema` URLs that are not versioned
-per release (e.g., `http://purl.org/iscc/schema/isbn.json`). Their `@context` URLs are versioned
-to pin the context mapping to a specific package version.
+Seed and service schemas (ISBN, ISRC, TDM, GenAI) use schema-specific `$schema` URLs that are
+not versioned per release (e.g., `http://purl.org/iscc/schema/isbn.json`). Their `@context` URLs
+are versioned to pin the context mapping to a specific package version.
+
+## Protocol Schemas
+
+Protocol schemas (IsccNote) serialize to compact JSON by default: the `@context` and `@type`
+fields are dropped, leaving `$schema` as the sole version anchor. Their `$schema` is therefore
+**version-specific** (e.g., `http://purl.org/iscc/schema/iscc-note-0.7.0.json`), is a required
+field, and a versioned archive copy is written alongside the latest schema.
+
+This matters because protocol records are permanent, signed log entries: the `$schema` value is
+part of the JCS bytes the signature is computed over, so the schema version is pinned into the
+signed record itself. `recover_context()` resolves both versioned and unversioned protocol
+`$schema` URLs to the bundled JSON-LD context.

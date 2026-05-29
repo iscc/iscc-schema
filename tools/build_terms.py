@@ -10,9 +10,11 @@ MARKDOWN_TERMS_SCHEMA = ROOT / "docs/includes/terms-schema.md"
 MARKDOWN_TERMS_ISCC = ROOT / "docs/includes/terms-iscc.md"
 MARKDOWN_TERMS_SEED = ROOT / "docs/includes/terms-seed.md"
 MARKDOWN_TERMS_SERVICE = ROOT / "docs/includes/terms-service.md"
+MARKDOWN_TERMS_PROTOCOL = ROOT / "docs/includes/terms-protocol.md"
 
 SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml"]
 SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml"]
+PROTOCOL_SCHEMATA = ["iscc-note.yaml"]
 
 
 def terms(context):
@@ -113,11 +115,17 @@ def build_terms_service():
     _build_terms_for_schemas(SERVICE_SCHEMATA, MARKDOWN_TERMS_SERVICE)
 
 
+def build_terms_protocol():
+    """Build protocol schema terms markdown for inclusion into /terms/index.md"""
+    _build_terms_for_schemas(PROTOCOL_SCHEMATA, MARKDOWN_TERMS_PROTOCOL)
+
+
 def build():
     build_terms_schema()
     build_terms_iscc()
     build_terms_seed()
     build_terms_service()
+    build_terms_protocol()
 
 
 if __name__ == "__main__":

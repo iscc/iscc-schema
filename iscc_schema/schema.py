@@ -587,7 +587,7 @@ class IsccJsonld(BaseModel):
     """
 
     context_: AnyUrl | None = Field(
-        "http://purl.org/iscc/context/0.6.0.jsonld",
+        "http://purl.org/iscc/context/0.7.0.jsonld",
         alias="@context",
         description="The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.",
     )
@@ -597,7 +597,7 @@ class IsccJsonld(BaseModel):
         description="The type of digital content according to schema.org classes (TextDigitalDocument, ImageObject, AudioObject, VideoObject).",
     )
     schema_: AnyUrl | None = Field(
-        "http://purl.org/iscc/schema/0.6.0.json",
+        "http://purl.org/iscc/schema/0.7.0.json",
         alias="$schema",
         description="The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.",
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#$schema"},

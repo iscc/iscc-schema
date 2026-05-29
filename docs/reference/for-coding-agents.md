@@ -194,14 +194,18 @@ Three fields use aliases because `@` and `$` are invalid in Python identifiers:
 4. Run `uv run poe all` to regenerate everything and run tests
 5. Verify the field appears in `schema.py`, `docs/schema/iscc.json`, and vocabulary docs
 
-### Add a new standalone schema (seed or service)
+### Add a new standalone schema (seed, service, or protocol)
+
+Standalone schemas come in three categories: **seed** (compact JSON, for Meta-Code generation),
+**service** (JSON-LD by default, for registry discovery), and **protocol** (compact JSON with a
+version-specific `$schema`, for ISCC Discovery Protocol records like IsccNote).
 
 1. Create `iscc_schema/models/{name}.yaml` with title, type, properties
-2. Add to `SEED_SCHEMAS` or `SERVICE_SCHEMAS` dict in `tools/build_code.py`
-3. Add to `SEED_SCHEMAS` or `SERVICE_SCHEMAS` lists in `tools/build_json_schema.py`
-4. Add to the corresponding lists in `tools/build_json_ld_context.py`
-5. Add to the corresponding lists in `tools/build_terms.py`
-6. Add to the corresponding lists in `tools/build_docs.py`
+2. Add to `SEED_SCHEMAS`, `SERVICE_SCHEMAS`, or `PROTOCOL_SCHEMAS` in `tools/build_code.py`
+3. Add to the matching list in `tools/build_json_schema.py`
+4. Add to the matching list in `tools/build_json_ld_context.py`
+5. Add to the matching list in `tools/build_terms.py`
+6. Add to the matching list in `tools/build_docs.py`
 7. Export the new model from `iscc_schema/__init__.py`
 8. Run `uv run poe all`
 

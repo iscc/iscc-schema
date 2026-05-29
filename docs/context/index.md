@@ -541,3 +541,50 @@ description: ISCC Metadata Vocabulary with JSON-LD context mappings.
 !!! term ""
     IPTC Digital Source Type URI for granular content source classification. This optional field bridges to the IPTC controlled vocabulary, an external evolving standard that offers finer-grained source type distinctions than the 'involvement' field. Also used by C2PA Content Credentials. See https://cv.iptc.org/newscodes/digitalsourcetype/
 
+
+---
+
+# Protocol Schema Vocabulary
+
+## datahash
+
+<small><http://purl.org/iscc/terms/#datahash></small>
+!!! term ""
+    A blake3 multihash of the digital content, hex-encoded with the `1e20` multihash prefix (blake3, 32-byte digest). Binds the declaration to the exact content bytes.
+
+## nonce
+
+<small><http://purl.org/iscc/terms/#nonce></small>
+!!! term ""
+    Cryptographic nonce for replay protection. A 128-bit random value encoded as lowercase hexadecimal.
+
+## timestamp
+
+<small><http://purl.org/iscc/terms/#timestamp></small>
+!!! term ""
+    RFC 3339 timestamp of declaration creation in UTC with millisecond precision. Optional on submission - an ISCC-HUB assigns the authoritative timestamp on receipt.
+
+## signature
+
+<small><http://purl.org/iscc/terms/#signature></small>
+!!! term ""
+    Cryptographic signature over the IsccNote, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto) signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.
+
+## units
+
+<small><http://purl.org/iscc/terms/#units></small>
+!!! term ""
+    The individual full-length ISCC-UNITs that compose the declared ISCC-CODE, enabling similarity matching against the declaration. One to four 256-bit ISCC-UNITs.
+
+## metahash
+
+<small><http://purl.org/iscc/terms/#metahash></small>
+!!! term ""
+    A blake3 multihash of the seed metadata, hex-encoded with the `1e20` multihash prefix (blake3, 32-byte digest). Same format as `datahash`.
+
+## gateway
+
+<small><http://purl.org/iscc/terms/#gateway></small>
+!!! term ""
+    An HTTP(S) URL or RFC 6570 URI template of a gateway that serves metadata for the declared ISCC. Used by ISCC resolvers to discover content metadata.
+
