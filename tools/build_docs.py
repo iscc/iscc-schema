@@ -21,6 +21,12 @@ DST = join(HERE, "../docs/index.md")
 CHANGELOG_SRC = join(HERE, "../CHANGELOG.md")
 CHANGELOG_DST = join(HERE, "../docs/changelog.md")
 
+# Versioned whole-schema URLs the Pydantic models and the published iscc.json default to.
+# Documented examples and field-reference defaults are pinned to these so the docs match the
+# artifacts they describe. Standalone schemas use per-schema names instead (see below).
+VERSIONED_CONTEXT = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
+VERSIONED_SCHEMA = f"http://purl.org/iscc/schema/{iscc_schema.__version__}.json"
+
 
 # TODO test json-ld normalization
 # TODO add more examples
@@ -86,21 +92,43 @@ STANDALONE_META = {
 }
 
 
-def _version_standalone_examples(examples, versioned_schema_id):
-    # type: (list, str) -> None
-    """Pin @context and $schema in a standalone schema's examples to the versioned URLs.
+def _pin_example_urls(examples, context_url, schema_url):
+    # type: (list, str, str) -> None
+    """Pin @context and $schema in example dicts to the given versioned URLs.
 
     Examples are loaded directly from YAML, where @context and $schema carry unversioned base
     URLs. Serialized ISCC data versions both, so the documented examples match the model output.
     """
-    versioned_ctx = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
     for ex in examples:
         if not isinstance(ex, dict):
             continue
         if "@context" in ex:
-            ex["@context"] = versioned_ctx
+            ex["@context"] = context_url
         if "$schema" in ex:
-            ex["$schema"] = versioned_schema_id
+            ex["$schema"] = schema_url
+
+
+def _version_standalone_examples(examples, versioned_schema_id):
+    # type: (list, str) -> None
+    """Pin a standalone schema's example URLs (per-schema versioned $schema, shared @context)."""
+    _pin_example_urls(examples, VERSIONED_CONTEXT, versioned_schema_id)
+
+
+def _version_main_schema(data):
+    # type: (dict) -> None
+    """Pin @context and $schema to the versioned whole-schema URLs in a main schema's examples
+    and its @context/$schema property defaults.
+
+    The Pydantic model and the published iscc.json both default these to the versioned
+    whole-schema URLs (no per-schema name), so the rendered examples and the field-reference
+    "Default" column match the artifacts they document.
+    """
+    _pin_example_urls(data.get("examples", []), VERSIONED_CONTEXT, VERSIONED_SCHEMA)
+    properties = data.get("properties", {})
+    if "@context" in properties:
+        properties["@context"]["default"] = VERSIONED_CONTEXT
+    if "$schema" in properties:
+        properties["$schema"]["default"] = VERSIONED_SCHEMA
 
 
 def _render_schema_sections(schemata):
@@ -111,6 +139,7 @@ def _render_schema_sections(schemata):
         path = SCHEMAS / schema
         with open(path, "rt", encoding="utf-8") as infile:
             data = yaml.safe_load(infile)
+        _version_main_schema(data)
         content += f"## {data['title']}\n"
         content += f"{data['description']}\n"
         if data.get("examples"):

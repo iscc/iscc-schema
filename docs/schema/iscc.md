@@ -13,7 +13,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| @context | `string-uri` | http://purl.org/iscc/context | The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.         |
+| @context | `string-uri` | http://purl.org/iscc/context/0.7.0.jsonld | The [JSON-LD](https://json-ld.org/) Context URI for ISCC metadata.         |
 
 ### **@type**
 <small>ISO 24138:2024</small>
@@ -29,7 +29,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| $schema | `string-uri` | http://purl.org/iscc/schema | The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.         |
+| $schema | `string-uri` | http://purl.org/iscc/schema/0.7.0.json | The [JSON Schema](https://json-schema.org/) URI for ISCC metadata.         |
 
 ## iscc-minimal
 Minimal required ISCC Metadata
@@ -38,9 +38,9 @@ Minimal required ISCC Metadata
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context",
+      "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
       "@type": "CreativeWork",
-      "$schema": "http://purl.org/iscc/schema",
+      "$schema": "http://purl.org/iscc/schema/0.7.0.json",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
     }
     ```
@@ -60,9 +60,9 @@ Basic user presentable ISCC Metadata essential for Meta-Code and Meta-Hash gener
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context",
+      "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
       "@type": "VideoObject",
-      "$schema": "http://purl.org/iscc/schema",
+      "$schema": "http://purl.org/iscc/schema/0.7.0.json",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "name": "The Never Ending Story",
       "description": "a 1984 fantasy film co-written and directed by *Wolfgang Petersen*"
@@ -144,9 +144,9 @@ Extended ISCC Metadata
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context",
+      "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
       "@type": "TextDigitalDocument",
-      "$schema": "http://purl.org/iscc/schema",
+      "$schema": "http://purl.org/iscc/schema/0.7.0.json",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "name": "The Neverending Story",
       "description": "a 1979 fantasy novel by German writer *Michael Ende*",
@@ -264,9 +264,9 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context",
+      "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
       "@type": "ImageObject",
-      "$schema": "http://purl.org/iscc/schema",
+      "$schema": "http://purl.org/iscc/schema/0.7.0.json",
       "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "filename": "the-file.png",
       "filesize": 46356,

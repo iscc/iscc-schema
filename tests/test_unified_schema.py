@@ -95,6 +95,22 @@ def test_standalone_versioned_archives_exist():
         assert _without_id(archive) == _without_id(latest), f"{archive_name} differs beyond $id"
 
 
+def test_iscc_md_pins_versioned_context_and_schema():
+    """The main ISCC Metadata docs page pins @context and $schema to the versioned whole-schema
+    URLs in both its examples and its field-reference "Default" column, matching the model output
+    and the published iscc.json (which default to the same versioned URLs)."""
+    text = (ROOT / "docs" / "schema" / "iscc.md").read_text(encoding="utf-8")
+    versioned_ctx = f"http://purl.org/iscc/context/{iss.__version__}.jsonld"
+    versioned_schema = f"http://purl.org/iscc/schema/{iss.__version__}.json"
+    assert versioned_ctx in text
+    assert versioned_schema in text
+    # No unversioned base URL survives as a complete JSON value or field-table cell.
+    assert '"http://purl.org/iscc/context"' not in text
+    assert '"http://purl.org/iscc/schema"' not in text
+    assert "| http://purl.org/iscc/context |" not in text
+    assert "| http://purl.org/iscc/schema |" not in text
+
+
 def test_recover_context_from_versioned_seed_archive():
     """recover_context resolves a versioned seed archive $schema URL to the bundled context."""
     data = {
