@@ -530,12 +530,6 @@ description: ISCC Metadata Vocabulary with JSON-LD context mappings.
 !!! term ""
     Manifestation version using the NISO JAV (RP-8-2008) vocabulary. Publisher-specific version taxonomies are mapped into these values. Lets a Version-of-Record and an Accepted-Manuscript of the same work produce different Meta-Codes while a shared work-level `doi` links them.
 
-## version_doi
-
-<small><http://purl.org/ontology/bibo/doi></small>
-!!! term ""
-    DOI assigned to this specific version, where one exists.
-
 ## container_title
 
 <small><http://prismstandard.org/namespaces/basic/2.0/publicationName></small>
@@ -547,12 +541,6 @@ description: ISCC Metadata Vocabulary with JSON-LD context mappings.
 <small><http://schema.org/issn></small>
 !!! term ""
     ISSN of the container serial. Only present for serial publications.
-
-## creator
-
-<small><http://schema.org/creator></small>
-!!! term ""
-    Family name of the first listed creator, normalized. Optional; the most stable cross-catalog author token.
 
 
 ---

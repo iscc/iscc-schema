@@ -23,7 +23,7 @@ VALID_STM_DATA = {
     "issn": "0022-314X",
 }
 
-# Only the five reproducibility-guaranteed fields (no version_type/issn/container_title/creator).
+# Only the five reproducibility-guaranteed fields (no version_type/issn/container_title).
 REQUIRED_ONLY_DATA = {
     "doi": "10.1016/j.jnt.2020.04.008",
     "resource_type": "JournalArticle",
@@ -197,7 +197,6 @@ def test_optional_fields_omittable():
     assert "version_type" not in d
     assert "issn" not in d
     assert "container_title" not in d
-    assert "creator" not in d
 
 
 def test_extra_fields_forbidden():

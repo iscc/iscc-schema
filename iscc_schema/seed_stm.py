@@ -105,13 +105,6 @@ class STM(BaseModel):
         examples=["VoR"],
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#version_type"},
     )
-    version_doi: str | None = Field(
-        None,
-        description="DOI assigned to this specific version, where one exists.",
-        examples=["10.1016/j.jnt.2020.04.008"],
-        json_schema_extra={"x-iscc-context": "http://purl.org/ontology/bibo/doi"},
-        pattern="^10\\.\\d{4,}/.+$",
-    )
     container_title: str | None = Field(
         None,
         description="Title of the serial or collection the work is part of (journal, proceedings, book). Not guaranteed for standalone works.",
@@ -127,11 +120,4 @@ class STM(BaseModel):
         examples=["0022-314X"],
         json_schema_extra={"x-iscc-context": "http://schema.org/issn"},
         pattern="^\\d{4}-\\d{3}[\\dxX]$",
-    )
-    creator: str | None = Field(
-        None,
-        description="Family name of the first listed creator, normalized. Optional; the most stable cross-catalog author token.",
-        examples=["Booker"],
-        json_schema_extra={"x-iscc-context": "http://schema.org/creator"},
-        max_length=100,
     )
