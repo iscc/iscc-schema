@@ -42,7 +42,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "http://purl.org/iscc/schema/isbn.json",
+      "const": "http://purl.org/iscc/schema/isbn-0.7.0.json",
       "description": "The JSON Schema URI for ISBN seed metadata. See the top-level `x-iscc-jsonld` extension for the JSON-LD upgrade path."
     },
     "isbn": {
@@ -116,7 +116,7 @@
   ],
   "examples": [
     {
-      "$schema": "http://purl.org/iscc/schema/isbn.json",
+      "$schema": "http://purl.org/iscc/schema/isbn-0.7.0.json",
       "isbn": "9789295055124",
       "productform": "EA",
       "title": "The Never Ending Story",

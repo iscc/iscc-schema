@@ -210,16 +210,15 @@ SERVICE_SCHEMAS = ["tdm.yaml", "genai.yaml"]
 PROTOCOL_SCHEMAS = ["iscc-note.yaml"]
 
 
-def build_seed_schema(yaml_file, full_context, versioned_schema=False):
-    # type: (str, dict, bool) -> dict
+def build_seed_schema(yaml_file, full_context):
+    # type: (str, dict) -> dict
     """Build a standalone JSON Schema file for a seed/service/protocol definition.
 
-    Every standalone schema pins a versioned `@context` default (matching what the Pydantic
-    model emits with ld=True) and writes a version-pinned archive copy alongside the latest
-    file, preserving the schema as it existed at each release. Protocol schemas
-    (versioned_schema=True) additionally pin a version-specific `$schema` URL, since their
-    compact wire form carries no @context to anchor the version. Returns the loaded YAML
-    schema for context building.
+    Every standalone schema version-pins both its `@context` default and its `$schema` const
+    to the current release (matching what the Pydantic model emits) and writes a version-pinned
+    archive copy alongside the latest file, preserving the schema as it existed at each release.
+    The latest file keeps an unversioned `$id`; the archive's `$id` carries the version.
+    Returns the loaded YAML schema for context building.
     """
     path = MODELS / yaml_file
     with open(path, encoding="utf-8") as f:
@@ -239,8 +238,7 @@ def build_seed_schema(yaml_file, full_context, versioned_schema=False):
     versioned_id = f"http://purl.org/iscc/schema/{name}-{iscc_schema.__version__}.json"
     if "$schema" in properties:
         schema_prop = dict(properties["$schema"])
-        if versioned_schema:
-            schema_prop["const"] = versioned_id
+        schema_prop["const"] = versioned_id
         if "description" in schema_prop:
             schema_prop[
                 "description"
@@ -260,13 +258,11 @@ def build_seed_schema(yaml_file, full_context, versioned_schema=False):
     if "additionalProperties" in schema:
         output["additionalProperties"] = schema["additionalProperties"]
     if schema.get("examples"):
-        examples = schema["examples"]
-        if versioned_schema:
-            examples = [
-                {**ex, "$schema": versioned_id} if "$schema" in ex else ex for ex in examples
-            ]
-        # JSON-LD examples (service schemas) carry @context; pin it to the versioned URL the
-        # model emits. Compact seed/protocol examples carry $schema instead and are untouched.
+        # Pin both anchors in the published examples to the versioned URLs the model emits:
+        # $schema on every example, and @context where present (JSON-LD service examples).
+        examples = [
+            {**ex, "$schema": versioned_id} if "$schema" in ex else ex for ex in schema["examples"]
+        ]
         examples = [
             {**ex, "@context": versioned_ctx} if "@context" in ex else ex for ex in examples
         ]
@@ -385,11 +381,8 @@ def build():
             outf.write(json.dumps(data, indent=2, ensure_ascii=False))
 
     standalone_schemas = {}
-    for yaml_file in SEED_SCHEMAS + SERVICE_SCHEMAS:
+    for yaml_file in SEED_SCHEMAS + SERVICE_SCHEMAS + PROTOCOL_SCHEMAS:
         schema = build_seed_schema(yaml_file, full_context)
-        standalone_schemas[yaml_file] = schema
-    for yaml_file in PROTOCOL_SCHEMAS:
-        schema = build_seed_schema(yaml_file, full_context, versioned_schema=True)
         standalone_schemas[yaml_file] = schema
 
     _build_contexts_module(full_context, standalone_schemas)

@@ -86,18 +86,21 @@ STANDALONE_META = {
 }
 
 
-def _version_standalone_examples(examples):
-    # type: (list) -> None
-    """Pin any @context in a standalone schema's examples to the versioned context URL.
+def _version_standalone_examples(examples, versioned_schema_id):
+    # type: (list, str) -> None
+    """Pin @context and $schema in a standalone schema's examples to the versioned URLs.
 
-    Examples are loaded directly from YAML, where @context carries the unversioned base URL.
-    Standalone records keep an unversioned $schema by design and pin the version via @context,
-    so versioning @context alone makes the documented example match the model's output.
+    Examples are loaded directly from YAML, where @context and $schema carry unversioned base
+    URLs. Serialized ISCC data versions both, so the documented examples match the model output.
     """
     versioned_ctx = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
     for ex in examples:
-        if isinstance(ex, dict) and "@context" in ex:
+        if not isinstance(ex, dict):
+            continue
+        if "@context" in ex:
             ex["@context"] = versioned_ctx
+        if "$schema" in ex:
+            ex["$schema"] = versioned_schema_id
 
 
 def _render_schema_sections(schemata):
@@ -166,27 +169,22 @@ def build_json_schema_docs():
         outf.write(content)
 
 
-def _build_standalone_doc(schema_file, category, extra_text="", versioned_schema=False):
-    # type: (str, str, str, bool) -> None
+def _build_standalone_doc(schema_file, category, extra_text=""):
+    # type: (str, str, str) -> None
     """Build a markdown documentation page for a standalone schema.
 
-    Protocol schemas (versioned_schema=True) render their version-specific $schema URL in
-    both the example and the field reference, matching the published JSON Schema.
+    All standalone schemas render their version-specific $schema URL (and versioned @context)
+    in both the example and the field reference, matching the published JSON Schema.
     """
     path = SCHEMAS / schema_file
     with open(path, "rt", encoding="utf-8") as infile:
         data = yaml.safe_load(infile)
 
     name = schema_file.replace(".yaml", "")
-    _version_standalone_examples(data.get("examples", []))
-    if versioned_schema:
-        versioned_id = f"http://purl.org/iscc/schema/{name}-{iscc_schema.__version__}.json"
-        if "$schema" in data.get("properties", {}):
-            schema_prop = {**data["properties"]["$schema"], "const": versioned_id}
-            data["properties"]["$schema"] = schema_prop
-        for ex in data.get("examples", []):
-            if "$schema" in ex:
-                ex["$schema"] = versioned_id
+    versioned_id = f"http://purl.org/iscc/schema/{name}-{iscc_schema.__version__}.json"
+    _version_standalone_examples(data.get("examples", []), versioned_id)
+    if "$schema" in data.get("properties", {}):
+        data["properties"]["$schema"] = {**data["properties"]["$schema"], "const": versioned_id}
     title = data["title"]
     meta = STANDALONE_META.get(name, {})
     frontmatter = "---\n"
@@ -261,7 +259,7 @@ def build_service_schema_docs():
 def build_protocol_schema_docs():
     """Build a separate markdown page for each protocol schema."""
     for schema_file in PROTOCOL_SCHEMATA:
-        _build_standalone_doc(schema_file, "Protocol Schema", versioned_schema=True)
+        _build_standalone_doc(schema_file, "Protocol Schema")
 
 
 def _render_context_terms(schemata):

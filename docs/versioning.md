@@ -49,26 +49,25 @@ cases.
 
 ## Standalone Schemas
 
-Seed and service schemas (ISBN, ISRC, TDM, GenAI) use schema-specific `$schema` URLs that are
-not versioned per release (e.g., `http://purl.org/iscc/schema/isbn.json`): the `$schema`
-identifies *which* schema, while the versioned `@context` identifies *which version*. Both the
-Pydantic models and the published JSON Schema files carry the versioned `@context` default
-(e.g., `http://purl.org/iscc/context/0.7.0.jsonld`), so serialized data pins the context mapping
-to a specific package version.
+Seed, service, and protocol schemas (ISBN, ISRC, TDM, GenAI, IsccNote) follow the same
+versioned-URL strategy as the main schema, with per-schema names. Serialized records carry a
+versioned `@context` (e.g., `http://purl.org/iscc/context/0.7.0.jsonld`) **and** a versioned
+`$schema` (e.g., `http://purl.org/iscc/schema/isbn-0.7.0.json`), pinning both the vocabulary and
+the schema version to a specific release.
 
-A version-pinned archive copy of each standalone schema is written alongside the latest file
-(e.g., `isbn-0.7.0.json` next to `isbn.json`), preserving the schema as it existed at that
-release. `recover_context()` resolves both the unversioned `$schema` URL and versioned archive
-URLs to the bundled JSON-LD context.
+The latest schema document is published at the unversioned URL (its `$id`, e.g.,
+`http://purl.org/iscc/schema/isbn.json`), while its `$schema` const points at the versioned
+archive so records always carry the version. A version-pinned archive copy is written alongside
+each latest file (e.g., `isbn-0.7.0.json` next to `isbn.json`), preserving the schema as it
+existed at that release. `recover_context()` resolves both unversioned `$schema` URLs (older
+records, or the "latest" document URL) and versioned archive URLs to the bundled JSON-LD context.
 
 ## Protocol Schemas
 
 Protocol schemas (IsccNote) serialize to compact JSON by default: the `@context` and `@type`
-fields are dropped, leaving `$schema` as the sole version anchor. Their `$schema` is therefore
-**version-specific** (e.g., `http://purl.org/iscc/schema/iscc-note-0.7.0.json`), is a required
-field, and a versioned archive copy is written alongside the latest schema.
+fields are dropped, leaving the versioned `$schema` as the **sole** version anchor. For these
+schemas `$schema` is therefore a **required** field.
 
 This matters because protocol records are permanent, signed log entries: the `$schema` value is
 part of the JCS bytes the signature is computed over, so the schema version is pinned into the
-signed record itself. `recover_context()` resolves both versioned and unversioned protocol
-`$schema` URLs to the bundled JSON-LD context.
+signed record itself.

@@ -5,6 +5,7 @@ import iscc_schema
 from iscc_schema.seed_isrc import ISRC
 
 CONTEXT_URL = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
+SCHEMA_URL = f"http://purl.org/iscc/schema/isrc-{iscc_schema.__version__}.json"
 
 VALID_ISRC_DATA = {
     "isrc": "AA6Q72000047",
@@ -29,7 +30,7 @@ def test_defaults():
     obj = ISRC(**VALID_ISRC_DATA)
     assert obj.context_ == CONTEXT_URL
     assert obj.type_ == "ISRC"
-    assert obj.schema_ == "http://purl.org/iscc/schema/isrc.json"
+    assert obj.schema_ == SCHEMA_URL
 
 
 def test_content_type_enum():
@@ -68,7 +69,7 @@ def test_dict_ld():
     d = obj.dict(exclude_unset=False, ld=True)
     assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "ISRC"
-    assert d["$schema"] == "http://purl.org/iscc/schema/isrc.json"
+    assert d["$schema"] == SCHEMA_URL
     assert d["isrc"] == "AA6Q72000047"
     assert d["duration"] == 125
     assert d["content_type"] == "sound"

@@ -40,7 +40,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "http://purl.org/iscc/schema/isrc.json",
+      "const": "http://purl.org/iscc/schema/isrc-0.7.0.json",
       "description": "The JSON Schema URI for ISRC seed metadata. See the top-level `x-iscc-jsonld` extension for the JSON-LD upgrade path."
     },
     "isrc": {
@@ -106,7 +106,7 @@
   ],
   "examples": [
     {
-      "$schema": "http://purl.org/iscc/schema/isrc.json",
+      "$schema": "http://purl.org/iscc/schema/isrc-0.7.0.json",
       "isrc": "AA6Q72000047",
       "main_artist": "The Beatles",
       "track_title": "Yesterday",

@@ -30,8 +30,8 @@ class ISRC(BaseModel):
         description="The JSON-LD Context URI for ISCC metadata.",
     )
     type_: Literal["ISRC"] = Field("ISRC", alias="@type", description="The type of seed metadata.")
-    schema_: Literal["http://purl.org/iscc/schema/isrc.json"] = Field(
-        "http://purl.org/iscc/schema/isrc.json",
+    schema_: Literal["http://purl.org/iscc/schema/isrc-0.7.0.json"] = Field(
+        "http://purl.org/iscc/schema/isrc-0.7.0.json",
         alias="$schema",
         description="The JSON Schema URI for ISRC seed metadata.",
     )

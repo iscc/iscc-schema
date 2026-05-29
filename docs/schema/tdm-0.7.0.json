@@ -40,7 +40,7 @@
     "$schema": {
       "type": "string",
       "format": "uri",
-      "const": "http://purl.org/iscc/schema/tdm.json",
+      "const": "http://purl.org/iscc/schema/tdm-0.7.0.json",
       "description": "The JSON Schema URI for TDM service metadata. See the top-level `x-iscc-jsonld` extension for the JSON-LD upgrade path."
     },
     "iscc": {
@@ -74,7 +74,7 @@
     {
       "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
       "@type": "TDM",
-      "$schema": "http://purl.org/iscc/schema/tdm.json",
+      "$schema": "http://purl.org/iscc/schema/tdm-0.7.0.json",
       "iscc": "ISCC:MAACAJINXFXA2SQX",
       "tdm_reservation": 1,
       "tdm_policy": "https://example.com/tdmrep-policy.json"

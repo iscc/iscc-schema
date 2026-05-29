@@ -16,7 +16,7 @@ Machine-readable generative AI disclosure signals for content transparency. Desi
     {
       "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
       "@type": "GenAI",
-      "$schema": "http://purl.org/iscc/schema/genai.json",
+      "$schema": "http://purl.org/iscc/schema/genai-0.7.0.json",
       "involvement": "ai_generated",
       "ai_system": "DALL-E 3",
       "digital_source_type": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia"
@@ -41,7 +41,7 @@ Machine-readable generative AI disclosure signals for content transparency. Desi
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| $schema | `string-uri` | http://purl.org/iscc/schema/genai.json | The JSON Schema URI for GenAI service metadata.         |
+| $schema | `string-uri` | http://purl.org/iscc/schema/genai-0.7.0.json | The JSON Schema URI for GenAI service metadata.         |
 
 ## **involvement**
 <http://purl.org/iscc/terms/#involvement>
