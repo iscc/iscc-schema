@@ -69,7 +69,7 @@
       "type": "string",
       "description": "Digital Object Identifier of the work, lowercased, in bare prefix form (without the https://doi.org/ resolver prefix).",
       "pattern": "^10\\.\\d{4,}/.+$",
-      "example": "10.1016/j.jnt.2020.04.008",
+      "example": "10.5555/example.2020.0001",
       "x-iscc-context": "http://purl.org/ontology/bibo/doi"
     },
     "resource_type": {
@@ -120,14 +120,14 @@
       "type": "string",
       "description": "The primary title of the work.",
       "maxLength": 128,
-      "example": "Twisting moduli for GL(2)",
+      "example": "On the Stability of Quasilinear Forms",
       "x-iscc-context": "http://schema.org/name"
     },
     "publisher": {
       "type": "string",
       "description": "Name of the publishing entity.",
       "maxLength": 100,
-      "example": "Elsevier Inc.",
+      "example": "Meridian Academic Press",
       "x-iscc-context": "http://schema.org/publisher"
     },
     "pubyear": {
@@ -157,14 +157,14 @@
       "type": "string",
       "description": "Title of the serial or collection the work is part of (journal, proceedings, book). Not guaranteed for standalone works.",
       "maxLength": 200,
-      "example": "Journal of Number Theory",
+      "example": "Journal of Applied Analysis",
       "x-iscc-context": "http://prismstandard.org/namespaces/basic/2.0/publicationName"
     },
     "issn": {
       "type": "string",
       "description": "ISSN of the container serial. Only present for serial publications.",
       "pattern": "^\\d{4}-\\d{3}[\\dxX]$",
-      "example": "0022-314X",
+      "example": "1234-5678",
       "x-iscc-context": "http://schema.org/issn"
     }
   },
@@ -179,14 +179,14 @@
   "examples": [
     {
       "$schema": "http://purl.org/iscc/schema/stm-0.7.0.json",
-      "doi": "10.1016/j.jnt.2020.04.008",
+      "doi": "10.5555/example.2020.0001",
       "resource_type": "JournalArticle",
-      "title": "Twisting moduli for GL(2)",
-      "publisher": "Elsevier Inc.",
+      "title": "On the Stability of Quasilinear Forms",
+      "publisher": "Meridian Academic Press",
       "pubyear": 2020,
       "version_type": "VoR",
-      "container_title": "Journal of Number Theory",
-      "issn": "0022-314X"
+      "container_title": "Journal of Applied Analysis",
+      "issn": "1234-5678"
     }
   ]
 }
