@@ -91,7 +91,7 @@ STANDALONE_META = {
     "genai": {"icon": "lucide/sparkles", "title": "GenAI Service"},
     "iscc-note": {
         "icon": "lucide/file-check",
-        "title": "ISCC Declaration",
+        "title": "ISCC Note",
         "description": (
             "Permanent ISCC Declaration log record for HUB timestamping and registration"
         ),

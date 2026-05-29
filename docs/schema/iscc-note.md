@@ -1,6 +1,6 @@
 ---
 icon: lucide/file-check
-title: ISCC Declaration
+title: ISCC Note
 description: Permanent ISCC Declaration log record for HUB timestamping and registration.
 ---
 
