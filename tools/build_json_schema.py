@@ -2,6 +2,7 @@
 
 import json
 import pathlib
+import subprocess
 import yaml
 import iscc_schema
 
@@ -377,9 +378,32 @@ def flatten_main_types():
     return []
 
 
+def _check_version_not_released(version):
+    # type: (str) -> None
+    """Abort the build if the current version is already released (a `v{version}` git tag exists).
+
+    Versioned archive files are immutable once released; overwriting them from a branch that
+    forgot to bump the version would silently mutate published artifacts. Local tags mirror the
+    GitHub releases after a fetch/pull, so this is equivalent to checking the remote without a
+    network call. If git is unavailable the check is skipped (fail-open); the bump-first rule
+    and tests/test_versioning.py remain as backstops.
+    """
+    try:
+        result = subprocess.run(["git", "tag", "-l", f"v{version}"], capture_output=True, text=True)
+    except OSError:
+        return
+    if result.stdout.strip():
+        raise SystemExit(
+            f"ERROR: Version {version} has already been released (tag v{version} exists). "
+            "Bump the version in pyproject.toml and iscc_schema/__init__.py before running "
+            "the build pipeline."
+        )
+
+
 def build():
     # type: () -> None
     """Build `iscc.json` & `<version>.json` schema, plus seed/service metadata schemas."""
+    _check_version_not_released(iscc_schema.__version__)
     full_context = _load_full_context()
 
     data = flatten_schemas()

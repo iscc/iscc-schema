@@ -42,13 +42,13 @@ properties:
     maxLength: 32
     pattern: ^[0-9a-f]{32}$
     x-iscc-context: http://purl.org/iscc/terms/#nonce
-    x-iscc-status: draft
+    x-iscc-status: stable
   signature:
     type: object
     description: Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto)
       signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.
     x-iscc-context: http://purl.org/iscc/terms/#signature
-    x-iscc-status: draft
+    x-iscc-status: stable
     required:
     - version
     - proof

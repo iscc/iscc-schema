@@ -4,6 +4,8 @@
 
     Blanket TDM reservation flag, semantically equivalent to W3C TDMRep tdm-reservation. 1 = rights reserved (EU DSM Art. 4 opt-out), 0 = not reserved, absent = undeclared.
 
+    **Status**:  stable
+
 ### **tdm_policy**
 
 !!! term "<small><http://www.w3.org/ns/tdmrep#policy></small>"

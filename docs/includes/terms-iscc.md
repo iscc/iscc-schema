@@ -162,7 +162,7 @@
 
     Name and version of the software that generated the ISCC
 
-    **Status**:  draft
+    **Status**:  stable
 
 ### **text**
 
@@ -248,7 +248,7 @@
 
     Cryptographic nonce for replay protection. A 128-bit random value encoded as lowercase hexadecimal.
 
-    **Status**:  draft
+    **Status**:  stable
 
 ### **signature**
 
@@ -256,7 +256,7 @@
 
     Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto) signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.
 
-    **Status**:  draft
+    **Status**:  stable
 
 ### **original**
 

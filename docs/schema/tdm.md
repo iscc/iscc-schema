@@ -98,6 +98,7 @@ predicates.
 
 ## **tdm_reservation**
 <http://www.w3.org/ns/tdmrep#reservation>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
