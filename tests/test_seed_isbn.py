@@ -150,3 +150,21 @@ def test_schema_has_jsonld_extension():
     assert ext["context"] == CONTEXT_URL
     assert ext["type"] == "ISBN"
     assert "x-iscc-jsonld" in schema["properties"]["$schema"]["description"]
+
+
+def test_schema_context_default_is_versioned():
+    """The published JSON Schema pins the versioned @context default, matching the value the
+    Pydantic model emits with ld=True."""
+    schema = json.loads((ROOT / "docs" / "schema" / "isbn.json").read_text(encoding="utf-8"))
+    assert schema["properties"]["@context"]["default"] == CONTEXT_URL
+    assert ISBN(**VALID_ISBN_DATA).context_ == CONTEXT_URL
+
+
+def test_versioned_archive_exists():
+    """A version-pinned archive copy is written alongside the latest schema; seed records keep
+    an unversioned $schema, so only the archive's $id carries the version."""
+    archive = ROOT / "docs" / "schema" / f"isbn-{iscc_schema.__version__}.json"
+    assert archive.exists()
+    data = json.loads(archive.read_text(encoding="utf-8"))
+    assert data["$id"] == f"http://purl.org/iscc/schema/isbn-{iscc_schema.__version__}.json"
+    assert data["properties"]["$schema"]["const"] == "http://purl.org/iscc/schema/isbn.json"

@@ -14,7 +14,7 @@ Machine-readable TDM rights signals conformant with W3C TDMRep, providing conten
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context",
+      "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
       "@type": "TDM",
       "$schema": "http://purl.org/iscc/schema/tdm.json",
       "iscc": "ISCC:MAACAJINXFXA2SQX",

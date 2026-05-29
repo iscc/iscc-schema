@@ -14,7 +14,7 @@ Machine-readable generative AI disclosure signals for content transparency. Desi
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context",
+      "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
       "@type": "GenAI",
       "$schema": "http://purl.org/iscc/schema/genai.json",
       "involvement": "ai_generated",

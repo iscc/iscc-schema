@@ -31,6 +31,7 @@
           "type": "object"
         }
       ],
+      "default": "http://purl.org/iscc/context/0.7.0.jsonld",
       "description": "The JSON-LD Context URI for ISCC metadata."
     },
     "@type": {
