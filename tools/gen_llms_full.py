@@ -14,6 +14,7 @@ PAGES = [
     "schema/iscc.md",
     "schema/isbn.md",
     "schema/isrc.md",
+    "schema/stm.md",
     "schema/tdm.md",
     "schema/genai.md",
     "schema/iscc-note.md",

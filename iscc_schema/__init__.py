@@ -2,6 +2,7 @@ __version__ = "0.7.0"
 from iscc_schema.schema import IsccMeta, Signature
 from iscc_schema.seed_isbn import ISBN
 from iscc_schema.seed_isrc import ISRC
+from iscc_schema.seed_stm import STM
 from iscc_schema.service_tdm import TDM
 from iscc_schema.service_genai import GenAI
 from iscc_schema.protocol_iscc_note import IsccNote

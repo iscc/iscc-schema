@@ -68,7 +68,7 @@ def copy_root_files():
         outf.write(CHANGELOG_FRONTMATTER + text)
 
 
-SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml"]
+SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml", "stm.yaml"]
 SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml"]
 PROTOCOL_SCHEMATA = ["iscc-note.yaml"]
 
@@ -76,6 +76,13 @@ PROTOCOL_SCHEMATA = ["iscc-note.yaml"]
 STANDALONE_META = {
     "isbn": {"icon": "lucide/book-text", "title": "ISBN Seed"},
     "isrc": {"icon": "lucide/music", "title": "ISRC Seed"},
+    "stm": {
+        "icon": "lucide/microscope",
+        "title": "STM Seed",
+        "description": (
+            "Scientific/Technical/Medical seed metadata for DOI-identified scholarly works"
+        ),
+    },
     "tdm": {
         "icon": "lucide/pickaxe",
         "title": "TDM Service",

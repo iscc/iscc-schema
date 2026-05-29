@@ -18,6 +18,7 @@ Industry-specific seed metadata schemas for interoperable Meta-Code generation. 
 
 - [**ISBN Seed Metadata**](isbn.md) — ISBN Seed Metadata for interoperable Meta-Code generation.
 - [**ISRC Seed Metadata**](isrc.md) — ISRC Seed Metadata for interoperable Meta-Code generation.
+- [**STM Seed Metadata**](stm.md) — STM (Scientific/Technical/Medical) Seed Metadata for interoperable Meta-Code generation. Minimal distinguishing metadata for scholarly works identified by a DOI, populatable from any DOI via Crossref/DataCite content negotiation (CSL-JSON).
 
 ## Service Metadata
 

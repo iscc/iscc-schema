@@ -29,6 +29,7 @@ nav = [
         { "Seed Metadata" = [
             "schema/isbn.md",
             "schema/isrc.md",
+            "schema/stm.md",
         ]},
         { "Service Metadata" = [
             "schema/tdm.md",

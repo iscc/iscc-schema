@@ -506,6 +506,54 @@ description: ISCC Metadata Vocabulary with JSON-LD context mappings.
 !!! term ""
     The elapsed playing time of the recording in seconds.
 
+## doi
+
+<small><http://purl.org/ontology/bibo/doi></small>
+!!! term ""
+    Digital Object Identifier of the work, lowercased, in bare prefix form (without the https://doi.org/ resolver prefix).
+
+## resource_type
+
+<small><http://schema.org/additionalType></small>
+!!! term ""
+    The kind of research output as a readable token. Tokens follow the DataCite resource-type vocabulary and are populated from the Crossref/DataCite work type (for example, journal-article maps to JournalArticle). Each token is mapped to a resolvable schema.org or FaBiO class IRI in the JSON-LD context (see x-iscc-enum-context). This is the work-kind axis; version_type is the orthogonal version-stage axis.
+
+## pubyear
+
+<small><http://schema.org/datePublished></small>
+!!! term ""
+    Year of publication. Crossref guarantees year-level precision only; using an integer avoids the false precision of a full date.
+
+## version_type
+
+<small><http://purl.org/iscc/terms/#version_type></small>
+!!! term ""
+    Manifestation version using the NISO JAV (RP-8-2008) vocabulary. Publisher-specific version taxonomies are mapped into these values. Lets a Version-of-Record and an Accepted-Manuscript of the same work produce different Meta-Codes while a shared work-level `doi` links them.
+
+## version_doi
+
+<small><http://purl.org/ontology/bibo/doi></small>
+!!! term ""
+    DOI assigned to this specific version, where one exists.
+
+## container_title
+
+<small><http://prismstandard.org/namespaces/basic/2.0/publicationName></small>
+!!! term ""
+    Title of the serial or collection the work is part of (journal, proceedings, book). Not guaranteed for standalone works.
+
+## issn
+
+<small><http://schema.org/issn></small>
+!!! term ""
+    ISSN of the container serial. Only present for serial publications.
+
+## creator
+
+<small><http://schema.org/creator></small>
+!!! term ""
+    Family name of the first listed creator, normalized. Optional; the most stable cross-catalog author token.
+
 
 ---
 
