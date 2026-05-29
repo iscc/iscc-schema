@@ -11,24 +11,24 @@ ROOT = pathlib.Path(__file__).parent.parent
 CONTEXT_URL = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
 SCHEMA_URL = f"http://purl.org/iscc/schema/stm-{iscc_schema.__version__}.json"
 
-# Worked example from the Elsevier pilot sample S0022314X20301219 (Journal of Number Theory).
+# Worked example for a journal article (fictional publisher/journal; DOI uses the 10.5555 test prefix).
 VALID_STM_DATA = {
-    "doi": "10.1016/j.jnt.2020.04.008",
+    "doi": "10.5555/example.2020.0001",
     "resource_type": "JournalArticle",
-    "title": "Twisting moduli for GL(2)",
-    "publisher": "Elsevier Inc.",
+    "title": "On the Stability of Quasilinear Forms",
+    "publisher": "Meridian Academic Press",
     "pubyear": 2020,
     "version_type": "VoR",
-    "container_title": "Journal of Number Theory",
-    "issn": "0022-314X",
+    "container_title": "Journal of Applied Analysis",
+    "issn": "1234-5678",
 }
 
 # Only the five reproducibility-guaranteed fields (no version_type/issn/container_title).
 REQUIRED_ONLY_DATA = {
-    "doi": "10.1016/j.jnt.2020.04.008",
+    "doi": "10.5555/example.2020.0001",
     "resource_type": "JournalArticle",
-    "title": "Twisting moduli for GL(2)",
-    "publisher": "Elsevier Inc.",
+    "title": "On the Stability of Quasilinear Forms",
+    "publisher": "Meridian Academic Press",
     "pubyear": 2020,
 }
 
@@ -41,10 +41,10 @@ def _load_jsonld_context():
 
 def test_valid_construction():
     obj = STM(**VALID_STM_DATA)
-    assert obj.doi == "10.1016/j.jnt.2020.04.008"
+    assert obj.doi == "10.5555/example.2020.0001"
     assert obj.resource_type == "JournalArticle"
-    assert obj.title == "Twisting moduli for GL(2)"
-    assert obj.publisher == "Elsevier Inc."
+    assert obj.title == "On the Stability of Quasilinear Forms"
+    assert obj.publisher == "Meridian Academic Press"
     assert obj.pubyear == 2020
 
 
@@ -58,7 +58,7 @@ def test_defaults():
 def test_dict():
     obj = STM(**VALID_STM_DATA)
     d = obj.dict()
-    assert d["doi"] == "10.1016/j.jnt.2020.04.008"
+    assert d["doi"] == "10.5555/example.2020.0001"
     assert d["resource_type"] == "JournalArticle"
     assert d["pubyear"] == 2020
 
@@ -77,7 +77,7 @@ def test_dict_ld():
     assert d["@context"] == CONTEXT_URL
     assert d["@type"] == "STM"
     assert d["$schema"] == SCHEMA_URL
-    assert d["doi"] == "10.1016/j.jnt.2020.04.008"
+    assert d["doi"] == "10.5555/example.2020.0001"
     assert d["resource_type"] == "JournalArticle"
 
 
@@ -87,7 +87,7 @@ def test_json_compact():
     assert '"$schema"' in j
     assert '"@context"' not in j
     assert '"@type"' not in j
-    assert '"doi":"10.1016/j.jnt.2020.04.008"' in j
+    assert '"doi":"10.5555/example.2020.0001"' in j
     assert '"pubyear":2020' in j
 
 
@@ -96,14 +96,14 @@ def test_json_ld():
     j = obj.json(ld=True)
     assert f'"@context":"{CONTEXT_URL}"' in j
     assert '"@type":"STM"' in j
-    assert '"doi":"10.1016/j.jnt.2020.04.008"' in j
+    assert '"doi":"10.5555/example.2020.0001"' in j
 
 
 def test_jcs():
     obj = STM(**VALID_STM_DATA)
     result = obj.jcs()
     assert isinstance(result, bytes)
-    assert b'"doi":"10.1016/j.jnt.2020.04.008"' in result
+    assert b'"doi":"10.5555/example.2020.0001"' in result
     assert b'"$schema"' in result
 
 
@@ -208,7 +208,7 @@ def test_import_from_package():
     from iscc_schema import STM as STMFromPkg
 
     obj = STMFromPkg(**VALID_STM_DATA)
-    assert obj.doi == "10.1016/j.jnt.2020.04.008"
+    assert obj.doi == "10.5555/example.2020.0001"
 
 
 def test_schema_has_jsonld_extension():
@@ -276,7 +276,7 @@ def test_stm_terms_in_shared_context():
 
 def test_recover_context_from_stm_schema():
     """A compact STM record recovers the shared context (with STM type) from its $schema."""
-    data = {"$schema": SCHEMA_URL, "doi": "10.1016/j.jnt.2020.04.008"}
+    data = {"$schema": SCHEMA_URL, "doi": "10.5555/example.2020.0001"}
     result = iscc_schema.recover_context(data)
     assert "STM" in result["@context"]
     assert result["@context"]["doi"] == "http://purl.org/ontology/bibo/doi"

@@ -67,7 +67,7 @@ class STM(BaseModel):
     doi: str = Field(
         ...,
         description="Digital Object Identifier of the work, lowercased, in bare prefix form (without the https://doi.org/ resolver prefix).",
-        examples=["10.1016/j.jnt.2020.04.008"],
+        examples=["10.5555/example.2020.0001"],
         json_schema_extra={"x-iscc-context": "http://purl.org/ontology/bibo/doi"},
         pattern="^10\\.\\d{4,}/.+$",
     )
@@ -80,14 +80,14 @@ class STM(BaseModel):
     title: str = Field(
         ...,
         description="The primary title of the work.",
-        examples=["Twisting moduli for GL(2)"],
+        examples=["On the Stability of Quasilinear Forms"],
         json_schema_extra={"x-iscc-context": "http://schema.org/name"},
         max_length=128,
     )
     publisher: str = Field(
         ...,
         description="Name of the publishing entity.",
-        examples=["Elsevier Inc."],
+        examples=["Meridian Academic Press"],
         json_schema_extra={"x-iscc-context": "http://schema.org/publisher"},
         max_length=100,
     )
@@ -108,7 +108,7 @@ class STM(BaseModel):
     container_title: str | None = Field(
         None,
         description="Title of the serial or collection the work is part of (journal, proceedings, book). Not guaranteed for standalone works.",
-        examples=["Journal of Number Theory"],
+        examples=["Journal of Applied Analysis"],
         json_schema_extra={
             "x-iscc-context": "http://prismstandard.org/namespaces/basic/2.0/publicationName"
         },
@@ -117,7 +117,7 @@ class STM(BaseModel):
     issn: str | None = Field(
         None,
         description="ISSN of the container serial. Only present for serial publications.",
-        examples=["0022-314X"],
+        examples=["1234-5678"],
         json_schema_extra={"x-iscc-context": "http://schema.org/issn"},
         pattern="^\\d{4}-\\d{3}[\\dxX]$",
     )

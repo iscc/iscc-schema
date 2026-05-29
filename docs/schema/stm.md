@@ -15,14 +15,14 @@ STM (Scientific/Technical/Medical) Seed Metadata for interoperable Meta-Code gen
     ```json
     {
       "$schema": "http://purl.org/iscc/schema/stm-0.7.0.json",
-      "doi": "10.1016/j.jnt.2020.04.008",
+      "doi": "10.5555/example.2020.0001",
       "resource_type": "JournalArticle",
-      "title": "Twisting moduli for GL(2)",
-      "publisher": "Elsevier Inc.",
+      "title": "On the Stability of Quasilinear Forms",
+      "publisher": "Meridian Academic Press",
       "pubyear": 2020,
       "version_type": "VoR",
-      "container_title": "Journal of Number Theory",
-      "issn": "0022-314X"
+      "container_title": "Journal of Applied Analysis",
+      "issn": "1234-5678"
     }
     ```
 
@@ -53,7 +53,7 @@ STM (Scientific/Technical/Medical) Seed Metadata for interoperable Meta-Code gen
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| doi | `string` | none | Digital Object Identifier of the work, lowercased, in bare prefix form (without the https://doi.org/ resolver prefix).<br><br>**Example**: `10.1016/j.jnt.2020.04.008`         |
+| doi | `string` | none | Digital Object Identifier of the work, lowercased, in bare prefix form (without the https://doi.org/ resolver prefix).<br><br>**Example**: `10.5555/example.2020.0001`         |
 
 ## **resource_type**
 <http://schema.org/additionalType>
@@ -67,14 +67,14 @@ STM (Scientific/Technical/Medical) Seed Metadata for interoperable Meta-Code gen
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| title | `string` | none | The primary title of the work.<br><br>**Example**: `Twisting moduli for GL(2)`         |
+| title | `string` | none | The primary title of the work.<br><br>**Example**: `On the Stability of Quasilinear Forms`         |
 
 ## **publisher**
 <http://schema.org/publisher>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| publisher | `string` | none | Name of the publishing entity.<br><br>**Example**: `Elsevier Inc.`         |
+| publisher | `string` | none | Name of the publishing entity.<br><br>**Example**: `Meridian Academic Press`         |
 
 ## **pubyear**
 <http://schema.org/datePublished>
@@ -95,12 +95,12 @@ STM (Scientific/Technical/Medical) Seed Metadata for interoperable Meta-Code gen
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| container_title | `string` | none | Title of the serial or collection the work is part of (journal, proceedings, book). Not guaranteed for standalone works.<br><br>**Example**: `Journal of Number Theory`         |
+| container_title | `string` | none | Title of the serial or collection the work is part of (journal, proceedings, book). Not guaranteed for standalone works.<br><br>**Example**: `Journal of Applied Analysis`         |
 
 ## **issn**
 <http://schema.org/issn>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| issn | `string` | none | ISSN of the container serial. Only present for serial publications.<br><br>**Example**: `0022-314X`         |
+| issn | `string` | none | ISSN of the container serial. Only present for serial publications.<br><br>**Example**: `1234-5678`         |
 
