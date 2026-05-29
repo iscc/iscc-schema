@@ -43,6 +43,7 @@ properties:
     - 1
     example: 1
     x-iscc-context: http://www.w3.org/ns/tdmrep#reservation
+    x-iscc-status: stable
   tdm_policy:
     type: string
     format: uri

@@ -289,7 +289,7 @@ description: ISCC Metadata Vocabulary with JSON-LD context mappings.
 ## generator
 
 <small><http://purl.org/iscc/terms/#generator></small>
-<small>Status: **draft**</small>
+<small>Status: **stable**</small>
 !!! term ""
     Name and version of the software that generated the ISCC
 
@@ -370,14 +370,14 @@ description: ISCC Metadata Vocabulary with JSON-LD context mappings.
 ## nonce
 
 <small><http://purl.org/iscc/terms/#nonce></small>
-<small>Status: **draft**</small>
+<small>Status: **stable**</small>
 !!! term ""
     Cryptographic nonce for replay protection. A 128-bit random value encoded as lowercase hexadecimal.
 
 ## signature
 
 <small><http://purl.org/iscc/terms/#signature></small>
-<small>Status: **draft**</small>
+<small>Status: **stable**</small>
 !!! term ""
     Cryptographic signature over ISCC metadata, conforming to the [iscc-crypto](https://github.com/iscc/iscc-crypto) signing protocol. Uses EdDSA (Ed25519) with JCS canonicalization.
 
@@ -562,6 +562,7 @@ description: ISCC Metadata Vocabulary with JSON-LD context mappings.
 ## tdm_reservation
 
 <small><http://www.w3.org/ns/tdmrep#reservation></small>
+<small>Status: **stable**</small>
 !!! term ""
     Blanket TDM reservation flag, semantically equivalent to W3C TDMRep tdm-reservation. 1 = rights reserved (EU DSM Art. 4 opt-out), 0 = not reserved, absent = undeclared.
 

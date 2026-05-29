@@ -25,7 +25,7 @@ The ISCC [JSON-LD](https://json-ld.org/) Context and [JSON Schema](https://json-
 ### **$schema**
 <http://purl.org/iscc/terms/#$schema>
 <small>ISO 24138:2024</small>
-<small>Status: **draft**</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -425,7 +425,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 ### **generator**
 <http://purl.org/iscc/terms/#generator>
-<small>Status: **draft**</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -521,7 +521,7 @@ Cryptography related ISCC Metadata
 
 ### **nonce**
 <http://purl.org/iscc/terms/#nonce>
-<small>Status: **draft**</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
@@ -529,7 +529,7 @@ Cryptography related ISCC Metadata
 
 ### **signature**
 <http://purl.org/iscc/terms/#signature>
-<small>Status: **draft**</small>
+<small>Status: **stable**</small>
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|

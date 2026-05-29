@@ -47,9 +47,30 @@ cases.
 - The `recover_context()` function resolves both versioned and unversioned URLs to the bundled
   JSON-LD context of the installed package version.
 
+## Field Stability
+
+Every schema property is annotated with an `x-iscc-status` of either `stable` or `draft`. This
+status is surfaced in the vocabulary documentation as a **Status** badge.
+
+- **Stable** fields are covered by the semver compatibility guarantees above. They will not be
+  removed or have their type or semantics changed in a minor version. Additive changes (relaxing
+  constraints, adding enum values) are permitted in minor versions; breaking changes require a
+  major version bump.
+
+- **Draft** fields carry no compatibility guarantee between minor versions. They may be renamed,
+  retyped, or removed without a major version bump. Implementors who depend on draft fields should
+  pin to a specific schema version and re-test against new releases before upgrading.
+
+- Promotion from `draft` to `stable` is one-way and happens at release boundaries. Once a field is
+  `stable` it is not demoted back to `draft`.
+
+- Standalone schemas (ISBN, ISRC, STM, TDM, GenAI, IsccNote) are versioned as a whole via semver.
+  Their field-level `x-iscc-status` follows the same contract: a stable field in a standalone
+  schema is covered by the package's semver guarantees.
+
 ## Standalone Schemas
 
-Seed, service, and protocol schemas (ISBN, ISRC, TDM, GenAI, IsccNote) follow the same
+Seed, service, and protocol schemas (ISBN, ISRC, STM, TDM, GenAI, IsccNote) follow the same
 versioned-URL strategy as the main schema, with per-schema names. Serialized records carry a
 versioned `@context` (e.g., `http://purl.org/iscc/context/0.7.0.jsonld`) **and** a versioned
 `$schema` (e.g., `http://purl.org/iscc/schema/isbn-0.7.0.json`), pinning both the vocabulary and
@@ -71,3 +92,20 @@ schemas `$schema` is therefore a **required** field.
 This matters because protocol records are permanent, signed log entries: the `$schema` value is
 part of the JCS bytes the signature is computed over, so the schema version is pinned into the
 signed record itself.
+
+## Release Workflow
+
+When starting work on a new version, the **first commit** on the feature branch bumps the version
+in `pyproject.toml` and `iscc_schema/__init__.py` to the target release. This guarantees the build
+pipeline writes to fresh versioned archive filenames from the start and never overwrites the
+archives of an already-released version.
+
+The discipline is enforced in two places:
+
+- A **build guard** (`_check_version_not_released`) runs at the top of the JSON Schema and JSON-LD
+  context builds. If a `v<version>` git tag already exists for the current version, the build aborts
+  with an error telling you to bump the version first. Local tags mirror the GitHub releases after a
+  fetch or pull, so the check needs no network access.
+- A **test** (`tests/test_versioning.py`) verifies that `pyproject.toml` and
+  `iscc_schema.__version__` agree, and that, once a version is tagged, its versioned archive files
+  on disk stay byte-identical to the content committed at that tag.
