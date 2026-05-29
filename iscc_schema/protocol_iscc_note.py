@@ -133,7 +133,7 @@ class IsccNote(BaseModel):
     gateway: str | None = Field(
         None,
         description="An HTTP(S) URL or RFC 6570 URI template of a gateway that serves metadata for the declared ISCC. Used by ISCC resolvers to discover content metadata.",
-        examples=["https://gateway.example.com/declaration/{iscc_code}"],
+        examples=["https://gateway.example.com/declaration/{iscc_id}"],
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#gateway"},
         max_length=2048,
         min_length=8,

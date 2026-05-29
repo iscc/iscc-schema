@@ -10,7 +10,24 @@ An ISCC Declaration record submitted to an ISCC-HUB for timestamping and registr
 
 **JSON Schema**: [`iscc-note.json`](iscc-note.json)
 
-!!! example
+!!! example "Minimal declaration"
+
+    ```json
+    {
+      "$schema": "http://purl.org/iscc/schema/iscc-note-0.7.0.json",
+      "iscc_code": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
+      "datahash": "1e20253d0f3460085c276f038de345c8e953a306f4a07f9fa77f5af8563c3d7274c5",
+      "nonce": "0013a3c214c05796673503e6e549446d",
+      "signature": {
+        "version": "ISCC-SIG v1.0",
+        "controller": "did:web:example.com",
+        "pubkey": "z6MkmeDbeC5BecFmVnTHA5PWEBaVUrGLdB3weGE2KYnXfHso",
+        "proof": "z5j9nrpPw3oYSAN4XbCvk2sUtkwrueTD6V2Y35gS1KFTode2ED2YQWokPmoXw6QBYtYEFxtAQfzBhdNyr8PMwP79G"
+      }
+    }
+    ```
+
+!!! example "Complete declaration (all fields)"
 
     ```json
     {
@@ -22,9 +39,17 @@ An ISCC Declaration record submitted to an ISCC-HUB for timestamping and registr
       "signature": {
         "version": "ISCC-SIG v1.0",
         "controller": "did:web:example.com",
+        "keyid": "key-1",
         "pubkey": "z6MkmeDbeC5BecFmVnTHA5PWEBaVUrGLdB3weGE2KYnXfHso",
         "proof": "z5j9nrpPw3oYSAN4XbCvk2sUtkwrueTD6V2Y35gS1KFTode2ED2YQWokPmoXw6QBYtYEFxtAQfzBhdNyr8PMwP79G"
-      }
+      },
+      "units": [
+        "ISCC:IADSKPIPGRQAQXBHN4BY3Y2FZDUVHIYG6SQH7H5HP5NPQVR4HVZHJRI",
+        "ISCC:GADUCK27AIQUBLC3ALIINORUJ6JEC4GHRWXSXLIO5VLKRE65RM6A5RI",
+        "ISCC:AADWN77F727NXSUSUVDFOUS64JFPMZ4GAR5NJ3O5P563LTMXWS5XNSQ"
+      ],
+      "metahash": "1e208bad08ad56b5517e09bc8bc5e2281b2d8f21d096939a310f539cf5007d443772",
+      "gateway": "https://gateway.example.com/declaration/{iscc_id}"
     }
     ```
 
@@ -103,5 +128,5 @@ An ISCC Declaration record submitted to an ISCC-HUB for timestamping and registr
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| gateway | `string` | none | An HTTP(S) URL or RFC 6570 URI template of a gateway that serves metadata for the declared ISCC. Used by ISCC resolvers to discover content metadata.<br><br>**Example**: `https://gateway.example.com/declaration/{iscc_code}`         |
+| gateway | `string` | none | An HTTP(S) URL or RFC 6570 URI template of a gateway that serves metadata for the declared ISCC. Used by ISCC resolvers to discover content metadata.<br><br>**Example**: `https://gateway.example.com/declaration/{iscc_id}`         |
 

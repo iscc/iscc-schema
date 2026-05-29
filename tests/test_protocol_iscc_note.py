@@ -411,6 +411,33 @@ def test_schema_example_is_compact_and_versioned():
     assert "@type" not in example
 
 
+def test_minimal_example_omits_optional_fields():
+    """The primary example is a minimal submission: it omits the optional timestamp (the
+    ISCC-HUB assigns the authoritative timestamp on receipt) and the other optional fields."""
+    example = _load_schema_json()["examples"][0]
+    for field in ("timestamp", "units", "metahash", "gateway"):
+        assert field not in example
+
+
+def test_complete_example_exercises_all_fields():
+    """A second published example carries every optional field and validates as an IsccNote,
+    so the docs page can show a full declaration alongside the minimal one."""
+    example = _load_schema_json()["examples"][1]
+    assert example["$schema"] == SCHEMA_URL
+    assert "@context" not in example
+    assert "@type" not in example
+    for field in ("timestamp", "units", "metahash", "gateway"):
+        assert field in example, f"complete example is missing {field}"
+    assert "keyid" in example["signature"]
+    obj = IsccNote(**example)
+    d = obj.dict()
+    assert d["timestamp"] == example["timestamp"]
+    assert d["units"] == example["units"]
+    assert d["metahash"] == example["metahash"]
+    assert d["gateway"] == example["gateway"]
+    assert obj.signature.keyid == example["signature"]["keyid"]
+
+
 # --- JSON-LD context coverage (reads generated artifacts) ---
 
 
