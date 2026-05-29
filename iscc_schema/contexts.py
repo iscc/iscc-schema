@@ -132,7 +132,6 @@ SCHEMA_CONTEXTS = {
         "Other": "http://schema.org/CreativeWork",
         "pubyear": "http://schema.org/datePublished",
         "version_type": "http://purl.org/iscc/terms/#version_type",
-        "version_doi": "http://purl.org/ontology/bibo/doi",
         "container_title": "http://prismstandard.org/namespaces/basic/2.0/publicationName",
         "issn": "http://schema.org/issn",
         "tdm_reservation": "http://www.w3.org/ns/tdmrep#reservation",
@@ -211,10 +210,8 @@ SCHEMA_CONTEXTS = {
         "publisher": "http://schema.org/publisher",
         "pubyear": "http://schema.org/datePublished",
         "version_type": "http://purl.org/iscc/terms/#version_type",
-        "version_doi": "http://purl.org/ontology/bibo/doi",
         "container_title": "http://prismstandard.org/namespaces/basic/2.0/publicationName",
         "issn": "http://schema.org/issn",
-        "creator": "http://schema.org/creator",
     },
     SCHEMA_TDM: {
         "TDM": "http://purl.org/iscc/terms/#TDM",

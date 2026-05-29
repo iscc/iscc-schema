@@ -123,12 +123,6 @@ properties:
     - EVoR
     example: VoR
     x-iscc-context: http://purl.org/iscc/terms/#version_type
-  version_doi:
-    type: string
-    description: DOI assigned to this specific version, where one exists.
-    pattern: ^10\.\d{4,}/.+$
-    example: 10.1016/j.jnt.2020.04.008
-    x-iscc-context: http://purl.org/ontology/bibo/doi
   container_title:
     type: string
     description: Title of the serial or collection the work is part of (journal, proceedings,
@@ -142,10 +136,3 @@ properties:
     pattern: ^\d{4}-\d{3}[\dxX]$
     example: 0022-314X
     x-iscc-context: http://schema.org/issn
-  creator:
-    type: string
-    description: Family name of the first listed creator, normalized. Optional; the most stable
-      cross-catalog author token.
-    maxLength: 100
-    example: Booker
-    x-iscc-context: http://schema.org/creator

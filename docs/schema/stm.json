@@ -27,10 +27,8 @@
     "publisher": "http://schema.org/publisher",
     "pubyear": "http://schema.org/datePublished",
     "version_type": "http://purl.org/iscc/terms/#version_type",
-    "version_doi": "http://purl.org/ontology/bibo/doi",
     "container_title": "http://prismstandard.org/namespaces/basic/2.0/publicationName",
-    "issn": "http://schema.org/issn",
-    "creator": "http://schema.org/creator"
+    "issn": "http://schema.org/issn"
   },
   "x-iscc-jsonld": {
     "context": "http://purl.org/iscc/context/0.7.0.jsonld",
@@ -155,13 +153,6 @@
       "example": "VoR",
       "x-iscc-context": "http://purl.org/iscc/terms/#version_type"
     },
-    "version_doi": {
-      "type": "string",
-      "description": "DOI assigned to this specific version, where one exists.",
-      "pattern": "^10\\.\\d{4,}/.+$",
-      "example": "10.1016/j.jnt.2020.04.008",
-      "x-iscc-context": "http://purl.org/ontology/bibo/doi"
-    },
     "container_title": {
       "type": "string",
       "description": "Title of the serial or collection the work is part of (journal, proceedings, book). Not guaranteed for standalone works.",
@@ -175,13 +166,6 @@
       "pattern": "^\\d{4}-\\d{3}[\\dxX]$",
       "example": "0022-314X",
       "x-iscc-context": "http://schema.org/issn"
-    },
-    "creator": {
-      "type": "string",
-      "description": "Family name of the first listed creator, normalized. Optional; the most stable cross-catalog author token.",
-      "maxLength": 100,
-      "example": "Booker",
-      "x-iscc-context": "http://schema.org/creator"
     }
   },
   "required": [

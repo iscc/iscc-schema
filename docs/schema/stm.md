@@ -90,13 +90,6 @@ STM (Scientific/Technical/Medical) Seed Metadata for interoperable Meta-Code gen
 | ---- | ---- | --------|--------------------------------|
 | version_type | `string` | none | Manifestation version using the NISO JAV (RP-8-2008) vocabulary. Publisher-specific version taxonomies are mapped into these values. Lets a Version-of-Record and an Accepted-Manuscript of the same work produce different Meta-Codes while a shared work-level `doi` links them.<br><br>**Example**: `VoR`         |
 
-## **version_doi**
-<http://purl.org/ontology/bibo/doi>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| version_doi | `string` | none | DOI assigned to this specific version, where one exists.<br><br>**Example**: `10.1016/j.jnt.2020.04.008`         |
-
 ## **container_title**
 <http://prismstandard.org/namespaces/basic/2.0/publicationName>
 
@@ -110,11 +103,4 @@ STM (Scientific/Technical/Medical) Seed Metadata for interoperable Meta-Code gen
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
 | issn | `string` | none | ISSN of the container serial. Only present for serial publications.<br><br>**Example**: `0022-314X`         |
-
-## **creator**
-<http://schema.org/creator>
-
-| Name | Type | Default | Definition                     |
-| ---- | ---- | --------|--------------------------------|
-| creator | `string` | none | Family name of the first listed creator, normalized. Optional; the most stable cross-catalog author token.<br><br>**Example**: `Booker`         |
 
