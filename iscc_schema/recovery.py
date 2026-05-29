@@ -1,5 +1,7 @@
 """Schema-driven JSON-LD context recovery for ISCC metadata."""
 
+import re
+
 from iscc_schema.contexts import SCHEMA_CONTEXTS, SCHEMA_ISCC, TYPE_SCHEMAS
 
 # Canonical standalone schema names (last path segment -> schema URL)
@@ -13,13 +15,26 @@ for url in SCHEMA_CONTEXTS:
 
 _ISCC_SCHEMA_BASE = "http://purl.org/iscc/schema"
 
+# Matches a `-X.Y.Z` version suffix in a versioned archive filename, e.g. the
+# `-0.7.0` in `iscc-note-0.7.0.json`. Protocol schemas carry a version-specific
+# $schema as their sole version anchor in compact form, so recovery must map it
+# back to the unversioned canonical name.
+_VERSION_SUFFIX = re.compile(r"-\d+\.\d+\.\d+")
+
 
 def _normalize_schema_url(url):
     # type: (str) -> str
-    """Normalize a $schema URL to its canonical form for lookup."""
+    """Normalize a $schema URL to its canonical form for lookup.
+
+    Handles unversioned standalone URLs (`.../iscc-note.json`) and versioned archive
+    URLs (`.../iscc-note-0.7.0.json`) alike.
+    """
     segment = url.rsplit("/", 1)[-1] if "/" in url else ""
     if segment in _STANDALONE_NAMES:
         return _STANDALONE_NAMES[segment]
+    base_segment = _VERSION_SUFFIX.sub("", segment)
+    if base_segment in _STANDALONE_NAMES:
+        return _STANDALONE_NAMES[base_segment]
     if url == SCHEMA_ISCC or url.startswith(_ISCC_SCHEMA_BASE):
         return SCHEMA_ISCC
     return url

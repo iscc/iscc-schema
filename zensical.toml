@@ -26,10 +26,17 @@ nav = [
     { "Reference" = [
         "schema/index.md",
         "schema/iscc.md",
-        "schema/isbn.md",
-        "schema/isrc.md",
-        "schema/tdm.md",
-        "schema/genai.md",
+        { "Seed Metadata" = [
+            "schema/isbn.md",
+            "schema/isrc.md",
+        ]},
+        { "Service Metadata" = [
+            "schema/tdm.md",
+            "schema/genai.md",
+        ]},
+        { "Protocol Schemas" = [
+            "schema/iscc-note.md",
+        ]},
         "terms/index.md",
         "versioning.md",
     ]},

@@ -25,3 +25,9 @@ Use-case-specific metadata schemas served by ISCC registries and discoverable th
 
 - [**TDM Service Metadata**](tdm.md) — Machine-readable TDM rights signals conformant with W3C TDMRep, providing content-addressed delivery of tdm-reservation and tdm-policy properties via ISCC. Designed for content identification and discovery where identity, provenance, and trust context complement the reservation signal.
 - [**GenAI Service Metadata**](genai.md) — Machine-readable generative AI disclosure signals for content transparency. Designed for AI providers to declare the level of AI involvement in content creation, supporting compliance with transparency regulations (e.g., EU AI Act Art. 50) and enabling end users to verify AI-generated content. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.
+
+## Protocol Schemas
+
+ISCC Discovery Protocol records exchanged with ISCC-HUBs and registries. These default to compact JSON with a version-specific `$schema` and recover JSON-LD on demand.
+
+- [**IsccNote**](iscc-note.md) — An ISCC Declaration record submitted to an ISCC-HUB for timestamping and registration. IsccNote is the permanent, self-describing log entry that binds an ISCC-CODE to its content hashes and a cryptographic signature. Stored in an append-only log, declarations are immutable once accepted, so the record is version-pinned and carries resolvable schema and context URLs.

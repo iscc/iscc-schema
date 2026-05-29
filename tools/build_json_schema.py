@@ -47,6 +47,11 @@ def _build_standalone_context(schema, full_context):
     for prop_name, prop_def in schema.get("properties", {}).items():
         if prop_name in ("@context", "@type", "$schema"):
             continue
+        if prop_name == "iscc_code":
+            # The declared ISCC-CODE is the JSON-LD subject (@id) of the record,
+            # mirroring how `iscc` is mapped to @id in the other ISCC schemas.
+            ctx[prop_name] = "@id"
+            continue
         if "x-iscc-context" not in prop_def:
             if prop_name in full_context:
                 ctx[prop_name] = full_context[prop_name]
@@ -180,13 +185,16 @@ def flatten_schemas():
 
 SEED_SCHEMAS = ["isbn.yaml", "isrc.yaml"]
 SERVICE_SCHEMAS = ["tdm.yaml", "genai.yaml"]
+PROTOCOL_SCHEMAS = ["iscc-note.yaml"]
 
 
-def build_seed_schema(yaml_file, full_context):
-    # type: (str, dict) -> dict
-    """Build a standalone JSON Schema file for a seed/service metadata definition.
+def build_seed_schema(yaml_file, full_context, versioned_schema=False):
+    # type: (str, dict, bool) -> dict
+    """Build a standalone JSON Schema file for a seed/service/protocol definition.
 
-    Returns the loaded YAML schema for context building.
+    Protocol schemas (versioned_schema=True) pin a version-specific $schema URL and write
+    an additional versioned archive copy, since their compact wire form carries no
+    @context to anchor the version. Returns the loaded YAML schema for context building.
     """
     path = MODELS / yaml_file
     with open(path, encoding="utf-8") as f:
@@ -197,9 +205,14 @@ def build_seed_schema(yaml_file, full_context):
     _patch_context_property(properties)
     standalone_context = _build_standalone_context(schema, full_context)
 
+    schema_id = f"http://purl.org/iscc/schema/{name}.json"
+    versioned_id = f"http://purl.org/iscc/schema/{name}-{iscc_schema.__version__}.json"
+    if versioned_schema and "$schema" in properties:
+        properties["$schema"] = {**properties["$schema"], "const": versioned_id}
+
     output = {"@context": standalone_context}
     output["$schema"] = "https://json-schema.org/draft/2020-12/schema"
-    output["$id"] = f"http://purl.org/iscc/schema/{name}.json"
+    output["$id"] = schema_id
     output["title"] = schema["title"]
     output["type"] = "object"
     output["description"] = schema["description"]
@@ -209,11 +222,22 @@ def build_seed_schema(yaml_file, full_context):
     if "additionalProperties" in schema:
         output["additionalProperties"] = schema["additionalProperties"]
     if schema.get("examples"):
-        output["examples"] = schema["examples"]
+        examples = schema["examples"]
+        if versioned_schema:
+            examples = [
+                {**ex, "$schema": versioned_id} if "$schema" in ex else ex for ex in examples
+            ]
+        output["examples"] = examples
 
     outpath = ROOT / "docs" / "schema" / f"{name}.json"
     with open(outpath, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(json.dumps(output, indent=2, ensure_ascii=False))
+
+    if versioned_schema:
+        archive = {**output, "$id": versioned_id}
+        archpath = ROOT / "docs" / "schema" / f"{name}-{iscc_schema.__version__}.json"
+        with open(archpath, "wt", encoding="utf-8", newline="\n") as outf:
+            outf.write(json.dumps(archive, indent=2, ensure_ascii=False))
 
     return schema
 
@@ -252,7 +276,7 @@ def _build_contexts_module(full_context, standalone_schemas):
     lines.append(f'SCHEMA_ISCC = "{schema_iscc}"')
     for yaml_file in sorted(standalone_schemas):
         name = yaml_file.replace(".yaml", "")
-        const_name = f"SCHEMA_{name.upper()}"
+        const_name = f"SCHEMA_{name.upper().replace('-', '_')}"
         url = f"http://purl.org/iscc/schema/{name}.json"
         lines.append(f'{const_name} = "{url}"')
     lines.append("")
@@ -262,7 +286,7 @@ def _build_contexts_module(full_context, standalone_schemas):
     lines.append(f"    SCHEMA_ISCC: {_format_context(full_context)},")
     for yaml_file in sorted(standalone_schemas):
         name = yaml_file.replace(".yaml", "")
-        const_name = f"SCHEMA_{name.upper()}"
+        const_name = f"SCHEMA_{name.upper().replace('-', '_')}"
         url = f"http://purl.org/iscc/schema/{name}.json"
         lines.append(f"    {const_name}: {_format_context(standalone_contexts[url])},")
     lines.append("}")
@@ -275,7 +299,7 @@ def _build_contexts_module(full_context, standalone_schemas):
             lines.append(f'    "{type_name}": SCHEMA_ISCC,')
         else:
             name = schema_url.split("/")[-1].replace(".json", "")
-            const_name = f"SCHEMA_{name.upper()}"
+            const_name = f"SCHEMA_{name.upper().replace('-', '_')}"
             lines.append(f'    "{type_name}": {const_name},')
     lines.append("}")
     lines.append("")
@@ -319,6 +343,9 @@ def build():
     standalone_schemas = {}
     for yaml_file in SEED_SCHEMAS + SERVICE_SCHEMAS:
         schema = build_seed_schema(yaml_file, full_context)
+        standalone_schemas[yaml_file] = schema
+    for yaml_file in PROTOCOL_SCHEMAS:
+        schema = build_seed_schema(yaml_file, full_context, versioned_schema=True)
         standalone_schemas[yaml_file] = schema
 
     _build_contexts_module(full_context, standalone_schemas)

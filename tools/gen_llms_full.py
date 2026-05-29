@@ -16,6 +16,7 @@ PAGES = [
     "schema/isrc.md",
     "schema/tdm.md",
     "schema/genai.md",
+    "schema/iscc-note.md",
     "examples/index.md",
     "versioning.md",
     "reference/for-coding-agents.md",

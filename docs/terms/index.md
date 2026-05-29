@@ -34,3 +34,9 @@ for details.
 Terms used in use-case-specific service metadata schemas served by ISCC registries.
 
 --8<-- "terms-service.md"
+
+## Protocol Schema Terms
+
+Terms used in ISCC Discovery Protocol records exchanged with ISCC-HUBs and registries.
+
+--8<-- "terms-protocol.md"
