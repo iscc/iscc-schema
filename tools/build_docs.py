@@ -86,6 +86,20 @@ STANDALONE_META = {
 }
 
 
+def _version_standalone_examples(examples):
+    # type: (list) -> None
+    """Pin any @context in a standalone schema's examples to the versioned context URL.
+
+    Examples are loaded directly from YAML, where @context carries the unversioned base URL.
+    Standalone records keep an unversioned $schema by design and pin the version via @context,
+    so versioning @context alone makes the documented example match the model's output.
+    """
+    versioned_ctx = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
+    for ex in examples:
+        if isinstance(ex, dict) and "@context" in ex:
+            ex["@context"] = versioned_ctx
+
+
 def _render_schema_sections(schemata):
     # type: (list[str]) -> str
     """Render markdown documentation sections from a list of YAML schema files."""
@@ -164,6 +178,7 @@ def _build_standalone_doc(schema_file, category, extra_text="", versioned_schema
         data = yaml.safe_load(infile)
 
     name = schema_file.replace(".yaml", "")
+    _version_standalone_examples(data.get("examples", []))
     if versioned_schema:
         versioned_id = f"http://purl.org/iscc/schema/{name}-{iscc_schema.__version__}.json"
         if "$schema" in data.get("properties", {}):

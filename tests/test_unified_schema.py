@@ -62,6 +62,59 @@ def test_standalone_context_terms_match_properties():
                 assert prop_name in ctx, f"{json_name}: {prop_name} missing from @context"
 
 
+# --- Standalone schema versioning (versioned @context default + archives) ---
+
+STANDALONE_JSON = ("isbn.json", "isrc.json", "tdm.json", "genai.json", "iscc-note.json")
+CONTEXT_URL = f"http://purl.org/iscc/context/{iss.__version__}.jsonld"
+
+
+def test_standalone_schemas_have_versioned_context_default():
+    """Every standalone schema pins a versioned @context default matching the package version,
+    so JSON Schema consumers resolve the same context the Pydantic model emits with ld=True."""
+    for name in STANDALONE_JSON:
+        schema = _load_json(name)
+        ctx_default = schema["properties"]["@context"].get("default")
+        assert ctx_default == CONTEXT_URL, f"{name} @context default is {ctx_default!r}"
+
+
+def _without_id(schema):
+    # type: (dict) -> dict
+    """Return a schema dict without its $id, for comparing an archive against the latest file."""
+    return {k: v for k, v in schema.items() if k != "$id"}
+
+
+def test_standalone_versioned_archives_exist():
+    """A version-pinned archive copy is written alongside each standalone schema, identical to
+    the latest file except for its versioned $id."""
+    for name in STANDALONE_JSON:
+        base = name.replace(".json", "")
+        archive_name = f"{base}-{iss.__version__}.json"
+        archive = _load_json(archive_name)
+        latest = _load_json(name)
+        assert archive["$id"] == f"http://purl.org/iscc/schema/{archive_name}"
+        assert _without_id(archive) == _without_id(latest), f"{archive_name} differs beyond $id"
+
+
+def test_recover_context_from_versioned_seed_archive():
+    """recover_context resolves a versioned seed archive $schema URL to the bundled context."""
+    data = {
+        "$schema": f"http://purl.org/iscc/schema/isbn-{iss.__version__}.json",
+        "isbn": "9789295055124",
+    }
+    result = iss.recover_context(data)
+    assert "ISBN" in result["@context"]
+
+
+def test_recover_context_from_versioned_service_archive():
+    """recover_context resolves a versioned service archive $schema URL to the bundled context."""
+    data = {
+        "$schema": f"http://purl.org/iscc/schema/tdm-{iss.__version__}.json",
+        "iscc": "ISCC:MAACAJINXFXA2SQX",
+    }
+    result = iss.recover_context(data)
+    assert "TDM" in result["@context"]
+
+
 def test_context_property_accepts_string_and_object():
     schema = _load_json("iscc.json")
     ctx_prop = schema["properties"]["@context"]

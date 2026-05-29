@@ -214,16 +214,24 @@ def build_seed_schema(yaml_file, full_context, versioned_schema=False):
     # type: (str, dict, bool) -> dict
     """Build a standalone JSON Schema file for a seed/service/protocol definition.
 
-    Protocol schemas (versioned_schema=True) pin a version-specific $schema URL and write
-    an additional versioned archive copy, since their compact wire form carries no
-    @context to anchor the version. Returns the loaded YAML schema for context building.
+    Every standalone schema pins a versioned `@context` default (matching what the Pydantic
+    model emits with ld=True) and writes a version-pinned archive copy alongside the latest
+    file, preserving the schema as it existed at each release. Protocol schemas
+    (versioned_schema=True) additionally pin a version-specific `$schema` URL, since their
+    compact wire form carries no @context to anchor the version. Returns the loaded YAML
+    schema for context building.
     """
     path = MODELS / yaml_file
     with open(path, encoding="utf-8") as f:
         schema = yaml.safe_load(f)
 
     name = yaml_file.replace(".yaml", "")
+    versioned_ctx = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
     properties = dict(schema.get("properties", {}))
+    if "@context" in properties:
+        # The YAML carries an unversioned `const`; replace it with a versioned `default` so the
+        # JSON Schema matches the versioned @context the Pydantic model emits with ld=True.
+        properties["@context"] = {**properties["@context"], "default": versioned_ctx}
     _patch_context_property(properties)
     standalone_context = _build_standalone_context(schema, full_context)
 
@@ -257,17 +265,23 @@ def build_seed_schema(yaml_file, full_context, versioned_schema=False):
             examples = [
                 {**ex, "$schema": versioned_id} if "$schema" in ex else ex for ex in examples
             ]
+        # JSON-LD examples (service schemas) carry @context; pin it to the versioned URL the
+        # model emits. Compact seed/protocol examples carry $schema instead and are untouched.
+        examples = [
+            {**ex, "@context": versioned_ctx} if "@context" in ex else ex for ex in examples
+        ]
         output["examples"] = examples
 
     outpath = ROOT / "docs" / "schema" / f"{name}.json"
     with open(outpath, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(json.dumps(output, indent=2, ensure_ascii=False))
 
-    if versioned_schema:
-        archive = {**output, "$id": versioned_id}
-        archpath = ROOT / "docs" / "schema" / f"{name}-{iscc_schema.__version__}.json"
-        with open(archpath, "wt", encoding="utf-8", newline="\n") as outf:
-            outf.write(json.dumps(archive, indent=2, ensure_ascii=False))
+    # A version-pinned archive copy (identical to the latest file except its versioned $id)
+    # preserves the schema as it existed at this release.
+    archive = {**output, "$id": versioned_id}
+    archpath = ROOT / "docs" / "schema" / f"{name}-{iscc_schema.__version__}.json"
+    with open(archpath, "wt", encoding="utf-8", newline="\n") as outf:
+        outf.write(json.dumps(archive, indent=2, ensure_ascii=False))
 
     return schema
 

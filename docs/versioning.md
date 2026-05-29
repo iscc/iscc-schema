@@ -50,8 +50,16 @@ cases.
 ## Standalone Schemas
 
 Seed and service schemas (ISBN, ISRC, TDM, GenAI) use schema-specific `$schema` URLs that are
-not versioned per release (e.g., `http://purl.org/iscc/schema/isbn.json`). Their `@context` URLs
-are versioned to pin the context mapping to a specific package version.
+not versioned per release (e.g., `http://purl.org/iscc/schema/isbn.json`): the `$schema`
+identifies *which* schema, while the versioned `@context` identifies *which version*. Both the
+Pydantic models and the published JSON Schema files carry the versioned `@context` default
+(e.g., `http://purl.org/iscc/context/0.7.0.jsonld`), so serialized data pins the context mapping
+to a specific package version.
+
+A version-pinned archive copy of each standalone schema is written alongside the latest file
+(e.g., `isbn-0.7.0.json` next to `isbn.json`), preserving the schema as it existed at that
+release. `recover_context()` resolves both the unversioned `$schema` URL and versioned archive
+URLs to the bundled JSON-LD context.
 
 ## Protocol Schemas
 

@@ -14,7 +14,7 @@
     "upgrade": "Compact records omit @context and @type. To obtain JSON-LD, set @context to this schema's top-level @context term map (or to the versioned context URL in this extension's `context` field) and set @type to this extension's `type` value."
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "http://purl.org/iscc/schema/isrc.json",
+  "$id": "http://purl.org/iscc/schema/isrc-0.7.0.json",
   "title": "ISRC",
   "type": "object",
   "description": "ISRC Seed Metadata for interoperable Meta-Code generation.",
