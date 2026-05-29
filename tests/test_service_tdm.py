@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+import json
+import pathlib
+
 import pytest
 from pydantic import ValidationError
 import iscc_schema
 from iscc_schema.service_tdm import TDM
 
+ROOT = pathlib.Path(__file__).parent.parent
 CONTEXT_URL = f"http://purl.org/iscc/context/{iscc_schema.__version__}.jsonld"
 
 VALID_TDM_DATA = {
@@ -116,3 +120,13 @@ def test_import_from_package():
 
     obj = TDMFromPkg(**VALID_TDM_DATA)
     assert obj.tdm_reservation == 1
+
+
+def test_schema_has_jsonld_extension():
+    """Standalone schemas carry a top-level x-iscc-jsonld extension; TDM defaults to JSON-LD
+    but may serialize compact, so it documents the upgrade path like the other categories."""
+    schema = json.loads((ROOT / "docs" / "schema" / "tdm.json").read_text(encoding="utf-8"))
+    ext = schema["x-iscc-jsonld"]
+    assert ext["context"] == CONTEXT_URL
+    assert ext["type"] == "TDM"
+    assert "x-iscc-jsonld" in schema["properties"]["$schema"]["description"]

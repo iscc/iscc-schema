@@ -8,6 +8,11 @@
       "@type": "@id"
     }
   },
+  "x-iscc-jsonld": {
+    "context": "http://purl.org/iscc/context/0.7.0.jsonld",
+    "type": "TDM",
+    "upgrade": "Compact records omit @context and @type. To obtain JSON-LD, set @context to this schema's top-level @context term map (or to the versioned context URL in this extension's `context` field) and set @type to this extension's `type` value."
+  },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "http://purl.org/iscc/schema/tdm.json",
   "title": "TDM",
@@ -35,7 +40,7 @@
       "type": "string",
       "format": "uri",
       "const": "http://purl.org/iscc/schema/tdm.json",
-      "description": "The JSON Schema URI for TDM service metadata."
+      "description": "The JSON Schema URI for TDM service metadata. See the top-level `x-iscc-jsonld` extension for the JSON-LD upgrade path."
     },
     "iscc": {
       "type": "string",

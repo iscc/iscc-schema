@@ -455,3 +455,57 @@ def test_recover_context_from_type():
     data = {"@type": "IsccNote", "iscc_code": ISCC_CODE_256}
     result = iscc_schema.recover_context(data)
     assert "IsccNote" in result["@context"]
+
+
+# --- x-iscc-jsonld extension: the JSON-LD upgrade path documented in the schema ---
+
+
+def test_schema_has_jsonld_extension():
+    """The schema carries a top-level x-iscc-jsonld extension that documents how to turn a
+    compact record back into JSON-LD - the recipe a compact record itself cannot carry."""
+    ext = _load_schema_json()["x-iscc-jsonld"]
+    assert ext["context"] == CONTEXT_URL
+    assert ext["type"] == "IsccNote"
+    assert "@context" in ext["upgrade"]
+    assert "@type" in ext["upgrade"]
+
+
+def test_jsonld_extension_context_matches_model_output():
+    """The extension's context URL is exactly the @context the model emits with ld=True, so
+    a record reconstructed by following the recipe matches a model-produced JSON-LD record."""
+    ext_context = _load_schema_json()["x-iscc-jsonld"]["context"]
+    model_context = IsccNote(**VALID_NOTE).dict(ld=True, exclude_unset=False)["@context"]
+    assert ext_context == model_context
+
+
+def test_jsonld_extension_type_matches_type_const():
+    """The extension's type matches the @type const the schema declares."""
+    schema = _load_schema_json()
+    assert schema["x-iscc-jsonld"]["type"] == schema["properties"]["@type"]["const"]
+
+
+def test_jsonld_extension_recipe_is_actionable():
+    """Following the documented recipe - inline this schema's top-level @context term map and
+    set @type from the extension - upgrades a compact record to JSON-LD whose term map resolves
+    the record's subject (iscc_code) to the @id keyword."""
+    schema = _load_schema_json()
+    term_map = schema["@context"]
+    ext = schema["x-iscc-jsonld"]
+    compact = {"$schema": SCHEMA_URL, "iscc_code": ISCC_CODE_256, "datahash": DATAHASH}
+    upgraded = {"@context": term_map, "@type": ext["type"], **compact}
+    assert upgraded["@context"]["iscc_code"] == "@id"
+    assert upgraded["@type"] == "IsccNote"
+
+
+def test_schema_description_points_to_jsonld_extension():
+    """The $schema property description points humans to the upgrade extension."""
+    desc = _load_schema_json()["properties"]["$schema"]["description"]
+    assert "x-iscc-jsonld" in desc
+
+
+def test_jsonld_extension_in_versioned_archive():
+    """The version-pinned archive carries the same upgrade extension as the latest schema."""
+    archive = ROOT / "docs" / "schema" / f"iscc-note-{iscc_schema.__version__}.json"
+    ext = json.loads(archive.read_text(encoding="utf-8"))["x-iscc-jsonld"]
+    assert ext["type"] == "IsccNote"
+    assert ext["context"] == CONTEXT_URL
