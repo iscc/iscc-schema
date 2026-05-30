@@ -14,7 +14,7 @@ The simplest valid ISCC metadata, just an `iscc` field with the `$schema` refere
 
 ```json
 {
-  "$schema": "http://purl.org/iscc/schema/0.7.0.json",
+  "$schema": "http://purl.org/iscc/schema/{{ version }}.json",
   "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY"
 }
 ```
@@ -25,9 +25,9 @@ ISCC metadata with descriptive fields for a video:
 
 ```json
 {
-  "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
+  "@context": "http://purl.org/iscc/context/{{ version }}.jsonld",
   "@type": "VideoObject",
-  "$schema": "http://purl.org/iscc/schema/0.7.0.json",
+  "$schema": "http://purl.org/iscc/schema/{{ version }}.json",
   "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
   "name": "The Never Ending Story",
   "description": "a 1984 fantasy film co-written and directed by Wolfgang Petersen",
@@ -41,9 +41,9 @@ ISCC metadata with embedded TDM (text and data mining) reservation signals:
 
 ```json
 {
-  "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
+  "@context": "http://purl.org/iscc/context/{{ version }}.jsonld",
   "@type": "CreativeWork",
-  "$schema": "http://purl.org/iscc/schema/0.7.0.json",
+  "$schema": "http://purl.org/iscc/schema/{{ version }}.json",
   "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
   "name": "The Never Ending Story",
   "tdm": {
@@ -61,7 +61,7 @@ the schema on demand (see [Schema-Driven Context Recovery](#schema-driven-contex
 
 ```json
 {
-  "$schema": "http://purl.org/iscc/schema/isbn-0.7.0.json",
+  "$schema": "http://purl.org/iscc/schema/isbn-{{ version }}.json",
   "isbn": "9789295055124",
   "productform": "EA",
   "title": "The Never Ending Story",
@@ -81,7 +81,7 @@ context in every object:
 
 ```json
 {
-  "$schema": "http://purl.org/iscc/schema/isrc-0.7.0.json",
+  "$schema": "http://purl.org/iscc/schema/isrc-{{ version }}.json",
   "isrc": "AA6Q72000047",
   "main_artist": "The Beatles",
   "track_title": "Yesterday",
@@ -99,7 +99,7 @@ Crossref/DataCite records for interoperable Meta-Code generation:
 
 ```json
 {
-  "$schema": "http://purl.org/iscc/schema/stm-0.7.0.json",
+  "$schema": "http://purl.org/iscc/schema/stm-{{ version }}.json",
   "doi": "10.5555/example.2020.0001",
   "resource_type": "JournalArticle",
   "title": "On the Stability of Quasilinear Forms",
@@ -117,9 +117,9 @@ Standalone TDM reservation signals served by an ISCC registry:
 
 ```json
 {
-  "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
+  "@context": "http://purl.org/iscc/context/{{ version }}.jsonld",
   "@type": "TDM",
-  "$schema": "http://purl.org/iscc/schema/tdm-0.7.0.json",
+  "$schema": "http://purl.org/iscc/schema/tdm-{{ version }}.json",
   "iscc": "ISCC:MAACAJINXFXA2SQX",
   "tdm_reservation": 1,
   "tdm_policy": "https://example.com/tdmrep-policy.json"
@@ -132,9 +132,9 @@ Standalone generative AI disclosure signals for content transparency:
 
 ```json
 {
-  "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
+  "@context": "http://purl.org/iscc/context/{{ version }}.jsonld",
   "@type": "GenAI",
-  "$schema": "http://purl.org/iscc/schema/genai-0.7.0.json",
+  "$schema": "http://purl.org/iscc/schema/genai-{{ version }}.json",
   "involvement": "ai_generated",
   "ai_system": "DALL-E 3",
   "digital_source_type": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia"
@@ -148,7 +148,7 @@ compact JSON with a version-specific `$schema` as the sole version anchor:
 
 ```json
 {
-  "$schema": "http://purl.org/iscc/schema/iscc-note-0.7.0.json",
+  "$schema": "http://purl.org/iscc/schema/iscc-note-{{ version }}.json",
   "iscc_code": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
   "datahash": "1e20253d0f3460085c276f038de345c8e953a306f4a07f9fa77f5af8563c3d7274c5",
   "nonce": "0013a3c214c05796673503e6e549446d",
@@ -171,7 +171,7 @@ from iscc_schema import recover_context
 
 # Plain JSON without @context
 data = {
-    "$schema": "http://purl.org/iscc/schema/0.7.0.json",
+    "$schema": "http://purl.org/iscc/schema/{{ version }}.json",
     "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
     "name": "The Never Ending Story",
 }
@@ -211,11 +211,11 @@ meta.dict()
 
 # JSON serialization (includes schema defaults)
 meta.json()
-# '{"@context":"http://purl.org/iscc/context/0.7.0.jsonld","@type":"CreativeWork","$schema":"http://purl.org/iscc/schema/0.7.0.json",...}'
+# '{"@context":"http://purl.org/iscc/context/{{ version }}.jsonld","@type":"CreativeWork","$schema":"http://purl.org/iscc/schema/{{ version }}.json",...}'
 
 # JCS canonical bytes (deterministic, for hashing)
 meta.jcs()
-# b'{"$schema":"http://purl.org/iscc/schema/0.7.0.json","@context":...}'
+# b'{"$schema":"http://purl.org/iscc/schema/{{ version }}.json","@context":...}'
 ```
 
 Seed metadata defaults to compact JSON (`ld=False`), service metadata to full JSON-LD
@@ -237,14 +237,14 @@ seed = ISBN(
 
 # Compact by default for seed metadata
 seed.json()
-# '{"$schema":"http://purl.org/iscc/schema/isbn-0.7.0.json","isbn":"9789295055124",...}'
+# '{"$schema":"http://purl.org/iscc/schema/isbn-{{ version }}.json","isbn":"9789295055124",...}'
 
 # Full JSON-LD when needed
 seed.json(ld=True)
-# '{"@context":"http://purl.org/iscc/context/0.7.0.jsonld","@type":"ISBN","$schema":...}'
+# '{"@context":"http://purl.org/iscc/context/{{ version }}.jsonld","@type":"ISBN","$schema":...}'
 
 # Service metadata defaults to full JSON-LD
 tdm = TDM(iscc="ISCC:MAACAJINXFXA2SQX", tdm_reservation=1)
 tdm.json()
-# '{"@context":"http://purl.org/iscc/context/0.7.0.jsonld","@type":"TDM",...}'
+# '{"@context":"http://purl.org/iscc/context/{{ version }}.jsonld","@type":"TDM",...}'
 ```

@@ -115,3 +115,10 @@ custom_fences = [{ name = "mermaid", class = "mermaid" }]
 [project.markdown_extensions.pymdownx.snippets]
 base_path = ["docs/includes"]
 auto_append = ["abbreviations.md"]
+
+# Jinja2 templating preprocessor: substitutes {{ version }} (from tools/docs_macros.py's
+# define_env) in hand-written docs so version-pinned example URLs derive from
+# iscc_schema.__version__. Runs at priority 35, before pymdownx.superfences, so tokens inside code
+# fences are substituted too.
+[project.markdown_extensions.zensical.extensions]
+macros = { module_name = "tools/docs_macros", on_undefined = "strict", on_error_fail = true }

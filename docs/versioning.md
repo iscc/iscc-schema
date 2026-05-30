@@ -72,16 +72,16 @@ status is surfaced in the vocabulary documentation as a **Status** badge.
 
 Seed, service, and protocol schemas (ISBN, ISRC, STM, TDM, GenAI, IsccNote) follow the same
 versioned-URL strategy as the main schema, with per-schema names. Every serialized record carries a
-versioned `$schema` (e.g., `http://purl.org/iscc/schema/isbn-0.7.0.json`); records serialized as
+versioned `$schema` (e.g., `http://purl.org/iscc/schema/isbn-{{ version }}.json`); records serialized as
 full JSON-LD additionally carry a versioned `@context` (e.g.,
-`http://purl.org/iscc/context/0.7.0.jsonld`). Seed and protocol schemas default to compact JSON
+`http://purl.org/iscc/context/{{ version }}.jsonld`). Seed and protocol schemas default to compact JSON
 (`$schema` only), while service schemas default to full JSON-LD (see below) — pinning the schema
 version, and the vocabulary version where an `@context` is present, to a specific release.
 
 The latest schema document is published at the unversioned URL (its `$id`, e.g.,
 `http://purl.org/iscc/schema/isbn.json`), while its `$schema` const points at the versioned
 archive so records always carry the version. A version-pinned archive copy is written alongside
-each latest file (e.g., `isbn-0.7.0.json` next to `isbn.json`), preserving the schema as it
+each latest file (e.g., `isbn-{{ version }}.json` next to `isbn.json`), preserving the schema as it
 existed at that release. `recover_context()` resolves both unversioned `$schema` URLs (older
 records, or the "latest" document URL) and versioned archive URLs to the bundled JSON-LD context.
 
