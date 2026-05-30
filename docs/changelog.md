@@ -5,20 +5,64 @@ description: Release notes and version history for iscc-schema.
 
 ## Changelog
 
-### 0.6.1 - 2026-05-28
+### 0.7.0 - Unreleased
 
-Seed and service metadata now default to compact, self-describing JSON instead of full JSON-LD.
-The `$schema` reference makes data recoverable to JSON-LD on demand, conformant with IEP-0002
-which accepts both `application/json` and `application/ld+json` as meta element formats.
+This release adds the **Protocol** schema category (ISCC Discovery Protocol wire records) alongside
+the existing Metadata, Seed, and Service categories, introduces an **STM** seed schema for scholarly
+works, makes compact self-describing JSON the default for seed and protocol records, and version-pins
+the `$schema` and `@context` of every standalone schema. The `$schema` reference makes compact data
+recoverable to JSON-LD on demand, conformant with IEP-0002 which accepts both `application/json` and
+`application/ld+json` as meta element formats.
 
+**Breaking changes:**
+- **`IsccMeta` is unaffected.** It still defaults to `ld=True` and serializes full JSON-LD exactly as
+  before. The breaking changes below apply only to the standalone Seed/Service/Protocol models.
+- Seed models (ISBN, ISRC, STM) now default to **compact JSON** (`ld=False`): `.dict()`, `.json()`,
+  and `.jcs()` emit `$schema` only, with no `@context`/`@type`. Pass `ld=True` to restore full JSON-LD.
+- Standalone schema `$schema` URLs are now **version-pinned** (e.g. `…/isbn-0.7.0.json`,
+  `…/tdm-0.7.0.json`, `…/iscc-note-0.7.0.json`). Code that matched the old unversioned `$schema`
+  string must account for the `-X.Y.Z` suffix. `recover_context()` resolves both forms, so v0.6.0
+  records still recover.
+- `$schema` is now a **required** field on the ISBN, ISRC, STM, and IsccNote schemas (auto-populated
+  from its const default on construction, so existing construction code keeps working).
+
+**New schemas:**
+- Added **IsccNote** protocol schema (exported as `iscc_schema.IsccNote`) — the permanent ISCC
+  Declaration log record for the ISCC Discovery Protocol HUB, and the first member of the new
+  Protocol category. Serializes to compact JSON by default and requires `$schema` as the sole version
+  anchor; `$schema` is part of the signed `jcs()` bytes, pinning the schema version into the signed
+  record. Required: `$schema`, `iscc_code`, `datahash`, `nonce`, `signature`.
+- Added **STM** seed schema (exported as `iscc_schema.STM`) — Scientific/Technical/Medical seed
+  metadata for DOI-identified scholarly works, for interoperable Meta-Code generation (IEP-0002).
+  Required: `doi`, `resource_type`, `title`, `publisher`, `pubyear`. Optional: `version_type` (NISO
+  JAV stage), `container_title`, `issn`. `resource_type` carries 17 DataCite-style work-type tokens
+  mapped to resolvable schema.org/FaBiO class IRIs.
+
+**Serialization:**
 - Added `ld` parameter to `.dict()`, `.json()`, `.jcs()` for controlling JSON-LD output
-- Seed models (ISBN, ISRC) default to `ld=False` (compact JSON with `$schema` only)
+- Seed models (ISBN, ISRC, STM) default to `ld=False` (compact JSON with `$schema` only)
 - Service models (TDM, GenAI) default to `ld=True` (full JSON-LD for registry/gateway interop)
+- Protocol model (IsccNote) defaults to `ld=False` (compact JSON, `$schema` as version anchor)
 - IsccMeta defaults to `ld=True` (full JSON-LD, backward compatible)
-- Made `$schema` a required field in ISBN and ISRC seed schemas
 - Changed seed metadata examples to compact recoverable JSON format (no `@context`/`@type`)
 - Added "Recommended Format" documentation to ISBN and ISRC schema pages
 - Added code-gen post-processing for const field defaults and `_default_ld` class attribute
+
+**Versioning:**
+- All standalone schemas (seed, service, protocol) now uniformly version both `$schema` and the
+  default `@context`, and write a version-pinned archive (`<name>-0.7.0.json`) next to the latest
+  file; the latest file keeps an unversioned `$id`
+- Added `x-iscc-jsonld` extension to every standalone JSON Schema documenting the JSON-LD upgrade
+  path (versioned context URL, `@type`, human-readable recipe) for compact records
+- Versioned the `@context`/`$schema` URLs shown in the main IsccMeta docs example
+
+**Field status & tooling:**
+- Promoted `$schema`, `nonce`, `signature`, `generator`, and `tdm_reservation` to `stable`
+- Documented the field-stability contract (stable/draft, one-way promotion) and the bump-first
+  release workflow in the versioning guide
+- Added a release-archive build guard: the schema and context builds abort if a git tag already
+  exists for the current version, preventing silent mutation of released archives (fails open when
+  git is unavailable)
 
 ### 0.6.0 - 2026-05-26
 - Replaced five per-category TDM fields (train, inference, derive, search, analyze) with two W3C TDMRep-conformant fields (tdm_reservation, tdm_policy)
