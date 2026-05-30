@@ -302,56 +302,49 @@ def build_protocol_schema_docs():
         _build_standalone_doc(schema_file, "Protocol Schema")
 
 
-def _render_context_terms(schemata):
-    # type: (list[str]) -> str
-    """Render vocabulary terms from a list of YAML schema files."""
-    doc = ""
-    seen = set()
-    for schema in schemata:
-        path = SCHEMAS / schema
-        with open(path, "rt", encoding="utf-8") as infile:
-            data = yaml.safe_load(infile)
-        for prop, fields in data["properties"].items():
-            if fields.get("x-iscc-context") and prop not in seen:
-                seen.add(prop)
-                doc += f"## {prop}\n\n"
-                doc += f"<small><{fields.get('x-iscc-context')}></small>\n"
-                if fields.get("x-iscc-standard"):
-                    doc += f"<small>{fields.get('x-iscc-standard')}</small>\n"
-                status = fields.get("x-iscc-status")
-                if status:
-                    doc += f"<small>Status: **{status}**</small>\n"
-                doc += '!!! term ""\n'
-                doc += f"    {fields['description']}\n\n"
-    return doc
-
-
 def build_json_ld_context_docs():
     # type: () -> None
-    """Build vocabulary documentation for JSON-LD context terms."""
-    iscc_schemata = [
-        # "iscc-jsonld.yaml",
-        "iscc-minimal.yaml",
-        "iscc-basic.yaml",
-        "iscc-embeddable.yaml",
-        "iscc-extended.yaml",
-        "iscc-technical.yaml",
-        "iscc-nft.yaml",
-        "iscc-crypto.yaml",
-        "iscc-declaration.yaml",
-    ]
-    doc = "---\nicon: lucide/book-open\ntitle: Vocabulary\ndescription: ISCC Metadata Vocabulary with JSON-LD context mappings.\n---\n\n"
-    doc += "# ISCC Metadata Vocabulary\n\n"
-    doc += _render_context_terms(iscc_schemata)
-    doc += "\n---\n\n"
-    doc += "# Seed Metadata Vocabulary\n\n"
-    doc += _render_context_terms(SEED_SCHEMATA)
-    doc += "\n---\n\n"
-    doc += "# Service Metadata Vocabulary\n\n"
-    doc += _render_context_terms(SERVICE_SCHEMATA)
-    doc += "\n---\n\n"
-    doc += "# Protocol Schema Vocabulary\n\n"
-    doc += _render_context_terms(PROTOCOL_SCHEMATA)
+    """Build the landing page for the JSON-LD context documents.
+
+    Term IRIs resolve into the `/terms/` namespace, so human-readable definitions live on the
+    Vocabulary page (`docs/terms/index.md`). This page documents the machine-readable `@context`
+    documents served from `/context/` and links to their version-pinned URLs.
+    """
+    version = iscc_schema.__version__
+    context_files = sorted(
+        (path.stem for path in MARKDOWN_CONTEXT.parent.glob("*.jsonld") if path.stem != "iscc"),
+        key=lambda stem: [int(part) for part in stem.split(".")],
+        reverse=True,
+    )
+    doc = (
+        "---\n"
+        "icon: lucide/link\n"
+        "title: JSON-LD Contexts\n"
+        "description: Machine-readable JSON-LD @context documents for ISCC metadata.\n"
+        "---\n\n"
+    )
+    doc += "# JSON-LD Contexts\n\n"
+    doc += (
+        "This directory hosts the machine-readable JSON-LD `@context` documents that map ISCC "
+        "metadata properties to their semantic IRIs. A JSON-LD processor dereferences a whole "
+        "context document by URL. For human-readable term definitions, see the "
+        "[Vocabulary](../terms/index.md) page — the `/terms/` namespace the term IRIs resolve "
+        "into.\n\n"
+    )
+    doc += "## Canonical Context\n\n"
+    doc += (
+        f"[`http://purl.org/iscc/context`](iscc.jsonld) always resolves to the latest release "
+        f"(currently {version}).\n\n"
+    )
+    doc += "## Versioned Contexts\n\n"
+    doc += (
+        "Serialized ISCC records carry a version-pinned `@context`, fixing the vocabulary to a "
+        "specific release:\n\n"
+    )
+    for stem in context_files:
+        marker = " — current release" if stem == version else ""
+        doc += f"- [`http://purl.org/iscc/context/{stem}.jsonld`]({stem}.jsonld){marker}\n"
+    doc += "\n"
 
     with open(MARKDOWN_CONTEXT, "wt", encoding="utf-8", newline="\n") as outf:
         outf.write(doc)

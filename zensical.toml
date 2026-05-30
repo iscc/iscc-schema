@@ -39,6 +39,7 @@ nav = [
             "schema/iscc-note.md",
         ]},
         "terms/index.md",
+        "context/index.md",
         "versioning.md",
     ]},
     { "Project" = [
