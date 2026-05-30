@@ -41,7 +41,7 @@ meta.dict()
 
 # Serialize as JSON (includes schema defaults)
 meta.json()
-# '{"@context":"http://purl.org/iscc/context","@type":"CreativeWork",...}'
+# '{"@context":"http://purl.org/iscc/context/0.7.0.jsonld","@type":"CreativeWork","$schema":"http://purl.org/iscc/schema/0.7.0.json",...}'
 ```
 
 ## Schema Categories
@@ -49,10 +49,12 @@ meta.json()
 - **ISCC Metadata.** Core vocabulary for digital content identified by the ISCC. All fields
   are optional, covering content description, rights, technical properties, and cryptographic
   declarations.
-- **Seed Metadata.** Industry-specific input for Meta-Code generation (`ISBN`, `ISRC`).
+- **Seed Metadata.** Industry-specific input for Meta-Code generation (`ISBN`, `ISRC`, `STM`).
   Required fields ensure interoperable content fingerprinting across platforms.
 - **Service Metadata.** Use-case-specific schemas for ISCC registries (`TDM`, `GenAI`).
   Machine-readable signals for text and data mining rights and generative AI disclosure.
+- **Protocol Schemas.** ISCC Discovery Protocol wire records (`IsccNote`). Compact,
+  signature-anchored declaration records for ISCC-HUB timestamping and registration.
 
 ## Published Artifacts
 

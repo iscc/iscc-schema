@@ -13,7 +13,7 @@ Dense, prescriptive reference for AI coding agents working on or integrating wit
 
 | Path | Contents | Editable? |
 |------|----------|-----------|
-| `iscc_schema/__init__.py` | Public API exports: `IsccMeta`, `Signature`, `ISBN`, `ISRC`, `TDM`, `GenAI`, `recover_context` | Yes |
+| `iscc_schema/__init__.py` | Public API exports: `IsccMeta`, `Signature`, `ISBN`, `ISRC`, `STM`, `TDM`, `GenAI`, `IsccNote`, `recover_context` | Yes |
 | `iscc_schema/base.py` | Custom `BaseModel` — serialization (`dict`, `json`, `jcs`), empty-string-to-None coercion | Yes |
 | `iscc_schema/fields.py` | RFC 3986-compliant `AnyUrl` type with regex validation | Yes |
 | `iscc_schema/recovery.py` | `recover_context()` — reconstruct `@context` from `$schema` or `@type` | Yes |
@@ -22,8 +22,10 @@ Dense, prescriptive reference for AI coding agents working on or integrating wit
 | `iscc_schema/generator.py` | **Generated** — OpenAPI models for ISCC Generator API | No |
 | `iscc_schema/seed_isbn.py` | **Generated** — `ISBN` model | No |
 | `iscc_schema/seed_isrc.py` | **Generated** — `ISRC` model | No |
+| `iscc_schema/seed_stm.py` | **Generated** — `STM` model | No |
 | `iscc_schema/service_tdm.py` | **Generated** — `TDM` model | No |
 | `iscc_schema/service_genai.py` | **Generated** — `GenAI` model | No |
+| `iscc_schema/protocol_iscc_note.py` | **Generated** — `IsccNote` model | No |
 | `iscc_schema/contexts.py` | **Generated** — JSON-LD context mappings + `TYPE_SCHEMAS` dispatch | No |
 | `iscc_schema/models/*.yaml` | **Source of truth** — OpenAPI 3.1.0 schema definitions | Yes |
 | `iscc_schema/models/iscc-all.yaml` | Composition manifest (`allOf` + `$ref` to individual schemas) | Yes |
@@ -49,10 +51,12 @@ IsccMeta (iscc-all.yaml composes via allOf + $ref):
   └── iscc-declaration.yaml → original, redirect, chain, wallet, credentials, verifications
 
 Standalone (NOT in IsccMeta):
-  ├── isbn.yaml  → ISBN (seed metadata)
-  ├── isrc.yaml  → ISRC (seed metadata)
-  ├── tdm.yaml   → TDM  (service metadata; also inline in IsccMeta.tdm)
-  └── genai.yaml → GenAI (service metadata; also inline in IsccMeta.genai)
+  ├── isbn.yaml      → ISBN  (seed metadata)
+  ├── isrc.yaml      → ISRC  (seed metadata)
+  ├── stm.yaml       → STM   (seed metadata; scholarly / DOI works)
+  ├── tdm.yaml       → TDM   (service metadata; also inline in IsccMeta.tdm)
+  ├── genai.yaml     → GenAI (service metadata; also inline in IsccMeta.genai)
+  └── iscc-note.yaml → IsccNote (protocol record; ISCC Discovery Protocol declaration)
 ```
 
 ### Import Dependency Flow
@@ -63,8 +67,10 @@ iscc_schema.__init__
                                     → iscc_schema.fields (AnyUrl)
   → iscc_schema.seed_isbn (generated) → iscc_schema.base
   → iscc_schema.seed_isrc (generated) → iscc_schema.base
+  → iscc_schema.seed_stm (generated) → iscc_schema.base
   → iscc_schema.service_tdm (generated) → iscc_schema.base
   → iscc_schema.service_genai (generated) → iscc_schema.base
+  → iscc_schema.protocol_iscc_note (generated) → iscc_schema.base
   → iscc_schema.recovery → iscc_schema.contexts (generated)
 ```
 
@@ -75,8 +81,10 @@ from iscc_schema import IsccMeta      # Main metadata model (all fields)
 from iscc_schema import Signature     # Cryptographic signature (nested)
 from iscc_schema import ISBN          # Seed metadata
 from iscc_schema import ISRC          # Seed metadata
+from iscc_schema import STM           # Seed metadata (scholarly / DOI works)
 from iscc_schema import TDM           # Service metadata
 from iscc_schema import GenAI         # Service metadata
+from iscc_schema import IsccNote      # Protocol record (ISCC Discovery Protocol)
 from iscc_schema import recover_context  # JSON-LD context recovery
 ```
 
@@ -89,8 +97,10 @@ from iscc_schema import recover_context  # JSON-LD context recovery
 | General ISCC metadata | `IsccMeta` | `iscc-all.yaml` (composed) |
 | ISBN-based Meta-Code generation | `ISBN` | `isbn.yaml` |
 | ISRC-based Meta-Code generation | `ISRC` | `isrc.yaml` |
+| DOI / scholarly-work Meta-Code generation | `STM` | `stm.yaml` |
 | TDM reservation signals | `TDM` | `tdm.yaml` |
 | GenAI disclosure signals | `GenAI` | `genai.yaml` |
+| ISCC Discovery Protocol declaration record | `IsccNote` | `iscc-note.yaml` |
 | API request/response models | `generator.py` models | `iscc-generator.yaml` |
 
 ### Which serialization method?
@@ -110,8 +120,9 @@ Default `ld` value depends on model type:
 | Model | Default `ld` | Why |
 |-------|-------------|-----|
 | `IsccMeta` | `True` | Core metadata, full JSON-LD |
-| `ISBN`, `ISRC` | `False` | Seed input for Meta-Code generation |
+| `ISBN`, `ISRC`, `STM` | `False` | Seed input for Meta-Code generation |
 | `TDM`, `GenAI` | `True` | Service metadata for registry discovery |
+| `IsccNote` | `False` | Protocol wire record, compact with version-specific `$schema` |
 
 ### Which build command?
 
@@ -129,7 +140,7 @@ Default `ld` value depends on model type:
 
 All models inherit from `iscc_schema.base.BaseModel` with:
 
-- `extra="forbid"` — unknown fields raise `ValidationError`
+- `extra="forbid"` — unknown fields raise `ValidationError` (the `TDM` service model overrides this to `extra="allow"` for forward-compatible reservation signals)
 - `validate_assignment=True` — assignment validates at runtime
 - `use_enum_values=True` — enums serialize to string values
 - `populate_by_name=True` — accept both `context_` and `@context`
@@ -177,7 +188,7 @@ Three fields use aliases because `@` and `$` are invalid in Python identifiers:
 | `meta.dict()` | Pure — returns new dict, no mutation |
 | `meta.json()` | Pure — returns JSON string, no mutation |
 | `meta.jcs()` | Pure — returns canonical bytes, no mutation |
-| `recover_context(data)` | Mutates input dict — adds `@context` key |
+| `recover_context(data)` | Pure — returns a new dict with `@context` prepended (input unchanged) |
 | `poe buildcode` | Overwrites `schema.py`, `generator.py`, seed/service modules |
 | `poe buildschema` | Overwrites `docs/schema/*.json`, `iscc_schema/contexts.py` |
 | `poe buildcontext` | Overwrites `docs/context/*.jsonld` |
@@ -207,7 +218,8 @@ version-specific `$schema`, for ISCC Discovery Protocol records like IsccNote).
 5. Add to the matching list in `tools/build_terms.py`
 6. Add to the matching list in `tools/build_docs.py`
 7. Export the new model from `iscc_schema/__init__.py`
-8. Run `uv run poe all`
+8. Add the schema's doc page to the nav in `zensical.toml` and to `PAGES` in `tools/gen_llms_full.py`
+9. Run `uv run poe all`
 
 ### Recover JSON-LD context from plain JSON
 

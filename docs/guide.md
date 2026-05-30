@@ -77,7 +77,7 @@ from iscc_schema import recover_context
 
 # Plain JSON data without @context
 data = {
-    "$schema": "http://purl.org/iscc/schema",
+    "$schema": "http://purl.org/iscc/schema/0.7.0.json",
     "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
     "name": "The Never Ending Story",
 }
@@ -150,19 +150,25 @@ across platforms.
 
 - `ISBN`: book metadata (ISBN, title, publisher, language, etc.)
 - `ISRC`: sound recording metadata (ISRC, artist, track title, duration, etc.)
+- `STM`: scholarly metadata for DOI-identified scientific/technical/medical works (DOI, title,
+  publisher, pubyear, etc.)
 
 ```python
 from iscc_schema import ISBN
 
 seed = ISBN(
     isbn="9789295055124",
+    productform="EA",
     title="The Never Ending Story",
     language="eng",
+    imprint="Penguin Classics",
     publisher="Penguin Random House",
+    country="US",
+    pubdate="20240214",
 )
 ```
 
-See the [ISBN](schema/isbn.md) and [ISRC](schema/isrc.md) schema references.
+See the [ISBN](schema/isbn.md), [ISRC](schema/isrc.md), and [STM](schema/stm.md) schema references.
 
 ### Service Metadata
 
@@ -185,6 +191,16 @@ meta = IsccMeta(
 ```
 
 See the [TDM](schema/tdm.md) and [GenAI](schema/genai.md) schema references.
+
+### Protocol Schemas
+
+Protocol schemas are ISCC Discovery Protocol wire records hosted and versioned here. Like seed
+metadata, they default to compact JSON with a version-specific `$schema` as the sole version anchor
+(the `@context` and `@type` are dropped and recovered on demand).
+
+- `IsccNote`: the permanent ISCC Declaration log record for ISCC-HUB timestamping and registration
+
+See the [ISCC Note](schema/iscc-note.md) schema reference.
 
 ## Python Usage
 
@@ -224,15 +240,15 @@ meta.dict()
 
 # JSON string, includes schema defaults (@context, @type, $schema)
 meta.json()
-# '{"@context":"http://purl.org/iscc/context","@type":"CreativeWork",...}'
+# '{"@context":"http://purl.org/iscc/context/0.7.0.jsonld","@type":"CreativeWork","$schema":"http://purl.org/iscc/schema/0.7.0.json",...}'
 
 # JCS canonical bytes, deterministic serialization for hashing
 meta.jcs()
-# b'{"$schema":"http://purl.org/iscc/schema","@context":...}'
+# b'{"$schema":"http://purl.org/iscc/schema/0.7.0.json","@context":...}'
 
 # Compact JSON without JSON-LD fields
 meta.json(ld=False)
-# '{"$schema":"http://purl.org/iscc/schema","iscc":"ISCC:KACY...","name":"The Never Ending Story"}'
+# '{"$schema":"http://purl.org/iscc/schema/0.7.0.json","iscc":"ISCC:KACY...","name":"The Never Ending Story"}'
 ```
 
 Field names are automatically translated to their JSON-LD aliases in all serialization formats
@@ -245,8 +261,9 @@ Different model types have different `ld` defaults to match their intended use:
 | Model | Default `ld` | Rationale |
 |-------|-------------|-----------|
 | `IsccMeta` | `True` | Core metadata, full JSON-LD for semantic interoperability |
-| `ISBN`, `ISRC` | `False` | Seed input for Meta-Code generation (IEP-0002), compact JSON with `$schema` |
+| `ISBN`, `ISRC`, `STM` | `False` | Seed input for Meta-Code generation (IEP-0002), compact JSON with `$schema` |
 | `TDM`, `GenAI` | `True` | Service metadata served by registries, full JSON-LD for discovery |
+| `IsccNote` | `False` | Protocol wire record, compact JSON with version-specific `$schema` |
 
 Seed metadata defaults to compact JSON because IEP-0002 accepts plain `application/json` and
 the `$schema` reference makes data self-describing - any consumer can recover the full JSON-LD
@@ -257,26 +274,31 @@ from iscc_schema import ISBN
 
 seed = ISBN(
     isbn="9789295055124",
+    productform="EA",
     title="The Never Ending Story",
     language="eng",
+    imprint="Penguin Classics",
     publisher="Penguin Random House",
+    country="US",
+    pubdate="20240214",
 )
 
 # Compact by default (ld=False)
 seed.json()
-# '{"$schema":"http://purl.org/iscc/schema/isbn.json","isbn":"9789295055124",...}'
+# '{"$schema":"http://purl.org/iscc/schema/isbn-0.7.0.json","isbn":"9789295055124",...}'
 
 # Full JSON-LD when needed
 seed.json(ld=True)
-# '{"@context":"http://purl.org/iscc/context","@type":"ISBN","$schema":...}'
+# '{"@context":"http://purl.org/iscc/context/0.7.0.jsonld","@type":"ISBN","$schema":...}'
 ```
 
 ### Strict Validation
 
-All schema models use `extra="forbid"`, so passing unrecognized fields raises a `ValidationError`.
+Most schema models use `extra="forbid"`, so passing unrecognized fields raises a `ValidationError`.
 This is intentional: `iscc-schema` defines a standard, and strictness catches typos early. It also
 matches JSON-LD semantics, where extra fields without `@context` mappings would be meaningless to
-processors.
+processors. The `TDM` service model is the deliberate exception — it sets `extra="allow"` to
+preserve forward-compatible reservation signals across versions.
 
 Downstream consumers who need flexibility can subclass with a one-line override:
 

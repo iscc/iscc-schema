@@ -47,6 +47,7 @@ Generated files (do not edit):
 - `iscc_schema/generator.py` - API models
 - `iscc_schema/seed_*.py` - seed metadata models
 - `iscc_schema/service_*.py` - service metadata models
+- `iscc_schema/protocol_*.py` - protocol schema models
 - `iscc_schema/contexts.py` - JSON-LD context mappings
 - `docs/schema/*.json` - JSON Schema files
 - `docs/context/*.jsonld` - JSON-LD context files
@@ -63,11 +64,11 @@ Hand-editable source files:
 
 ### Workflow
 
-1. Create a branch from `develop`
+1. Create a branch from `main`
 2. Make your changes (see task guides below)
 3. Run `uv run poe all` to regenerate artifacts and run tests
 4. Commit your changes (include both source and generated files)
-5. Open a pull request against `develop`
+5. Open a pull request against `main`
 
 ### Adding or Modifying a Schema Field
 
