@@ -67,7 +67,7 @@ An ISCC Declaration record submitted to an ISCC-HUB for timestamping and registr
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| @type | `string` | IsccNote | The type of service metadata.         |
+| @type | `string` | IsccNote | The type of protocol metadata.         |
 
 ## **$schema**
 
