@@ -71,10 +71,12 @@ status is surfaced in the vocabulary documentation as a **Status** badge.
 ## Standalone Schemas
 
 Seed, service, and protocol schemas (ISBN, ISRC, STM, TDM, GenAI, IsccNote) follow the same
-versioned-URL strategy as the main schema, with per-schema names. Serialized records carry a
-versioned `@context` (e.g., `http://purl.org/iscc/context/0.7.0.jsonld`) **and** a versioned
-`$schema` (e.g., `http://purl.org/iscc/schema/isbn-0.7.0.json`), pinning both the vocabulary and
-the schema version to a specific release.
+versioned-URL strategy as the main schema, with per-schema names. Every serialized record carries a
+versioned `$schema` (e.g., `http://purl.org/iscc/schema/isbn-0.7.0.json`); records serialized as
+full JSON-LD additionally carry a versioned `@context` (e.g.,
+`http://purl.org/iscc/context/0.7.0.jsonld`). Seed and protocol schemas default to compact JSON
+(`$schema` only), while service schemas default to full JSON-LD (see below) — pinning the schema
+version, and the vocabulary version where an `@context` is present, to a specific release.
 
 The latest schema document is published at the unversioned URL (its `$id`, e.g.,
 `http://purl.org/iscc/schema/isbn.json`), while its `$schema` const points at the versioned
