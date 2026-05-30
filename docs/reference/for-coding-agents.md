@@ -144,6 +144,7 @@ All models inherit from `iscc_schema.base.BaseModel` with:
 - `validate_assignment=True` — assignment validates at runtime
 - `use_enum_values=True` — enums serialize to string values
 - `populate_by_name=True` — accept both `context_` and `@context`
+- `from_attributes=True` — models can be built from objects with matching attributes (ORM-style)
 
 ### Empty String Coercion
 
@@ -165,13 +166,20 @@ Three fields use aliases because `@` and `$` are invalid in Python identifiers:
 
 ### Extension Fields
 
+Authored in the YAML source:
+
 | Extension | Values | Purpose |
 |-----------|--------|---------|
-| `x-iscc-context` | IRI string | JSON-LD context mapping for the property |
+| `x-iscc-context` | IRI string | JSON-LD predicate IRI for the property |
+| `x-iscc-enum-context` | `{token: IRI}` map | Per-enum-value class IRIs for the JSON-LD context (e.g. `stm.yaml` `resource_type`); context-only, kept out of the Pydantic model |
 | `x-iscc-status` | `stable` / `draft` | Field maturity indicator |
-| `x-iscc-standard` | Standard name | ISO/IPTC standard reference |
+| `x-iscc-category` | Category name (e.g. `nft`) | Groups related fields |
+| `x-iscc-standard` | Standard name (e.g. `ISO 24138:2024`) | Source standard reference |
 | `x-iscc-schema-doc` | Text | Original schema.org definition |
 | `x-iscc-embed` | Text | Media embedding guidance |
+| `x-iscc-example-titles` | List of strings | Titles for a schema's multiple examples in generated docs (e.g. `iscc-note.yaml`) |
+
+`x-iscc-jsonld` is **generated, not authored** — `build_json_schema.py` writes it into each standalone schema JSON to document the compact→JSON-LD upgrade path.
 
 ### Generated File Post-Processing
 
@@ -214,9 +222,9 @@ version-specific `$schema`, for ISCC Discovery Protocol records like IsccNote).
 1. Create `iscc_schema/models/{name}.yaml` with title, type, properties
 2. Add to `SEED_SCHEMAS`, `SERVICE_SCHEMAS`, or `PROTOCOL_SCHEMAS` in `tools/build_code.py`
 3. Add to the matching list in `tools/build_json_schema.py`
-4. Add to the matching list in `tools/build_json_ld_context.py`
+4. Add to the matching list in `tools/build_json_ld_context.py` (service/protocol schemas also need their `@type` IRI in the hardcoded context dict, e.g. `"IsccNote": ".../terms/#IsccNote"`)
 5. Add to the matching list in `tools/build_terms.py`
-6. Add to the matching list in `tools/build_docs.py`
+6. Add to the matching list and to `STANDALONE_META` in `tools/build_docs.py`
 7. Export the new model from `iscc_schema/__init__.py`
 8. Add the schema's doc page to the nav in `zensical.toml` and to `PAGES` in `tools/gen_llms_full.py`
 9. Run `uv run poe all`
