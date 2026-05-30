@@ -77,7 +77,7 @@ from iscc_schema import recover_context
 
 # Plain JSON data without @context
 data = {
-    "$schema": "http://purl.org/iscc/schema/0.7.0.json",
+    "$schema": "http://purl.org/iscc/schema/{{ version }}.json",
     "iscc": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
     "name": "The Never Ending Story",
 }
@@ -240,15 +240,15 @@ meta.dict()
 
 # JSON string, includes schema defaults (@context, @type, $schema)
 meta.json()
-# '{"@context":"http://purl.org/iscc/context/0.7.0.jsonld","@type":"CreativeWork","$schema":"http://purl.org/iscc/schema/0.7.0.json",...}'
+# '{"@context":"http://purl.org/iscc/context/{{ version }}.jsonld","@type":"CreativeWork","$schema":"http://purl.org/iscc/schema/{{ version }}.json",...}'
 
 # JCS canonical bytes, deterministic serialization for hashing
 meta.jcs()
-# b'{"$schema":"http://purl.org/iscc/schema/0.7.0.json","@context":...}'
+# b'{"$schema":"http://purl.org/iscc/schema/{{ version }}.json","@context":...}'
 
 # Compact JSON without JSON-LD fields
 meta.json(ld=False)
-# '{"$schema":"http://purl.org/iscc/schema/0.7.0.json","iscc":"ISCC:KACY...","name":"The Never Ending Story"}'
+# '{"$schema":"http://purl.org/iscc/schema/{{ version }}.json","iscc":"ISCC:KACY...","name":"The Never Ending Story"}'
 ```
 
 Field names are automatically translated to their JSON-LD aliases in all serialization formats
@@ -285,11 +285,11 @@ seed = ISBN(
 
 # Compact by default (ld=False)
 seed.json()
-# '{"$schema":"http://purl.org/iscc/schema/isbn-0.7.0.json","isbn":"9789295055124",...}'
+# '{"$schema":"http://purl.org/iscc/schema/isbn-{{ version }}.json","isbn":"9789295055124",...}'
 
 # Full JSON-LD when needed
 seed.json(ld=True)
-# '{"@context":"http://purl.org/iscc/context/0.7.0.jsonld","@type":"ISBN","$schema":...}'
+# '{"@context":"http://purl.org/iscc/context/{{ version }}.jsonld","@type":"ISBN","$schema":...}'
 ```
 
 ### Strict Validation

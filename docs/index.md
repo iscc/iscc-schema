@@ -41,7 +41,7 @@ meta.dict()
 
 # Serialize as JSON (includes schema defaults)
 meta.json()
-# '{"@context":"http://purl.org/iscc/context/0.7.0.jsonld","@type":"CreativeWork","$schema":"http://purl.org/iscc/schema/0.7.0.json",...}'
+# JSON-LD: includes @context, @type and a version-pinned $schema
 ```
 
 ## Schema Categories

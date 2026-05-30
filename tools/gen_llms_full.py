@@ -3,8 +3,14 @@
 import re
 from pathlib import Path
 
+import iscc_schema
+
 DOCS_DIR = Path(__file__).parent.parent / "docs"
 SITE_DIR = Path(__file__).parent.parent / "site"
+
+# Resolve the {{ version }} macro the same way zensical does, since this reads raw source
+# markdown without running Jinja (see tools/build_docs.py and main.py for the build-time path).
+VERSION_RE = re.compile(r"\{\{\s*version\s*\}\}")
 
 # Ordered list of doc pages to include (relative to docs/)
 PAGES = [
@@ -41,10 +47,16 @@ def strip_snippets(content):
     return SNIPPET_RE.sub("", content)
 
 
+def resolve_version(content):
+    """Substitute the {{ version }} macro with the package version."""
+    return VERSION_RE.sub(iscc_schema.__version__, content)
+
+
 def clean_content(content):
-    """Strip frontmatter, snippets, and normalize whitespace."""
+    """Strip frontmatter, snippets, resolve version macro, and normalize whitespace."""
     content = strip_frontmatter(content)
     content = strip_snippets(content)
+    content = resolve_version(content)
     return content.strip()
 
 

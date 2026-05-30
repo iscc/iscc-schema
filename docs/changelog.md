@@ -64,6 +64,13 @@ recoverable to JSON-LD on demand, conformant with IEP-0002 which accepts both `a
   exists for the current version, preventing silent mutation of released archives (fails open when
   git is unavailable)
 
+**Documentation:**
+- Templated the version string in hand-written docs (guide, examples, versioning) via Zensical's
+  `macros` extension, so version-pinned example URLs derive from `iscc_schema.__version__` and never
+  go stale on a release bump; the `{{ version }}` variable is supplied by `tools/docs_macros.py`
+- Made the README version-free (it renders on GitHub/PyPI where macros do not run) and taught the
+  `llms-full.txt` generator to resolve the version token
+
 ### 0.6.0 - 2026-05-26
 - Replaced five per-category TDM fields (train, inference, derive, search, analyze) with two W3C TDMRep-conformant fields (tdm_reservation, tdm_policy)
 - Added `tdm_reservation` integer field (0/1) bound to `http://www.w3.org/ns/tdmrep#reservation`
