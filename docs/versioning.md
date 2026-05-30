@@ -39,6 +39,29 @@ produced a given piece of data.
 The unversioned URLs are for documentation, human convenience, and "give me the latest" use
 cases.
 
+## Identifiers vs. Locators
+
+ISCC URLs play two distinct roles. Conflating them is what makes the `http`-vs-`https` choice
+feel ambiguous:
+
+- **Identity** — the IRI that *names* a term, context, or schema: the `@context` value, every
+  `@type` and term IRI, and the `$schema` value carried in records. In JSON-LD/RDF these are
+  compared by exact string match ([RDF 1.1 Concepts §3.1](https://www.w3.org/TR/rdf11-concepts/#section-IRIs)),
+  so the scheme is part of the identifier — `http://schema.org/name` and
+  `https://schema.org/name` are **different** properties. ISCC identity IRIs are `http://` and
+  are **frozen**: changing the scheme would mint a new, incompatible term, break graph merges
+  with the dominant `http://schema.org/` vocabulary, and — for signed protocol records —
+  invalidate the signature, because `$schema` is part of the JCS bytes the signature is computed
+  over.
+
+- **Location** — where the bytes are actually served. The identity IRIs resolve through a
+  purl.org redirect to the hosting server, which is served over **https**. The scheme used to
+  *fetch* a document is independent of the IRI's identity and can be upgraded freely.
+
+In short: identity IRIs stay `http://` for stability and signature integrity; resolution and
+hosting use `https`. The single `https` identity value is the JSON Schema dialect
+(`https://json-schema.org/draft/2020-12/schema`), which is the canonical 2020-12 meta-schema IRI.
+
 ## Compatibility Guarantees
 
 - Minor version bumps are additive only: data produced by an older version validates against
