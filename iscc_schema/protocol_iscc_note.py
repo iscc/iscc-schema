@@ -68,7 +68,7 @@ class IsccNote(BaseModel):
         description="The JSON-LD Context URI for ISCC metadata.",
     )
     type_: Literal["IsccNote"] = Field(
-        "IsccNote", alias="@type", description="The type of service metadata."
+        "IsccNote", alias="@type", description="The type of protocol metadata."
     )
     schema_: Literal["http://purl.org/iscc/schema/iscc-note-0.7.0.json"] = Field(
         "http://purl.org/iscc/schema/iscc-note-0.7.0.json",
@@ -137,5 +137,5 @@ class IsccNote(BaseModel):
         json_schema_extra={"x-iscc-context": "http://purl.org/iscc/terms/#gateway"},
         max_length=2048,
         min_length=8,
-        pattern="^https?://[^\\s]+",
+        pattern="^https?://[^\\s]+$",
     )

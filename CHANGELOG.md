@@ -42,6 +42,13 @@ recoverable to JSON-LD on demand, conformant with IEP-0002 which accepts both `a
 - Changed seed metadata examples to compact recoverable JSON format (no `@context`/`@type`)
 - Added "Recommended Format" documentation to ISBN and ISRC schema pages
 - Added code-gen post-processing for const field defaults and `_default_ld` class attribute
+- `.json()` now accepts an `indent` argument for pretty-printing compact records and forwards
+  `exclude_unset`, so the compact path offers the same formatting controls as the JSON-LD path
+
+**Fixes:**
+- End-anchored the IsccNote `gateway` URL pattern (`$`) so values with embedded whitespace or
+  trailing characters are rejected rather than silently accepted into a permanent declaration record
+- Corrected the IsccNote `@type` description ("service metadata" → "protocol metadata")
 
 **Versioning:**
 - All standalone schemas (seed, service, protocol) now uniformly version both `$schema` and the

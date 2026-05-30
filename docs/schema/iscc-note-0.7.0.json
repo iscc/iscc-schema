@@ -37,7 +37,7 @@
     "@type": {
       "type": "string",
       "const": "IsccNote",
-      "description": "The type of service metadata."
+      "description": "The type of protocol metadata."
     },
     "$schema": {
       "type": "string",
@@ -154,7 +154,7 @@
       "example": "https://gateway.example.com/declaration/{iscc_id}",
       "minLength": 8,
       "maxLength": 2048,
-      "pattern": "^https?://[^\\s]+",
+      "pattern": "^https?://[^\\s]+$",
       "x-iscc-context": "http://purl.org/iscc/terms/#gateway"
     }
   },

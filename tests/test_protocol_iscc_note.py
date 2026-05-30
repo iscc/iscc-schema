@@ -165,6 +165,24 @@ def test_json_jsonld_upgrade():
     assert f'"$schema":"{SCHEMA_URL}"' in j
 
 
+def test_json_compact_indent_pretty_prints():
+    """Compact json() honors indent (the formatting kwargs that model_dump_json accepts remain
+    available on the compact path) while keeping the $schema version anchor."""
+    obj = IsccNote(**VALID_NOTE)
+    pretty = obj.json(indent=2)
+    assert "\n" in pretty
+    assert json.loads(pretty)["$schema"] == SCHEMA_URL
+    assert obj.json() == obj.json(indent=None)  # default stays minified
+
+
+def test_json_compact_exclude_unset_no_collision():
+    """Passing exclude_unset on the compact path does not raise (it previously collided with the
+    hardcoded value); $schema stays present because it is injected regardless of exclude_unset."""
+    obj = IsccNote(**VALID_NOTE)
+    j = obj.json(exclude_unset=True)
+    assert json.loads(j)["$schema"] == SCHEMA_URL
+
+
 def test_units_serialize_as_strings():
     obj = IsccNote(**_note(units=UNITS_256))
     d = obj.dict()
@@ -360,6 +378,13 @@ def test_gateway_accepts_uri_template():
 def test_gateway_rejects_non_http():
     with pytest.raises(ValidationError):
         IsccNote(**_note(gateway="ftp://example.com/resource"))
+
+
+def test_gateway_rejects_embedded_whitespace():
+    """The gateway pattern is end-anchored, so a URL with embedded whitespace and trailing junk
+    is rejected rather than silently accepted into a permanent declaration record."""
+    with pytest.raises(ValidationError):
+        IsccNote(**_note(gateway="https://gateway.example/a bad"))
 
 
 # --- additionalProperties: false at both levels ---
