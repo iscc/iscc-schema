@@ -29,9 +29,9 @@ class Signature(BaseModel):
         examples=["did:web:example.com"],
     )
     keyid: str | None = Field(None, description="Key identifier within the controller document.")
-    pubkey: str = Field(
-        ...,
-        description="Ed25519 public key in multibase format (z + base58btc(0xED01 + 32-byte key)) as specified in [W3C Multikey](https://www.w3.org/TR/cid/#Multikey).",
+    pubkey: str | None = Field(
+        None,
+        description="Ed25519 public key in multibase format (z + base58btc(0xED01 + 32-byte key)) as specified in [W3C Multikey](https://www.w3.org/TR/cid/#Multikey). Optional - omitted in PROOF_ONLY signatures, where the verifier obtains the key out-of-band.",
         examples=["z6MkmeDbeC5BecFmVnTHA5PWEBaVUrGLdB3weGE2KYnXfHso"],
         max_length=48,
         min_length=48,
