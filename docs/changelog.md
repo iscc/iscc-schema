@@ -5,7 +5,7 @@ description: Release notes and version history for iscc-schema.
 
 ## Changelog
 
-### 0.7.0 - Unreleased
+### 0.7.0 - 2026-06-01
 
 This release adds the **Protocol** schema category (ISCC Discovery Protocol wire records) alongside
 the existing Metadata, Seed, and Service categories, introduces an **STM** seed schema for scholarly
