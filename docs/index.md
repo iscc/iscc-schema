@@ -10,14 +10,15 @@ description: ISCC JSON-LD Metadata and OpenAPI Service Descriptions.
 [![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)](LICENSE)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/iscc/iscc-schema)
 
-**JSON-LD Metadata and OpenAPI Service Descriptions for the International Standard Content Code.**
+**JSON Schema and JSON-LD Contexts for ISCC Metadata**
 
 ## What is iscc-schema?
 
 `iscc-schema` provides the official schema definitions for the International Standard Content Code
 ([ISO 24138:2024](https://www.iso.org/standard/77899.html)). YAML-based OpenAPI 3.1.0 definitions
 are the single source of truth for auto-generated [JSON Schema](https://json-schema.org/),
-[JSON-LD](https://json-ld.org/) contexts, and [Python](https://python.org/) models.
+[JSON-LD](https://json-ld.org/) contexts, [Python](https://python.org/) models, and vocabulary
+documentation.
 
 ## Install
 
@@ -26,6 +27,8 @@ pip install iscc-schema
 ```
 
 ## Quick Start
+
+Core and Service metadata serialize as full JSON-LD by default:
 
 ```python
 from iscc_schema import IsccMeta
@@ -42,6 +45,30 @@ meta.dict()
 # Serialize as JSON (includes schema defaults)
 meta.json()
 # JSON-LD: includes @context, @type and a version-pinned $schema
+```
+
+Seed and Protocol records serialize as **compact JSON** — just the fields plus a version-pinned
+`$schema` that anchors the schema version and lets any consumer recover full JSON-LD on demand:
+
+```python
+from iscc_schema import STM, recover_context
+
+seed = STM(
+    doi="10.5555/example.2020.0001",
+    resource_type="JournalArticle",
+    title="On the Stability of Quasilinear Forms",
+    publisher="Meridian Academic Press",
+    pubyear=2020,
+)
+
+# Compact JSON by default: fields plus the version-pinned $schema, no @context/@type
+seed.json()
+
+# Opt into full JSON-LD when you need it
+seed.json(ld=True)
+
+# Recover the JSON-LD @context from compact data using its $schema
+recover_context(seed.dict())
 ```
 
 ## Schema Categories
