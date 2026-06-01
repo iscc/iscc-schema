@@ -251,12 +251,20 @@ def test_timestamp_rejects_non_utc():
 # --- Nested signature object ---
 
 
-@pytest.mark.parametrize("missing", ["pubkey", "proof"])
+@pytest.mark.parametrize("missing", ["proof"])
 def test_signature_required_fields(missing):
     sig = dict(VALID_SIGNATURE)
     del sig[missing]
     with pytest.raises(ValidationError):
         IsccNote(**_note(signature=sig))
+
+
+def test_signature_proof_only_mode():
+    """PROOF_ONLY signatures omit pubkey; the verifier supplies the key out-of-band.
+    Matches the ISCC-SIG spec, where only version and proof are required."""
+    obj = IsccNote(**_note(signature={"version": "ISCC-SIG v1.0", "proof": PROOF}))
+    assert obj.signature.pubkey is None
+    assert obj.signature.proof == PROOF
 
 
 def test_signature_invalid_pubkey_pattern():

@@ -98,7 +98,6 @@ properties:
     x-iscc-context: http://purl.org/iscc/terms/#signature
     required:
     - version
-    - pubkey
     - proof
     properties:
       version:
@@ -117,7 +116,8 @@ properties:
       pubkey:
         type: string
         description: Ed25519 public key in multibase format (z + base58btc(0xED01 + 32-byte
-          key)) as specified in [W3C Multikey](https://www.w3.org/TR/cid/#Multikey).
+          key)) as specified in [W3C Multikey](https://www.w3.org/TR/cid/#Multikey). Optional
+          - omitted in PROOF_ONLY signatures, where the verifier obtains the key out-of-band.
         pattern: ^z[1-9A-HJ-NP-Za-km-z]+$
         minLength: 48
         maxLength: 48
