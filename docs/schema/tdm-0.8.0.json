@@ -14,7 +14,7 @@
     "upgrade": "Compact records omit @context and @type. To obtain JSON-LD, set @context to this schema's top-level @context term map (or to the versioned context URL in this extension's `context` field) and set @type to this extension's `type` value."
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "http://purl.org/iscc/schema/tdm.json",
+  "$id": "http://purl.org/iscc/schema/tdm-0.8.0.json",
   "title": "TDM",
   "type": "object",
   "description": "Machine-readable TDM rights signals conformant with W3C TDMRep, providing content-addressed delivery of tdm-reservation and tdm-policy properties via ISCC. Designed for content identification and discovery where identity, provenance, and trust context complement the reservation signal.",

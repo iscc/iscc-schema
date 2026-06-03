@@ -10,13 +10,14 @@ This directory hosts the machine-readable JSON-LD `@context` documents that map 
 
 ## Canonical Context
 
-[`http://purl.org/iscc/context`](iscc.jsonld) always resolves to the latest release (currently 0.7.0).
+[`http://purl.org/iscc/context`](iscc.jsonld) always resolves to the latest release (currently 0.8.0).
 
 ## Versioned Contexts
 
 Serialized ISCC records carry a version-pinned `@context`, fixing the vocabulary to a specific release:
 
-- [`http://purl.org/iscc/context/0.7.0.jsonld`](0.7.0.jsonld) — current release
+- [`http://purl.org/iscc/context/0.8.0.jsonld`](0.8.0.jsonld) — current release
+- [`http://purl.org/iscc/context/0.7.0.jsonld`](0.7.0.jsonld)
 - [`http://purl.org/iscc/context/0.6.0.jsonld`](0.6.0.jsonld)
 - [`http://purl.org/iscc/context/0.5.0.jsonld`](0.5.0.jsonld)
 - [`http://purl.org/iscc/context/0.4.1.jsonld`](0.4.1.jsonld)

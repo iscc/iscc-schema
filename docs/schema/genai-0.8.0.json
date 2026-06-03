@@ -14,7 +14,7 @@
     "upgrade": "Compact records omit @context and @type. To obtain JSON-LD, set @context to this schema's top-level @context term map (or to the versioned context URL in this extension's `context` field) and set @type to this extension's `type` value."
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "http://purl.org/iscc/schema/genai.json",
+  "$id": "http://purl.org/iscc/schema/genai-0.8.0.json",
   "title": "GenAI",
   "type": "object",
   "description": "Machine-readable generative AI disclosure signals for content transparency. Designed for AI providers to declare the level of AI involvement in content creation, supporting compliance with transparency regulations (e.g., EU AI Act Art. 50) and enabling end users to verify AI-generated content. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.",

@@ -14,9 +14,9 @@ Machine-readable TDM rights signals conformant with W3C TDMRep, providing conten
 
     ```json
     {
-      "@context": "http://purl.org/iscc/context/0.7.0.jsonld",
+      "@context": "http://purl.org/iscc/context/0.8.0.jsonld",
       "@type": "TDM",
-      "$schema": "http://purl.org/iscc/schema/tdm-0.7.0.json",
+      "$schema": "http://purl.org/iscc/schema/tdm-0.8.0.json",
       "iscc": "ISCC:MAACAJINXFXA2SQX",
       "tdm_reservation": 1,
       "tdm_policy": "https://example.com/tdmrep-policy.json"
@@ -88,7 +88,7 @@ predicates.
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| $schema | `string-uri` | http://purl.org/iscc/schema/tdm-0.7.0.json | The JSON Schema URI for TDM service metadata.         |
+| $schema | `string-uri` | http://purl.org/iscc/schema/tdm-0.8.0.json | The JSON Schema URI for TDM service metadata.         |
 
 ## **iscc**
 
