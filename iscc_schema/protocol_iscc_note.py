@@ -62,16 +62,16 @@ class IsccNote(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    context_: Literal["http://purl.org/iscc/context/0.7.0.jsonld"] = Field(
-        "http://purl.org/iscc/context/0.7.0.jsonld",
+    context_: Literal["http://purl.org/iscc/context/0.8.0.jsonld"] = Field(
+        "http://purl.org/iscc/context/0.8.0.jsonld",
         alias="@context",
         description="The JSON-LD Context URI for ISCC metadata.",
     )
     type_: Literal["IsccNote"] = Field(
         "IsccNote", alias="@type", description="The type of protocol metadata."
     )
-    schema_: Literal["http://purl.org/iscc/schema/iscc-note-0.7.0.json"] = Field(
-        "http://purl.org/iscc/schema/iscc-note-0.7.0.json",
+    schema_: Literal["http://purl.org/iscc/schema/iscc-note-0.8.0.json"] = Field(
+        "http://purl.org/iscc/schema/iscc-note-0.8.0.json",
         alias="$schema",
         description="The JSON Schema URI for ISCC Declaration metadata.",
     )

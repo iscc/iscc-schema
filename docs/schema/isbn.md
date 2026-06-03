@@ -14,7 +14,7 @@ ISBN Seed Metadata for interoperable Meta-Code generation. See [IEP-0002](https:
 
     ```json
     {
-      "$schema": "http://purl.org/iscc/schema/isbn-0.7.0.json",
+      "$schema": "http://purl.org/iscc/schema/isbn-0.8.0.json",
       "isbn": "9789295055124",
       "productform": "EA",
       "title": "The Never Ending Story",
@@ -57,7 +57,7 @@ self-describing through the `$schema` link.
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| $schema | `string-uri` | http://purl.org/iscc/schema/isbn-0.7.0.json | The JSON Schema URI for ISBN seed metadata.         |
+| $schema | `string-uri` | http://purl.org/iscc/schema/isbn-0.8.0.json | The JSON Schema URI for ISBN seed metadata.         |
 
 ## **isbn**
 <http://schema.org/isbn>

@@ -53,14 +53,14 @@ class STM(BaseModel):
     """
 
     _default_ld: ClassVar[bool] = False
-    context_: Literal["http://purl.org/iscc/context/0.7.0.jsonld"] = Field(
-        "http://purl.org/iscc/context/0.7.0.jsonld",
+    context_: Literal["http://purl.org/iscc/context/0.8.0.jsonld"] = Field(
+        "http://purl.org/iscc/context/0.8.0.jsonld",
         alias="@context",
         description="The JSON-LD Context URI for ISCC metadata.",
     )
     type_: Literal["STM"] = Field("STM", alias="@type", description="The type of seed metadata.")
-    schema_: Literal["http://purl.org/iscc/schema/stm-0.7.0.json"] = Field(
-        "http://purl.org/iscc/schema/stm-0.7.0.json",
+    schema_: Literal["http://purl.org/iscc/schema/stm-0.8.0.json"] = Field(
+        "http://purl.org/iscc/schema/stm-0.8.0.json",
         alias="$schema",
         description="The JSON Schema URI for STM seed metadata.",
     )

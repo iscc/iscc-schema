@@ -1,5 +1,9 @@
 ## Changelog
 
+### 0.8.0 - Unreleased
+
+_In development._
+
 ### 0.7.0 - 2026-06-01
 
 This release adds the **Protocol** schema category (ISCC Discovery Protocol wire records) alongside

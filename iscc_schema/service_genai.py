@@ -28,16 +28,16 @@ class GenAI(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    context_: Literal["http://purl.org/iscc/context/0.7.0.jsonld"] = Field(
-        "http://purl.org/iscc/context/0.7.0.jsonld",
+    context_: Literal["http://purl.org/iscc/context/0.8.0.jsonld"] = Field(
+        "http://purl.org/iscc/context/0.8.0.jsonld",
         alias="@context",
         description="The JSON-LD Context URI for ISCC metadata.",
     )
     type_: Literal["GenAI"] = Field(
         "GenAI", alias="@type", description="The type of service metadata."
     )
-    schema_: Literal["http://purl.org/iscc/schema/genai-0.7.0.json"] = Field(
-        "http://purl.org/iscc/schema/genai-0.7.0.json",
+    schema_: Literal["http://purl.org/iscc/schema/genai-0.8.0.json"] = Field(
+        "http://purl.org/iscc/schema/genai-0.8.0.json",
         alias="$schema",
         description="The JSON Schema URI for GenAI service metadata.",
     )

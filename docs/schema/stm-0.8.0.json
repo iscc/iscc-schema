@@ -36,7 +36,7 @@
     "upgrade": "Compact records omit @context and @type. To obtain JSON-LD, set @context to this schema's top-level @context term map (or to the versioned context URL in this extension's `context` field) and set @type to this extension's `type` value."
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "http://purl.org/iscc/schema/stm.json",
+  "$id": "http://purl.org/iscc/schema/stm-0.8.0.json",
   "title": "STM",
   "type": "object",
   "description": "STM (Scientific/Technical/Medical) Seed Metadata for interoperable Meta-Code generation. Minimal distinguishing metadata for scholarly works identified by a DOI, populatable from any DOI via Crossref/DataCite content negotiation (CSL-JSON).",

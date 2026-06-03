@@ -14,7 +14,7 @@ An ISCC Declaration record submitted to an ISCC-HUB for timestamping and registr
 
     ```json
     {
-      "$schema": "http://purl.org/iscc/schema/iscc-note-0.7.0.json",
+      "$schema": "http://purl.org/iscc/schema/iscc-note-0.8.0.json",
       "iscc_code": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "datahash": "1e20253d0f3460085c276f038de345c8e953a306f4a07f9fa77f5af8563c3d7274c5",
       "nonce": "0013a3c214c05796673503e6e549446d",
@@ -31,7 +31,7 @@ An ISCC Declaration record submitted to an ISCC-HUB for timestamping and registr
 
     ```json
     {
-      "$schema": "http://purl.org/iscc/schema/iscc-note-0.7.0.json",
+      "$schema": "http://purl.org/iscc/schema/iscc-note-0.8.0.json",
       "iscc_code": "ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
       "datahash": "1e20253d0f3460085c276f038de345c8e953a306f4a07f9fa77f5af8563c3d7274c5",
       "nonce": "0013a3c214c05796673503e6e549446d",
@@ -73,7 +73,7 @@ An ISCC Declaration record submitted to an ISCC-HUB for timestamping and registr
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| $schema | `string-uri` | http://purl.org/iscc/schema/iscc-note-0.7.0.json | The JSON Schema URI for ISCC Declaration metadata.         |
+| $schema | `string-uri` | http://purl.org/iscc/schema/iscc-note-0.8.0.json | The JSON Schema URI for ISCC Declaration metadata.         |
 
 ## **iscc_code**
 

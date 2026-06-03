@@ -16,7 +16,7 @@
     "upgrade": "Compact records omit @context and @type. To obtain JSON-LD, set @context to this schema's top-level @context term map (or to the versioned context URL in this extension's `context` field) and set @type to this extension's `type` value."
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "http://purl.org/iscc/schema/isbn.json",
+  "$id": "http://purl.org/iscc/schema/isbn-0.8.0.json",
   "title": "ISBN",
   "type": "object",
   "description": "ISBN Seed Metadata for interoperable Meta-Code generation.",

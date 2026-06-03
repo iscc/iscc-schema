@@ -16,7 +16,7 @@
     "upgrade": "Compact records omit @context and @type. To obtain JSON-LD, set @context to this schema's top-level @context term map (or to the versioned context URL in this extension's `context` field) and set @type to this extension's `type` value."
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "http://purl.org/iscc/schema/iscc-note.json",
+  "$id": "http://purl.org/iscc/schema/iscc-note-0.8.0.json",
   "title": "IsccNote",
   "type": "object",
   "description": "An ISCC Declaration record submitted to an ISCC-HUB for timestamping and registration. IsccNote is the permanent, self-describing log entry that binds an ISCC-CODE to its content hashes and a cryptographic signature. Stored in an append-only log, declarations are immutable once accepted, so the record is version-pinned and carries resolvable schema and context URLs.",

@@ -14,7 +14,7 @@ STM (Scientific/Technical/Medical) Seed Metadata for interoperable Meta-Code gen
 
     ```json
     {
-      "$schema": "http://purl.org/iscc/schema/stm-0.7.0.json",
+      "$schema": "http://purl.org/iscc/schema/stm-0.8.0.json",
       "doi": "10.5555/example.2020.0001",
       "resource_type": "JournalArticle",
       "title": "On the Stability of Quasilinear Forms",
@@ -46,7 +46,7 @@ STM (Scientific/Technical/Medical) Seed Metadata for interoperable Meta-Code gen
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| $schema | `string-uri` | http://purl.org/iscc/schema/stm-0.7.0.json | The JSON Schema URI for STM seed metadata.         |
+| $schema | `string-uri` | http://purl.org/iscc/schema/stm-0.8.0.json | The JSON Schema URI for STM seed metadata.         |
 
 ## **doi**
 <http://purl.org/ontology/bibo/doi>
