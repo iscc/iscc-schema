@@ -5,7 +5,7 @@ description: Release notes and version history for iscc-schema.
 
 ## Changelog
 
-### 0.8.0 - Unreleased
+### 0.8.0 - 2026-06-04
 
 **New schemas:**
 - Added **Identifiers** service schema (exported as `iscc_schema.Identifiers`) for registry/gateway
@@ -30,6 +30,9 @@ description: Release notes and version history for iscc-schema.
   schema names.
 - Rejected empty string entries inside `IsccMeta.identifier` lists; the published JSON Schema also
   marks identifier string branches with `minLength: 1`.
+- Tightened the published JSON Schema's `identifier` array branch to validate every element instead
+  of only the first; strict external validators may now reject payloads they previously accepted.
+  The Pydantic model already validated all elements, so runtime behavior is unchanged.
 
 ### 0.7.0 - 2026-06-01
 
