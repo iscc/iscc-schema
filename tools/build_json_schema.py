@@ -42,21 +42,21 @@ def _build_standalone_context(schema, full_context):
     # type: (dict, dict) -> dict
     """Build schema-specific @context from YAML properties and the full ISCC context."""
     ctx = {}
-    type_name = schema.get("properties", {}).get("@type", {}).get("const")
-    if type_name and type_name in full_context:
-        ctx[type_name] = full_context[type_name]
-    for prop_name, prop_def in schema.get("properties", {}).items():
+
+    def add_property_term(prop_name, prop_def):
+        # type: (str, dict) -> None
+        """Add one property term when it has an explicit mapping or a global-context term."""
         if prop_name in ("@context", "@type", "$schema"):
-            continue
+            return
         if prop_name == "iscc_code":
             # The declared ISCC-CODE is the JSON-LD subject (@id) of the record,
             # mirroring how `iscc` is mapped to @id in the other ISCC schemas.
             ctx[prop_name] = "@id"
-            continue
+            return
         if "x-iscc-context" not in prop_def:
             if prop_name in full_context:
                 ctx[prop_name] = full_context[prop_name]
-            continue
+            return
         iri = prop_def["x-iscc-context"]
         enum_ctx = prop_def.get("x-iscc-enum-context")
         if enum_ctx:
@@ -69,6 +69,27 @@ def _build_standalone_context(schema, full_context):
             ctx[prop_name] = {"@id": iri, "@type": "@id"}
         else:
             ctx[prop_name] = iri
+
+    def add_nested_property_terms(prop_def):
+        # type: (dict) -> None
+        """Recover explicitly mapped property terms from one level of nested objects/arrays."""
+        candidates = []
+        if prop_def.get("type") == "object":
+            candidates.append(prop_def)
+        items = prop_def.get("items")
+        if isinstance(items, dict):
+            candidates.append(items)
+        for candidate in candidates:
+            for nested_name, nested_def in candidate.get("properties", {}).items():
+                if "x-iscc-context" in nested_def:
+                    add_property_term(nested_name, nested_def)
+
+    type_name = schema.get("properties", {}).get("@type", {}).get("const")
+    if type_name and type_name in full_context:
+        ctx[type_name] = full_context[type_name]
+    for prop_name, prop_def in schema.get("properties", {}).items():
+        add_property_term(prop_name, prop_def)
+        add_nested_property_terms(prop_def)
     return ctx
 
 
@@ -112,6 +133,26 @@ def _patch_context_property(properties):
     properties["@context"] = patched
 
 
+def _patch_identifier_string_min_length(properties):
+    # type: (dict) -> None
+    """Make published JSON Schema reject empty identifier strings without affecting codegen."""
+    identifier = properties.get("identifier")
+    if not isinstance(identifier, dict):
+        return
+    for branch in identifier.get("oneOf", []):
+        if branch.get("type") == "string":
+            branch["minLength"] = 1
+            continue
+        if branch.get("type") != "array":
+            continue
+        items = branch.get("items", {})
+        if not isinstance(items, dict):
+            continue
+        for item in items.get("oneOf", []):
+            if item.get("type") == "string":
+                item["minLength"] = 1
+
+
 def flatten_schemas():
     # type: () -> dict
     """Load individual schemas referenced by iscc-all.yaml and merge into flat JSON Schema."""
@@ -131,6 +172,7 @@ def flatten_schemas():
             merged_properties[prop_name].update(overrides)
 
     _patch_context_property(merged_properties)
+    _patch_identifier_string_min_length(merged_properties)
 
     # Order properties for readability (jsonld first, then by importance)
     ordered = {}
@@ -214,7 +256,7 @@ def flatten_schemas():
 
 
 SEED_SCHEMAS = ["isbn.yaml", "isrc.yaml", "stm.yaml"]
-SERVICE_SCHEMAS = ["tdm.yaml", "genai.yaml"]
+SERVICE_SCHEMAS = ["tdm.yaml", "genai.yaml", "identifiers.yaml"]
 PROTOCOL_SCHEMAS = ["iscc-note.yaml"]
 
 

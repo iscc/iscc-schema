@@ -2,7 +2,29 @@
 
 ### 0.8.0 - Unreleased
 
-_In development._
+**New schemas:**
+- Added **Identifiers** service schema (exported as `iscc_schema.Identifiers`) for registry/gateway
+  responses listing external identifiers for an asset, with optional `iscc` subject binding.
+
+**Metadata:**
+- Widened `IsccMeta.identifier` from `str | list[str]` to accept a typed identifier object or a
+  mixed list of strings and objects. Legacy string forms remain valid.
+- Added the `iscc_schema.Identifier` item model for constructing typed identifier objects with
+  `scheme`, `code`, optional `scope`, and optional `primary`.
+- Identifier objects are bare when nested in `IsccMeta` or `Identifiers`: no nested `@context`,
+  `$schema`, or `@type` is emitted.
+
+**Service metadata:**
+- Added optional `iscc` to standalone `GenAI`, aligning it with `TDM` and `Identifiers` as a
+  subject-bearing service record.
+- Made all Service objects forward-compatible with extension fields (`additionalProperties: true`),
+  including standalone and inline `GenAI`.
+- Preserved falsy extension-field values on Service objects, so values such as `0.0`, `[]`, `{}`,
+  `""`, and `false` are no longer normalized away.
+- Made `recover_context(..., schema="<name>-<version>.json")` work with bare versioned standalone
+  schema names.
+- Rejected empty string entries inside `IsccMeta.identifier` lists; the published JSON Schema also
+  marks identifier string branches with `minLength: 1`.
 
 ### 0.7.0 - 2026-06-01
 

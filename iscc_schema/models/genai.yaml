@@ -5,11 +5,12 @@ description: Machine-readable generative AI disclosure signals for content trans
   compliance with transparency regulations (e.g., EU AI Act Art. 50) and enabling end users
   to verify AI-generated content. These signals are designed for use within content identification
   and discovery protocols that provide additional identity, provenance, and trust context.
-additionalProperties: false
+additionalProperties: true
 examples:
 - '@context': http://purl.org/iscc/context
   '@type': GenAI
   $schema: http://purl.org/iscc/schema/genai.json
+  iscc: ISCC:MAACAJINXFXA2SQX
   involvement: ai_generated
   ai_system: DALL-E 3
   digital_source_type: http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia
@@ -28,6 +29,14 @@ properties:
     format: uri
     const: http://purl.org/iscc/schema/genai.json
     description: The JSON Schema URI for GenAI service metadata.
+  iscc:
+    type: string
+    description: An ISCC-CODE or ISCC-ID identifying the digital content this GenAI declaration
+      applies to. Mapped to JSON-LD @id, making it the RDF subject of the declaration.
+    example: ISCC:MAACAJINXFXA2SQX
+    minLength: 15
+    maxLength: 73
+    pattern: ^ISCC:[A-Z2-7]{10,73}$
   involvement:
     type: string
     description: Level of generative AI involvement in content creation. 'human' indicates

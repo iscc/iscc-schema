@@ -13,8 +13,8 @@ Dense, prescriptive reference for AI coding agents working on or integrating wit
 
 | Path | Contents | Editable? |
 |------|----------|-----------|
-| `iscc_schema/__init__.py` | Public API exports: `IsccMeta`, `Signature`, `ISBN`, `ISRC`, `STM`, `TDM`, `GenAI`, `IsccNote`, `recover_context` | Yes |
-| `iscc_schema/base.py` | Custom `BaseModel` — serialization (`dict`, `json`, `jcs`), empty-string-to-None coercion | Yes |
+| `iscc_schema/__init__.py` | Public API exports: `IsccMeta`, `Signature`, `ISBN`, `ISRC`, `STM`, `TDM`, `GenAI`, `Identifier`, `Identifiers`, `IsccNote`, `recover_context` | Yes |
+| `iscc_schema/base.py` | Custom `BaseModel` — serialization (`dict`, `json`, `jcs`), declared-field empty-value coercion | Yes |
 | `iscc_schema/fields.py` | RFC 3986-compliant `AnyUrl` type with regex validation | Yes |
 | `iscc_schema/recovery.py` | `recover_context()` — reconstruct `@context` from `$schema` or `@type` | Yes |
 | `iscc_schema/aliases.json` | Maps `@context`→`context_`, `@type`→`type_`, `$schema`→`schema_` | Yes |
@@ -25,6 +25,7 @@ Dense, prescriptive reference for AI coding agents working on or integrating wit
 | `iscc_schema/seed_stm.py` | **Generated** — `STM` model | No |
 | `iscc_schema/service_tdm.py` | **Generated** — `TDM` model | No |
 | `iscc_schema/service_genai.py` | **Generated** — `GenAI` model | No |
+| `iscc_schema/service_identifiers.py` | **Generated** — `Identifiers` service model and bare `Identifier` item model | No |
 | `iscc_schema/protocol_iscc_note.py` | **Generated** — `IsccNote` model | No |
 | `iscc_schema/contexts.py` | **Generated** — JSON-LD context mappings + `TYPE_SCHEMAS` dispatch | No |
 | `iscc_schema/models/*.yaml` | **Source of truth** — OpenAPI 3.1.0 schema definitions | Yes |
@@ -44,7 +45,7 @@ IsccMeta (iscc-all.yaml composes via allOf + $ref):
   ├── iscc-minimal.yaml     → iscc
   ├── iscc-basic.yaml       → name, description, meta
   ├── iscc-embeddable.yaml  → creator, license, credit, rights, acquire
-  ├── iscc-extended.yaml    → media_id, iscc_id, image, keywords, form, version, tdm, genai
+  ├── iscc-extended.yaml    → media_id, iscc_id, image, identifier, keywords, form, version, tdm, genai
   ├── iscc-technical.yaml   → mode, filename, filesize, datasize, mediatype, duration, fps, width, height, created
   ├── iscc-crypto.yaml      → tophash, metahash, datahash, nonce, signature
   ├── iscc-nft.yaml         → external_url, animation_url, properties, attributes, nft
@@ -56,6 +57,7 @@ Standalone (NOT in IsccMeta):
   ├── stm.yaml       → STM   (seed metadata; scholarly / DOI works)
   ├── tdm.yaml       → TDM   (service metadata; also inline in IsccMeta.tdm)
   ├── genai.yaml     → GenAI (service metadata; also inline in IsccMeta.genai)
+  ├── identifiers.yaml → Identifiers (service metadata; asset-to-identifiers response, includes Identifier items)
   └── iscc-note.yaml → IsccNote (protocol record; ISCC Discovery Protocol declaration)
 ```
 
@@ -70,6 +72,7 @@ iscc_schema.__init__
   → iscc_schema.seed_stm (generated) → iscc_schema.base
   → iscc_schema.service_tdm (generated) → iscc_schema.base
   → iscc_schema.service_genai (generated) → iscc_schema.base
+  → iscc_schema.service_identifiers (generated) → iscc_schema.base
   → iscc_schema.protocol_iscc_note (generated) → iscc_schema.base
   → iscc_schema.recovery → iscc_schema.contexts (generated)
 ```
@@ -84,6 +87,8 @@ from iscc_schema import ISRC          # Seed metadata
 from iscc_schema import STM           # Seed metadata (scholarly / DOI works)
 from iscc_schema import TDM           # Service metadata
 from iscc_schema import GenAI         # Service metadata
+from iscc_schema import Identifier    # Bare typed external identifier item
+from iscc_schema import Identifiers   # Asset-to-identifiers service metadata
 from iscc_schema import IsccNote      # Protocol record (ISCC Discovery Protocol)
 from iscc_schema import recover_context  # JSON-LD context recovery
 ```
@@ -100,6 +105,8 @@ from iscc_schema import recover_context  # JSON-LD context recovery
 | DOI / scholarly-work Meta-Code generation | `STM` | `stm.yaml` |
 | TDM reservation signals | `TDM` | `tdm.yaml` |
 | GenAI disclosure signals | `GenAI` | `genai.yaml` |
+| One typed external identifier | `Identifier` | `identifiers.yaml` item schema |
+| Asset-to-identifiers discovery response | `Identifiers` | `identifiers.yaml` |
 | ISCC Discovery Protocol declaration record | `IsccNote` | `iscc-note.yaml` |
 | API request/response models | `generator.py` models | `iscc-generator.yaml` |
 
@@ -121,7 +128,8 @@ Default `ld` value depends on model type:
 |-------|-------------|-----|
 | `IsccMeta` | `True` | Core metadata, full JSON-LD |
 | `ISBN`, `ISRC`, `STM` | `False` | Seed input for Meta-Code generation |
-| `TDM`, `GenAI` | `True` | Service metadata for registry discovery |
+| `TDM`, `GenAI`, `Identifiers` | `True` | Service metadata for registry discovery |
+| `Identifier` | No JSON-LD wrapper fields | Bare item model used inside identifier lists |
 | `IsccNote` | `False` | Protocol wire record, compact with version-specific `$schema` |
 
 ### Which build command?
@@ -140,7 +148,7 @@ Default `ld` value depends on model type:
 
 All models inherit from `iscc_schema.base.BaseModel` with:
 
-- `extra="forbid"` — unknown fields raise `ValidationError` (the `TDM` service model overrides this to `extra="allow"` for forward-compatible reservation signals)
+- `extra="forbid"` — unknown fields raise `ValidationError` by default; generated Service objects (`TDM`, `GenAI`, `Identifiers`), nested identifier items, and their inline forms in `IsccMeta` override this to `extra="allow"` for forward-compatible service signals
 - `validate_assignment=True` — assignment validates at runtime
 - `use_enum_values=True` — enums serialize to string values
 - `populate_by_name=True` — accept both `context_` and `@context`
@@ -148,7 +156,7 @@ All models inherit from `iscc_schema.base.BaseModel` with:
 
 ### Empty String Coercion
 
-The `@model_validator(mode="before")` in `base.py` converts empty strings to `None` for all fields. Combined with `exclude_none=True` in serialization, empty strings are silently dropped.
+The `@model_validator(mode="before")` in `base.py` converts falsy values on declared schema fields to `None`, except empty lists on required list fields, which are preserved so list constraints such as `minItems` can run. Combined with `exclude_none=True` in serialization, empty optional declared values are silently dropped. Unknown extension fields are preserved as supplied, including `0.0`, `[]`, `{}`, `""`, and `False`.
 
 ### URL Validation
 
@@ -192,7 +200,7 @@ Authored in the YAML source:
 
 | Method / Function | Effect |
 |-------------------|--------|
-| `IsccMeta(...)` | Validates all fields, coerces empty strings to None |
+| `IsccMeta(...)` | Validates all fields, coerces empty declared-field values to None |
 | `meta.dict()` | Pure — returns new dict, no mutation |
 | `meta.json()` | Pure — returns JSON string, no mutation |
 | `meta.jcs()` | Pure — returns canonical bytes, no mutation |
@@ -308,4 +316,4 @@ NEVER pass `by_alias=False` to `dict()` or `json()` unless you specifically need
 
 ---
 
-NEVER add a standalone schema without updating ALL five build scripts (`build_code.py`, `build_json_schema.py`, `build_json_ld_context.py`, `build_terms.py`, `build_docs.py`). Missing any one causes incomplete output.
+NEVER add a standalone schema without updating ALL five build scripts (`build_code.py`, `build_json_schema.py`, `build_json_ld_context.py`, `build_terms.py`, `build_docs.py`) plus public exports and docs navigation. Missing any one causes incomplete output.

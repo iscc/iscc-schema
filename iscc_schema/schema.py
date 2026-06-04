@@ -6,7 +6,7 @@ from enum import Enum, IntEnum
 from pydantic import AwareDatetime, ConfigDict, Field
 from iscc_schema.fields import AnyUrl
 from iscc_schema.base import BaseModel
-from typing import Any
+from typing import Annotated, Any
 
 
 class Chain(Enum):
@@ -326,6 +326,23 @@ class IsccTechnical(BaseModel):
     )
 
 
+class Identifier(BaseModel):
+    """
+    A typed external identifier with scheme, code, scope, and preferred-status flag.
+    """
+
+    model_config = ConfigDict(
+        extra="allow",
+    )
+    scheme: str = Field(..., min_length=1, pattern="^[a-z0-9]+([._-][a-z0-9]+)*$")
+    code: str = Field(..., min_length=1)
+    scope: str | None = Field(None, pattern="^[a-z0-9]+([._-][a-z0-9]+)*$")
+    primary: bool | None = None
+
+
+IdentifierString = Annotated[str, Field(min_length=1)]
+
+
 class Form(Enum):
     """
     The form or kind of content identified, using a Schema.org CreativeWork subtype. While `@type` provides a coarse modality classification (text, image, audio, video) and `mode`/`mediatype` describe technical aspects, `form` captures what the content *is* — a book, scholarly article, presentation, report, photograph, etc.
@@ -395,7 +412,7 @@ class Genai(BaseModel):
     """
 
     model_config = ConfigDict(
-        extra="forbid",
+        extra="allow",
     )
     involvement: Involvement | None = Field(
         None, description="Level of generative AI involvement in content creation."
@@ -443,9 +460,9 @@ class IsccExtended(BaseModel):
         examples=["https://picsum.photos/200/300.jpg"],
         json_schema_extra={"x-iscc-context": "http://schema.org/image"},
     )
-    identifier: str | list[str] | None = Field(
+    identifier: IdentifierString | Identifier | list[IdentifierString | Identifier] | None = Field(
         None,
-        description="Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.",
+        description="Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation. Accepts a bare string, a typed Identifier object, or a list mixing both forms.",
         json_schema_extra={"x-iscc-context": "http://schema.org/identifier"},
     )
     content: AnyUrl | None = Field(

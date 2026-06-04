@@ -23,6 +23,7 @@ PAGES = [
     "schema/stm.md",
     "schema/tdm.md",
     "schema/genai.md",
+    "schema/identifiers.md",
     "schema/iscc-note.md",
     "examples/index.md",
     "versioning.md",

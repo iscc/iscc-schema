@@ -29,7 +29,7 @@ def _normalize_schema_url(url):
     Handles unversioned standalone URLs (`.../iscc-note.json`) and versioned archive
     URLs (`.../iscc-note-0.7.0.json`) alike.
     """
-    segment = url.rsplit("/", 1)[-1] if "/" in url else ""
+    segment = url.rsplit("/", 1)[-1]
     if segment in _STANDALONE_NAMES:
         return _STANDALONE_NAMES[segment]
     base_segment = _VERSION_SUFFIX.sub("", segment)

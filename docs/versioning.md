@@ -87,13 +87,13 @@ status is surfaced in the vocabulary documentation as a **Status** badge.
 - Promotion from `draft` to `stable` is one-way and happens at release boundaries. Once a field is
   `stable` it is not demoted back to `draft`.
 
-- Standalone schemas (ISBN, ISRC, STM, TDM, GenAI, IsccNote) are versioned as a whole via semver.
+- Standalone schemas (ISBN, ISRC, STM, TDM, GenAI, Identifiers, IsccNote) are versioned as a whole via semver.
   Their field-level `x-iscc-status` follows the same contract: a stable field in a standalone
   schema is covered by the package's semver guarantees.
 
 ## Standalone Schemas
 
-Seed, service, and protocol schemas (ISBN, ISRC, STM, TDM, GenAI, IsccNote) follow the same
+Seed, service, and protocol schemas (ISBN, ISRC, STM, TDM, GenAI, Identifiers, IsccNote) follow the same
 versioned-URL strategy as the main schema, with per-schema names. Every serialized record carries a
 versioned `$schema` (e.g., `http://purl.org/iscc/schema/isbn-{{ version }}.json`); records serialized as
 full JSON-LD additionally carry a versioned `@context` (e.g.,

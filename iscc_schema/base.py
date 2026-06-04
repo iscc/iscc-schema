@@ -2,10 +2,39 @@
 """Custom BaseModel with JSON-LD alias serialization, JCS canonicalization, and coercion."""
 
 import json
-from typing import ClassVar
+import types
+from functools import lru_cache
+from typing import ClassVar, Union, get_args, get_origin
 
 import jcs
 from pydantic import BaseModel as PydanticBaseModel, ConfigDict, model_validator
+
+
+def _allows_list(annotation):
+    # type: (object) -> bool
+    """Return True if a type annotation accepts a list value."""
+    origin = get_origin(annotation)
+    if origin is list:
+        return True
+    if origin in (Union, types.UnionType):
+        return any(_allows_list(arg) for arg in get_args(annotation))
+    return False
+
+
+@lru_cache(maxsize=None)
+def _field_normalization_policy(cls):
+    # type: (type[BaseModel]) -> tuple[frozenset[str], frozenset[str]]
+    """Return declared input keys and required list keys for a model class."""
+    declared_keys = set()
+    required_list_keys = set()
+    for name, field in cls.model_fields.items():
+        keys = {name}
+        if isinstance(field.alias, str):
+            keys.add(field.alias)
+        declared_keys.update(keys)
+        if field.is_required() and _allows_list(field.annotation):
+            required_list_keys.update(keys)
+    return frozenset(declared_keys), frozenset(required_list_keys)
 
 
 class BaseModel(PydanticBaseModel):
@@ -25,11 +54,21 @@ class BaseModel(PydanticBaseModel):
     @classmethod
     def empty_string_to_default(cls, values):
         # type: (dict) -> dict
-        """Convert empty string values to None."""
+        """Convert falsy declared field values to None while preserving extension data."""
         if not isinstance(values, dict):
             return values
+        declared_keys, required_list_keys = _field_normalization_policy(cls)
         return {
-            k: v if v or (isinstance(v, int) and not isinstance(v, bool)) else None
+            k: (
+                v
+                if (
+                    k not in declared_keys
+                    or v
+                    or (isinstance(v, int) and not isinstance(v, bool))
+                    or (isinstance(v, list) and k in required_list_keys)
+                )
+                else None
+            )
             for k, v in values.items()
         }
 

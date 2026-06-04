@@ -11,6 +11,7 @@
     "STM": "http://purl.org/iscc/terms/#STM",
     "TDM": "http://purl.org/iscc/terms/#TDM",
     "GenAI": "http://purl.org/iscc/terms/#GenAI",
+    "Identifiers": "http://purl.org/iscc/terms/#Identifiers",
     "IsccNote": "http://purl.org/iscc/terms/#IsccNote",
     "$schema": {
       "@id": "http://purl.org/iscc/terms/#$schema",
@@ -166,6 +167,10 @@
       "@id": "http://purl.org/iscc/terms/#digital_source_type",
       "@type": "@id"
     },
+    "scheme": "http://schema.org/propertyID",
+    "code": "http://schema.org/value",
+    "scope": "http://purl.org/iscc/terms/#scope",
+    "primary": "http://purl.org/iscc/terms/#primary",
     "timestamp": "http://purl.org/iscc/terms/#timestamp",
     "gateway": "http://purl.org/iscc/terms/#gateway"
   },
@@ -413,7 +418,7 @@
       "description": "Machine-readable generative AI disclosure signals for content transparency. Omitted fields indicate that the disclosure status has not been determined.",
       "x-iscc-context": "http://purl.org/iscc/terms/#genai",
       "x-iscc-status": "draft",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "properties": {
         "involvement": {
           "type": "string",
@@ -496,18 +501,78 @@
       "x-iscc-schema-doc": "An image of the item. This can be a URL or a fully described ImageObject."
     },
     "identifier": {
-      "description": "Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.",
+      "description": "Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation. Accepts a bare string, a typed Identifier object, or a list mixing both forms.",
       "oneOf": [
         {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "title": "Identifier",
+          "description": "A typed external identifier with scheme, code, scope, and preferred-status flag.",
+          "additionalProperties": true,
+          "required": [
+            "scheme",
+            "code"
+          ],
+          "properties": {
+            "scheme": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$"
+            },
+            "code": {
+              "type": "string",
+              "minLength": 1
+            },
+            "scope": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$"
+            },
+            "primary": {
+              "type": "boolean"
+            }
+          }
         },
         {
           "type": "array",
-          "items": [
-            {
-              "type": "string"
-            }
-          ]
+          "items": {
+            "oneOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "object",
+                "title": "Identifier",
+                "description": "A typed external identifier with scheme, code, scope, and preferred-status flag.",
+                "additionalProperties": true,
+                "required": [
+                  "scheme",
+                  "code"
+                ],
+                "properties": {
+                  "scheme": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$"
+                  },
+                  "code": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "scope": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$"
+                  },
+                  "primary": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            ]
+          }
         }
       ],
       "x-iscc-context": "http://schema.org/identifier",

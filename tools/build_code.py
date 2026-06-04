@@ -105,6 +105,43 @@ def _patch_versioned_urls(outfile, patch_schema=True):
         f.write(text)
 
 
+def _patch_identifier_string_constraints(outfile):
+    # type: (pathlib.Path) -> None
+    """Preserve minLength on IsccMeta.identifier string branches without RootModel wrappers."""
+    with outfile.open("rt", encoding="utf-8") as f:
+        text = f.read()
+
+    if "IdentifierString = Annotated[str, Field(min_length=1)]" not in text:
+        text = re.sub(
+            r"^from typing import (.+)$",
+            lambda m: "from typing import "
+            + ", ".join(
+                dict.fromkeys(["Annotated"] + [name.strip() for name in m.group(1).split(",")])
+            ),
+            text,
+            count=1,
+            flags=re.MULTILINE,
+        )
+        marker = "\n\nclass Form(Enum):\n"
+        if marker not in text:
+            raise ValueError("Could not locate generated Identifier class boundary")
+        text = text.replace(
+            marker,
+            "\n\nIdentifierString = Annotated[str, Field(min_length=1)]\n" + marker,
+            1,
+        )
+
+    old = "identifier: str | Identifier | list[str | Identifier] | None = Field("
+    new = "identifier: IdentifierString | Identifier | list[IdentifierString | Identifier] | None = Field("
+    if old in text:
+        text = text.replace(old, new, 1)
+    elif new not in text:
+        raise ValueError("Could not locate generated IsccMeta.identifier annotation")
+
+    with outfile.open("wt", encoding="utf-8", newline="\n") as f:
+        f.write(text)
+
+
 def _patch_versioned_schema(outfile, name):
     # type: (pathlib.Path, str) -> None
     """Pin a standalone model's $schema literal to the version-specific archive URL.
@@ -151,6 +188,7 @@ def build_schema():
         formatters=[],
     )
     _patch_imports(outfile)
+    _patch_identifier_string_constraints(outfile)
     _patch_versioned_urls(outfile)
 
 
@@ -184,6 +222,7 @@ SEED_SCHEMAS = {
 SERVICE_SCHEMAS = {
     "tdm": ("tdm.yaml", "service_tdm.py", "TDM"),
     "genai": ("genai.yaml", "service_genai.py", "GenAI"),
+    "identifiers": ("identifiers.yaml", "service_identifiers.py", "Identifiers"),
 }
 
 # Protocol schemas are ISCC Discovery Protocol records (e.g. declaration notes). Unlike
@@ -280,6 +319,7 @@ def build():
             CODE / "seed_stm.py",
             CODE / "service_tdm.py",
             CODE / "service_genai.py",
+            CODE / "service_identifiers.py",
             CODE / "protocol_iscc_note.py",
         ]
     )
