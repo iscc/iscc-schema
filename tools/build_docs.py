@@ -69,7 +69,7 @@ def copy_root_files():
 
 
 SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml", "stm.yaml"]
-SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml"]
+SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml", "identifiers.yaml"]
 PROTOCOL_SCHEMATA = ["iscc-note.yaml"]
 
 # Icons and short nav titles for standalone schema pages
@@ -89,6 +89,11 @@ STANDALONE_META = {
         "description": "W3C TDMRep-conformant rights signals via content-addressed discovery",
     },
     "genai": {"icon": "lucide/sparkles", "title": "GenAI Service"},
+    "identifiers": {
+        "icon": "lucide/list-checks",
+        "title": "Identifiers Service",
+        "description": "Asset-to-identifier discovery response for ISCC registries",
+    },
     "iscc-note": {
         "icon": "lucide/file-check",
         "title": "ISCC Note",
@@ -138,6 +143,43 @@ def _version_main_schema(data):
         properties["$schema"]["default"] = VERSIONED_SCHEMA
 
 
+def _type_name(attrs):
+    # type: (dict) -> str
+    """Render a compact field type label for docs tables."""
+    if "oneOf" in attrs:
+        names = [_type_name(item) for item in attrs["oneOf"]]
+        return " | ".join(dict.fromkeys(name for name in names if name))
+    type_ = attrs.get("type")
+    if isinstance(type_, list):
+        type_ = " | ".join(str(item) for item in type_)
+    if not type_:
+        return "object" if "properties" in attrs else "any"
+    if attrs.get("format"):
+        type_ += "-" + attrs.get("format")
+    return type_
+
+
+def _render_array_item_fields(prop, attrs):
+    # type: (str, dict) -> str
+    """Render a compact table for object item fields inside an array property."""
+    items = attrs.get("items")
+    if not isinstance(items, dict) or not items.get("properties"):
+        return ""
+    required = set(items.get("required", []))
+    content = f"### **{prop} item fields**\n\n"
+    content += "| Name | Type | Required | Definition |\n"
+    content += "| ---- | ---- | -------- | ---------- |\n"
+    for item_prop, item_attrs in items["properties"].items():
+        type_ = _type_name(item_attrs)
+        description = item_attrs.get("description", "")
+        if item_attrs.get("example"):
+            description += f"<br><br>**Example**: `{item_attrs['example']}`"
+        required_text = "yes" if item_prop in required else "no"
+        content += f"| {item_prop} | `{type_}` | {required_text} | {description} |\n"
+    content += "\n"
+    return content
+
+
 def _render_schema_sections(schemata):
     # type: (list[str]) -> str
     """Render markdown documentation sections from a list of YAML schema files."""
@@ -162,9 +204,7 @@ def _render_schema_sections(schemata):
             content += f"**Required fields**: `{'`, `'.join(data['required'])}`\n\n"
 
         for prop, attrs in data["properties"].items():
-            type_ = attrs.get("type")
-            if attrs.get("format"):
-                type_ += "-" + attrs.get("format")
+            type_ = _type_name(attrs)
             title = f"**{prop}**\n"
             if attrs.get("x-iscc-context"):
                 title += f"<{attrs.get('x-iscc-context')}>\n"
@@ -257,9 +297,7 @@ def _build_standalone_doc(schema_file, category, extra_text=""):
     content += "## Field Reference\n\n"
 
     for prop, attrs in data["properties"].items():
-        type_ = attrs.get("type")
-        if attrs.get("format"):
-            type_ += "-" + attrs.get("format")
+        type_ = _type_name(attrs)
         heading = f"**{prop}**\n"
         if attrs.get("x-iscc-context"):
             heading += f"<{attrs.get('x-iscc-context')}>\n"
@@ -274,6 +312,7 @@ def _build_standalone_doc(schema_file, category, extra_text=""):
         content += f"| Name | Type | Default | Definition                     |\n"
         content += f"| ---- | ---- | --------|--------------------------------|\n"
         content += f"| {prop} | `{type_}` | {default} | {description}         |\n\n"
+        content += _render_array_item_fields(prop, attrs)
 
     outpath = ROOT / "docs" / "schema" / f"{name}.md"
     with open(outpath, "wt", encoding="utf-8", newline="\n") as outf:
@@ -328,7 +367,7 @@ def build_json_ld_context_docs():
         "This directory hosts the machine-readable JSON-LD `@context` documents that map ISCC "
         "metadata properties to their semantic IRIs. A JSON-LD processor dereferences a whole "
         "context document by URL. For human-readable term definitions, see the "
-        "[Vocabulary](../terms/index.md) page — the `/terms/` namespace the term IRIs resolve "
+        "[Vocabulary](/terms/) page — the `/terms/` namespace the term IRIs resolve "
         "into.\n\n"
     )
     doc += "## Canonical Context\n\n"

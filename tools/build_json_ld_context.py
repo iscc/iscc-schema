@@ -13,7 +13,11 @@ HERE = dirname(abspath(__file__))
 ROOT = pathlib.Path(__file__).parent.parent
 MODELS = ROOT / "iscc_schema" / "models"
 SEED_SCHEMAS = [MODELS / "isbn.yaml", MODELS / "isrc.yaml", MODELS / "stm.yaml"]
-SERVICE_SCHEMAS = [MODELS / "tdm.yaml", MODELS / "genai.yaml"]
+SERVICE_SCHEMAS = [
+    MODELS / "tdm.yaml",
+    MODELS / "genai.yaml",
+    MODELS / "identifiers.yaml",
+]
 PROTOCOL_SCHEMAS = [MODELS / "iscc-note.yaml"]
 PATH_LATEST = join(HERE, f"../docs/context/iscc.jsonld")
 PATH_VERSION = join(HERE, f"../docs/context/{iscc_schema.__version__}.jsonld")
@@ -35,6 +39,7 @@ def build_context():
             "STM": "http://purl.org/iscc/terms/#STM",
             "TDM": "http://purl.org/iscc/terms/#TDM",
             "GenAI": "http://purl.org/iscc/terms/#GenAI",
+            "Identifiers": "http://purl.org/iscc/terms/#Identifiers",
             "IsccNote": "http://purl.org/iscc/terms/#IsccNote",
         }
     }
@@ -62,7 +67,24 @@ def _add_schema_terms(ctx, yaml_path):
     """Add terms from a standalone YAML schema to the JSON-LD context."""
     with open(yaml_path, encoding="utf-8") as f:
         schema = yaml.safe_load(f)
-    for prop, fields in schema.get("properties", {}).items():
+
+    def iter_context_fields(properties):
+        # type: (dict) -> object
+        """Yield top-level and explicitly mapped nested property definitions."""
+        for prop, fields in properties.items():
+            yield prop, fields
+            candidates = []
+            if fields.get("type") == "object":
+                candidates.append(fields)
+            items = fields.get("items")
+            if isinstance(items, dict):
+                candidates.append(items)
+            for candidate in candidates:
+                for nested_prop, nested_fields in candidate.get("properties", {}).items():
+                    if "x-iscc-context" in nested_fields:
+                        yield nested_prop, nested_fields
+
+    for prop, fields in iter_context_fields(schema.get("properties", {})):
         if "x-iscc-context" not in fields:
             continue
         iri = fields["x-iscc-context"]

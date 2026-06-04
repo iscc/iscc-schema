@@ -11,6 +11,7 @@
     "STM": "http://purl.org/iscc/terms/#STM",
     "TDM": "http://purl.org/iscc/terms/#TDM",
     "GenAI": "http://purl.org/iscc/terms/#GenAI",
+    "Identifiers": "http://purl.org/iscc/terms/#Identifiers",
     "IsccNote": "http://purl.org/iscc/terms/#IsccNote",
     "$schema": {
       "@id": "http://purl.org/iscc/terms/#$schema",
@@ -166,6 +167,10 @@
       "@id": "http://purl.org/iscc/terms/#digital_source_type",
       "@type": "@id"
     },
+    "scheme": "http://schema.org/propertyID",
+    "code": "http://schema.org/value",
+    "scope": "http://purl.org/iscc/terms/#scope",
+    "primary": "http://purl.org/iscc/terms/#primary",
     "timestamp": "http://purl.org/iscc/terms/#timestamp",
     "gateway": "http://purl.org/iscc/terms/#gateway"
   }

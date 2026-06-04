@@ -102,7 +102,7 @@
 
     The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides dedicated properties for representing many of these, either as textual strings or as URL (URI) links. See background notes for more details.
 
-    **Comment**:  Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.
+    **Comment**:  Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation. Accepts a bare string, a typed Identifier object, or a list mixing both forms.
 
     **Standard**:  ISO 24138:2024
 

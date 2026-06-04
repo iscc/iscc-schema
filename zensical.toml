@@ -34,6 +34,7 @@ nav = [
         { "Service Metadata" = [
             "schema/tdm.md",
             "schema/genai.md",
+            "schema/identifiers.md",
         ]},
         { "Protocol Schemas" = [
             "schema/iscc-note.md",

@@ -26,7 +26,7 @@ class GenAI(BaseModel):
     """
 
     model_config = ConfigDict(
-        extra="forbid",
+        extra="allow",
     )
     context_: Literal["http://purl.org/iscc/context/0.8.0.jsonld"] = Field(
         "http://purl.org/iscc/context/0.8.0.jsonld",
@@ -40,6 +40,14 @@ class GenAI(BaseModel):
         "http://purl.org/iscc/schema/genai-0.8.0.json",
         alias="$schema",
         description="The JSON Schema URI for GenAI service metadata.",
+    )
+    iscc: str | None = Field(
+        None,
+        description="An ISCC-CODE or ISCC-ID identifying the digital content this GenAI declaration applies to. Mapped to JSON-LD @id, making it the RDF subject of the declaration.",
+        examples=["ISCC:MAACAJINXFXA2SQX"],
+        max_length=73,
+        min_length=15,
+        pattern="^ISCC:[A-Z2-7]{10,73}$",
     )
     involvement: Involvement | None = Field(
         None,

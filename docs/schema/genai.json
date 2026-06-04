@@ -1,6 +1,7 @@
 {
   "@context": {
     "GenAI": "http://purl.org/iscc/terms/#GenAI",
+    "iscc": "@id",
     "involvement": "http://purl.org/iscc/terms/#involvement",
     "ai_system": "http://purl.org/iscc/terms/#ai_system",
     "digital_source_type": {
@@ -43,6 +44,14 @@
       "const": "http://purl.org/iscc/schema/genai-0.8.0.json",
       "description": "The JSON Schema URI for GenAI service metadata. See the top-level `x-iscc-jsonld` extension for the JSON-LD upgrade path."
     },
+    "iscc": {
+      "type": "string",
+      "description": "An ISCC-CODE or ISCC-ID identifying the digital content this GenAI declaration applies to. Mapped to JSON-LD @id, making it the RDF subject of the declaration.",
+      "example": "ISCC:MAACAJINXFXA2SQX",
+      "minLength": 15,
+      "maxLength": 73,
+      "pattern": "^ISCC:[A-Z2-7]{10,73}$"
+    },
     "involvement": {
       "type": "string",
       "description": "Level of generative AI involvement in content creation. 'human' indicates content created purely by human effort without generative AI. 'ai_assisted' indicates content created by human effort with support from generative AI. 'human_supervised' indicates content created by generative AI but supervised or reviewed by humans. 'ai_generated' indicates content created by generative AI without human supervision.",
@@ -70,12 +79,13 @@
       "x-iscc-context": "http://purl.org/iscc/terms/#digital_source_type"
     }
   },
-  "additionalProperties": false,
+  "additionalProperties": true,
   "examples": [
     {
       "@context": "http://purl.org/iscc/context/0.8.0.jsonld",
       "@type": "GenAI",
       "$schema": "http://purl.org/iscc/schema/genai-0.8.0.json",
+      "iscc": "ISCC:MAACAJINXFXA2SQX",
       "involvement": "ai_generated",
       "ai_system": "DALL-E 3",
       "digital_source_type": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia"

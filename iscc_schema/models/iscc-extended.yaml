@@ -50,12 +50,56 @@ properties:
     x-iscc-schema-doc: An image of the item. This can be a URL or a fully described ImageObject.
   identifier:
     description: Other identifier(s) referencing the work, product or other abstraction of
-      which the referenced **digital content** is a full or partial manifestation.
+      which the referenced **digital content** is a full or partial manifestation. Accepts
+      a bare string, a typed Identifier object, or a list mixing both forms.
     oneOf:
     - type: string
+    - type: object
+      title: Identifier
+      description: A typed external identifier with scheme, code, scope, and preferred-status
+        flag.
+      additionalProperties: true
+      required:
+      - scheme
+      - code
+      properties:
+        scheme:
+          type: string
+          minLength: 1
+          pattern: ^[a-z0-9]+([._-][a-z0-9]+)*$
+        code:
+          type: string
+          minLength: 1
+        scope:
+          type: string
+          pattern: ^[a-z0-9]+([._-][a-z0-9]+)*$
+        primary:
+          type: boolean
     - type: array
       items:
-      - type: string
+        oneOf:
+        - type: string
+        - type: object
+          title: Identifier
+          description: A typed external identifier with scheme, code, scope, and preferred-status
+            flag.
+          additionalProperties: true
+          required:
+          - scheme
+          - code
+          properties:
+            scheme:
+              type: string
+              minLength: 1
+              pattern: ^[a-z0-9]+([._-][a-z0-9]+)*$
+            code:
+              type: string
+              minLength: 1
+            scope:
+              type: string
+              pattern: ^[a-z0-9]+([._-][a-z0-9]+)*$
+            primary:
+              type: boolean
     x-iscc-context: http://schema.org/identifier
     x-iscc-status: draft
     x-iscc-schema-doc: The identifier property represents any kind of identifier for any kind
@@ -155,7 +199,7 @@ properties:
       Omitted fields indicate that the disclosure status has not been determined.
     x-iscc-context: http://purl.org/iscc/terms/#genai
     x-iscc-status: draft
-    additionalProperties: false
+    additionalProperties: true
     properties:
       involvement:
         type: string

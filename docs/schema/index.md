@@ -26,6 +26,7 @@ Use-case-specific metadata schemas served by ISCC registries and discoverable th
 
 - [**TDM Service Metadata**](tdm.md) — Machine-readable TDM rights signals conformant with W3C TDMRep, providing content-addressed delivery of tdm-reservation and tdm-policy properties via ISCC. Designed for content identification and discovery where identity, provenance, and trust context complement the reservation signal.
 - [**GenAI Service Metadata**](genai.md) — Machine-readable generative AI disclosure signals for content transparency. Designed for AI providers to declare the level of AI involvement in content creation, supporting compliance with transparency regulations (e.g., EU AI Act Art. 50) and enabling end users to verify AI-generated content. These signals are designed for use within content identification and discovery protocols that provide additional identity, provenance, and trust context.
+- [**Identifiers Service Metadata**](identifiers.md) — Set of typed external identifiers served for an asset identified by an ISCC.
 
 ## Protocol Schemas
 

@@ -1,0 +1,126 @@
+{
+  "@context": {
+    "Identifiers": "http://purl.org/iscc/terms/#Identifiers",
+    "iscc": "@id",
+    "identifier": "http://schema.org/identifier",
+    "scheme": "http://schema.org/propertyID",
+    "code": "http://schema.org/value",
+    "scope": "http://purl.org/iscc/terms/#scope",
+    "primary": "http://purl.org/iscc/terms/#primary"
+  },
+  "x-iscc-jsonld": {
+    "context": "http://purl.org/iscc/context/0.8.0.jsonld",
+    "type": "Identifiers",
+    "upgrade": "Compact records omit @context and @type. To obtain JSON-LD, set @context to this schema's top-level @context term map (or to the versioned context URL in this extension's `context` field) and set @type to this extension's `type` value."
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "http://purl.org/iscc/schema/identifiers-0.8.0.json",
+  "title": "Identifiers",
+  "type": "object",
+  "description": "Set of typed external identifiers served for an asset identified by an ISCC.",
+  "properties": {
+    "@context": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "default": "http://purl.org/iscc/context/0.8.0.jsonld",
+      "description": "The JSON-LD Context URI for ISCC metadata."
+    },
+    "@type": {
+      "type": "string",
+      "const": "Identifiers",
+      "description": "The type of service metadata."
+    },
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "const": "http://purl.org/iscc/schema/identifiers-0.8.0.json",
+      "description": "The JSON Schema URI for Identifiers service metadata. See the top-level `x-iscc-jsonld` extension for the JSON-LD upgrade path."
+    },
+    "iscc": {
+      "type": "string",
+      "description": "An ISCC-CODE or ISCC-ID identifying the digital content these identifiers apply to. Mapped to JSON-LD @id when present; when omitted, the serving transport must preserve the asset subject out of band.",
+      "example": "ISCC:MAACAJINXFXA2SQX",
+      "minLength": 15,
+      "maxLength": 73,
+      "pattern": "^ISCC:[A-Z2-7]{10,73}$"
+    },
+    "identifier": {
+      "type": "array",
+      "description": "One or more typed external identifiers associated with the asset.",
+      "minItems": 1,
+      "x-iscc-context": "http://schema.org/identifier",
+      "x-iscc-status": "draft",
+      "items": {
+        "type": "object",
+        "title": "Identifier",
+        "additionalProperties": true,
+        "required": [
+          "scheme",
+          "code"
+        ],
+        "properties": {
+          "scheme": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+            "description": "Lowercase token naming the identifier namespace, such as doi, isrc, iswc, isbn, issn, ror, or orcid.",
+            "x-iscc-context": "http://schema.org/propertyID",
+            "x-iscc-status": "draft"
+          },
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifier value within the declared scheme, normalized by the producer according to the scheme's conventions.",
+            "x-iscc-context": "http://schema.org/value",
+            "x-iscc-status": "draft"
+          },
+          "scope": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$",
+            "description": "Optional lowercase token naming the level the identifier applies to, such as work, series, manifestation, asset, organization, or person.",
+            "x-iscc-context": "http://purl.org/iscc/terms/#scope",
+            "x-iscc-status": "draft"
+          },
+          "primary": {
+            "type": "boolean",
+            "description": "Preferred identifier flag within the same scope. True means preferred; false is equivalent to omission and is normalized away by the model construction path.",
+            "x-iscc-context": "http://purl.org/iscc/terms/#primary",
+            "x-iscc-status": "draft"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "identifier"
+  ],
+  "additionalProperties": true,
+  "examples": [
+    {
+      "@context": "http://purl.org/iscc/context/0.8.0.jsonld",
+      "@type": "Identifiers",
+      "$schema": "http://purl.org/iscc/schema/identifiers-0.8.0.json",
+      "iscc": "ISCC:MAACAJINXFXA2SQX",
+      "identifier": [
+        {
+          "scheme": "iswc",
+          "code": "T-034.524.680-1",
+          "scope": "work",
+          "primary": true
+        },
+        {
+          "scheme": "isrc",
+          "code": "USRC17607839",
+          "scope": "manifestation"
+        }
+      ]
+    }
+  ]
+}

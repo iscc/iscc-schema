@@ -139,7 +139,7 @@ meta = IsccMeta(
 )
 ```
 
-See the [ISCC Metadata schema reference](schema/iscc.md) for all available fields.
+See the [ISCC Metadata schema reference](/schema/iscc/) for all available fields.
 
 ### Seed Metadata
 
@@ -168,7 +168,7 @@ seed = ISBN(
 )
 ```
 
-See the [ISBN](schema/isbn.md), [ISRC](schema/isrc.md), and [STM](schema/stm.md) schema references.
+See the [ISBN](/schema/isbn/), [ISRC](/schema/isrc/), and [STM](/schema/stm/) schema references.
 
 ### Service Metadata
 
@@ -177,8 +177,10 @@ through ISCC gateways.
 
 - `TDM`: machine-readable text and data mining reservation signals
 - `GenAI`: generative AI disclosure signals for content transparency
+- `Identifiers`: a registry response listing the external identifiers associated with an asset
 
-Service metadata can be used standalone or embedded as nested objects in `IsccMeta`:
+Service metadata can be used standalone or embedded as nested objects in `IsccMeta`. Typed
+identifier objects are accepted by `IsccMeta.identifier` and by the `Identifiers.identifier` list:
 
 ```python
 from iscc_schema import IsccMeta
@@ -186,11 +188,27 @@ from iscc_schema import IsccMeta
 meta = IsccMeta(
     iscc="ISCC:KACYPXW445FTYNJ3CYSXHAFJMA2HUWULUNRFE3BLHRSCXYH2M5AEGQY",
     name="The Never Ending Story",
+    identifier=[
+        {"scheme": "iswc", "code": "T-034.524.680-1", "scope": "work", "primary": True},
+        {"scheme": "isrc", "code": "USRC17607839", "scope": "manifestation"},
+    ],
     tdm={"tdm_reservation": 1, "tdm_policy": "https://example.com/tdmrep-policy.json"},
 )
 ```
 
-See the [TDM](schema/tdm.md) and [GenAI](schema/genai.md) schema references.
+Registries can serve the same identifier objects through the standalone `Identifiers` response:
+
+```python
+from iscc_schema import Identifiers
+
+record = Identifiers(
+    iscc="ISCC:MAACAJINXFXA2SQX",
+    identifier=[{"scheme": "doi", "code": "10.1234/example.2024.001", "scope": "work"}],
+)
+```
+
+See the [TDM](/schema/tdm/), [GenAI](/schema/genai/), and
+[Identifiers](/schema/identifiers/) schema references.
 
 ### Protocol Schemas
 
@@ -200,7 +218,7 @@ metadata, they default to compact JSON with a version-specific `$schema` as the 
 
 - `IsccNote`: the permanent ISCC Declaration log record for ISCC-HUB timestamping and registration
 
-See the [ISCC Note](schema/iscc-note.md) schema reference.
+See the [ISCC Note](/schema/iscc-note/) schema reference.
 
 ## Python Usage
 
@@ -262,7 +280,8 @@ Different model types have different `ld` defaults to match their intended use:
 |-------|-------------|-----------|
 | `IsccMeta` | `True` | Core metadata, full JSON-LD for semantic interoperability |
 | `ISBN`, `ISRC`, `STM` | `False` | Seed input for Meta-Code generation (IEP-0002), compact JSON with `$schema` |
-| `TDM`, `GenAI` | `True` | Service metadata served by registries, full JSON-LD for discovery |
+| `TDM`, `GenAI`, `Identifiers` | `True` | Service metadata served by registries, full JSON-LD for discovery |
+| `Identifier` | No JSON-LD wrapper fields | Bare identifier item used inside `IsccMeta.identifier` and `Identifiers.identifier` |
 | `IsccNote` | `False` | Protocol wire record, compact JSON with version-specific `$schema` |
 
 Seed metadata defaults to compact JSON because IEP-0002 accepts plain `application/json` and
@@ -297,8 +316,9 @@ seed.json(ld=True)
 Most schema models use `extra="forbid"`, so passing unrecognized fields raises a `ValidationError`.
 This is intentional: `iscc-schema` defines a standard, and strictness catches typos early. It also
 matches JSON-LD semantics, where extra fields without `@context` mappings would be meaningless to
-processors. The `TDM` service model is the deliberate exception — it sets `extra="allow"` to
-preserve forward-compatible reservation signals across versions.
+processors. Service metadata objects are the deliberate exception — `TDM`, `GenAI`,
+`Identifiers`, their nested identifier items, and the inline service objects in `IsccMeta` set
+`extra="allow"` to preserve forward-compatible service signals across versions.
 
 Downstream consumers who need flexibility can subclass with a one-line override:
 

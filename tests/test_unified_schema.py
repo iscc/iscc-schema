@@ -42,7 +42,15 @@ def test_iscc_json_context_matches_jsonld():
 
 
 def test_standalone_schemas_have_context():
-    for name in ("isbn.json", "isrc.json", "stm.json", "tdm.json", "genai.json", "iscc-note.json"):
+    for name in (
+        "isbn.json",
+        "isrc.json",
+        "stm.json",
+        "tdm.json",
+        "genai.json",
+        "identifiers.json",
+        "iscc-note.json",
+    ):
         schema = _load_json(name)
         assert "@context" in schema, f"{name} missing @context"
         assert isinstance(schema["@context"], dict), f"{name} @context not a dict"
@@ -55,6 +63,7 @@ def test_standalone_context_terms_match_properties():
         "stm.yaml",
         "tdm.yaml",
         "genai.yaml",
+        "identifiers.yaml",
         "iscc-note.yaml",
     ):
         with open(MODELS / yaml_name, encoding="utf-8") as f:
@@ -71,7 +80,15 @@ def test_standalone_context_terms_match_properties():
 
 # --- Standalone schema versioning (versioned @context default + archives) ---
 
-STANDALONE_JSON = ("isbn.json", "isrc.json", "stm.json", "tdm.json", "genai.json", "iscc-note.json")
+STANDALONE_JSON = (
+    "isbn.json",
+    "isrc.json",
+    "stm.json",
+    "tdm.json",
+    "genai.json",
+    "identifiers.json",
+    "iscc-note.json",
+)
 CONTEXT_URL = f"http://purl.org/iscc/context/{iss.__version__}.jsonld"
 
 
@@ -136,6 +153,19 @@ def test_recover_context_from_versioned_service_archive():
     }
     result = iss.recover_context(data)
     assert "TDM" in result["@context"]
+
+
+@pytest.mark.parametrize(
+    ("schema_name", "type_term"),
+    (
+        (f"identifiers-{iss.__version__}.json", "Identifiers"),
+        (f"iscc-note-{iss.__version__}.json", "IsccNote"),
+    ),
+)
+def test_recover_context_from_bare_versioned_standalone_schema_name(schema_name, type_term):
+    """recover_context accepts bare versioned archive names, not only full $schema URLs."""
+    result = iss.recover_context({}, schema=schema_name)
+    assert type_term in result["@context"]
 
 
 def test_context_property_accepts_string_and_object():

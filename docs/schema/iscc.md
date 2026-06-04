@@ -103,7 +103,7 @@ Metadata intended to be embedded into the media asset.
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| creator | `None` | none | An entity primarily responsible for making the resource.<br><br>**Example**: `Agatha Christie`         |
+| creator | `string | array` | none | An entity primarily responsible for making the resource.<br><br>**Example**: `Agatha Christie`         |
 
 ### **license**
 <http://schema.org/license>
@@ -198,7 +198,7 @@ Extended ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| identifier | `None` | none | Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation.         |
+| identifier | `string | object | array` | none | Other identifier(s) referencing the work, product or other abstraction of which the referenced **digital content** is a full or partial manifestation. Accepts a bare string, a typed Identifier object, or a list mixing both forms.         |
 
 ### **content**
 <http://schema.org/contentUrl>
@@ -215,7 +215,7 @@ Extended ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| keywords | `None` | none | Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.         |
+| keywords | `string | array` | none | Keywords or tags used to describe this content. Either a list of keywords or a string with comma separated keywords.         |
 
 ### **previous**
 <http://purl.org/iscc/terms/#previous>
@@ -239,7 +239,7 @@ Extended ISCC Metadata
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| version | `['integer', 'string']` | none | The version of the CreativeWork embodied by a specified resource.         |
+| version | `integer | string` | none | The version of the CreativeWork embodied by a specified resource.         |
 
 ### **tdm**
 <@nest>
@@ -389,7 +389,7 @@ Technical ISCC Metadata automatically inferred from the *digital content* by an 
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| language | `None` | none | Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).<br><br>**Example**: `en-US`         |
+| language | `string | array` | none | Language(s) of content [BCP 47](https://tools.ietf.org/search/bcp47).<br><br>**Example**: `en-US`         |
 
 ### **parts**
 <http://purl.org/iscc/terms/#parts>
@@ -575,7 +575,7 @@ Fields relevant in context with public ISCC declarations
 
 | Name | Type | Default | Definition                     |
 | ---- | ---- | --------|--------------------------------|
-| credentials | `None` | none | One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one or more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul><br><br>**Example**: `https://schema.iscc.codes/examples/vc.json`         |
+| credentials | `string | object | array` | none | One or more [Verifiable Credentials](https://www.w3.org/TR/vc-data-model/) or one or more URIs pointing to one or more VCs. A reader of ISCC metadata must interpret the value according to the following rules <ul> <li>If the value is a JSON `string` interpret it as an URI. The expectation is that the URI dereferences to a response with Content-type `application/json` where the data is a VC or an `array` of VCs.</li><li>If the value is a JSON `object` interpret it as a VC according to the [Verifiable Credentials JSON Schema](https://w3c-ccg.github.io/vc-json-schemas/).</li><li>If the value is an `array` and an item in the `array` is a JSON `object` interpret it as a VC.</li><li>If the value is an `array` and an items is a `string` interpret the item as an URI that dereferences to VC(s)</li><li>Credentials should only be taken into account if the [`credentialSubject`](https://www.w3.org/2018/credentials/#property-definitions) matches with the declarer (e.g. [`did:pkh`](https://github.com/w3c-ccg/did-pkh/blob/main/did-pkh-method-draft.md) representation of the declarers address).</li> </ul><br><br>**Example**: `https://schema.iscc.codes/examples/vc.json`         |
 
 ### **verifications**
 <http://purl.org/iscc/terms/#verifications>

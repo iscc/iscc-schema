@@ -13,8 +13,13 @@ MARKDOWN_TERMS_SERVICE = ROOT / "docs/includes/terms-service.md"
 MARKDOWN_TERMS_PROTOCOL = ROOT / "docs/includes/terms-protocol.md"
 
 SEED_SCHEMATA = ["isbn.yaml", "isrc.yaml", "stm.yaml"]
-SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml"]
+SERVICE_SCHEMATA = ["tdm.yaml", "genai.yaml", "identifiers.yaml"]
 PROTOCOL_SCHEMATA = ["iscc-note.yaml"]
+SERVICE_TYPE_CONTEXTS = {
+    "TDM": "http://purl.org/iscc/terms/#TDM",
+    "GenAI": "http://purl.org/iscc/terms/#GenAI",
+    "Identifiers": "http://purl.org/iscc/terms/#Identifiers",
+}
 
 
 def terms(context):
@@ -80,17 +85,43 @@ def build_terms_iscc():
         outf.write(doc)
 
 
-def _build_terms_for_schemas(schemata, outpath):
-    # type: (list[str], pathlib.Path) -> None
+def _build_terms_for_schemas(schemata, outpath, type_contexts=None, skip_contexts=None):
+    # type: (list[str], pathlib.Path, dict|None, set[str]|None) -> None
     """Build vocabulary terms markdown from a list of standalone schema files."""
     doc = ""
     seen = set()
+    skip_contexts = skip_contexts or set()
+
+    def iter_term_fields(properties):
+        # type: (dict) -> object
+        """Yield top-level and explicitly mapped nested property definitions."""
+        for term, fields in properties.items():
+            yield term, fields
+            candidates = []
+            if fields.get("type") == "object":
+                candidates.append(fields)
+            items = fields.get("items")
+            if isinstance(items, dict):
+                candidates.append(items)
+            for candidate in candidates:
+                for nested_term, nested_fields in candidate.get("properties", {}).items():
+                    if "x-iscc-context" in nested_fields:
+                        yield nested_term, nested_fields
+
     for schema_file in schemata:
         path = SCHEMAS / schema_file
         with open(path, "rt", encoding="utf-8") as infile:
             data = yaml.safe_load(infile)
-        for term, fields in data.get("properties", {}).items():
+        type_name = data.get("properties", {}).get("@type", {}).get("const")
+        if type_contexts and type_name in type_contexts and type_name not in seen:
+            seen.add(type_name)
+            doc += f"### **{type_name}**\n\n"
+            doc += f'!!! term "<small><{type_contexts[type_name]}></small>"\n\n'
+            doc += f"    {data['description']}\n\n"
+        for term, fields in iter_term_fields(data.get("properties", {})):
             if not fields.get("x-iscc-context"):
+                continue
+            if fields["x-iscc-context"] in skip_contexts:
                 continue
             if term in seen:
                 continue
@@ -112,7 +143,17 @@ def build_terms_seed():
 
 def build_terms_service():
     """Build service metadata terms markdown for inclusion into /terms/index.md"""
-    _build_terms_for_schemas(SERVICE_SCHEMATA, MARKDOWN_TERMS_SERVICE)
+    schema_contexts = {
+        fields["x-iscc-context"]
+        for context in ("http://schema.org", "https://www.w3.org/2018/credentials")
+        for _, fields in terms(context)
+    }
+    _build_terms_for_schemas(
+        SERVICE_SCHEMATA,
+        MARKDOWN_TERMS_SERVICE,
+        SERVICE_TYPE_CONTEXTS,
+        skip_contexts=schema_contexts,
+    )
 
 
 def build_terms_protocol():

@@ -6,7 +6,7 @@ description: Machine-readable JSON-LD @context documents for ISCC metadata.
 
 # JSON-LD Contexts
 
-This directory hosts the machine-readable JSON-LD `@context` documents that map ISCC metadata properties to their semantic IRIs. A JSON-LD processor dereferences a whole context document by URL. For human-readable term definitions, see the [Vocabulary](../terms/index.md) page — the `/terms/` namespace the term IRIs resolve into.
+This directory hosts the machine-readable JSON-LD `@context` documents that map ISCC metadata properties to their semantic IRIs. A JSON-LD processor dereferences a whole context document by URL. For human-readable term definitions, see the [Vocabulary](/terms/) page — the `/terms/` namespace the term IRIs resolve into.
 
 ## Canonical Context
 
